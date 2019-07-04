@@ -11,27 +11,31 @@ const getHeight = ({ size }) => {
     return sizeMap[size];
 }
 
+const getTypography = (size) => {
+    const textMap = {
+        'sm': Body3,
+        'md': Body2,
+        'lg': Body1,
+    };
+    return textMap[size];
+}
+
 const StyledButton = styled.button`
     font-family: inherit;
     height: ${getHeight};
     border: 0;
-    background: #009E8F;
+    background: ${({theme}) => theme.cs};
     border-radius: 0.4rem;
     padding: 0 1.6rem;
     cursor: pointer;
 `;
 
 const Button = ({ children, ...restProps }) => {
-    const textMap = {
-        'sm': Body3,
-        'md': Body2,
-        'lg': Body1,
-    };
-    const Typography = textMap[restProps.size];
+    const Typography = getTypography(restProps.size);
 
     return (
         <StyledButton {...restProps}>
-            <Typography color="contrast" weight="bold">{children}</Typography>
+            <Typography color="csc" weight="bold">{children}</Typography>
         </StyledButton>
     )
 };
