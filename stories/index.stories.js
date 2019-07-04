@@ -7,6 +7,7 @@ import { withKnobs, select, boolean, number } from '@storybook/addon-knobs';
 
 import { ThemeProvider } from 'styled-components';
 import Button from '../src/Buttons';
+import Tabs from '../src/Tabs.js';
 import { TinyText, Body1, Body2, Body3, H4, H3, H2, H1, Huge } from '../src/Typography.js';
 import theme from './theme.js';
 
@@ -26,6 +27,21 @@ const stories = storiesOf('Button', module)
    );
 
 stories.addDecorator(withKnobs);
+
+const stories2 = storiesOf('Tabs', module)
+  .addDecorator(story => <ThemeProvider theme={theme}>{story()}</ThemeProvider>)
+  .add('default', () =>
+       <Tabs
+       tabs={[
+            {key: 'all', label: 'All Cards'},
+            {key: 'recently', label: 'Recently Viewed'},
+            {key: 'most', label: 'Most Viewed'},
+            {key: 'favorites', label: 'Favorites'}
+        ]}
+       />
+   );
+
+stories2.addDecorator(withKnobs);
 
 const sample = 'Sample Text';
 const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'

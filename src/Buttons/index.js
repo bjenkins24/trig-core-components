@@ -20,7 +20,8 @@ const getTypography = (size) => {
     return textMap[size];
 }
 
-const StyledButton = styled.button`
+
+const ButtonSecondary = styled.button`
     font-family: inherit;
     height: ${getHeight};
     border: 0;
@@ -30,13 +31,29 @@ const StyledButton = styled.button`
     cursor: pointer;
 `;
 
-const Button = ({ children, ...restProps }) => {
+const ButtonTransparent = styled.button`
+    font-family: inherit;
+    border: 0;
+    background: none;
+    cursor: pointer;
+`;
+
+const getButton = (buttonComponent) => {
+    const componentMap = {
+        'sm': Body3,
+        'md': Body2,
+        'lg': Body1,
+    };
+    return textMap[size];
+}
+
+const Button = ({ children, ButtonComponent, ...restProps }) => {
     const Typography = getTypography(restProps.size);
 
     return (
-        <StyledButton {...restProps}>
+        <ButtonComponent {...restProps}>
             <Typography color="csc" weight="bold">{children}</Typography>
-        </StyledButton>
+        </ButtonComponent>
     )
 };
 

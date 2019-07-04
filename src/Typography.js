@@ -64,6 +64,9 @@ const Body1 = styled.span`
     font-weight: ${getWeight};
     color: ${getColor()};
     margin-top: 0;
+    border: 0;
+    padding: 0;
+    cursor: ${({as}) => 'button' ? 'pointer' : 'default'};
 `;
 
 const Body2 = styled.span`
@@ -72,6 +75,9 @@ const Body2 = styled.span`
     font-weight: ${getWeight};
     color: ${getColor()};
     margin-top: 0;
+    border: 0;
+    padding: 0;
+    cursor: ${({as}) => 'button' ? 'pointer' : 'default'};
 `;
 
 const Body3 = styled.span`
@@ -80,6 +86,9 @@ const Body3 = styled.span`
     font-weight: ${getWeight};
     color: ${getColor()};
     margin-top: 0;
+    border: 0;
+    padding: 0;
+    cursor: ${({as}) => 'button' ? 'pointer' : 'default'};
 `;
 
 const TinyText = styled.span`
@@ -89,6 +98,9 @@ const TinyText = styled.span`
     text-transform: uppercase;
     color: ${getColor()};
     margin: 0;
+    border: 0;
+    padding: 0;
+    cursor: ${({as}) => 'button' ? 'pointer' : 'default'};
 `;
 
 export { TinyText, Body1, Body2, Body3, H4, H3, H2, H1, Huge };
