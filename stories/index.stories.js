@@ -7,7 +7,7 @@ import { withKnobs, select, boolean, number } from '@storybook/addon-knobs';
 
 import { ThemeProvider } from 'styled-components';
 import Button from '../src/Buttons';
-import Tabs from '../src/Tabs.js';
+import { Tabs, TabList, Tab, TabPanel} from '../src/Tabs/index.js';
 import { TinyText, Body1, Body2, Body3, H4, H3, H2, H1, Huge } from '../src/Typography.js';
 import theme from './theme.js';
 
@@ -31,14 +31,22 @@ stories.addDecorator(withKnobs);
 const stories2 = storiesOf('Tabs', module)
   .addDecorator(story => <ThemeProvider theme={theme}>{story()}</ThemeProvider>)
   .add('default', () =>
-       <Tabs
-       tabs={[
-            {key: 'all', label: 'All Cards'},
-            {key: 'recently', label: 'Recently Viewed'},
-            {key: 'most', label: 'Most Viewed'},
-            {key: 'favorites', label: 'Favorites'}
-        ]}
-       />
+       <Tabs>
+            <TabList>
+                <Tab>View</Tab>
+                <Tab>Recent</Tab>
+                <Tab>Other</Tab>
+            </TabList>
+            <TabPanel>
+                View Stuff
+            </TabPanel>
+            <TabPanel>
+                Recent Stuff
+            </TabPanel>
+            <TabPanel>
+                OTher Stuff
+            </TabPanel>
+       </Tabs>
    );
 
 stories2.addDecorator(withKnobs);
