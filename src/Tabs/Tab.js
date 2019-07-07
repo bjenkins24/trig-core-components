@@ -11,7 +11,7 @@ const Tab = ({tabIndex, ...restProps}) => {
     const getColor = ({theme}) => {
         if (!isSelected) return false;
         return css`
-            color: ${theme.cs};
+            color: rgb(${theme.cs});
         `;
     }
     const getPadding = () => {
@@ -38,7 +38,7 @@ const Tab = ({tabIndex, ...restProps}) => {
                 ${getPadding};
                 ${getColor};
                 &:hover {
-                    color: ${({theme}) => theme.cs}
+                    color: ${({theme}) => `rgb(${theme.cs})`}
                 }
             `}
             {...restProps}
