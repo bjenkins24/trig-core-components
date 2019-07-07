@@ -1,11 +1,12 @@
-import React, {useContext} from 'react';
+import React, {useContext, useRef, useEffect} from 'react';
+
 import {css } from 'styled-components';
 import {Body1} from '../Typography.js';
 import {TabContext} from './Tabs.js';
 
 const Tab = ({tabIndex, ...restProps}) => {
-    const context = useContext(TabContext);
-    const isSelected = context.selectedTab === tabIndex;
+    const {selectedTab, setSelectedTab, tabRefs} = useContext(TabContext);
+    const isSelected = selectedTab === tabIndex;
 
     const getColor = ({theme}) => {
         if (!isSelected) return false;
@@ -14,7 +15,7 @@ const Tab = ({tabIndex, ...restProps}) => {
         `;
     }
     const getPadding = () => {
-        if (tabIndex === 1) {
+        if (tabIndex === 0) {
             return css`
                 padding-right: 1.2rem;
             `;
@@ -25,32 +26,23 @@ const Tab = ({tabIndex, ...restProps}) => {
     }
 
     return (
-        <div>
-                <Body1
-                    as="button"
-                    id={`tab-${tabIndex}`}
-                    role="tab"
-                    aria-controls={`panel-${tabIndex}`}
-                    onClick={() => context.setSelectedTab(tabIndex)}
-                    css={`
-                        margin-bottom: 0.8rem;
-                        ${getPadding};
-                        ${getColor};
-                        &:hover {
-                            color: ${({theme}) => theme.cs}
-                        }
-                    `}
-                    {...restProps}
-                />
-                {isSelected && <div
-                    css={`
-                        height: 0.3rem;
-                        background: ${({theme}) => theme.cs};
-                        position: relative;
-                        bottom: -0.3rem;
-                    `}
-                />}
-        </div>
+        <Body1
+            ref={tabRefs[tabIndex]}
+            as="button"
+            id={`tab-${tabIndex}`}
+            role="tab"
+            aria-controls={`panel-${tabIndex}`}
+            onClick={() => setSelectedTab(tabIndex)}
+            css={`
+                margin-bottom: 0.8rem;
+                ${getPadding};
+                ${getColor};
+                &:hover {
+                    color: ${({theme}) => theme.cs}
+                }
+            `}
+            {...restProps}
+        />
     );
 }
 
