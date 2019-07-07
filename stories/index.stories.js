@@ -33,18 +33,22 @@ const stories2 = storiesOf('Tabs', module)
   .add('default', () =>
        <Tabs>
             <TabList>
-                <Tab>View</Tab>
-                <Tab>Recent</Tab>
-                <Tab>Other</Tab>
+                <Tab>All Cards</Tab>
+                <Tab>Recently Viewed</Tab>
+                <Tab>Most Viewed</Tab>
+                <Tab>Favorites</Tab>
             </TabList>
             <TabPanel>
-                View Stuff
+                All Cards Stuff
             </TabPanel>
             <TabPanel>
-                Recent Stuff
+                Recently Viewed Stuff
             </TabPanel>
             <TabPanel>
-                OTher Stuff
+                Most Viewed Stuff
+            </TabPanel>
+            <TabPanel>
+                Favorite Stuff
             </TabPanel>
        </Tabs>
    );

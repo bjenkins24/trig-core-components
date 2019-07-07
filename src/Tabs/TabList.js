@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { HorizontalGroup } from '../Groups.js';
 
-const StyledTabList = styled.div`
+const StyledTabList = styled(HorizontalGroup)`
     border-bottom: solid 0.3rem ${({theme}) => theme.cp};
     margin-bottom: 2.4rem;
 `;
