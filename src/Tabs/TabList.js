@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const StyledTabList = styled.div`
     border-bottom: solid 0.3rem ${({theme}) => theme.cp};
+    margin-bottom: 2.4rem;
 `;
 
 const TabList = ({children, ...restProps}) => {
