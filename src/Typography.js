@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import get from 'lodash/get';
 
 const getWeight = ({ weight }) => {
@@ -14,6 +14,20 @@ const getColor = (defaultColor = 'cp') => ({ theme, color }) => {
     return get(theme, color, theme[defaultColor]);
 }
 
+const buttonStyles = ({as}) => {
+    if (as !== 'button') return false;
+    return css`
+    margin-top: 0;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    &:focus {
+        outline: 0;
+        color: ${({theme}) => theme.cs};
+    }
+`;
+}
+
 const Huge = styled.h1`
     font-size: 6.4rem;
     line-height: 1.3;
@@ -21,6 +35,7 @@ const Huge = styled.h1`
     font-weight: 500;
     margin-top: 0;
     margin-bottom: 2.4rem;
+    ${buttonStyles};
 `;
 
 const H1 = styled.h1`
@@ -30,6 +45,7 @@ const H1 = styled.h1`
     font-weight: 500;
     margin-top: 0;
     margin-bottom: 1.6rem;
+    ${buttonStyles};
 `;
 
 const H2 = styled.h2`
@@ -39,6 +55,7 @@ const H2 = styled.h2`
     color: ${getColor('cs')};
     margin-top: 0;
     margin-bottom: 1.6rem;
+    ${buttonStyles};
 `;
 
 const H3 = styled.h3`
@@ -48,6 +65,7 @@ const H3 = styled.h3`
     color: ${getColor()};
     margin-top: 0;
     margin-bottom: 1.6rem;
+    ${buttonStyles};
 `;
 
 const H4 = styled.h4`
@@ -56,6 +74,7 @@ const H4 = styled.h4`
     color: ${getColor()};
     margin-top: 0;
     margin-bottom: 1.6rem;
+    ${buttonStyles};
 `;
 
 const Body1 = styled.span`
@@ -63,10 +82,7 @@ const Body1 = styled.span`
     line-height: 1.7;
     font-weight: ${getWeight};
     color: ${getColor()};
-    margin-top: 0;
-    border: 0;
-    padding: 0;
-    cursor: ${({as}) => 'button' ? 'pointer' : 'default'};
+    ${buttonStyles};
 `;
 
 const Body2 = styled.span`
@@ -74,10 +90,7 @@ const Body2 = styled.span`
     line-height: 1.7;
     font-weight: ${getWeight};
     color: ${getColor()};
-    margin-top: 0;
-    border: 0;
-    padding: 0;
-    cursor: ${({as}) => 'button' ? 'pointer' : 'default'};
+    ${buttonStyles};
 `;
 
 const Body3 = styled.span`
@@ -85,10 +98,7 @@ const Body3 = styled.span`
     line-height: 1.7;
     font-weight: ${getWeight};
     color: ${getColor()};
-    margin-top: 0;
-    border: 0;
-    padding: 0;
-    cursor: ${({as}) => 'button' ? 'pointer' : 'default'};
+    ${buttonStyles};
 `;
 
 const TinyText = styled.span`
@@ -97,10 +107,7 @@ const TinyText = styled.span`
     line-height: 1.3;
     text-transform: uppercase;
     color: ${getColor()};
-    margin: 0;
-    border: 0;
-    padding: 0;
-    cursor: ${({as}) => 'button' ? 'pointer' : 'default'};
+    ${buttonStyles};
 `;
 
 export { TinyText, Body1, Body2, Body3, H4, H3, H2, H1, Huge };

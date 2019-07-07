@@ -12,6 +12,7 @@ const Tab = ({tabIndex, ...restProps}) => {
             role="tab"
             aria-controls={`panel-${tabIndex}`}
             onClick={() => context.setSelectedTab(tabIndex)}
+            css={`padding-right: 1.6rem`}
             {...restProps}
         />);
 }
