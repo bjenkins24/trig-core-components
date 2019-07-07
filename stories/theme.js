@@ -1,9 +1,9 @@
 const theme = {
-    cp: '#2C2929', // Color Primary
-    cs: '#009E8F', // Color Secondary
-    cbc: '#F5F5F5', // Color Contrast (white if light theme)
-    csc: '#F5F5F5', // Color Secondary Contrast (white if light theme)
-    cpl: '#C0BFBF', // Color Placeholder
+    cp: '44,41,41', // Color Primary
+    cs: '0,158,143', // Color Secondary
+    cbc: '245,245,245', // Color Contrast (white if light theme)
+    csc: '245,245,245', // Color Secondary Contrast (white if light theme)
+    cpl: '192,191,191', // Color Placeholder
 }
 
 export default theme;

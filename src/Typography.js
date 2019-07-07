@@ -11,7 +11,7 @@ const getWeight = ({ weight }) => {
 }
 
 const getColor = (defaultColor = 'cp') => ({ theme, color }) => {
-    return get(theme, color, theme[defaultColor]);
+    return `rgb(${get(theme, color, theme[defaultColor])})`;
 }
 
 const buttonStyles = ({as}) => {
@@ -24,7 +24,7 @@ const buttonStyles = ({as}) => {
     font-family: hero-new, sans-serif;
     &:focus {
         outline: 0;
-        color: ${({theme}) => theme.cs};
+        color: ${({theme}) => `rgb(${theme.cs})`};
     }
 `;
 }

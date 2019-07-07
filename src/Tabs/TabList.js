@@ -2,14 +2,14 @@ import React, {useRef, useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { HorizontalGroup } from '../Groups.js';
 import {TabContext} from './Tabs.js';
-import {useSpring, animated} from 'react-spring';
+import {useSpring, animated, config} from 'react-spring';
 
 const separatorHeight = '0.3rem';
 
 const SelectedBar = styled(animated.div)`
     height: ${separatorHeight};
     width: ${({width}) => width / 10}rem;
-    background: ${({theme}) => theme.cs};
+    background: ${({theme}) => `rgb(${theme.cs})`};
     margin-bottom: -${separatorHeight};
     position: relative;
 `;
@@ -25,7 +25,8 @@ const TabList = ({children, ...restProps}) => {
         left: selectedPosition,
         width: selectedWidth,
         from: { left: lastPosition, width: lastWidth },
-        config: { duration: 200 }
+        // config: {duration: 200}
+        config: {tension: 210, friction: 22}
     })
 
     useEffect(() => {
@@ -45,7 +46,7 @@ const TabList = ({children, ...restProps}) => {
         <div
             role="presentational"
             css={`
-                border-bottom: solid ${separatorHeight} ${({theme}) => theme.cp};
+                border-bottom: solid ${separatorHeight} rgb(${({theme}) => theme.cp});
                 margin-bottom: 2.4rem;
             `}
         >

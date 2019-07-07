@@ -25,16 +25,9 @@ const ButtonSecondary = styled.button`
     font-family: inherit;
     height: ${getHeight};
     border: 0;
-    background: ${({theme}) => theme.cs};
+    background: ${({theme}) => `rgb(${theme.cs})`};
     border-radius: 0.4rem;
     padding: 0 1.6rem;
-    cursor: pointer;
-`;
-
-const ButtonTransparent = styled.button`
-    font-family: inherit;
-    border: 0;
-    background: none;
     cursor: pointer;
 `;
 
@@ -51,9 +44,9 @@ const Button = ({ children, ButtonComponent, ...restProps }) => {
     const Typography = getTypography(restProps.size);
 
     return (
-        <ButtonComponent {...restProps}>
+        <ButtonSecondary {...restProps}>
             <Typography color="csc" weight="bold">{children}</Typography>
-        </ButtonComponent>
+        </ButtonSecondary>
     )
 };
 
