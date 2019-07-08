@@ -1,4 +1,4 @@
-import React, {useRef, useContext, useEffect, useState} from 'react';
+import React, {useRef, useReducer, useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { HorizontalGroup } from '../Groups.js';
 import {TabContext} from './Tabs.js';
@@ -19,31 +19,49 @@ const SelectedBar = styled(animated.div)`
     position: relative;
 `;
 
+const initialState = {
+    selectedWidth: 0,
+    lastWidth: 0,
+    selectedPosition: 0,
+    lastPosition: 0,
+}
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'setSelectedWidth':
+      return {...state, selectedWidth: action.payload};
+    case 'setLastWidth':
+      return {...state, lastWidth: action.payload};
+    case 'setSelectedPosition':
+      return {...state, selectedPosition: action.payload};
+    case 'setLastPosition':
+      return {...state, lastPosition: action.payload};
+    default:
+      throw new Error();
+  }
+}
+
 const TabList = ({children, ...restProps}) => {
     const {selectedTab, tabRefs} = useContext(TabContext);
-    const [selectedWidth, setSelectedWidth] = useState(0);
-    const [lastWidth, setLastWidth] = useState(selectedWidth);
-    const [selectedPosition, setSelectedPosition] = useState(0);
-    const [lastPosition, setLastPosition] = useState(0);
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     const animateProps = useSpring({
-        left: selectedPosition,
-        width: selectedWidth,
-        from: { left: lastPosition, width: lastWidth },
-        // config: {duration: 200}
+        left: state.selectedPosition,
+        width: state.selectedWidth,
+        from: { left: state.lastPosition, width: state.lastWidth },
         config: {tension: 210, friction: 22}
     })
 
     useEffect(() => {
         if (tabRefs[selectedTab]) {
-            setLastPosition(selectedPosition);
-            setLastWidth(selectedWidth);
-            setSelectedWidth(tabRefs[selectedTab].current.offsetWidth);
+            dispatch({type: 'setLastPosition', payload: state.selectedPosition});
+            dispatch({type: 'setLastWidth', payload: state.selectedWidth});
+            dispatch({type: 'setSelectedWidth', payload: tabRefs[selectedTab].current.offsetWidth});
             const position = tabRefs.reduce((accumulator, tabRef, i) => {
                 if (i > selectedTab - 1) return accumulator;
                 return accumulator + tabRef.current.offsetWidth
             }, 0);
-            setSelectedPosition(position);
+            dispatch({type: 'setSelectedPosition', payload: position});
         }
     });
 
@@ -65,7 +83,7 @@ const TabList = ({children, ...restProps}) => {
                  })}
             </HorizontalGroup>
             <Separator>
-                <SelectedBar width={selectedWidth} style={animateProps} />
+                <SelectedBar width={state.selectedWidth} style={animateProps} />
             </Separator>
         </div>
     );
