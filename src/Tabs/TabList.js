@@ -6,11 +6,16 @@ import {useSpring, animated, config} from 'react-spring';
 
 const separatorHeight = '0.3rem';
 
+const Separator = styled.div`
+    height: ${separatorHeight};
+    background: rgb(${({theme}) => theme.cp});
+    overflow: hidden;
+`;
+
 const SelectedBar = styled(animated.div)`
     height: ${separatorHeight};
     width: ${({width}) => width / 10}rem;
     background: ${({theme}) => `rgb(${theme.cs})`};
-    margin-bottom: -${separatorHeight};
     position: relative;
 `;
 
@@ -46,7 +51,6 @@ const TabList = ({children, ...restProps}) => {
         <div
             role="presentational"
             css={`
-                border-bottom: solid ${separatorHeight} rgb(${({theme}) => theme.cp});
                 margin-bottom: 2.4rem;
             `}
         >
@@ -60,7 +64,9 @@ const TabList = ({children, ...restProps}) => {
                     })
                  })}
             </HorizontalGroup>
-            <SelectedBar width={selectedWidth} style={animateProps} />
+            <Separator>
+                <SelectedBar width={selectedWidth} style={animateProps} />
+            </Separator>
         </div>
     );
 }
