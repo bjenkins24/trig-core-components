@@ -33,6 +33,7 @@
     "@storybook/addons": "^5.1.9",
     "@storybook/react": "^5.1.9",
     "babel-loader": "^8.0.6",
-    "babel-plugin-styled-components": "^1.10.6"
+    "babel-plugin-styled-components": "^1.10.6",
+    "svg-sprite-loader": "^4.1.6"
   }
 }
