@@ -1,6 +1,6 @@
-import Tabs from './Tabs.js';
-import TabList from './TabList.js';
-import TabPanel from './TabPanel.js';
-import Tab from './Tab.js';
+import Tabs from './Tabs';
+import TabList from './TabList';
+import TabPanel from './TabPanel';
+import Tab from './Tab';
 
-export {Tabs, TabList, Tab, TabPanel};
+export { Tabs, TabList, Tab, TabPanel };

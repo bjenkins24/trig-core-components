@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Body1, Body2, Body3 } from '../Typography.js';
+import { Body1, Body2, Body3 } from '../Typography';
 
 const getHeight = ({ size }) => {
   const sizeMap = {
@@ -30,16 +30,7 @@ const ButtonSecondary = styled.button`
   cursor: pointer;
 `;
 
-const getButton = buttonComponent => {
-  const componentMap = {
-    sm: Body3,
-    md: Body2,
-    lg: Body1,
-  };
-  return textMap[size];
-};
-
-const Button = ({ children, ButtonComponent, ...restProps }) => {
+const Button = ({ children, ...restProps }) => {
   const Typography = getTypography(restProps.size);
 
   return (
@@ -54,5 +45,9 @@ const Button = ({ children, ButtonComponent, ...restProps }) => {
 Button.defaultProps = {
   size: 'md',
 };
+
+Button.propTypes = {
+  children: PropTypes.node.isRequired
+}
 
 export default Button;
