@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { sizeProp } from '../utils/propTypes';
 import { Body1, Body2, Body3 } from '../Typography';
 
 const getHeight = ({ size }) => {
@@ -12,7 +13,7 @@ const getHeight = ({ size }) => {
   return sizeMap[size];
 };
 
-const getTypography = size => {
+const getTypography = (size) => {
   const textMap = {
     sm: Body3,
     md: Body2,
@@ -48,7 +49,8 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  children: PropTypes.node.isRequired
-}
+  children: PropTypes.node.isRequired,
+  size: sizeProp,
+};
 
 export default Button;

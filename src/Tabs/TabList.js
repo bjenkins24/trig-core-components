@@ -88,4 +88,8 @@ const TabList = ({ children, ...restProps }) => {
   );
 };
 
+TabList.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
 export default TabList;

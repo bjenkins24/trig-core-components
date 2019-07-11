@@ -1,9 +1,9 @@
 {
-    "extends": "airbnb",
-    "rules": {
-       "react/jsx-filename-extension": 0,
-       "arrow-body-style": 0,
-       "arrow-parens": 0,
-       "object-curly-newline": 0 
-    }
+  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "rules": {
+    "react/jsx-filename-extension": 0,
+    "arrow-body-style": 0,
+    "arrow-parens": 0,
+    "object-curly-newline": 0
+  }
 }

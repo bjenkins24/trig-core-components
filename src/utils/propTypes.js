@@ -1,0 +1,1 @@
+export const sizeProp = PropTypes.oneOf(['sm', 'md', 'lg']);
