@@ -8,6 +8,11 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bjenkins24/trig-core-components.git"
@@ -50,7 +55,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "precise-commits",
+      "precise-commites",
       "eslint --fix",
       "git add"
     ]
