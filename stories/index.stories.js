@@ -1,14 +1,13 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
-import { withKnobs, select, boolean, number } from '@storybook/addon-knobs';
+import { withKnobs, select } from '@storybook/addon-knobs';
 
 import { ThemeProvider } from 'styled-components';
 import Button from '../src/Buttons';
 import Icon from '../src/Icon';
-import { Tabs, TabList, Tab, TabPanel } from '../src/Tabs/index.js';
+import { Tabs, TabList, Tab, TabPanel } from '../src/Tabs';
 import {
   TinyText,
   Body1,
@@ -19,33 +18,35 @@ import {
   H2,
   H1,
   Huge,
-} from '../src/Typography.js';
-import theme from './theme.js';
+} from '../src/Typography';
+import theme from './theme';
 
 const stories = storiesOf('Button', module)
-  .addDecorator(story => <ThemeProvider theme={theme}>{story()}</ThemeProvider>)
-  .add('default', () => (
-    <Button
-      size={select(
-        'Size',
-        {
-          small: 'sm',
-          medium: 'md',
-          large: 'lg',
-        },
-        'md',
-        'GROUP-ID1'
-      )}
-      onClick={action('clicked')}
-    >
-      Hello Button
-    </Button>
-  ));
+  .addDecorator((story) => {
+    return <ThemeProvider theme={theme}>{story()}</ThemeProvider>;
+  })
+  .add('default', () => {
+    return (
+      <Button
+        size={select(
+          'Size',
+          { small: 'sm', medium: 'md', large: 'lg' },
+          'md',
+          'GROUP-ID1'
+        )}
+        onClick={action('clicked')}
+      >
+        Hello Button
+      </Button>
+    );
+  });
 
 stories.addDecorator(withKnobs);
 
 const stories2 = storiesOf('Tabs', module)
-  .addDecorator(story => <ThemeProvider theme={theme}>{story()}</ThemeProvider>)
+  .addDecorator((story) => (
+    <ThemeProvider theme={theme}>{story()}</ThemeProvider>
+  ))
   .add('default', () => (
     <Tabs>
       <TabList>
@@ -63,15 +64,19 @@ const stories2 = storiesOf('Tabs', module)
 
 stories2.addDecorator(withKnobs);
 
-const icons = storiesOf('Icons', module)
-  .addDecorator(story => <ThemeProvider theme={theme}>{story()}</ThemeProvider>)
+storiesOf('Icons', module)
+  .addDecorator((story) => (
+    <ThemeProvider theme={theme}>{story()}</ThemeProvider>
+  ))
   .add('default', () => <Icon type="Deck" />);
 
 const sample = 'Sample Text';
 const lorem =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 storiesOf('Typography', module)
-  .addDecorator(story => <ThemeProvider theme={theme}>{story()}</ThemeProvider>)
+  .addDecorator((story) => (
+    <ThemeProvider theme={theme}>{story()}</ThemeProvider>
+  ))
   .add('all', () => {
     return (
       <table>
