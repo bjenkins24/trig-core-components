@@ -55,7 +55,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "precise-commites",
+      "precise-commits",
       "eslint --fix",
       "git add"
     ]
