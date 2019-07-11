@@ -5,7 +5,7 @@ import { TabContext } from './Tabs';
 const TabPanel = ({ tabIndex, ...restProps }) => {
   const { selectedTab } = useContext(TabContext);
   return (
-          <div
+            <div
       {...restProps}
       role="tabpanel"
       hidden={selectedTab !== tabIndex}
