@@ -68,7 +68,17 @@ storiesOf('Icons', module)
   .addDecorator((story) => (
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
-  .add('default', () => <Icon type="Deck" />);
+  .add('default', () => (
+    <Icon
+      type={select(
+        'Icon',
+        { deck: 'deck', cards: 'cards', avatar: 'avatar' },
+        'deck',
+        'GROUP-ID1'
+      )}
+    />
+  ))
+  .addDecorator(withKnobs);
 
 const sample = 'Sample Text';
 const lorem =
