@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require('path');
 
 // Export a function. Accept the base config as the only param.
 module.exports = async ({ config, mode }) => {
@@ -9,7 +9,7 @@ module.exports = async ({ config, mode }) => {
   // Make whatever fine-grained changes you need
   config.module.rules.unshift({
     test: /\.svg$/,
-    loader: "svg-sprite-loader"
+    loader: 'svg-sprite-loader',
   });
 
   // Remove the file loader (is there a better way?) - so the svg sprite loader works
