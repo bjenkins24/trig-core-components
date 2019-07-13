@@ -7,6 +7,7 @@ import { withKnobs, select } from '@storybook/addon-knobs';
 import { ThemeProvider } from 'styled-components';
 import Button from '../src/Buttons';
 import Icon from '../src/Icon';
+import Avatar from '../src/Avatar';
 import { Tabs, TabList, Tab, TabPanel } from '../src/Tabs';
 import {
   TinyText,
@@ -77,6 +78,15 @@ storiesOf('Icons', module)
         'GROUP-ID1'
       )}
     />
+  ))
+  .addDecorator(withKnobs);
+
+storiesOf('Avatar', module)
+  .addDecorator((story) => (
+    <ThemeProvider theme={theme}>{story()}</ThemeProvider>
+  ))
+  .add('default', () => (
+    <Avatar image="https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg" />
   ))
   .addDecorator(withKnobs);
 
