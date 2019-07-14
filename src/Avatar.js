@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { H1, Body1, Body3 } from './Typography';
 import Icon from './Icon';
 
 const getSize = ({ size }) => {
   return css`
     width: ${size}rem;
     height: ${size}rem;
+    font-size: ${size * 0.5}rem;
   `;
 };
 
@@ -25,57 +25,6 @@ const Initials = styled.div`
 `;
 
 const Avatar = ({ image, size, firstName, lastName, email, ...restProps }) => {
-  const getInitials = () => {
-    if (size >= 6.4) {
-      return (
-        <H1
-          css={`
-            margin: 0 auto;
-          `}
-        >
-          {firstName.charAt(0)}
-          {lastName.charAt(0)}
-        </H1>
-      );
-    }
-    if (size < 6.4 && size > 2.4) {
-      return (
-        <Body1
-          css={`
-            margin: 0 auto;
-          `}
-        >
-          {firstName.charAt(0)}
-          {lastName.charAt(0)}
-        </Body1>
-      );
-    }
-    if (size <= 2.4 && size > 1.6) {
-      return (
-        <Body3
-          css={`
-            margin: 0 auto;
-          `}
-        >
-          {firstName.charAt(0)}
-          {lastName.charAt(0)}
-        </Body3>
-      );
-    }
-    if (size <= 1.6) {
-      return (
-        <Body3
-          css={`
-            margin: 0 auto;
-          `}
-        >
-          {lastName.charAt(0)}
-        </Body3>
-      );
-    }
-    return false;
-  };
-
   const getAlt = () => {
     if (firstName && lastName) {
       return `${firstName} ${lastName}`;
@@ -96,10 +45,17 @@ const Avatar = ({ image, size, firstName, lastName, email, ...restProps }) => {
     return <Image src={image} alt={getAlt()} {...restProps} />;
   }
 
-  if ((firstName || lastName) && size <= 9.6) {
+  if (firstName || lastName) {
     return (
       <Initials size={size} {...restProps}>
-        {getInitials()}
+        <span
+          css={`
+            margin: 0 auto;
+          `}
+        >
+          {size > 1.6 && firstName.charAt(0)}
+          {lastName.charAt(0)}
+        </span>
       </Initials>
     );
   }

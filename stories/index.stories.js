@@ -2,7 +2,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, select } from '@storybook/addon-knobs';
+import { withKnobs, select, number, text } from '@storybook/addon-knobs';
 
 import { ThemeProvider } from 'styled-components';
 import Button from '../src/Buttons';
@@ -85,7 +85,13 @@ storiesOf('Avatar', module)
   .addDecorator((story) => (
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
-  .add('default', () => <Avatar firstName="Brian" lastName="Jenkins" />)
+  .add('default', () => (
+    <Avatar
+      firstName={text('first name', 'Brian')}
+      lastName={text('last name', 'Jenkins')}
+      size={number('size', 3.2)}
+    />
+  ))
   .addDecorator(withKnobs);
 
 const sample = 'Sample Text';
