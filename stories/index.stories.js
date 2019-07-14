@@ -85,9 +85,7 @@ storiesOf('Avatar', module)
   .addDecorator((story) => (
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
-  .add('default', () => (
-    <Avatar image="https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg" />
-  ))
+  .add('default', () => <Avatar firstName="Brian" lastName="Jenkins" />)
   .addDecorator(withKnobs);
 
 const sample = 'Sample Text';
