@@ -10,6 +10,7 @@ import Button from '../src/Buttons';
 import Icon from '../src/Icon';
 import Avatar from '../src/Avatar';
 import { Tabs, TabList, Tab, TabPanel } from '../src/Tabs';
+import Deck from '../src/Deck';
 import {
   TinyText,
   Body1,
@@ -78,6 +79,20 @@ storiesOf('Icons', module)
         'deck',
         'GROUP-ID1'
       )}
+    />
+  ))
+  .addDecorator(withKnobs);
+
+storiesOf('Deck', module)
+  .addDecorator((story) => (
+    <ThemeProvider theme={theme}>{story()}</ThemeProvider>
+  ))
+  .add('default', () => (
+    <Deck
+      user={{ firstName: 'Brian', lastName: 'Jenkins' }}
+      totalFollowers={9}
+      totalCards={22}
+      title="Onboarding Support"
     />
   ))
   .addDecorator(withKnobs);
