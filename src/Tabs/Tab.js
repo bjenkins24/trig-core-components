@@ -9,6 +9,9 @@ const getColor = ({ theme, isSelected, dark }) => {
   if (dark && isSelected) {
     return theme.cpc;
   }
+  if (dark && !isSelected) {
+    return theme.cps;
+  }
   if (isSelected) {
     return theme.cs;
   }

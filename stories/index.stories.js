@@ -2,7 +2,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, select, number, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  select,
+  number,
+  text,
+  boolean,
+} from '@storybook/addon-knobs';
 
 import { ThemeProvider } from 'styled-components';
 import './consoleOverrides';
@@ -52,7 +58,7 @@ const stories2 = storiesOf('Tabs', module)
   ))
   .add('default', () => (
     <Tabs>
-      <TabList dark>
+      <TabList dark={boolean('Dark', false)}>
         <Tab>All Cards</Tab>
         <Tab>Recently Viewed</Tab>
         <Tab>Most Viewed</Tab>
