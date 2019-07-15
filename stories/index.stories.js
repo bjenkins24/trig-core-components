@@ -50,7 +50,7 @@ const stories2 = storiesOf('Tabs', module)
   ))
   .add('default', () => (
     <Tabs>
-      <TabList>
+      <TabList dark>
         <Tab>All Cards</Tab>
         <Tab>Recently Viewed</Tab>
         <Tab>Most Viewed</Tab>

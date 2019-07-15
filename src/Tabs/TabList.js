@@ -9,14 +9,14 @@ const separatorHeight = '0.3rem';
 
 const Separator = styled.div`
   height: ${separatorHeight};
-  background: rgb(${({ theme }) => theme.cp});
+  background: rgb(${({ theme, dark }) => (dark ? theme.cps : theme.cp)});
   overflow: hidden;
 `;
 
 const SelectedBar = styled(animated.div)`
   height: ${separatorHeight};
   width: ${({ width }) => width / 10}rem;
-  background: ${({ theme }) => `rgb(${theme.cs})`};
+  background: rgb(${({ theme, dark }) => (dark ? theme.cpc : theme.cs)});
   position: relative;
 `;
 
@@ -42,7 +42,7 @@ const reducer = (state, action) => {
   }
 };
 
-const TabList = ({ children, ...restProps }) => {
+const TabList = ({ children, dark, ...restProps }) => {
   const { selectedTab, tabRefs } = useContext(TabContext);
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -67,7 +67,7 @@ const TabList = ({ children, ...restProps }) => {
       }, 0);
       dispatch({ type: 'setSelectedPosition', payload: position });
     }
-  });
+  }, [selectedTab]);
 
   return (
     <div
@@ -79,18 +79,28 @@ const TabList = ({ children, ...restProps }) => {
         {React.Children.map(children, (child, i) => {
           return React.cloneElement(child, {
             tabIndex: i,
+            dark,
           });
         })}
       </HorizontalGroup>
-      <Separator>
-        <SelectedBar width={state.selectedWidth} style={animateProps} />
+      <Separator dark={dark}>
+        <SelectedBar
+          dark={dark}
+          width={state.selectedWidth}
+          style={animateProps}
+        />
       </Separator>
     </div>
   );
 };
 
+TabList.defaultProps = {
+  dark: false,
+};
+
 TabList.propTypes = {
   children: PropTypes.node.isRequired,
+  dark: PropTypes.bool,
 };
 
 export default TabList;
