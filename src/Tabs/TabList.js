@@ -67,7 +67,7 @@ const TabList = ({ children, dark, ...restProps }) => {
       }, 0);
       dispatch({ type: 'setSelectedPosition', payload: position });
     }
-  }, [selectedTab]);
+  }, [selectedTab, tabRefs]);
 
   return (
     <div

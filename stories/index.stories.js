@@ -5,6 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, select, number, text } from '@storybook/addon-knobs';
 
 import { ThemeProvider } from 'styled-components';
+import './consoleOverrides';
 import Button from '../src/Buttons';
 import Icon from '../src/Icon';
 import Avatar from '../src/Avatar';
