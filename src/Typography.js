@@ -38,7 +38,7 @@ const Huge = styled.h1`
   ${buttonStyles};
 `;
 
-const H1 = styled.h1`
+const Heading1 = styled.h1`
   font-size: 3.4rem;
   line-height: 1.3;
   color: ${getColor()};
@@ -48,7 +48,7 @@ const H1 = styled.h1`
   ${buttonStyles};
 `;
 
-const H2 = styled.h2`
+const Heading2 = styled.h2`
   font-size: 2.6rem;
   line-height: 1.3;
   font-weight: 600;
@@ -58,7 +58,7 @@ const H2 = styled.h2`
   ${buttonStyles};
 `;
 
-const H3 = styled.h3`
+const Heading3 = styled.h3`
   font-size: 1.5rem;
   line-height: 1.5;
   font-weight: 600;
@@ -68,7 +68,7 @@ const H3 = styled.h3`
   ${buttonStyles};
 `;
 
-const H4 = styled.h4`
+const Heading4 = styled.h4`
   font-size: 1.3rem;
   line-height: 1.7;
   color: ${getColor()};
@@ -110,4 +110,14 @@ const TinyText = styled.span`
   ${buttonStyles};
 `;
 
-export { TinyText, Body1, Body2, Body3, H4, H3, H2, H1, Huge };
+export {
+  Huge,
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Body1,
+  Body2,
+  Body3,
+  TinyText,
+};

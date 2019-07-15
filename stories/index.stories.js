@@ -12,15 +12,15 @@ import Avatar from '../src/Avatar';
 import { Tabs, TabList, Tab, TabPanel } from '../src/Tabs';
 import Deck from '../src/Deck';
 import {
-  TinyText,
+  Huge,
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
   Body1,
   Body2,
   Body3,
-  H4,
-  H3,
-  H2,
-  H1,
-  Huge,
+  TinyText,
 } from '../src/Typography';
 import theme from './theme';
 
@@ -134,7 +134,7 @@ storiesOf('Typography', module)
               <Body1>H1</Body1>
             </td>
             <td>
-              <H1>{sample}</H1>
+              <Heading1>{sample}</Heading1>
             </td>
           </tr>
           <tr>
@@ -142,7 +142,7 @@ storiesOf('Typography', module)
               <Body1>H2</Body1>
             </td>
             <td>
-              <H2>{sample}</H2>
+              <Heading2>{sample}</Heading2>
             </td>
           </tr>
           <tr>
@@ -150,7 +150,7 @@ storiesOf('Typography', module)
               <Body1>H3</Body1>
             </td>
             <td>
-              <H3>{sample}</H3>
+              <Heading3>{sample}</Heading3>
             </td>
           </tr>
           <tr>
@@ -158,7 +158,7 @@ storiesOf('Typography', module)
               <Body1>H4</Body1>
             </td>
             <td>
-              <H4>{sample}</H4>
+              <Heading4>{sample}</Heading4>
             </td>
           </tr>
           <tr>

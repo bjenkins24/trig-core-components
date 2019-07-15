@@ -33,13 +33,13 @@ const ButtonSecondary = styled.button`
 `;
 
 const Button = ({ children, ...restProps }) => {
-  const Typography = getTypography(restProps.size);
+  const Text = getTypography(restProps.size);
 
   return (
     <ButtonSecondary {...restProps}>
-      <Typography color="csc" weight="bold">
+      <Text color="csc" weight="bold">
         {children}
-      </Typography>
+      </Text>
     </ButtonSecondary>
   );
 };
