@@ -2,9 +2,11 @@ import styled from 'styled-components';
 
 const HorizontalGroup = styled.div`
   display: flex;
-  & > * {
-    margin-right: ${({ margin }) => (margin ? `${margin}rem` : 0)};
-    padding-right: ${({ padding }) => (padding ? `${padding}rem` : 0)};
+  align-items: center;
+
+  > *:not(:last-child) {
+    ${({ margin }) => margin && `margin-right: ${margin}rem`};
+    ${({ padding }) => padding && `padding-right: ${padding}rem`};
   }
 `;
 

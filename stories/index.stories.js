@@ -45,7 +45,7 @@ const stories = storiesOf('Button', module)
         )}
         onClick={action('clicked')}
       >
-        Hello Button
+        {text('Button Text', 'Hello Button')}
       </Button>
     );
   });

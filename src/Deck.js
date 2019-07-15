@@ -10,15 +10,11 @@ const Wrapper = styled.div`
   border-radius: 0.4rem;
   background: rgb(${({ theme }) => theme.cs});
   padding: 1.6rem;
-  width: 26.2rem;
-  height: 22.5rem;
+  width: 23rem;
+  height: 19.3rem;
   color: rgb(${({ theme }) => theme.csc});
   display: flex;
   align-items: flex-end;
-`;
-
-const IconWrapper = styled(HorizontalGroup)`
-  align-items: center;
 `;
 
 const Deck = ({ title, user, totalCards, totalFollowers }) => {
@@ -36,18 +32,18 @@ const Deck = ({ title, user, totalCards, totalFollowers }) => {
               color: rgb(${({ theme }) => theme.cp});
             `}
           />
-          <IconWrapper margin={0.8}>
+          <HorizontalGroup margin={0.8}>
             <Icon type="cards" size={2.2} />
             <Body3 weight="bold" color="csc">
               {totalCards} Cards
             </Body3>
-          </IconWrapper>
-          <IconWrapper margin={0.8}>
+          </HorizontalGroup>
+          <HorizontalGroup margin={0.8}>
             <Icon type="followers" size={1.6} />
             <Body3 weight="bold" color="csc">
               {totalFollowers} Followers
             </Body3>
-          </IconWrapper>
+          </HorizontalGroup>
         </HorizontalGroup>
       </div>
     </Wrapper>
