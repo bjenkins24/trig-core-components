@@ -81,7 +81,12 @@ storiesOf('Icons', module)
     <Icon
       type={select(
         'Icon',
-        { deck: 'deck', cards: 'cards', avatar: 'avatar' },
+        {
+          deck: 'deck',
+          cards: 'cards',
+          avatar: 'avatar',
+          followers: 'followers',
+        },
         'deck',
         'GROUP-ID1'
       )}

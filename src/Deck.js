@@ -13,35 +13,43 @@ const Wrapper = styled.div`
   width: 26.2rem;
   height: 22.5rem;
   color: rgb(${({ theme }) => theme.csc});
+  display: flex;
+  align-items: flex-end;
+`;
+
+const IconWrapper = styled(HorizontalGroup)`
+  align-items: center;
 `;
 
 const Deck = ({ title, user, totalCards, totalFollowers }) => {
   return (
     <Wrapper>
-      <Heading2 color="csc">{title}</Heading2>
-      <HorizontalGroup margin={1.6}>
-        <Avatar
-          firstName={user.firstName}
-          lastName={user.lastName}
-          email={user.email}
-          size={2.4}
-          css={`
-            color: rgb(${({ theme }) => theme.cp});
-          `}
-        />
-        <HorizontalGroup margin={0.8}>
-          <Icon type="cards" size={2.2} />
-          <Body3 weight="bold" color="csc">
-            {totalCards} Cards
-          </Body3>
+      <div>
+        <Heading2 color="csc">{title}</Heading2>
+        <HorizontalGroup margin={1.6}>
+          <Avatar
+            firstName={user.firstName}
+            lastName={user.lastName}
+            email={user.email}
+            size={2.4}
+            css={`
+              color: rgb(${({ theme }) => theme.cp});
+            `}
+          />
+          <IconWrapper margin={0.8}>
+            <Icon type="cards" size={2.2} />
+            <Body3 weight="bold" color="csc">
+              {totalCards} Cards
+            </Body3>
+          </IconWrapper>
+          <IconWrapper margin={0.8}>
+            <Icon type="followers" size={1.6} />
+            <Body3 weight="bold" color="csc">
+              {totalFollowers} Followers
+            </Body3>
+          </IconWrapper>
         </HorizontalGroup>
-        <HorizontalGroup margin={0.8}>
-          <Icon type="followers" size={1.6} />
-          <Body3 weight="bold" color="csc">
-            {totalFollowers} Followers
-          </Body3>
-        </HorizontalGroup>
-      </HorizontalGroup>
+      </div>
     </Wrapper>
   );
 };
