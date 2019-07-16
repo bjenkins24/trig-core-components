@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Truncate from 'react-truncate';
 import { Heading2, Body3 } from './Typography';
 import Icon from './Icon';
 import Avatar from './Avatar';
@@ -20,8 +21,19 @@ const Wrapper = styled.div`
 const Deck = ({ title, user, totalCards, totalFollowers }) => {
   return (
     <Wrapper>
-      <div>
-        <Heading2 color="csc">{title}</Heading2>
+      <div
+        css={`
+          width: 23rem;
+        `}
+      >
+        <Heading2
+          color="csc"
+          css={`
+            overflow-wrap: break-word;
+          `}
+        >
+          <Truncate lines={4}>{title}</Truncate>
+        </Heading2>
         <HorizontalGroup margin={1.6}>
           <Avatar
             firstName={user.firstName}

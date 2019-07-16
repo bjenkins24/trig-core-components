@@ -37,12 +37,7 @@ const stories = storiesOf('Button', module)
   .add('default', () => {
     return (
       <Button
-        size={select(
-          'Size',
-          { small: 'sm', medium: 'md', large: 'lg' },
-          'md',
-          'GROUP-ID1'
-        )}
+        size={select('Size', { small: 'sm', medium: 'md', large: 'lg' }, 'md')}
         onClick={action('clicked')}
       >
         {text('Button Text', 'Hello Button')}
@@ -87,8 +82,7 @@ storiesOf('Icons', module)
           avatar: 'avatar',
           followers: 'followers',
         },
-        'deck',
-        'GROUP-ID1'
+        'deck'
       )}
     />
   ))
@@ -101,9 +95,9 @@ storiesOf('Deck', module)
   .add('default', () => (
     <Deck
       user={{ firstName: 'Brian', lastName: 'Jenkins' }}
-      totalFollowers={9}
-      totalCards={22}
-      title="Onboarding Support"
+      totalFollowers={number('followers', 9)}
+      totalCards={number('cards', 22)}
+      title={text('title', 'Onboarding Support')}
     />
   ))
   .addDecorator(withKnobs);
