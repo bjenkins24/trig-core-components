@@ -19,6 +19,7 @@ const Wrapper = styled.div`
 `;
 
 const Deck = ({ title, user, totalCards, totalFollowers }) => {
+  const totalCountLength = `${totalCards}${totalFollowers}`.length;
   return (
     <Wrapper>
       <div
@@ -47,13 +48,13 @@ const Deck = ({ title, user, totalCards, totalFollowers }) => {
           <HorizontalGroup margin={0.8}>
             <Icon type="cards" size={2.2} />
             <Body3 weight="bold" color="csc">
-              {totalCards} Cards
+              {totalCards} {totalCountLength <= 3 && ' Cards'}
             </Body3>
           </HorizontalGroup>
           <HorizontalGroup margin={0.8}>
             <Icon type="followers" size={1.6} />
             <Body3 weight="bold" color="csc">
-              {totalFollowers} Followers
+              {totalFollowers} {totalCountLength <= 3 && ' Followers'}
             </Body3>
           </HorizontalGroup>
         </HorizontalGroup>
