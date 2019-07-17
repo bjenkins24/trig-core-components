@@ -103,7 +103,7 @@ const Body3 = styled.span`
 
 const TinyText = styled.span`
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.3;
   text-transform: uppercase;
   color: ${getColor()};

@@ -92,11 +92,18 @@ const Deck = ({
           color="csc"
           css={`
             overflow-wrap: break-word;
+            margin-bottom: 0.3rem;
           `}
         >
           <Truncate lines={2}>{title}</Truncate>
         </Heading2>
-        <Body2 color="csc">
+        <Body2
+          color="csc"
+          as="p"
+          css={`
+            margin: 0 0 0.8rem 0;
+          `}
+        >
           <Truncate lines={4}>{description}</Truncate>
         </Body2>
         <HorizontalGroup margin={0.8}>
