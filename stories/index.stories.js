@@ -94,6 +94,9 @@ storiesOf('Deck', module)
   ))
   .add('default', () => (
     <Deck
+      css={`
+        margin: 100px;
+      `}
       user={{
         firstName: 'Brian',
         lastName: 'Jenkins',

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useSpring, useTransition, animated, config } from 'react-spring';
 import styled from 'styled-components';
 import Truncate from 'react-truncate';
 import { Heading2, Body2, Body3, TinyText } from './Typography';
@@ -7,33 +8,27 @@ import Icon from './Icon';
 import Avatar from './Avatar';
 import { HorizontalGroup, VerticalGroup } from './Groups';
 
-const DeckThumbnail = styled.div`
+const DeckThumbnail = styled(animated.div)`
   width: 23rem;
-  align-self: flex-end;
+  height: 19.3rem;
+  display: flex;
+  flex-direction: column;
 `;
 
-const DeckHover = styled.div`
+const DeckHover = styled(animated.div)`
+  display: flex;
+  flex-direction: column;
   width: 23rem;
-  display: none;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled(animated.div)`
   border-radius: 0.4rem;
   background: rgb(${({ theme }) => theme.cs});
   padding: 1.6rem;
   width: 23rem;
   height: 19.3rem;
   color: rgb(${({ theme }) => theme.csc});
-  display: flex;
   cursor: pointer;
-  &:hover ${DeckThumbnail} {
-    opacity: 0;
-    display: none;
-  }
-  &:hover ${DeckHover} {
-    opacity: 1;
-    display: block;
-  }
 `;
 
 const Deck = ({
@@ -45,6 +40,16 @@ const Deck = ({
   ...restProps
 }) => {
   const totalCountLength = `${totalCards}${totalFollowers}`.length;
+  const [isHovered, setIsHovered] = useState(false);
+  const animateProps = useSpring({
+    transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+  });
+  const transitions = useTransition(!isHovered, null, {
+    from: { opacity: 0, display: 'none' },
+    enter: { opacity: 1, display: 'flex' },
+    leave: { opacity: 0, display: 'none' },
+    config: config.gentle,
+  });
 
   const AvatarWrapper = () => {
     return (
@@ -61,65 +66,76 @@ const Deck = ({
   };
 
   return (
-    <Wrapper {...restProps}>
-      <DeckThumbnail>
-        <Heading2
-          color="csc"
-          css={`
-            overflow-wrap: break-word;
-          `}
-        >
-          <Truncate lines={4}>{title}</Truncate>
-        </Heading2>
-        <HorizontalGroup margin={1.6}>
-          <AvatarWrapper user={user} />
-          <HorizontalGroup margin={0.8}>
-            <Icon type="cards" size={2.2} />
-            <Body3 weight="bold" color="csc">
-              {totalCards} {totalCountLength <= 3 && ' Cards'}
-            </Body3>
-          </HorizontalGroup>
-          <HorizontalGroup margin={0.8}>
-            <Icon type="followers" size={1.6} />
-            <Body3 weight="bold" color="csc">
-              {totalFollowers} {totalCountLength <= 3 && ' Followers'}
-            </Body3>
-          </HorizontalGroup>
-        </HorizontalGroup>
-      </DeckThumbnail>
-      <DeckHover>
-        <Heading2
-          color="csc"
-          css={`
-            overflow-wrap: break-word;
-            margin-bottom: 0.3rem;
-          `}
-        >
-          <Truncate lines={2}>{title}</Truncate>
-        </Heading2>
-        <Body2
-          color="csc"
-          as="p"
-          css={`
-            margin: 0 0 0.8rem 0;
-          `}
-        >
-          <Truncate lines={4}>{description}</Truncate>
-        </Body2>
-        <HorizontalGroup margin={0.8}>
-          <AvatarWrapper user={user} />
-          <VerticalGroup
-            css={`
-              margin-top: 0.1rem;
-            `}
-          >
-            <TinyText color="csc">
-              {user.firstName} {user.lastName}
-            </TinyText>
-            <TinyText color="csc">{user.position}</TinyText>
-          </VerticalGroup>
-        </HorizontalGroup>
-      </DeckHover>
+    <Wrapper
+      onMouseEnter={() => setIsHovered(!isHovered)}
+      onMouseLeave={() => setIsHovered(!isHovered)}
+      style={animateProps}
+      {...restProps}
+    >
+      {transitions.map(({ item, key, props }) =>
+        item ? (
+          <DeckThumbnail key={key} style={props}>
+            <Heading2
+              color="csc"
+              css={`
+                overflow-wrap: break-word;
+                margin-top: auto;
+              `}
+            >
+              <Truncate lines={4}>{title}</Truncate>
+            </Heading2>
+            <HorizontalGroup margin={1.6}>
+              <AvatarWrapper user={user} />
+              <HorizontalGroup margin={0.8}>
+                <Icon type="cards" size={2.2} />
+                <Body3 weight="bold" color="csc">
+                  {totalCards} {totalCountLength <= 3 && ' Cards'}
+                </Body3>
+              </HorizontalGroup>
+              <HorizontalGroup margin={0.8}>
+                <Icon type="followers" size={1.6} />
+                <Body3 weight="bold" color="csc">
+                  {totalFollowers} {totalCountLength <= 3 && ' Followers'}
+                </Body3>
+              </HorizontalGroup>
+            </HorizontalGroup>
+          </DeckThumbnail>
+        ) : (
+          <DeckHover style={props} key={key}>
+            <Heading2
+              color="csc"
+              css={`
+                overflow-wrap: break-word;
+                margin-bottom: 0.3rem;
+              `}
+            >
+              <Truncate lines={2}>{title}</Truncate>
+            </Heading2>
+            <Body2
+              color="csc"
+              as="p"
+              css={`
+                margin: 0 0 0.8rem 0;
+              `}
+            >
+              <Truncate lines={4}>{description}</Truncate>
+            </Body2>
+            <HorizontalGroup margin={0.8}>
+              <AvatarWrapper user={user} />
+              <VerticalGroup
+                css={`
+                  margin-top: 0.1rem;
+                `}
+              >
+                <TinyText color="csc">
+                  {user.firstName} {user.lastName}
+                </TinyText>
+                <TinyText color="csc">{user.position}</TinyText>
+              </VerticalGroup>
+            </HorizontalGroup>
+          </DeckHover>
+        )
+      )}
     </Wrapper>
   );
 };
