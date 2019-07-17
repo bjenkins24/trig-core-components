@@ -108,7 +108,11 @@ const Deck = ({
         </Body2>
         <HorizontalGroup margin={0.8}>
           <AvatarWrapper user={user} />
-          <VerticalGroup>
+          <VerticalGroup
+            css={`
+              margin-top: 0.1rem;
+            `}
+          >
             <TinyText color="csc">
               {user.firstName} {user.lastName}
             </TinyText>
