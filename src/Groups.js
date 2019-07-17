@@ -12,7 +12,12 @@ const HorizontalGroup = styled.div`
 
 const VerticalGroup = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  > *:not(:last-child) {
+    ${({ margin }) => margin && `margin-bottom: ${margin}rem`};
+    ${({ padding }) => padding && `padding-bottom: ${padding}rem`};
+  }
 `;
 
 export { HorizontalGroup, VerticalGroup };

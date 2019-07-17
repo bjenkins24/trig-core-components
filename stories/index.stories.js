@@ -94,10 +94,18 @@ storiesOf('Deck', module)
   ))
   .add('default', () => (
     <Deck
-      user={{ firstName: 'Brian', lastName: 'Jenkins' }}
+      user={{
+        firstName: 'Brian',
+        lastName: 'Jenkins',
+        position: 'President, CEO',
+      }}
       totalFollowers={number('followers', 9)}
       totalCards={number('cards', 22)}
       title={text('title', 'Onboarding Support')}
+      description={text(
+        'description',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea'
+      )}
     />
   ))
   .addDecorator(withKnobs);
