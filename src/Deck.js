@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSpring, useTransition, animated, config } from 'react-spring';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Truncate from 'react-truncate';
 import { Heading2, Body2, Body3, TinyText } from './Typography';
 import Icon from './Icon';
@@ -21,9 +21,26 @@ const DeckHover = styled(animated.div)`
   width: 23rem;
 `;
 
+const getBackground = ({ theme, isHovered, image }) => {
+  if (image && !isHovered) {
+    return css`
+      background: linear-gradient(0deg, rgba(${theme.cs},0.90) 25%, rgba(${theme.csc},.8) 80%), url('${image}');
+      box-shadow: inset 0 0 0 1000px rgba(${theme.cs}, .25);
+    `;
+  }
+  if (image && isHovered) {
+    return css`
+      background: url('${image}');
+      box-shadow: inset 0 0 0 1000px rgba(${theme.cs}, .9);
+    `;
+  }
+  return false;
+};
+
 const Wrapper = styled(animated.div)`
+  position: relative;
   border-radius: 0.4rem;
-  background: rgb(${({ theme }) => theme.cs});
+  ${getBackground}
   padding: 1.6rem;
   width: 23rem;
   height: 19.3rem;
@@ -33,6 +50,7 @@ const Wrapper = styled(animated.div)`
 
 const Deck = ({
   title,
+  image,
   user,
   totalCards,
   totalFollowers,
@@ -67,6 +85,8 @@ const Deck = ({
 
   return (
     <Wrapper
+      image={image}
+      isHovered={isHovered}
       onMouseEnter={() => setIsHovered(!isHovered)}
       onMouseLeave={() => setIsHovered(!isHovered)}
       style={animateProps}
@@ -140,11 +160,16 @@ const Deck = ({
   );
 };
 
+Deck.defaultProps = {
+  image: '',
+};
+
 Deck.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   totalCards: PropTypes.number.isRequired,
   totalFollowers: PropTypes.number.isRequired,
+  image: PropTypes.string,
   user: PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
