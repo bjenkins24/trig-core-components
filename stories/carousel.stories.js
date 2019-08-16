@@ -10,7 +10,7 @@ import './consoleOverrides';
 import Deck from '../src/Deck';
 import themeForProvider from './theme';
 
-// eslint-disable-next-line
+// eslint-disable-next-line react/prop-types
 const DeckDemo = ({ title }) => (
   <Deck
     css={`
@@ -71,22 +71,24 @@ const Wrapper = styled.div`
     margin-right: auto;
   }
 
-  .slick-slider .slick-track,
-  .slick-slider .slick-list {
-    transform: translate3d(0, 0, 0);
-  }
-
   .slick-track:before,
   .slick-track:after {
     display: table;
 
     content: '';
   }
+
   .slick-track:after {
     clear: both;
   }
+
   .slick-loading .slick-track {
     visibility: hidden;
+  }
+
+  .slick-slider .slick-track,
+  .slick-slider .slick-list {
+    transform: translate3d(0, 0, 0);
   }
 
   .slick-slide {
@@ -135,6 +137,17 @@ const Wrapper = styled.div`
   /* Slider */
   .slick-loading .slick-list {
     background: #fff url('./ajax-loader.gif') center center no-repeat;
+  }
+
+  .slick-prev:hover:before,
+  .slick-prev:focus:before,
+  .slick-next:hover:before,
+  .slick-next:focus:before {
+    opacity: 1;
+  }
+  .slick-prev.slick-disabled:before,
+  .slick-next.slick-disabled:before {
+    opacity: 0.25;
   }
 
   .slick-prev,
@@ -187,7 +200,6 @@ storiesOf('Carousel', module)
       <Slider
         prevArrow={<Icon type="left-arrow" />}
         nextArrow={<Icon type="right-arrow" />}
-        dots
         infinite
         speed={500}
         slidesToShow={4}
