@@ -9,28 +9,31 @@ import Avatar from './Avatar';
 import { HorizontalGroup, VerticalGroup } from './Groups';
 
 const DeckThumbnail = styled(animated.div)`
-  width: 23rem;
-  height: 19.3rem;
   display: flex;
   flex-direction: column;
+  transform: translateY(-100%);
+  padding: 1.6rem;
 `;
 
 const DeckHover = styled(animated.div)`
   display: flex;
   flex-direction: column;
-  width: 23rem;
+  transform: translateY(-100%);
+  padding: 1.6rem;
 `;
 
 const getBackground = ({ theme, isHovered, image }) => {
   if (image && !isHovered) {
     return css`
       background: linear-gradient(0deg, rgba(${theme.cs},0.90) 25%, rgba(${theme.csc},.8) 80%), url('${image}');
+      background-size: cover;
       box-shadow: inset 0 0 0 1000px rgba(${theme.cs}, .25);
     `;
   }
   if (image && isHovered) {
     return css`
       background: url('${image}');
+      background-size: cover;
       box-shadow: inset 0 0 0 1000px rgba(${theme.cs}, .9);
     `;
   }
@@ -41,9 +44,9 @@ const Wrapper = styled(animated.div)`
   position: relative;
   border-radius: 0.4rem;
   ${getBackground}
-  padding: 1.6rem;
-  width: 23rem;
-  height: 19.3rem;
+  padding-top: calc(3 / 4 * 20%);
+  height: 0;
+  width: 20%;
   color: rgb(${({ theme }) => theme.csc});
   cursor: pointer;
 `;
@@ -60,7 +63,9 @@ const Deck = ({
   const totalCountLength = `${totalCards}${totalFollowers}`.length;
   const [isHovered, setIsHovered] = useState(false);
   const animateProps = useSpring({
-    transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+    transform: isHovered ? 'translate(-20%, -20%)' : 'translate(0px, 0px)',
+    width: isHovered ? '25%' : '20%',
+    paddingTop: isHovered ? 'calc(3 / 4 * 25%)' : 'calc(3 / 4 * 20%)',
   });
   const transitions = useTransition(!isHovered, null, {
     from: { opacity: 0, display: 'none' },
