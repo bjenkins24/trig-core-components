@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
 import Icon from './Icon';
 
@@ -44,13 +45,8 @@ const SliderMask = styled.div`
   overflow-x: visible;
 `;
 
-const SliderContent = styled.div`
+const SliderContent = styled(animated.div)`
   white-space: nowrap;
-  transform: translate3d(
-    -${({ page, slidesPerPage, slidesToScroll }) => (100 / slidesPerPage) * slidesToScroll * page}%,
-    0px,
-    0px
-  );
 `;
 
 const Slide = styled.div`
@@ -65,13 +61,26 @@ const Slide = styled.div`
 
 const Carousel = ({ children, slidesPerPage, slidesToScroll }) => {
   const [page, setPage] = useState(0);
+  const [lastPage, setLastPage] = useState(0);
   const totalPages = React.Children.count(children) / slidesToScroll - 1;
+
+  const getSlidePosition = (selectedPage) => {
+    return `${-(100 / slidesPerPage) * slidesToScroll * selectedPage}%`;
+  };
+
+  const animateProps = useSpring({
+    from: {
+      transform: `translate3d(${getSlidePosition(lastPage)}, 0px, 0px)`,
+    },
+    transform: `translate3d(${getSlidePosition(page)}, 0px 0px)`,
+  });
 
   return (
     <Slider>
       <Previous
         onClick={() => {
           if (page === 0) return false;
+          setLastPage(page);
           return setPage(page - 1);
         }}
         role="button"
@@ -81,11 +90,7 @@ const Carousel = ({ children, slidesPerPage, slidesToScroll }) => {
         <Icon type="left-arrow" />
       </Previous>
       <SliderMask>
-        <SliderContent
-          page={page}
-          slidesPerPage={slidesPerPage}
-          slidesToScroll={slidesToScroll}
-        >
+        <SliderContent style={animateProps}>
           {React.Children.map(children, (item) => {
             return (
               <Slide slidesPerPage={slidesPerPage}>
@@ -98,6 +103,7 @@ const Carousel = ({ children, slidesPerPage, slidesToScroll }) => {
       <Next
         onClick={() => {
           if (page >= totalPages) return false;
+          setLastPage(page);
           return setPage(page + 1);
         }}
         role="button"
