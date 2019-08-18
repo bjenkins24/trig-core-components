@@ -59,13 +59,38 @@ const Slide = styled.div`
   width: ${({ slidesPerPage }) => 100 / slidesPerPage}%;
 `;
 
-const Carousel = ({ children, slidesPerPage, slidesToScroll }) => {
+const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
   const [page, setPage] = useState(0);
   const [lastPage, setLastPage] = useState(0);
-  const totalPages = React.Children.count(children) / slidesToScroll - 1;
+  const [additionalPages, setAdditionalPages] = useState(0);
+  const totalItems = React.Children.count(children);
+  const [copySlideCursor, setCopySlideCursor] = useState(totalItems);
+  const totalPages = totalItems / defaultSlidesToScroll - 1 + additionalPages;
 
   const getSlidePosition = (selectedPage) => {
-    return `${-(100 / slidesPerPage) * slidesToScroll * selectedPage}%`;
+    return `${-(100 / slidesPerPage) * defaultSlidesToScroll * selectedPage}%`;
+  };
+
+  if (totalPages - page <= 1) {
+    setAdditionalPages(additionalPages + 1);
+    setCopySlideCursor(copySlideCursor + totalItems);
+  }
+
+  const renderSlides = () => {
+    return [...Array(copySlideCursor)].map((u, i) => {
+      let newIndex = i;
+      while (newIndex > totalItems - 1) {
+        newIndex -= totalItems;
+      }
+      return (
+        <Slide slidesPerPage={slidesPerPage}>
+          {React.Children.map(children, (item, key) => {
+            if (key === newIndex) return React.cloneElement(item);
+            return false;
+          })}
+        </Slide>
+      );
+    });
   };
 
   const animateProps = useSpring({
@@ -90,15 +115,7 @@ const Carousel = ({ children, slidesPerPage, slidesToScroll }) => {
         <Icon type="left-arrow" />
       </Previous>
       <SliderMask>
-        <SliderContent style={animateProps}>
-          {React.Children.map(children, (item) => {
-            return (
-              <Slide slidesPerPage={slidesPerPage}>
-                {React.cloneElement(item)}
-              </Slide>
-            );
-          })}
-        </SliderContent>
+        <SliderContent style={animateProps}>{renderSlides()}</SliderContent>
       </SliderMask>
       <Next
         onClick={() => {
@@ -118,13 +135,13 @@ const Carousel = ({ children, slidesPerPage, slidesToScroll }) => {
 
 Carousel.defaultProps = {
   slidesPerPage: 5,
-  slidesToScroll: 5,
+  defaultSlidesToScroll: 5,
 };
 
 Carousel.propTypes = {
   children: PropTypes.node.isRequired,
   slidesPerPage: PropTypes.number,
-  slidesToScroll: PropTypes.number,
+  defaultSlidesToScroll: PropTypes.number,
 };
 
 export default Carousel;
