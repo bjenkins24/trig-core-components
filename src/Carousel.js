@@ -60,24 +60,39 @@ const Slide = styled.div`
 `;
 
 const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
-  const [page, setPage] = useState(0);
-  const [lastPage, setLastPage] = useState(0);
-  const [additionalPages, setAdditionalPages] = useState(0);
   const totalItems = React.Children.count(children);
-  const [copySlideCursor, setCopySlideCursor] = useState(totalItems);
-  const totalPages = totalItems / defaultSlidesToScroll - 1 + additionalPages;
+  const [currentPosition, setCurrentPosition] = useState(0);
+  const [lastPosition, setLastPosition] = useState(0);
 
-  const getSlidePosition = (selectedPage) => {
-    return `${-(100 / slidesPerPage) * defaultSlidesToScroll * selectedPage}%`;
+  const setPosition = (direction) => {
+    let directionSign = -1;
+    if (direction === 'prev') {
+      directionSign = 1;
+    }
+    let slidesToScroll = defaultSlidesToScroll;
+    setLastPosition(currentPosition);
+    const percentWidthPerItem = 100 / slidesPerPage;
+    let totalMovement = percentWidthPerItem * slidesToScroll * directionSign;
+    const totalSlidesMoved = Math.abs(
+      (currentPosition + totalMovement) / percentWidthPerItem
+    );
+    const nextSlidesMoved = totalSlidesMoved + slidesToScroll;
+    if (
+      totalSlidesMoved % defaultSlidesToScroll !== 0 &&
+      direction === 'prev'
+    ) {
+      slidesToScroll = totalItems % slidesPerPage;
+      totalMovement = percentWidthPerItem * slidesToScroll * directionSign;
+    }
+    if (nextSlidesMoved > totalItems) {
+      slidesToScroll = slidesPerPage - (nextSlidesMoved - totalItems);
+      totalMovement = percentWidthPerItem * slidesToScroll * directionSign;
+    }
+    setCurrentPosition(currentPosition + totalMovement);
   };
 
-  if (totalPages - page <= 1) {
-    setAdditionalPages(additionalPages + 1);
-    setCopySlideCursor(copySlideCursor + totalItems);
-  }
-
   const renderSlides = () => {
-    return [...Array(copySlideCursor)].map((u, i) => {
+    return [...Array(totalItems)].map((u, i) => {
       let newIndex = i;
       while (newIndex > totalItems - 1) {
         newIndex -= totalItems;
@@ -95,18 +110,16 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
 
   const animateProps = useSpring({
     from: {
-      transform: `translate3d(${getSlidePosition(lastPage)}, 0px, 0px)`,
+      transform: `translate3d(${lastPosition}%, 0px, 0px)`,
     },
-    transform: `translate3d(${getSlidePosition(page)}, 0px 0px)`,
+    transform: `translate3d(${currentPosition}%, 0px 0px)`,
   });
 
   return (
     <Slider>
       <Previous
         onClick={() => {
-          if (page === 0) return false;
-          setLastPage(page);
-          return setPage(page - 1);
+          setPosition('prev');
         }}
         role="button"
         tabindex={0}
@@ -119,9 +132,7 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
       </SliderMask>
       <Next
         onClick={() => {
-          if (page >= totalPages) return false;
-          setLastPage(page);
-          return setPage(page + 1);
+          setPosition('next');
         }}
         role="button"
         tabindex={0}
