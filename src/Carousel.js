@@ -61,8 +61,10 @@ const Slide = styled.div`
 
 const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
   const totalItems = React.Children.count(children);
+  const percentWidthPerItem = 100 / slidesPerPage;
   const [currentPosition, setCurrentPosition] = useState(0);
   const [lastPosition, setLastPosition] = useState(0);
+  const [moved, setMoved] = useState(false);
 
   const setPosition = (direction) => {
     let directionSign = -1;
@@ -71,31 +73,79 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
     }
     let slidesToScroll = defaultSlidesToScroll;
     setLastPosition(currentPosition);
-    const percentWidthPerItem = 100 / slidesPerPage;
-    let totalMovement = percentWidthPerItem * slidesToScroll * directionSign;
-    const totalSlidesMoved = Math.abs(
-      (currentPosition + totalMovement) / percentWidthPerItem
-    );
-    const nextSlidesMoved = totalSlidesMoved + slidesToScroll;
-    if (
-      totalSlidesMoved % defaultSlidesToScroll !== 0 &&
-      direction === 'prev'
-    ) {
-      slidesToScroll = totalItems % slidesPerPage;
-      totalMovement = percentWidthPerItem * slidesToScroll * directionSign;
+    if (!moved) {
+      setMoved(true);
+      // Set position to second page because we just added 2 pages before the first
+      // slide after we move once
+      const nextPosition =
+        percentWidthPerItem * slidesToScroll * 3 * directionSign;
+      setCurrentPosition(nextPosition);
+    } else {
+      let nextPosition =
+        currentPosition + percentWidthPerItem * slidesToScroll * directionSign;
+      const total = Math.abs(nextPosition / percentWidthPerItem);
+      // If we have some odd number not equal to
+      if (
+        total - slidesToScroll > totalItems &&
+        totalItems % slidesPerPage !== 0
+      ) {
+        slidesToScroll = totalItems % slidesPerPage;
+        nextPosition =
+          currentPosition +
+          percentWidthPerItem * slidesToScroll * directionSign;
+      }
+      // Go to any page after the issue page
+      if (
+        Math.abs(nextPosition / percentWidthPerItem) >
+        totalItems + defaultSlidesToScroll
+      ) {
+        slidesToScroll = 5;
+        nextPosition =
+          currentPosition +
+          percentWidthPerItem * slidesToScroll * directionSign;
+      }
+
+      setCurrentPosition(nextPosition);
     }
-    if (nextSlidesMoved > totalItems) {
-      slidesToScroll = slidesPerPage - (nextSlidesMoved - totalItems);
-      totalMovement = percentWidthPerItem * slidesToScroll * directionSign;
-    }
-    setCurrentPosition(currentPosition + totalMovement);
+
+    // let totalMovement = percentWidthPerItem * slidesToScroll * directionSign;
+    // const totalSlidesMoved = Math.abs(
+    //   (currentPosition + totalMovement) / percentWidthPerItem
+    // );
+    // const nextSlidesMoved = totalSlidesMoved + slidesToScroll;
+    // if (
+    //   totalSlidesMoved % defaultSlidesToScroll !== 0 &&
+    //   direction === 'prev'
+    // ) {
+    //   slidesToScroll = totalItems % slidesPerPage;
+    //   totalMovement = percentWidthPerItem * slidesToScroll * directionSign;
+    // }
+    // if (
+    //   nextSlidesMoved > totalItems &&
+    //   totalSlidesMoved % defaultSlidesToScroll === 0
+    // ) {
+    //   slidesToScroll = slidesPerPage - (nextSlidesMoved - totalItems);
+    //   totalMovement = percentWidthPerItem * slidesToScroll * directionSign;
+    // }
+    // setCurrentPosition(currentPosition + totalMovement);
   };
 
   const renderSlides = () => {
-    return [...Array(totalItems)].map((u, i) => {
+    let slides = [...Array(totalItems)];
+    if (moved) {
+      slides = [...Array(totalItems + slidesPerPage * 4)];
+    }
+    return slides.map((u, i) => {
       let newIndex = i;
-      while (newIndex > totalItems - 1) {
-        newIndex -= totalItems;
+      if (moved) {
+        if (i < slidesPerPage * 2) {
+          newIndex = i + totalItems - slidesPerPage * 2;
+        } else {
+          newIndex = i - slidesPerPage * 2;
+          while (newIndex > totalItems - 1) {
+            newIndex -= totalItems;
+          }
+        }
       }
       return (
         <Slide slidesPerPage={slidesPerPage}>

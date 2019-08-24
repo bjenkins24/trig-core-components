@@ -22,7 +22,16 @@ Icon.defaultProps = {
 };
 
 Icon.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf([
+    'avatar',
+    'cards',
+    'comments',
+    'deck',
+    'followers',
+    'heart',
+    'left-arrow',
+    'right-arrow',
+  ]).isRequired,
   size: PropTypes.number,
   title: PropTypes.string,
   desc: PropTypes.string,
