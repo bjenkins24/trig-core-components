@@ -1,7 +1,14 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  select,
+  number,
+  text,
+  boolean,
+  date,
+} from '@storybook/addon-knobs';
 import CardThumbnail from '../src/Cards/CardThumbnail';
 import Avatar from '../src/Avatar';
 import './consoleOverrides';
@@ -13,16 +20,24 @@ storiesOf('Cards', module)
   ))
   .add('Thumbnail', () => (
     <CardThumbnail
-      title="Why AI is Going to Take Your Job"
-      dateTime={new Date()}
+      title={text('title', 'Why AI is Going to Take Your Job')}
+      dateTime={date('dateTime', new Date())}
       renderAvatar={() => (
-        <Avatar size={1.6} firstName="Brian" lastName="Jenkins" />
+        <Avatar
+          size={1.6}
+          firstName={text('firstName', 'Brian')}
+          lastName={text('lastName', 'Jenkins')}
+        />
       )}
-      image="https://picsum.photos/300/300"
-      type="youtube"
-      totalFavorites={10}
-      isFavorited
-      totalComments={45}
+      image={text('image', 'https://picsum.photos/300/300')}
+      type={select(
+        'type',
+        { youtube: 'youtube', doc: 'doc', xls: 'xls', ppt: 'ppt' },
+        'youtube'
+      )}
+      totalFavorites={number('totalFavorites', 10)}
+      isFavorited={boolean('isFavorited', false)}
+      totalComments={number('totalComments', 45)}
     />
   ))
   .addDecorator(withKnobs);

@@ -15,6 +15,10 @@ const Container = styled.div`
   box-shadow: ${({ theme }) => theme.bs};
 `;
 
+const ClickableArea = styled.div`
+  cursor: pointer;
+`;
+
 const Title = styled(Heading3)`
   margin-bottom: 0.8rem;
 `;
@@ -54,15 +58,17 @@ const TypeIcon = styled(Icon)`
   margin: 0 auto;
 `;
 
-const StyledIcon = styled(Icon)`
+const IconGroup = styled(HorizontalGroup).attrs({ margin: 0.4 })`
+  cursor: pointer;
+`;
+
+const StyledIcon = styled(Icon).attrs({ size: 1.6 })`
   color: ${({ theme }) => `rgb(${theme.cs})`};
 `;
 
-const HorizontalDots = styled(Icon).attrs({
-  type: 'horizontal-dots',
-  size: '1.6',
-})`
-  color: ${({ theme }) => `rgb(${theme.cps})`};
+const HorizontalDots = styled(StyledIcon).attrs({ type: 'horizontal-dots' })`
+  margin: 0 0.4rem 0 auto;
+  cursor: pointer;
 `;
 
 const CardThumbnail = ({
@@ -77,33 +83,39 @@ const CardThumbnail = ({
 }) => {
   return (
     <Container>
-      <Title>{title}</Title>
-      <Meta margin={0.8}>
-        {renderAvatar()}
-        <DateCreated color="cps">
-          {`${format(dateTime, 'MMM d, yyyy')} at ${format(
-            dateTime,
-            'h:mm a'
-          )}`}
-        </DateCreated>
-      </Meta>
-      <ThumbnailContainer>
-        <Thumbnail src={image} />
-        <Type>
-          <TypeIcon type={type} size={1.6} />
-        </Type>
-      </ThumbnailContainer>
-      <HorizontalGroup margin={1.6}>
-        <HorizontalGroup margin={0.4}>
-          <StyledIcon type="heart" size={1.6} />
-          <TinyText color="cs">{totalFavorites}</TinyText>
-        </HorizontalGroup>
-        <HorizontalGroup margin={0.4}>
-          <StyledIcon type="comments" size={1.6} />
-          <TinyText color="cs">{totalComments}</TinyText>
-        </HorizontalGroup>
+      <ClickableArea>
+        <Title>{title}</Title>
+        <Meta margin={0.8}>
+          {renderAvatar()}
+          <DateCreated color="cps">
+            {`${format(dateTime, 'MMM d, yyyy')} at ${format(
+              dateTime,
+              'h:mm a'
+            )}`}
+          </DateCreated>
+        </Meta>
+        <ThumbnailContainer>
+          <Thumbnail src={image} />
+          <Type>
+            <TypeIcon type={type} size={1.6} />
+          </Type>
+        </ThumbnailContainer>
+      </ClickableArea>
+      <HorizontalGroup>
+        <div>
+          <HorizontalGroup margin={1.6}>
+            <IconGroup>
+              <StyledIcon type="heart" />
+              <TinyText color="cs">{totalFavorites}</TinyText>
+            </IconGroup>
+            <IconGroup>
+              <StyledIcon type="comments" />
+              <TinyText color="cs">{totalComments}</TinyText>
+            </IconGroup>
+          </HorizontalGroup>
+        </div>
+        <HorizontalDots />
       </HorizontalGroup>
-      <HorizontalDots />
     </Container>
   );
 };
