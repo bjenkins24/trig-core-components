@@ -8,7 +8,10 @@ const mapTypes = (type) => {
     case 'dotx':
     case 'dotm':
     case 'doc':
-      return `${prefix}doc`;
+      return {
+        type: `${prefix}doc`,
+        title: 'Microsoft Word Document Icon',
+      };
 
     // Microsoft excel
     case 'xla':
@@ -20,7 +23,10 @@ const mapTypes = (type) => {
     case 'xltx':
     case 'xlw':
     case 'xls':
-      return `${prefix}xls`;
+      return {
+        type: `${prefix}xls`,
+        title: 'Microsoft Excel Icon',
+      };
 
     // Microsoft powerpoint
     case 'ppa':
@@ -30,10 +36,13 @@ const mapTypes = (type) => {
     case 'ppsx':
     case 'pptx':
     case 'ppt':
-      return `${prefix}ppt`;
+      return {
+        type: `${prefix}ppt`,
+        title: 'Microsoft Powerpoint Icon',
+      };
 
     default:
-      return type;
+      return { type };
   }
 };
 

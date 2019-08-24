@@ -1,19 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import get from 'lodash/get';
 import capitalize from 'lodash/capitalize';
 import mapTypes from './mapTypes';
 
 const files = require.context('./icons', false, /.*\.svg$/);
 files.keys().forEach(files);
 
+const getTitle = ({ title, mappedIcon, type }) => {
+  if (title) return title;
+  return get(mappedIcon, 'title', `${capitalize(type)} icon`);
+};
+
 const Icon = ({ type, size, title, desc, ...restProps }) => {
-  const mappedType = mapTypes(type);
+  const mappedIcon = mapTypes(type);
 
   return (
     <svg width={`${size}rem`} height={`${size}rem`} role="img" {...restProps}>
-      <title>{title || `${capitalize(type)} icon`}</title>
+      <title>{getTitle({ title, mappedIcon, type })}</title>
       <desc>{desc}</desc>
-      <use xlinkHref={`#${mappedType}`} />
+      <use xlinkHref={`#${mappedIcon.type}`} />
     </svg>
   );
 };
