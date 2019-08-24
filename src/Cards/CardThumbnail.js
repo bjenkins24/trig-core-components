@@ -18,6 +18,7 @@ const Container = styled.div`
 
 const ClickableArea = styled.div`
   cursor: pointer;
+  position: relative;
 `;
 
 const Title = styled(Heading3)`
@@ -36,7 +37,8 @@ const ThumbnailContainer = styled.div`
   width: calc(3.2rem + 100%);
   margin: 0 0 3.2rem -1.6rem;
   position: relative;
-  max-height: 300px;
+  max-height: 40rem;
+  overflow: hidden;
 `;
 
 const Thumbnail = styled.img`
@@ -50,10 +52,11 @@ const Type = styled.div`
   box-shadow: ${({ theme }) => theme.bs};
   position: absolute;
   bottom: -1.2rem;
-  right: 1.2rem;
+  right: -0.4rem;
   background: ${({ theme }) => `rgb(${theme.cbl})`};
   display: flex;
   align-items: center;
+  z-index: 1;
 `;
 
 const TypeIcon = styled(Icon)`
@@ -98,11 +101,11 @@ const CardThumbnail = ({
             )}`}
           </DateCreated>
         </Meta>
+        <Type>
+          <TypeIcon type={type} size={1.6} />
+        </Type>
         <ThumbnailContainer>
           <Thumbnail src={image} />
-          <Type>
-            <TypeIcon type={type} size={1.6} />
-          </Type>
         </ThumbnailContainer>
       </ClickableArea>
       <HorizontalGroup>
