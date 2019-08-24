@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Truncate from 'react-truncate';
 import { Heading3, Heading4, TinyText } from '../Typography';
 import { HorizontalGroup } from '../Groups';
 import Icon from '../Icon';
@@ -35,6 +36,7 @@ const ThumbnailContainer = styled.div`
   width: calc(3.2rem + 100%);
   margin: 0 0 3.2rem -1.6rem;
   position: relative;
+  max-height: 300px;
 `;
 
 const Thumbnail = styled.img`
@@ -78,13 +80,15 @@ const CardThumbnail = ({
   image,
   type,
   totalFavorites,
-  // isFavorited,
+  isFavorited,
   totalComments,
 }) => {
   return (
     <Container>
       <ClickableArea>
-        <Title>{title}</Title>
+        <Title>
+          <Truncate lines={4}>{title}</Truncate>
+        </Title>
         <Meta margin={0.8}>
           {renderAvatar()}
           <DateCreated color="cps">
@@ -105,7 +109,11 @@ const CardThumbnail = ({
         <div>
           <HorizontalGroup margin={1.6}>
             <IconGroup>
-              <StyledIcon type="heart" />
+              {!isFavorited ? (
+                <StyledIcon type="heart" />
+              ) : (
+                <StyledIcon type="heart-filled" />
+              )}
               <TinyText color="cs">{totalFavorites}</TinyText>
             </IconGroup>
             <IconGroup>
@@ -133,7 +141,7 @@ CardThumbnail.propTypes = {
   image: PropTypes.string,
   type: cardType,
   totalFavorites: PropTypes.number.isRequired,
-  // isFavorited: PropTypes.bool.isRequired,
+  isFavorited: PropTypes.bool.isRequired,
   totalComments: PropTypes.number.isRequired,
 };
 
