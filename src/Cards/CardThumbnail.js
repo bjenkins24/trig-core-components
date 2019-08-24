@@ -46,6 +46,12 @@ const Type = styled.div`
   bottom: -1.2rem;
   right: 1.2rem;
   background: ${({ theme }) => `rgb(${theme.cbl})`};
+  display: flex;
+  align-items: center;
+`;
+
+const TypeIcon = styled(Icon)`
+  margin: 0 auto;
 `;
 
 const StyledIcon = styled(Icon)`
@@ -84,7 +90,7 @@ const CardThumbnail = ({
       <ThumbnailContainer>
         <Thumbnail src={image} />
         <Type>
-          <Icon type={type} size={1.6} />
+          <TypeIcon type={type} size={1.6} />
         </Type>
       </ThumbnailContainer>
       <HorizontalGroup margin={1.6}>

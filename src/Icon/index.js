@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import capitalize from 'lodash/capitalize';
-import mapTypes from './mapTypes';
+import mapIconTypes from './mapIconTypes';
 
 const files = require.context('./icons', false, /.*\.svg$/);
 files.keys().forEach(files);
@@ -13,7 +13,7 @@ const getTitle = ({ title, mappedIcon, type }) => {
 };
 
 const Icon = ({ type, size, title, desc, ...restProps }) => {
-  const mappedIcon = mapTypes(type);
+  const mappedIcon = mapIconTypes(type);
 
   return (
     <svg width={`${size}rem`} height={`${size}rem`} role="img" {...restProps}>

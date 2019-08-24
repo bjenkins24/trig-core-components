@@ -19,7 +19,7 @@ storiesOf('Cards', module)
         <Avatar size={1.6} firstName="Brian" lastName="Jenkins" />
       )}
       image="https://picsum.photos/300/300"
-      type="doc"
+      type="youtube"
       totalFavorites={10}
       isFavorited
       totalComments={45}

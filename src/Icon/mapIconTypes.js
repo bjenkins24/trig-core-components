@@ -1,5 +1,5 @@
 const prefix = 'type-';
-const mapTypes = (type) => {
+const mapIconTypes = (type) => {
   switch (type) {
     // Microsoft word
     case 'docx':
@@ -41,9 +41,15 @@ const mapTypes = (type) => {
         title: 'Microsoft Powerpoint Icon',
       };
 
+    case 'youtube':
+      return {
+        type: `${prefix}youtube`,
+        title: 'Youtube Video',
+      };
+
     default:
       return { type };
   }
 };
 
-export default mapTypes;
+export default mapIconTypes;
