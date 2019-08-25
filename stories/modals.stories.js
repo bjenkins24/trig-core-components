@@ -9,12 +9,12 @@ import themeForProvider from './theme';
 const ModalStory = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div>
+    <>
       <button type="button" onClick={() => setIsOpen(true)}>
         Trigger Modal
       </button>
       <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} />
-    </div>
+    </>
   );
 };
 

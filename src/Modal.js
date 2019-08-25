@@ -1,6 +1,8 @@
 import React from 'react';
-import { createGlobalStyle } from 'styled-components';
+import PropTypes from 'prop-types';
+import styled, { createGlobalStyle } from 'styled-components';
 import ReactModal from 'react-modal';
+import Icon from './Icon';
 
 const transitionTimeMS = 150;
 
@@ -10,6 +12,8 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
   }
   &__Overlay {
+    display: flex;
+    align-items: center;
     opacity: 0;
     transition: opacity ${transitionTimeMS}ms ease-in-out;
     &--after-open {
@@ -19,20 +23,43 @@ const GlobalStyle = createGlobalStyle`
       opacity: 0;
     }
   }
+  &__Content {
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: 50% !important;
+    padding: 3.2rem !important;
+    background: ${({ theme }) => theme.cbl};
+    border: 0 !important;
+    transform: translateX(-50%);
+  }
 }
 `;
 
-const Modal = (props) => {
+const CloseButton = styled(Icon).attrs({ size: 1.6, type: 'close' })`
+  cursor: pointer;
+`;
+
+const Modal = ({ children, onRequestClose, ...restProps }) => {
   return (
     <>
       <GlobalStyle />
       <ReactModal
         contentLabel="Modal"
         closeTimeoutMS={transitionTimeMS}
-        {...props}
-      />
+        onRequestClose={onRequestClose}
+        {...restProps}
+      >
+        <CloseButton onClick={onRequestClose} />
+        {children}
+      </ReactModal>
     </>
   );
+};
+
+Modal.propTypes = {
+  children: PropTypes.node.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
 };
 
 export default Modal;
