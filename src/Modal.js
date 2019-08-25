@@ -39,9 +39,9 @@ const GlobalStyle = createGlobalStyle`
 const CloseButton = styled(Icon).attrs({ size: 1.6, type: 'close' })`
   cursor: pointer;
   transition: color ${transitionTimeMS}ms ease-in-out;
-  color: ${({ theme }) => `rgb(${theme.cps})`};
+  color: ${({ theme }) => theme.bcs[200]};
   &:hover {
-    color: ${({ theme }) => `rgb(${theme.cp})`};
+    color: ${({ theme }) => theme.bc};
   }
 `;
 
