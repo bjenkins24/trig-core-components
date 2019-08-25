@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
+import getColor from './utils/getColor';
 
 const getWeight = ({ weight }) => {
   const weightMap = {
@@ -7,10 +8,6 @@ const getWeight = ({ weight }) => {
     bold: 600,
   };
   return get(weightMap, weight, 400);
-};
-
-const getColor = (defaultColor = 'p') => ({ theme, color }) => {
-  return get(theme, color, get(theme, defaultColor));
 };
 
 const buttonStyles = ({ as }) => {

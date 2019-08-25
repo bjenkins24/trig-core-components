@@ -28,15 +28,18 @@ const GlobalStyle = createGlobalStyle`
     right: auto !important;
     bottom: auto !important;
     left: 50% !important;
-    padding: 3.2rem !important;
+    padding: 4rem !important;
     background: ${({ theme }) => theme.cbl};
-    border: 0 !important;
+    /*border: 0 !important;*/
     transform: translateX(-50%);
   }
 }
 `;
 
 const CloseButton = styled(Icon).attrs({ size: 1.6, type: 'close' })`
+  position: absolute;
+  top: 2.4rem;
+  right: 2.4rem;
   cursor: pointer;
   transition: color ${transitionTimeMS}ms ease-in-out;
   color: ${({ theme }) => theme.bcs[200]};
