@@ -57,6 +57,18 @@ const theme = {
   bcs: primaryShades,
   bs: backgroundShades,
 
+  // Accent Color
+  a1: '#E6544C',
+  a1c: background,
+  a2: '#7594BD',
+  a2c: background,
+  a3: '#8D85E1',
+  a3c: background,
+  a4: '#2D81EF',
+  a4c: background,
+  a5: '#FCCC79',
+  a5c: primary,
+
   // Box-shadow
   sh: shadow,
 };

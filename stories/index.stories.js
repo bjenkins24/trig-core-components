@@ -13,6 +13,7 @@ import {
 import { ThemeProvider } from 'styled-components';
 import './consoleOverrides';
 import Button from '../src/Buttons';
+import ButtonSelect from '../src/Buttons/ButtonSelect';
 import Icon from '../src/Icon';
 import Avatar from '../src/Avatar';
 import { Tabs, TabList, Tab, TabPanel } from '../src/Tabs';
@@ -42,6 +43,16 @@ const stories = storiesOf('Button', module)
       >
         {text('Button Text', 'Hello Button')}
       </Button>
+    );
+  })
+  .add('Select', () => {
+    return (
+      <ButtonSelect
+        title="Wiki"
+        iconType="deck"
+        description="Create a wiki to document anything in your orginization"
+        color="a1"
+      />
     );
   });
 
