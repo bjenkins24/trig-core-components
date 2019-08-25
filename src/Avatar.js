@@ -66,7 +66,7 @@ const Avatar = ({ image, size, firstName, lastName, email, ...restProps }) => {
       title={getAlt()}
       size={size}
       css={`
-        color: rgb(${({ theme }) => theme.cpl});
+        color: ${({ theme }) => theme.ps[200]};
         ${getSize};
       `}
       {...restProps}

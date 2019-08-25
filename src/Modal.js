@@ -38,6 +38,11 @@ const GlobalStyle = createGlobalStyle`
 
 const CloseButton = styled(Icon).attrs({ size: 1.6, type: 'close' })`
   cursor: pointer;
+  transition: color ${transitionTimeMS}ms ease-in-out;
+  color: ${({ theme }) => `rgb(${theme.cps})`};
+  &:hover {
+    color: ${({ theme }) => `rgb(${theme.cp})`};
+  }
 `;
 
 const Modal = ({ children, onRequestClose, ...restProps }) => {

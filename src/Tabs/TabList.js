@@ -9,14 +9,14 @@ const separatorHeight = '0.3rem';
 
 const Separator = styled.div`
   height: ${separatorHeight};
-  background: rgb(${({ theme, dark }) => (dark ? theme.cps : theme.cp)});
+  background: ${({ theme, dark }) => (dark ? theme.ps[200] : theme.p)};
   overflow: hidden;
 `;
 
 const SelectedBar = styled(animated.div)`
   height: ${separatorHeight};
   width: ${({ width }) => width / 10}rem;
-  background: rgb(${({ theme, dark }) => (dark ? theme.cpc : theme.cs)});
+  background: ${({ theme, dark }) => (dark ? theme.pc : theme.s)};
   position: relative;
 `;
 

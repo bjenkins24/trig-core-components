@@ -9,8 +9,8 @@ const getWeight = ({ weight }) => {
   return get(weightMap, weight, 400);
 };
 
-const getColor = (defaultColor = 'cp') => ({ theme, color }) => {
-  return `rgb(${get(theme, color, theme[defaultColor])})`;
+const getColor = (defaultColor = 'p') => ({ theme, color }) => {
+  return get(theme, color, get(theme, defaultColor));
 };
 
 const buttonStyles = ({ as }) => {
@@ -23,7 +23,7 @@ const buttonStyles = ({ as }) => {
     font-family: hero-new, sans-serif;
     &:focus {
       outline: 0;
-      color: ${({ theme }) => `rgb(${theme.cs})`};
+      color: ${({ theme }) => theme.s};
     }
   `;
 };
@@ -52,7 +52,7 @@ const Heading2 = styled.h2`
   font-size: 2.6rem;
   line-height: 1.3;
   font-weight: 600;
-  color: ${getColor('cs')};
+  color: ${getColor('s')};
   margin-top: 0;
   margin-bottom: 1.6rem;
   ${buttonStyles};
@@ -71,7 +71,7 @@ const Heading3 = styled.h3`
 const Heading4 = styled.h4`
   font-size: 1.3rem;
   line-height: 1.7;
-  color: ${getColor()};
+  color: ${getColor('bcs.200')};
   margin-top: 0;
   margin-bottom: 1.6rem;
   ${buttonStyles};

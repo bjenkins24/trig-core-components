@@ -1,15 +1,64 @@
+const primary = '#2C2929';
+const primaryShades = {
+  50: '#E6E5E5',
+  100: '#C0BFBF',
+  200: '#8A8787',
+  300: '#6B6969',
+  400: '#4C4949',
+  500: primary,
+  600: '#272424',
+  700: '#211F1F',
+  800: '#1B1919',
+  900: '#100F0F',
+};
+const secondary = '#009E8F';
+const secondaryShades = {
+  // Secondary shade
+  50: '#E0F3F2',
+  100: '#B3E2DD',
+  200: '#80CFC7',
+  300: '#4DBBB1',
+  400: '#26ADA0',
+  500: secondary,
+  600: '#009183',
+  700: '#008F7C',
+  800: '#098072',
+  900: '#007060',
+};
+const background = '#F5F5F5';
+const backgroundShades = {
+  200: '#FFFFFF',
+  300: '#FCFCFC',
+  400: '#FAFAFA',
+  500: background,
+};
+const primaryContrast = background;
+const secondaryContrast = background;
+const backgroundContrast = primary;
+const shadow =
+  '0px 1px 8px rgba(0, 0, 0, 0.08), 0px 4px 5px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.08)';
+
 const theme = {
-  cb: '245,245,245',
-  cbl: '255,255,255',
-  cp: '44,41,41', // Color Primary
-  cps: '135,135,135',
-  cs: '0,158,143', // Color Secondary
-  csc: '245,245,245', // Color Contrast (white if light theme)
-  cpc: '245,245,245', // Color Contrast (white if light theme)
-  cbc: '245,245,245', // Color Contrast (white if light theme)
-  cpl: '191,191,191', // Color Placeholder
-  bs:
-    '0px 1px 8px rgba(0, 0, 0, 0.08), 0px 4px 5px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.08)',
+  // Primary Colors
+  p: primary,
+  pc: primaryContrast,
+  pcs: backgroundShades,
+  ps: primaryShades,
+
+  // Secondary Colors
+  s: secondary,
+  sc: secondaryContrast,
+  scs: backgroundShades,
+  ss: secondaryShades,
+
+  // Background Colors
+  b: background,
+  bc: backgroundContrast,
+  bcs: primaryShades,
+  bs: backgroundShades,
+
+  // Box-shadow
+  sh: shadow,
 };
 
 export default theme;

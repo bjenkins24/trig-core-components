@@ -26,7 +26,7 @@ const ButtonSecondary = styled.button`
   font-family: inherit;
   height: ${getHeight};
   border: 0;
-  background: ${({ theme }) => `rgb(${theme.cs})`};
+  background: ${({ theme }) => theme.s};
   border-radius: 0.4rem;
   padding: 0 1.6rem;
   cursor: pointer;
@@ -37,7 +37,7 @@ const Button = ({ children, ...restProps }) => {
 
   return (
     <ButtonSecondary {...restProps}>
-      <Text color="csc" weight="bold">
+      <Text color="sc" weight="bold">
         {children}
       </Text>
     </ButtonSecondary>

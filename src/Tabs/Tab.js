@@ -7,22 +7,22 @@ import { TabContext } from './Tabs';
 
 const getColor = ({ theme, isSelected, dark }) => {
   if (dark && isSelected) {
-    return theme.cpc;
+    return theme.pc;
   }
   if (dark && !isSelected) {
-    return theme.cps;
+    return theme.ps[200];
   }
   if (isSelected) {
-    return theme.cs;
+    return theme.s;
   }
-  return theme.cp;
+  return theme.p;
 };
 
 const getActiveColor = ({ dark, theme }) => {
   if (dark) {
-    return theme.cpc;
+    return theme.pc;
   }
-  return theme.cs;
+  return theme.s;
 };
 
 const getPadding = ({ tabIndex }) => {
@@ -46,13 +46,13 @@ const Tab = ({ tabIndex, dark, ...restProps }) => {
       css={`
         margin-bottom: 0.8rem;
         ${getPadding};
-        color: rgb(${getColor});
+        color: ${getColor};
         transition: 250ms;
         &:hover {
-          color: rgb(${getActiveColor});
+          color: ${getActiveColor};
         }
         &:focus {
-          color: rgb(${getActiveColor});
+          color: ${getActiveColor};
         }
       `}
       as="button"

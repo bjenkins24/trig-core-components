@@ -9,11 +9,11 @@ import { cardType } from '../utils/propTypes';
 import { format } from '../utils/dateFns';
 
 const Container = styled.div`
-  background: ${({ theme }) => `rgb(${theme.cbl})`};
+  background: ${({ theme }) => theme.bs[200]};
   width: 21.9rem;
   padding: 1.6rem 1.6rem 1.6rem 1.6rem;
   border-radius: 0.4rem;
-  box-shadow: ${({ theme }) => theme.bs};
+  box-shadow: ${({ theme }) => theme.sh};
 `;
 
 const ClickableArea = styled.div`
@@ -49,11 +49,11 @@ const Type = styled.div`
   width: 3.2rem;
   height: 3.2rem;
   border-radius: 50%;
-  box-shadow: ${({ theme }) => theme.bs};
+  box-shadow: ${({ theme }) => theme.sh};
   position: absolute;
   bottom: -1.2rem;
   right: -0.4rem;
-  background: ${({ theme }) => `rgb(${theme.cbl})`};
+  background: ${({ theme }) => theme.bs[200]};
   display: flex;
   align-items: center;
   z-index: 1;
@@ -68,7 +68,7 @@ const IconGroup = styled(HorizontalGroup).attrs({ margin: 0.4 })`
 `;
 
 const StyledIcon = styled(Icon).attrs({ size: 1.6 })`
-  color: ${({ theme }) => `rgb(${theme.cs})`};
+  color: ${({ theme }) => theme.s};
 `;
 
 const HorizontalDots = styled(StyledIcon).attrs({ type: 'horizontal-dots' })`
@@ -94,7 +94,7 @@ const CardThumbnail = ({
         </Title>
         <Meta margin={0.8}>
           {renderAvatar()}
-          <DateCreated color="cps">
+          <DateCreated>
             {`${format(dateTime, 'MMM d, yyyy')} at ${format(
               dateTime,
               'h:mm a'
@@ -117,11 +117,11 @@ const CardThumbnail = ({
               ) : (
                 <StyledIcon type="heart-filled" />
               )}
-              <TinyText color="cs">{totalFavorites}</TinyText>
+              <TinyText color="s">{totalFavorites}</TinyText>
             </IconGroup>
             <IconGroup>
               <StyledIcon type="comments" />
-              <TinyText color="cs">{totalComments}</TinyText>
+              <TinyText color="s">{totalComments}</TinyText>
             </IconGroup>
           </HorizontalGroup>
         </div>
