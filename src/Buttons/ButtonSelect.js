@@ -8,13 +8,16 @@ import iconPropTypes from '../Icon/iconPropTypes';
 
 const Container = styled.div`
   width: 14.8rem;
-  height: 18rem;
   border-radius: 0.2rem;
   background: ${({ theme }) => theme.bs[200]};
   box-shadow: ${({ theme }) => theme.sh};
   border-top: 0.4rem solid ${getColor()};
   padding: 1.6rem;
   cursor: pointer;
+  transition: transform 150ms ease-in-out;
+  &:hover {
+    transform: scale(1.03);
+  }
 `;
 
 const IconContainer = styled.div`
@@ -38,6 +41,7 @@ const Title = styled(Heading3)`
 const Description = styled(Heading4)`
   text-align: center;
   font-weight: 400;
+  margin-bottom: 0;
 `;
 
 const ButtonSelect = ({ title, description, iconType, color }) => {

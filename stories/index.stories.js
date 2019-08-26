@@ -31,6 +31,16 @@ import {
 } from '../src/Typography';
 import theme from './theme';
 
+const icons = {
+  deck: 'deck',
+  cards: 'cards',
+  avatar: 'avatar',
+  followers: 'followers',
+  document: 'document',
+  link: 'link',
+  file: 'file',
+};
+
 const stories = storiesOf('Button', module)
   .addDecorator((story) => {
     return <ThemeProvider theme={theme}>{story()}</ThemeProvider>;
@@ -48,10 +58,17 @@ const stories = storiesOf('Button', module)
   .add('Select', () => {
     return (
       <ButtonSelect
-        title="Wiki"
-        iconType="deck"
-        description="Create a wiki to document anything in your orginization"
-        color="a1"
+        title={text('Title', 'Wiki')}
+        iconType={select('Icon Type', icons, 'document')}
+        description={text(
+          'Description',
+          'Create a wiki to document anything in your orginization'
+        )}
+        color={select(
+          'Color',
+          { a1: 'a1', a2: 'a2', a3: 'a3', a4: 'a4', a5: 'a5' },
+          'a1'
+        )}
       />
     );
   });
@@ -83,20 +100,7 @@ storiesOf('Icons', module)
   .addDecorator((story) => (
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
-  .add('default', () => (
-    <Icon
-      type={select(
-        'Icon',
-        {
-          deck: 'deck',
-          cards: 'cards',
-          avatar: 'avatar',
-          followers: 'followers',
-        },
-        'deck'
-      )}
-    />
-  ))
+  .add('default', () => <Icon type={select('Icon', icons, 'deck')} />)
   .addDecorator(withKnobs);
 
 storiesOf('Deck', module)
