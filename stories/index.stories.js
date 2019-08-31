@@ -13,6 +13,7 @@ import {
 import { ThemeProvider } from 'styled-components';
 import './consoleOverrides';
 import Button from '../src/Buttons';
+import Fab from '../src/Buttons/Fab';
 import ButtonSelect from '../src/Buttons/ButtonSelect';
 import Icon from '../src/Icon';
 import Avatar from '../src/Avatar';
@@ -45,6 +46,7 @@ const stories = storiesOf('Button', module)
   .addDecorator((story) => {
     return <ThemeProvider theme={theme}>{story()}</ThemeProvider>;
   })
+
   .add('default', () => {
     return (
       <Button
@@ -53,6 +55,19 @@ const stories = storiesOf('Button', module)
       >
         {text('Button Text', 'Hello Button')}
       </Button>
+    );
+  })
+  .add('Fab', () => {
+    return (
+      <Fab>
+        <Icon
+          css={`
+            margin: 0 auto;
+          `}
+          type="cards"
+          color="sc"
+        />
+      </Fab>
     );
   })
   .add('Select', () => {

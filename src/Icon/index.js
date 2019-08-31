@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import get from 'lodash/get';
 import capitalize from 'lodash/capitalize';
-import getColor from '../utils/getColor';
+import { getColor } from '../utils/getColor';
 import mapIconTypes from './mapIconTypes';
-import iconPropTypes from './iconPropTypes';
+import iconTypePropTypes from './iconTypePropTypes';
 
 const files = require.context('./icons', false, /.*\.svg$/);
 files.keys().forEach(files);
@@ -42,11 +42,13 @@ Icon.defaultProps = {
   title: '',
 };
 
-Icon.propTypes = {
-  type: iconPropTypes.isRequired,
+export const iconPropTypes = {
+  type: iconTypePropTypes.isRequired,
   size: PropTypes.number,
   title: PropTypes.string,
   desc: PropTypes.string,
 };
+
+Icon.propTypes = iconPropTypes;
 
 export default Icon;

@@ -1,34 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Heading3, Heading4 } from '../Typography';
-import { HorizontalGroup, VerticalGroup } from '../Groups';
+import { HorizontalGroup } from '../Groups';
 
-const Title = styled(Heading3)`
-  margin-bottom: 0;
+const Container = styled.div`
+  height: 7.2rem;
+  border: 0.1rem solid ${({ theme }) => theme.ps[100]};
+  display: flex;
+  padding-right: 1.6rem;
 `;
 
-const Description = styled(Heading4)`
-  font-weight: 400;
-  margin-bottom: 0;
+const Item = styled.div`
+  width: 7.2rem;
+  height: 100%;
+  background: ${({ theme }) => theme.p};
+  margin-right: 1.2rem;
+  display: flex;
 `;
 
-const ListItem = ({ renderItem, title, description }) => {
+const ItemContent = styled.div`
+  margin: 0 auto;
+  align-self: center;
+`;
+
+const Actions = styled(HorizontalGroup)`
+  margin-left: auto;
+`;
+
+const ListItem = ({ renderItem, renderContent, actions }) => {
   return (
-    <HorizontalGroup margin={1.6}>
-      {renderItem()}
-      <VerticalGroup>
-        <Title>{title}</Title>
-        <Description>{description}</Description>
-      </VerticalGroup>
-    </HorizontalGroup>
+    <Container>
+      <Item>
+        <ItemContent>{renderItem()}</ItemContent>
+      </Item>
+      {renderContent()}
+      <Actions margin={1.6}>{actions.map((action) => action)}</Actions>
+    </Container>
   );
 };
 
+ListItem.defaultProps = {
+  renderItem: () => null,
+  actions: [],
+};
+
 ListItem.propTypes = {
-  renderItem: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  renderItem: PropTypes.func,
+  renderContent: PropTypes.func.isRequired,
+  actions: PropTypes.arrayOf(PropTypes.node),
 };
 
 export default ListItem;

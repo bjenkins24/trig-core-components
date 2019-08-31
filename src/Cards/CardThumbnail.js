@@ -67,9 +67,7 @@ const IconGroup = styled(HorizontalGroup).attrs({ margin: 0.4 })`
   cursor: pointer;
 `;
 
-const StyledIcon = styled(Icon).attrs({ size: 1.6 })`
-  color: ${({ theme }) => theme.s};
-`;
+const StyledIcon = styled(Icon).attrs({ size: 1.6, color: 's' })``;
 
 const HorizontalDots = styled(StyledIcon).attrs({ type: 'horizontal-dots' })`
   margin: 0 0.4rem 0 auto;

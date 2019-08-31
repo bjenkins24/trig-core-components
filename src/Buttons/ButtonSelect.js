@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Heading3, Heading4 } from '../Typography';
-import getColor from '../utils/getColor';
+import { getColor } from '../utils/getColor';
 import Icon from '../Icon';
-import iconPropTypes from '../Icon/iconPropTypes';
+import iconTypePropTypes from '../Icon/iconTypePropTypes';
 
 const Container = styled.div`
   width: 14.8rem;
@@ -60,7 +60,7 @@ ButtonSelect.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  iconType: iconPropTypes.isRequired,
+  iconType: iconTypePropTypes.isRequired,
 };
 
 export default ButtonSelect;

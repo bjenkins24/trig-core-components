@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
-import getColor from './utils/getColor';
+import { getColor } from './utils/getColor';
 
 const getWeight = ({ weight }) => {
   const weightMap = {

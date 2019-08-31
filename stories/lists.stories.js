@@ -2,7 +2,9 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text } from '@storybook/addon-knobs';
+import ListItemContent from '../src/Lists/ListItemContent';
 import ListItem from '../src/Lists/ListItem';
+import Icon from '../src/Icon';
 import Avatar from '../src/Avatar';
 import './consoleOverrides';
 import themeForProvider from './theme';
@@ -13,11 +15,30 @@ storiesOf('Lists', module)
   ))
   .add('List Item', () => (
     <ListItem
+      renderItem={() => <Icon type="doc" size={3.2} />}
+      renderContent={() => (
+        <ListItemContent
+          renderItem={() => (
+            <Avatar firstName="Brian" lastName="Jenkins" size={4} />
+          )}
+          primary={text('primary', 'How To Memorize Music 5 Times Faster')}
+          secondary={text('secondary', 'Oct 27, 2018 at 5:35pm')}
+        />
+      )}
+      actions={[
+        <Icon type="comments" color="s" size={1.6} />,
+        <Icon type="heart" color="s" size={1.6} />,
+        <Icon type="horizontal-dots" color="s" size={1.6} />,
+      ]}
+    />
+  ))
+  .add('List Item Content', () => (
+    <ListItemContent
       renderItem={() => (
         <Avatar firstName="Brian" lastName="Jenkins" size={4} />
       )}
-      title={text('title', 'How To Memorize Music 5 Times Faster')}
-      description={text('description', 'Oct 27, 2018 at 5:35pm')}
+      primary={text('primary', 'How To Memorize Music 5 Times Faster')}
+      secondary={text('secondary', 'Oct 27, 2018 at 5:35pm')}
     />
   ))
   .addDecorator(withKnobs);

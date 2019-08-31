@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import getColor from './utils/getColor';
+import { getColor } from './utils/getColor';
 
 const Separator = styled.div`
   width: 100%;

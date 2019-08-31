@@ -30,6 +30,15 @@ const ButtonSecondary = styled.button`
   border-radius: 0.4rem;
   padding: 0 1.6rem;
   cursor: pointer;
+  transition: background 100ms ease-in;
+  outline: none;
+  &:hover {
+    background: ${({ theme }) => theme.ss[600]};
+  }
+  &:active {
+    position: relative;
+    top: 2px;
+  }
 `;
 
 const Button = ({ children, ...restProps }) => {
