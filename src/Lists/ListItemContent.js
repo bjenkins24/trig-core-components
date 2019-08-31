@@ -25,8 +25,12 @@ const ListItemContent = ({ renderItem, primary, secondary }) => {
   );
 };
 
+ListItemContent.defaultProps = {
+  renderItem: () => null,
+};
+
 ListItemContent.propTypes = {
-  renderItem: PropTypes.func.isRequired,
+  renderItem: PropTypes.func,
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string.isRequired,
 };
