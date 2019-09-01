@@ -7,7 +7,7 @@ const getSize = ({ size }) => {
   return css`
     width: ${size}rem;
     height: ${size}rem;
-    font-size: ${size * 0.5}rem;
+    font-size: ${(size * 0.45).toFixed(2)}rem;
   `;
 };
 
