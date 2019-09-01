@@ -14,31 +14,43 @@ storiesOf('Lists', module)
     <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
   ))
   .add('List Item', () => (
-    <ListItem
-      renderItem={() => <Icon type="doc" size={3.2} />}
-      renderContent={() => (
-        <ListItemContent
-          renderItem={() => (
-            <Avatar firstName="Brian" lastName="Jenkins" size={4} />
-          )}
-          primary={text('primary', 'How To Memorize Music 5 Times Faster')}
-          secondary={text('secondary', 'Oct 27, 2018 at 5:35pm')}
-        />
-      )}
-      actions={[
-        <Icon type="comments" color="s" size={1.6} />,
-        <Icon type="heart" color="s" size={1.6} />,
-        <Icon type="horizontal-dots" color="s" size={1.6} />,
-      ]}
-    />
+    <div
+      css={`
+        width: 62rem;
+      `}
+    >
+      <ListItem
+        renderItem={() => <Icon type="doc" size={3.2} />}
+        renderContent={() => (
+          <ListItemContent
+            renderItem={() => (
+              <Avatar firstName="Brian" lastName="Jenkins" size={4} />
+            )}
+            primary={text('primary', 'How To Memorize Music 5 Times Faster')}
+            secondary={text('secondary', 'Oct 27, 2018 at 5:35pm')}
+          />
+        )}
+        actions={[
+          <Icon type="comments" color="s" size={1.6} />,
+          <Icon type="heart" color="s" size={1.6} />,
+          <Icon type="horizontal-dots" color="s" size={1.6} />,
+        ]}
+      />
+    </div>
   ))
   .add('List Item Content', () => (
-    <ListItemContent
-      renderItem={() => (
-        <Avatar firstName="Brian" lastName="Jenkins" size={4} />
-      )}
-      primary={text('primary', 'How To Memorize Music 5 Times Faster')}
-      secondary={text('secondary', 'Oct 27, 2018 at 5:35pm')}
-    />
+    <div
+      css={`
+        width: 62rem;
+      `}
+    >
+      <ListItemContent
+        renderItem={() => (
+          <Avatar firstName="Brian" lastName="Jenkins" size={4} />
+        )}
+        primary={text('primary', 'How To Memorize Music 5 Times Faster')}
+        secondary={text('secondary', 'Oct 27, 2018 at 5:35pm')}
+      />
+    </div>
   ))
   .addDecorator(withKnobs);

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { HorizontalGroup } from '../Groups';
 
 const Container = styled.div`
-  height: 7.2rem;
+  min-height: 7.2rem;
   border: 0.1rem solid ${({ theme }) => theme.ps[100]};
   display: flex;
   padding-right: 1.6rem;
@@ -12,15 +12,20 @@ const Container = styled.div`
 
 const Item = styled.div`
   width: 7.2rem;
-  height: 100%;
+  min-height: 7.2rem;
   background: ${({ theme }) => theme.p};
   margin-right: 1.2rem;
   display: flex;
+  flex-shrink: 0;
 `;
 
 const ItemContent = styled.div`
   margin: 0 auto;
   align-self: center;
+`;
+
+const Content = styled.div`
+  padding: 1.6rem 0;
 `;
 
 const Actions = styled(HorizontalGroup)`
@@ -33,7 +38,7 @@ const ListItem = ({ renderItem, renderContent, actions }) => {
       <Item>
         <ItemContent>{renderItem()}</ItemContent>
       </Item>
-      {renderContent()}
+      <Content>{renderContent()}</Content>
       <Actions margin={1.6}>{actions.map((action) => action)}</Actions>
     </Container>
   );

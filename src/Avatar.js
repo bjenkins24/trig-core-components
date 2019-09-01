@@ -13,6 +13,7 @@ const getSize = ({ size }) => {
 
 const Image = styled.img`
   border-radius: 50%;
+  flex-shrink: 0;
   ${getSize};
 `;
 
@@ -20,6 +21,7 @@ const Initials = styled.div`
   background: rgb(224, 224, 224);
   border-radius: 50%;
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   ${getSize};
 `;
