@@ -35,6 +35,7 @@ import theme from './theme';
 const icons = {
   deck: 'deck',
   cards: 'cards',
+  comments: 'comments',
   avatar: 'avatar',
   followers: 'followers',
   document: 'document',
@@ -115,7 +116,23 @@ storiesOf('Icons', module)
   .addDecorator((story) => (
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
-  .add('default', () => <Icon type={select('Icon', icons, 'deck')} />)
+  .add('default', () => (
+    <Icon size={number('size', 3.2)} type={select('Icon', icons, 'deck')} />
+  ))
+  .add('with count', () => (
+    <div
+      css={`
+        width: 1.6rem;
+      `}
+    >
+      <Icon
+        size={number('size', 1.6)}
+        type={select('Icon', icons, 'comments')}
+        color={text('color', 's')}
+        count={number('count', 5)}
+      />
+    </div>
+  ))
   .addDecorator(withKnobs);
 
 storiesOf('Deck', module)

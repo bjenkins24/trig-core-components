@@ -20,7 +20,7 @@ storiesOf('Lists', module)
       `}
     >
       <ListItem
-        renderItem={() => <Icon type="doc" size={3.2} />}
+        renderItem={() => <Icon type="doc" size={2.4} />}
         renderContent={() => (
           <ListItemContent
             renderItem={() => (
@@ -31,8 +31,8 @@ storiesOf('Lists', module)
           />
         )}
         actions={[
-          <Icon type="comments" color="s" size={1.6} />,
           <Icon type="heart" color="s" size={1.6} />,
+          <Icon type="comments" color="s" size={1.6} count={16} />,
           <Icon type="horizontal-dots" color="s" size={1.6} />,
         ]}
       />

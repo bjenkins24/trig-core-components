@@ -15,7 +15,7 @@ const Item = styled.div`
   width: 7.2rem;
   min-height: 7.2rem;
   background: ${({ theme }) => theme.p};
-  margin-right: 1.2rem;
+  margin-right: 2.4rem;
   display: flex;
   flex-shrink: 0;
 `;
@@ -26,7 +26,9 @@ const ItemContent = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 1.6rem 1.6rem 1.6rem 0;
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1.6rem 0.8rem 0;
 `;
 
 const Actions = styled(HorizontalGroup)`
