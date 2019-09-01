@@ -42,9 +42,9 @@ const CloseButton = styled(Icon).attrs({ size: 1.6, type: 'close' })`
   right: 2.4rem;
   cursor: pointer;
   transition: color ${transitionTimeMS}ms ease-in-out;
-  color: ${({ theme }) => theme.bcs[200]};
+  color: ${({ theme }) => theme.bcs[200]} !important;
   &:hover {
-    color: ${({ theme }) => theme.bc};
+    color: ${({ theme }) => theme.bc} !important;
   }
 `;
 

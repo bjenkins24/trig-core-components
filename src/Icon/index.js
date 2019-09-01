@@ -22,7 +22,7 @@ const Container = styled.div`
 `;
 
 const StyledSvg = styled.svg`
-  color: ${getColor()};
+  color: ${({ color }) => (color ? getColor() : 'inherit')};
 `;
 
 const CountContainer = styled.div`
@@ -42,11 +42,11 @@ const Count = styled(TinyText)`
   padding-top: 0.1rem;
 `;
 
-const Icon = ({ type, size, title, desc, count, ...restProps }) => {
+const Icon = ({ type, size, title, desc, color, count, ...restProps }) => {
   const mappedIcon = mapIconTypes(type);
 
   return (
-    <Container>
+    <Container {...restProps}>
       {count !== 0 && (
         <CountContainer count={count}>
           <Count color="sc">{count}</Count>
@@ -55,8 +55,8 @@ const Icon = ({ type, size, title, desc, count, ...restProps }) => {
       <StyledSvg
         width={`${size}rem`}
         height={`${size}rem`}
+        color={color}
         role="img"
-        {...restProps}
       >
         <title>{getTitle({ title, mappedIcon, type })}</title>
         <desc>{desc}</desc>
@@ -71,6 +71,7 @@ Icon.defaultProps = {
   desc: '',
   title: '',
   count: 0,
+  color: null,
 };
 
 export const iconPropTypes = {
@@ -78,6 +79,7 @@ export const iconPropTypes = {
   size: PropTypes.number,
   title: PropTypes.string,
   desc: PropTypes.string,
+  color: PropTypes.string,
   count: PropTypes.number,
 };
 
