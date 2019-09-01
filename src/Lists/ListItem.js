@@ -8,6 +8,7 @@ const Container = styled.div`
   border: 0.1rem solid ${({ theme }) => theme.ps[100]};
   display: flex;
   padding-right: 1.6rem;
+  cursor: pointer;
 `;
 
 const Item = styled.div`
@@ -25,7 +26,7 @@ const ItemContent = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 1.6rem 0;
+  padding: 1.6rem 1.6rem 1.6rem 0;
 `;
 
 const Actions = styled(HorizontalGroup)`
