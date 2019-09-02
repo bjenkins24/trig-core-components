@@ -90,7 +90,25 @@ const stories = storiesOf('Button', module)
     );
   })
   .add('Toggle', () => {
-    return <ButtonToggle />;
+    return (
+      <ButtonToggle>
+        <Icon
+          onClick={() => console.log('clicked the first one')}
+          type="row-view"
+          size={1.6}
+        />
+        <Icon
+          onClick={() => console.log('clicked the second one')}
+          type="thumbnail-view"
+          size={1.6}
+        />
+        <Icon
+          onClick={() => console.log('clicked the third one')}
+          type="thumbnail-view"
+          size={1.6}
+        />
+      </ButtonToggle>
+    );
   });
 
 stories.addDecorator(withKnobs);
