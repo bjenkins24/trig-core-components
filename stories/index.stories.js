@@ -13,6 +13,7 @@ import {
 import { ThemeProvider } from 'styled-components';
 import './consoleOverrides';
 import Button from '../src/Buttons';
+import ButtonToggle from '../src/Buttons/ButtonToggle';
 import Fab from '../src/Buttons/Fab';
 import ButtonSelect from '../src/Buttons/ButtonSelect';
 import Icon from '../src/Icon';
@@ -87,6 +88,9 @@ const stories = storiesOf('Button', module)
         )}
       />
     );
+  })
+  .add('Toggle', () => {
+    return <ButtonToggle />;
   });
 
 stories.addDecorator(withKnobs);

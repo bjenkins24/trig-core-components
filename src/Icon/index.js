@@ -26,15 +26,15 @@ const StyledSvg = styled.svg`
 `;
 
 const CountContainer = styled.div`
-  width: ${({ count }) => (count > 9 ? '1.6rem' : '1.2rem')};
-  height: ${({ count }) => (count > 9 ? '1.6rem' : '1.2rem')};
+  width: ${({ count }) => (count > 9 ? '1.7rem' : '1.4rem')};
+  height: 1.4rem;
   background: ${({ theme }) => theme.s};
   border-radius: 50%;
   display: flex;
   align-items: center;
   position: absolute;
-  right: ${({ count }) => (count > 9 ? '-0.9rem' : '-0.5rem')};
-  top: ${({ count }) => (count > 9 ? '-0.7rem' : '-0.4rem')};
+  right: -0.6rem;
+  top: -0.6rem;
 `;
 
 const Count = styled(TinyText)`
