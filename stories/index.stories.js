@@ -92,18 +92,9 @@ const stories = storiesOf('Button', module)
   .add('Toggle', () => {
     return (
       <ButtonToggle>
+        <Icon onClick={action('clicked row')} type="row-view" size={1.6} />
         <Icon
-          onClick={() => console.log('clicked the first one')}
-          type="row-view"
-          size={1.6}
-        />
-        <Icon
-          onClick={() => console.log('clicked the second one')}
-          type="thumbnail-view"
-          size={1.6}
-        />
-        <Icon
-          onClick={() => console.log('clicked the third one')}
+          onClick={action('clicked thumbnail')}
           type="thumbnail-view"
           size={1.6}
         />

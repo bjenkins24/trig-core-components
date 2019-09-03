@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import get from 'lodash/get';
 import styled, { css } from 'styled-components';
+import { useSprings, animated } from 'react-spring';
+import get from 'lodash/get';
+import useTheme from '../utils/useTheme';
 
 const Container = styled.div`
   display: flex;
@@ -11,7 +13,9 @@ const getBorderRadius = () => ({ isLastChild, isFirstChild }) => {
   if (isLastChild) {
     return css`
       border-radius: 0 0.2rem 0.2rem 0;
-      border: 0.1rem solid ${({ theme }) => theme.s};
+      border-top: 0.1rem solid ${({ theme }) => theme.s};
+      border-right: 0.1rem solid ${({ theme }) => theme.s};
+      border-bottom: 0.1rem solid ${({ theme }) => theme.s};
     `;
   }
   if (isFirstChild) {
@@ -23,13 +27,13 @@ const getBorderRadius = () => ({ isLastChild, isFirstChild }) => {
   return css`
     border-top: 0.1rem solid ${({ theme }) => theme.s};
     border-bottom: 0.1rem solid ${({ theme }) => theme.s};
+    border-right: 0.1rem solid ${({ theme }) => theme.s};
   `;
 };
 
-const Button = styled.div`
+const Button = styled(animated.div)`
   cursor: ${({ selected }) => (selected ? 'default' : 'pointer')};
   ${getBorderRadius()};
-  background: ${({ selected, theme }) => (selected ? theme.s : theme.b)};
   color: ${({ selected, theme }) => (selected ? theme.sc : theme.s)};
   width: 4rem;
   height: 3.2rem;
@@ -43,11 +47,34 @@ const Button = styled.div`
 const ButtonToggle = ({ children }) => {
   const [selectedButton, setSelectedButton] = useState(0);
   const totalChildren = React.Children.count(children);
+  const theme = useTheme();
+
+  const [springs, set] = useSprings(totalChildren, (i) => {
+    return {
+      background: selectedButton === i ? theme.s : theme.b,
+    };
+  });
+
   return (
     <Container>
       {React.Children.map(children, (child, i) => {
+        set((index) => {
+          return {
+            background: selectedButton === index ? theme.s : theme.b,
+            from: { background: selectedButton === index ? theme.b : theme.s },
+            config: { tension: 600, friction: 100 },
+          };
+        });
+        const animateProps = springs.map((spring, springIndex) => {
+          if (springIndex === i) {
+            return spring;
+          }
+          return false;
+        })[i];
+
         return (
           <Button
+            style={animateProps}
             isFirstChild={i === 0}
             isLastChild={totalChildren === i + 1}
             selected={selectedButton === i}
