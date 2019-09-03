@@ -6,6 +6,7 @@ import { HorizontalGroup, VerticalGroup } from '../Groups';
 
 const Primary = styled(Heading3)`
   margin-bottom: 0;
+  padding-top: 0.3rem;
 `;
 
 const Secondary = styled(Heading4)`
