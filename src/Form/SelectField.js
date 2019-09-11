@@ -13,7 +13,7 @@ const Select = styled.select`
   padding-left: 1.6rem;
   border-radius: ${({ theme }) => theme.br};
   border: 0.1rem solid ${({ theme }) => theme.ps[100]};
-  height: 4.7rem;
+  height: 4.5rem;
   cursor: pointer;
 `;
 
