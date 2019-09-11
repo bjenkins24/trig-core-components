@@ -19,24 +19,26 @@ const Select = styled.select`
 `;
 
 const selectFieldTypes = {
+  className: PropTypes.string,
   labelProps: labelTypes,
   label: PropTypes.string,
   width: widthType,
 };
 
 const defaultProps = {
+  className: '',
   labelProps: {},
   width: 20,
   label: '',
 };
 
-const SelectField = ({ label, labelProps, ...restProps }) => {
+const SelectField = ({ className, label, labelProps, ...restProps }) => {
   if (!label) {
     return <Select {...restProps} />;
   }
 
   return (
-    <VerticalGroup>
+    <VerticalGroup className={className}>
       <Label {...labelProps}>{label}</Label>
       <Select {...restProps} />
     </VerticalGroup>

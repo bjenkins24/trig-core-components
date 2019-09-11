@@ -20,7 +20,10 @@ storiesOf('Form', module)
     />
   ))
   .add('SelectField', () => (
-    <SelectField>
+    <SelectField
+      label={text('label', 'My Cool Label')}
+      width={text('width', '20')}
+    >
       <option>First</option>
       <option>Second</option>
       <option>Third</option>
