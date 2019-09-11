@@ -54,6 +54,15 @@ const stories = storiesOf('Button', module)
       <Button
         size={select('Size', { small: 'sm', medium: 'md', large: 'lg' }, 'md')}
         onClick={action('clicked')}
+        variant={select(
+          'variant',
+          {
+            secondary: 's',
+            'inverse-secondary': 'inverse-s',
+            'inverse-primary-contrast': 'inverse-pc',
+          },
+          's'
+        )}
       >
         {text('Button Text', 'Hello Button')}
       </Button>

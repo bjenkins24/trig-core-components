@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "stylelint": "stylelint './src/**/*.js'"
+    "build-storybook": "build-storybook"
   },
   "husky": {
     "hooks": {
@@ -56,15 +55,10 @@
     "image-webpack-loader": "^5.0.0",
     "lint-staged": "^9.2.0",
     "prettier": "1.18.2",
-    "stylelint": "^10.1.0",
-    "stylelint-config-recommended": "^2.2.0",
-    "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-processor-styled-components": "^1.8.0",
     "svg-sprite-loader": "^4.1.6"
   },
   "lint-staged": {
     "*.js": [
-      "stylelint",
       "precise-commits",
       "eslint --fix",
       "git add"

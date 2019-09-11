@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { sizeProp } from '../utils/propTypes';
 import { Body1, Body2, Body3 } from '../Typography';
 
@@ -37,11 +37,50 @@ const ripple = keyframes`
     }
 `;
 
-const ButtonSecondary = styled.button`
+const getVariantStyles = ({ variant }) => {
+  switch (variant) {
+    case 'inverse-pc':
+      return css`
+        background: none;
+        border: 0.1rem solid ${({ theme }) => theme.pc};
+        span {
+          color: ${({ theme }) => theme.pc};
+        }
+        &:hover {
+          background: ${({ theme }) => theme.pc};
+          span {
+            color: ${({ theme }) => theme.p};
+          }
+        }
+      `;
+    case 'inverse-s':
+      return css`
+        background: none;
+        border: 0.1rem solid ${({ theme }) => theme.s};
+
+        &:hover {
+          background: ${({ theme }) => theme.s};
+          span {
+            color: ${({ theme }) => theme.sc};
+          }
+        }
+      `;
+    default:
+      return css`
+        background: ${({ theme }) => theme.s};
+        border: 0.1rem solid ${({ theme }) => theme.s};
+        &:hover {
+          background: ${({ theme }) => theme.ss[800]};
+        }
+      `;
+  }
+};
+
+const StyledButton = styled.button`
   font-family: inherit;
   height: ${getHeight};
   border: 0;
-  background: ${({ theme }) => theme.s};
+  ${getVariantStyles};
   position: relative;
   overflow: hidden;
   border-radius: 0.4rem;
@@ -49,9 +88,6 @@ const ButtonSecondary = styled.button`
   cursor: pointer;
   transition: background 150ms ease-in;
   outline: none;
-  &:hover {
-    background: ${({ theme }) => theme.ss[800]};
-  }
 
   &:after {
     content: '';
@@ -72,24 +108,26 @@ const ButtonSecondary = styled.button`
   }
 `;
 
-const Button = ({ children, ...restProps }) => {
+const Button = ({ children, variant, ...restProps }) => {
   const Text = getTypography(restProps.size);
 
   return (
-    <ButtonSecondary {...restProps}>
+    <StyledButton variant={variant} {...restProps}>
       <Text color="sc" weight="bold">
         {children}
       </Text>
-    </ButtonSecondary>
+    </StyledButton>
   );
 };
 
 Button.defaultProps = {
   size: 'md',
+  variant: 's',
 };
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
+  variant: PropTypes.oneOf(['s', 'inverse-s', 'inverse-pc']),
   size: sizeProp,
 };
 
