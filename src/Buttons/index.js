@@ -57,7 +57,9 @@ const getVariantStyles = ({ variant }) => {
       return css`
         background: none;
         border: 0.1rem solid ${({ theme }) => theme.s};
-
+        span {
+          color: ${({ theme }) => theme.s};
+        }
         &:hover {
           background: ${({ theme }) => theme.s};
           span {
@@ -83,7 +85,7 @@ const StyledButton = styled.button`
   ${getVariantStyles};
   position: relative;
   overflow: hidden;
-  border-radius: 0.4rem;
+  border-radius: ${({ theme }) => theme.br};
   padding: 0 1.6rem;
   cursor: pointer;
   transition: background 150ms ease-in;
@@ -108,6 +110,17 @@ const StyledButton = styled.button`
   }
 `;
 
+const buttonTypes = {
+  children: PropTypes.node.isRequired,
+  variant: PropTypes.oneOf(['s', 'inverse-s', 'inverse-pc']),
+  size: sizeProp,
+};
+
+const defaultProps = {
+  size: 'md',
+  variant: 's',
+};
+
 const Button = ({ children, variant, ...restProps }) => {
   const Text = getTypography(restProps.size);
 
@@ -120,15 +133,7 @@ const Button = ({ children, variant, ...restProps }) => {
   );
 };
 
-Button.defaultProps = {
-  size: 'md',
-  variant: 's',
-};
-
-Button.propTypes = {
-  children: PropTypes.node.isRequired,
-  variant: PropTypes.oneOf(['s', 'inverse-s', 'inverse-pc']),
-  size: sizeProp,
-};
+Button.propTypes = buttonTypes;
+Button.defaultProps = defaultProps;
 
 export default Button;

@@ -12,7 +12,7 @@ const Container = styled.div`
   background: ${({ theme }) => theme.bs[200]};
   width: 21.9rem;
   padding: 1.6rem 1.6rem 1.6rem 1.6rem;
-  border-radius: 0.4rem;
+  border-radius: ${({ theme }) => theme.br};
   box-shadow: ${({ theme }) => theme.sh};
 `;
 
@@ -74,6 +74,23 @@ const HorizontalDots = styled(StyledIcon).attrs({ type: 'horizontal-dots' })`
   cursor: pointer;
 `;
 
+const cardThumbnailTypes = {
+  title: PropTypes.string.isRequired,
+  dateTime: PropTypes.instanceOf(Date).isRequired,
+  renderAvatar: PropTypes.node,
+  image: PropTypes.string,
+  type: cardType,
+  totalFavorites: PropTypes.number.isRequired,
+  isFavorited: PropTypes.bool.isRequired,
+  totalComments: PropTypes.number.isRequired,
+};
+
+const defaultProps = {
+  renderAvatar: () => null,
+  type: null,
+  image: null,
+};
+
 const CardThumbnail = ({
   title,
   dateTime,
@@ -129,21 +146,7 @@ const CardThumbnail = ({
   );
 };
 
-CardThumbnail.defaultProps = {
-  renderAvatar: () => null,
-  type: null,
-  image: null,
-};
-
-CardThumbnail.propTypes = {
-  title: PropTypes.string.isRequired,
-  dateTime: PropTypes.instanceOf(Date).isRequired,
-  renderAvatar: PropTypes.node,
-  image: PropTypes.string,
-  type: cardType,
-  totalFavorites: PropTypes.number.isRequired,
-  isFavorited: PropTypes.bool.isRequired,
-  totalComments: PropTypes.number.isRequired,
-};
+CardThumbnail.propTypes = cardThumbnailTypes;
+CardThumbnail.defaultProps = defaultProps;
 
 export default CardThumbnail;

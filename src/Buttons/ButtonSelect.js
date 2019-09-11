@@ -8,7 +8,7 @@ import iconTypePropTypes from '../Icon/iconTypePropTypes';
 
 const Container = styled.div`
   width: 14.8rem;
-  border-radius: 0.2rem;
+  border-radius: ${({ theme }) => theme.br};
   background: ${({ theme }) => theme.bs[200]};
   box-shadow: ${({ theme }) => theme.sh};
   border-top: 0.4rem solid ${getColor()};
@@ -44,6 +44,13 @@ const Description = styled(Heading4)`
   margin-bottom: 0;
 `;
 
+const buttonSelectTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  iconType: iconTypePropTypes.isRequired,
+};
+
 const ButtonSelect = ({ title, description, iconType, color }) => {
   return (
     <Container color={color}>
@@ -56,11 +63,6 @@ const ButtonSelect = ({ title, description, iconType, color }) => {
   );
 };
 
-ButtonSelect.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-  iconType: iconTypePropTypes.isRequired,
-};
+ButtonSelect.propTypes = buttonSelectTypes;
 
 export default ButtonSelect;

@@ -14,6 +14,16 @@ const Secondary = styled(Heading4)`
   margin-bottom: 0;
 `;
 
+const defaultProps = {
+  renderItem: () => null,
+};
+
+const listItemContentTypes = {
+  renderItem: PropTypes.func,
+  primary: PropTypes.string.isRequired,
+  secondary: PropTypes.string.isRequired,
+};
+
 const ListItemContent = ({ renderItem, primary, secondary }) => {
   return (
     <HorizontalGroup margin={1.6}>
@@ -26,14 +36,7 @@ const ListItemContent = ({ renderItem, primary, secondary }) => {
   );
 };
 
-ListItemContent.defaultProps = {
-  renderItem: () => null,
-};
-
-ListItemContent.propTypes = {
-  renderItem: PropTypes.func,
-  primary: PropTypes.string.isRequired,
-  secondary: PropTypes.string.isRequired,
-};
+ListItemContent.propTypes = listItemContentTypes;
+ListItemContent.defaultProps = defaultProps;
 
 export default ListItemContent;

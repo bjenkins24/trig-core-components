@@ -12,7 +12,7 @@ const Container = styled.div`
 const getBorderRadius = () => ({ isLastChild, isFirstChild }) => {
   if (isLastChild) {
     return css`
-      border-radius: 0 0.2rem 0.2rem 0;
+      border-radius: 0 ${({ theme }) => theme.br} ${({ theme }) => theme.br} 0;
       border-top: 0.1rem solid ${({ theme }) => theme.s};
       border-right: 0.1rem solid ${({ theme }) => theme.s};
       border-bottom: 0.1rem solid ${({ theme }) => theme.s};
@@ -20,7 +20,7 @@ const getBorderRadius = () => ({ isLastChild, isFirstChild }) => {
   }
   if (isFirstChild) {
     return css`
-      border-radius: 0.2rem 0 0 0.2rem;
+      border-radius: ${({ theme }) => theme.br} 0 0 ${({ theme }) => theme.br};
       border: 0.1rem solid ${({ theme }) => theme.s};
     `;
   }
@@ -43,6 +43,10 @@ const Button = styled(animated.div)`
     margin: 0 auto;
   }
 `;
+
+const buttonToggleTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 const ButtonToggle = ({ children }) => {
   const [selectedButton, setSelectedButton] = useState(0);
@@ -98,8 +102,6 @@ const ButtonToggle = ({ children }) => {
   );
 };
 
-ButtonToggle.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+ButtonToggle.propTypes = buttonToggleTypes;
 
 export default ButtonToggle;

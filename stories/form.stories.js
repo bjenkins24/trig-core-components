@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text } from '@storybook/addon-knobs';
 import StringField from '../src/Form/StringField';
+import SelectField from '../src/Form/SelectField';
 import Label from '../src/Form/Label';
 import './consoleOverrides';
 import themeForProvider from './theme';
@@ -17,6 +18,13 @@ storiesOf('Form', module)
       placeholder={text('placeholder', 'Placeholder')}
       width={text('width', '20')}
     />
+  ))
+  .add('SelectField', () => (
+    <SelectField>
+      <option>First</option>
+      <option>Second</option>
+      <option>Third</option>
+    </SelectField>
   ))
   .add('Label', () => <Label>My awesome field</Label>)
   .addDecorator(withKnobs);

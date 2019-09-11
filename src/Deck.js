@@ -42,7 +42,7 @@ const getBackground = ({ theme, isHovered, image }) => {
 
 const Wrapper = styled(animated.div)`
   position: relative;
-  border-radius: 0.4rem;
+  border-radius: ${({ theme }) => theme.br};
   ${getBackground}
   padding-top: calc(3 / 4 * 20%);
   height: 0;

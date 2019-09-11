@@ -42,6 +42,15 @@ const reducer = (state, action) => {
   }
 };
 
+const tabListTypes = {
+  children: PropTypes.node.isRequired,
+  dark: PropTypes.bool,
+};
+
+const defaultProps = {
+  dark: false,
+};
+
 const TabList = ({ children, dark, ...restProps }) => {
   const { selectedTab, tabRefs } = useContext(TabContext);
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -94,13 +103,7 @@ const TabList = ({ children, dark, ...restProps }) => {
   );
 };
 
-TabList.defaultProps = {
-  dark: false,
-};
-
-TabList.propTypes = {
-  children: PropTypes.node.isRequired,
-  dark: PropTypes.bool,
-};
+TabList.propTypes = tabListTypes;
+TabList.defaultProps = defaultProps;
 
 export default TabList;

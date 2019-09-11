@@ -2,6 +2,10 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { TabContext } from './Tabs';
 
+const tabPanelTypes = {
+  tabIndex: PropTypes.number.isRequired,
+};
+
 const TabPanel = ({ tabIndex, ...restProps }) => {
   const { selectedTab } = useContext(TabContext);
   return (
@@ -14,8 +18,6 @@ const TabPanel = ({ tabIndex, ...restProps }) => {
   );
 };
 
-TabPanel.propTypes = {
-  tabIndex: PropTypes.number.isRequired,
-};
+TabPanel.propTypes = tabPanelTypes;
 
 export default TabPanel;

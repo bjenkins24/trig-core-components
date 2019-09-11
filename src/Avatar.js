@@ -26,6 +26,22 @@ const Initials = styled.div`
   ${getSize};
 `;
 
+const avatarTypes = {
+  image: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  email: PropTypes.string,
+  size: PropTypes.number,
+};
+
+const defaultProps = {
+  image: '',
+  email: '',
+  firstName: '',
+  lastName: '',
+  size: 3.2,
+};
+
 const Avatar = ({ image, size, firstName, lastName, email, ...restProps }) => {
   const getAlt = () => {
     if (firstName && lastName) {
@@ -76,20 +92,7 @@ const Avatar = ({ image, size, firstName, lastName, email, ...restProps }) => {
   );
 };
 
-Avatar.defaultProps = {
-  image: '',
-  email: '',
-  firstName: '',
-  lastName: '',
-  size: 3.2,
-};
-
-Avatar.propTypes = {
-  image: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  email: PropTypes.string,
-  size: PropTypes.number,
-};
+Avatar.propTypes = avatarTypes;
+Avatar.defaultProps = defaultProps;
 
 export default Avatar;

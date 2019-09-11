@@ -42,6 +42,23 @@ const Count = styled(TinyText)`
   padding-top: 0.1rem;
 `;
 
+const iconTypes = {
+  type: iconTypePropTypes.isRequired,
+  size: PropTypes.number,
+  title: PropTypes.string,
+  desc: PropTypes.string,
+  color: PropTypes.string,
+  count: PropTypes.number,
+};
+
+const defaultProps = {
+  size: 3.2,
+  desc: '',
+  title: '',
+  count: 0,
+  color: null,
+};
+
 const Icon = ({ type, size, title, desc, color, count, ...restProps }) => {
   const mappedIcon = mapIconTypes(type);
 
@@ -66,23 +83,7 @@ const Icon = ({ type, size, title, desc, color, count, ...restProps }) => {
   );
 };
 
-Icon.defaultProps = {
-  size: 3.2,
-  desc: '',
-  title: '',
-  count: 0,
-  color: null,
-};
-
-export const iconPropTypes = {
-  type: iconTypePropTypes.isRequired,
-  size: PropTypes.number,
-  title: PropTypes.string,
-  desc: PropTypes.string,
-  color: PropTypes.string,
-  count: PropTypes.number,
-};
-
-Icon.propTypes = iconPropTypes;
+Icon.propTypes = iconTypes;
+Icon.defaultProps = defaultProps;
 
 export default Icon;
