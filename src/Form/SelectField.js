@@ -15,6 +15,9 @@ const Select = styled.select`
   border: 0.1rem solid ${({ theme }) => theme.ps[100]};
   height: 4.7rem;
   cursor: pointer;
+`;
+
+const Container = styled(VerticalGroup)`
   ${getWidth}
 `;
 
@@ -32,16 +35,16 @@ const defaultProps = {
   label: '',
 };
 
-const SelectField = ({ className, label, labelProps, ...restProps }) => {
+const SelectField = ({ className, width, label, labelProps, ...restProps }) => {
   if (!label) {
     return <Select {...restProps} />;
   }
 
   return (
-    <VerticalGroup className={className}>
+    <Container width={width} className={className}>
       <Label {...labelProps}>{label}</Label>
       <Select {...restProps} />
-    </VerticalGroup>
+    </Container>
   );
 };
 
