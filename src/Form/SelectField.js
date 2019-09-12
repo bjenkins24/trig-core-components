@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { VerticalGroup } from '../Groups';
 import Icon from '../Icon';
 import getWidth from '../utils/getWidth';
@@ -12,6 +12,22 @@ const Container = styled(VerticalGroup)`
   position: relative;
 `;
 
+const getSelectWidth = ({ width, fullWidth }) => {
+  if (fullWidth) {
+    return css`
+      width: 100%;
+    `;
+  }
+  return css`
+    width: ${width}rem;
+  `;
+};
+
+const SelectContainer = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
 const Select = styled.select`
   appearance: none;
   font-size: 1.6rem;
@@ -21,7 +37,7 @@ const Select = styled.select`
   border: 0.1rem solid ${({ theme }) => theme.ps[100]};
   height: 4.5rem;
   cursor: pointer;
-  width: 100%;
+  ${getSelectWidth};
   outline: 0;
 `;
 
@@ -53,6 +69,8 @@ const defaultProps = {
   htmlFor: '',
 };
 
+// eslint-disable-next-line react/prop-types
+
 const SelectField = ({
   className,
   width,
@@ -62,8 +80,25 @@ const SelectField = ({
   children,
   ...restProps
 }) => {
+  const SelectWithArrow = () => {
+    return (
+      <SelectContainer>
+        <Select
+          width={width}
+          onMouseDown={(e) => e.preventDefault()}
+          fullWidth={!!label}
+          id={htmlFor}
+          {...restProps}
+        >
+          {children}
+        </Select>
+        <ArrowDown />
+      </SelectContainer>
+    );
+  };
+
   if (!label) {
-    return <Select {...restProps} />;
+    return <SelectWithArrow />;
   }
 
   return (
@@ -71,20 +106,7 @@ const SelectField = ({
       <Label htmlFor={htmlFor} {...labelProps}>
         {label}
       </Label>
-      <div
-        css={`
-          position: relative;
-        `}
-      >
-        <Select
-          onMouseDown={(e) => e.preventDefault()}
-          id={htmlFor}
-          {...restProps}
-        >
-          {children}
-        </Select>
-        <ArrowDown />
-      </div>
+      <SelectWithArrow />
     </Container>
   );
 };
