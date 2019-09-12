@@ -22,6 +22,7 @@ const Select = styled.select`
   height: 4.5rem;
   cursor: pointer;
   width: 100%;
+  outline: 0;
 `;
 
 const ArrowDown = styled(Icon).attrs({
@@ -32,6 +33,7 @@ const ArrowDown = styled(Icon).attrs({
   top: 50%;
   right: 1.6rem;
   transform: translateY(-50%);
+  cursor: pointer;
 `;
 
 const selectFieldTypes = {
@@ -39,6 +41,8 @@ const selectFieldTypes = {
   labelProps: labelTypes,
   label: PropTypes.string,
   width: widthType,
+  htmlFor: PropTypes.string,
+  children: PropTypes.node.isRequired,
 };
 
 const defaultProps = {
@@ -46,22 +50,39 @@ const defaultProps = {
   labelProps: {},
   width: 20,
   label: '',
+  htmlFor: '',
 };
 
-const SelectField = ({ className, width, label, labelProps, ...restProps }) => {
+const SelectField = ({
+  className,
+  width,
+  label,
+  htmlFor,
+  labelProps,
+  children,
+  ...restProps
+}) => {
   if (!label) {
     return <Select {...restProps} />;
   }
 
   return (
     <Container width={width} className={className}>
-      <Label {...labelProps}>{label}</Label>
+      <Label htmlFor={htmlFor} {...labelProps}>
+        {label}
+      </Label>
       <div
         css={`
           position: relative;
         `}
       >
-        <Select {...restProps} />
+        <Select
+          onMouseDown={(e) => e.preventDefault()}
+          id={htmlFor}
+          {...restProps}
+        >
+          {children}
+        </Select>
         <ArrowDown />
       </div>
     </Container>
