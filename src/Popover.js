@@ -29,6 +29,7 @@ const Arrow = styled.div`
 const Popover = ({ placement, renderContent, children, isOpenDefault }) => {
   const contentRef = useRef(null);
   const arrowRef = useRef(null);
+  const triggerRef = useRef(null);
   const [isOpen, setIsOpen] = useState(isOpenDefault);
   const [wasUpdated, setWasUpdated] = useState(false);
 
@@ -50,7 +51,8 @@ const Popover = ({ placement, renderContent, children, isOpenDefault }) => {
     if (!isOpen) return false;
     if (
       contentRef.current.contains(e.target) ||
-      arrowRef.current.contains(e.target)
+      arrowRef.current.contains(e.target) ||
+      triggerRef.current.contains(e.target)
     ) {
       // inside click
       return false;
@@ -79,17 +81,21 @@ const Popover = ({ placement, renderContent, children, isOpenDefault }) => {
     <Manager>
       <Reference>
         {({ ref }) => {
-          return React.Children.map(children, (child) => {
-            return React.cloneElement(children, {
-              ref,
-              onClick: () => {
-                setIsOpen(!isOpen);
-                if (typeof child.props.onClick !== 'undefined') {
-                  child.props.onClick();
-                }
-              },
-            });
-          });
+          return (
+            <div ref={triggerRef}>
+              {React.Children.map(children, (child) => {
+                return React.cloneElement(children, {
+                  ref,
+                  onClick: () => {
+                    setIsOpen(!isOpen);
+                    if (typeof child.props.onClick !== 'undefined') {
+                      child.props.onClick();
+                    }
+                  },
+                });
+              })}
+            </div>
+          );
         }}
       </Reference>
       <Popper placement={placement}>
