@@ -17,6 +17,7 @@ import ButtonToggle from '../src/Buttons/ButtonToggle';
 import Fab from '../src/Buttons/Fab';
 import ButtonSelect from '../src/Buttons/ButtonSelect';
 import Icon from '../src/Icon';
+import Popover from '../src/Popover';
 import Avatar from '../src/Avatar';
 import { Tabs, TabList, Tab, TabPanel } from '../src/Tabs';
 import Deck from '../src/Deck';
@@ -43,6 +44,21 @@ const icons = {
   link: 'link',
   file: 'file',
 };
+
+storiesOf('Popover', module)
+  .addDecorator((story) => {
+    return <ThemeProvider theme={theme}>{story()}</ThemeProvider>;
+  })
+  .add('default', () => {
+    return (
+      <>
+        <Popover renderContent={() => <span>Hello</span>}>
+          <button type="button">Button</button>
+        </Popover>
+        <div id="destination" />
+      </>
+    );
+  });
 
 const stories = storiesOf('Button', module)
   .addDecorator((story) => {
