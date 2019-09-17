@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Manager, Reference, Popper } from 'react-popper';
+import PopperElement from './PopperElement';
 
 const popoverTypes = {
   isOpenDefault: PropTypes.bool,
@@ -17,13 +18,7 @@ const defaultProps = {
 
 const PopoverContainer = styled.div`
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
-`;
-
-const Arrow = styled.div`
-  background: blue;
-  width: 5px;
-  height: 5px;
-  position: relative;
+  position: absolute;
 `;
 
 const Popover = ({ placement, renderContent, children, isOpenDefault }) => {
@@ -101,8 +96,8 @@ const Popover = ({ placement, renderContent, children, isOpenDefault }) => {
       <Popper placement={placement}>
         {({ placement: position, ref, style, scheduleUpdate, arrowProps }) => {
           if (!wasUpdated && isOpen) {
-            scheduleUpdate();
             setWasUpdated(true);
+            scheduleUpdate();
           }
           return (
             <PopoverContainer
@@ -111,10 +106,15 @@ const Popover = ({ placement, renderContent, children, isOpenDefault }) => {
               style={style}
               data-placement={position}
             >
-              <div ref={arrowRef}>
-                <Arrow {...arrowProps} />
-              </div>
-              <div ref={contentRef}>{renderContent()}</div>
+              <PopperElement
+                contentRef={contentRef}
+                arrowRef={arrowRef}
+                arrowProps={arrowProps}
+                placement={placement}
+                scheduleUpdate={scheduleUpdate}
+                renderContent={renderContent}
+                isOpen={isOpen}
+              />
             </PopoverContainer>
           );
         }}
