@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { refType } from '../utils/propTypes';
@@ -22,7 +22,7 @@ const popperElementTypes = {
 };
 
 const defaultProps = {
-  placement: '',
+  placement: 'bottom',
 };
 
 const PopperElement = ({
@@ -33,27 +33,40 @@ const PopperElement = ({
   scheduleUpdate,
   renderContent,
   isOpen,
+  containerId,
 }) => {
+  const [actualPlacement, setActualPlacement] = useState(placement);
   useEffect(() => {
+    console.log('sup');
     scheduleUpdate();
-  }, [isOpen]);
+  }, [isOpen, actualPlacement]);
 
-  if (
-    placement.includes('top') ||
-    placement.includes('left') ||
-    placement.includes('auto')
-  ) {
+  useEffect(() => {
+    // Popper doesn't want to give me the new
+    const container = document.getElementById(containerId);
+    if (container && container.dataset.placement) {
+      setActualPlacement(container.dataset.placement);
+    }
+  });
+
+  if (actualPlacement.includes('top') || actualPlacement.includes('left')) {
     return (
       <div>
         <div ref={contentRef}>{renderContent()}</div>
         <div ref={arrowRef}>
-          <Arrow {...arrowProps} />
+          <Arrow
+            {...arrowProps}
+            style={{
+              ...arrowProps.style,
+              right: placement.includes('left') ? 0 : 'auto',
+            }}
+          />
         </div>
       </div>
     );
   }
 
-  if (placement.includes('bottom') || placement.includes('right')) {
+  if (actualPlacement.includes('bottom') || actualPlacement.includes('right')) {
     return (
       <div>
         <div ref={arrowRef}>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Manager, Reference, Popper } from 'react-popper';
@@ -24,9 +24,14 @@ const PopoverContainer = styled.div`
 const Popover = ({ placement, renderContent, children, isOpenDefault }) => {
   const contentRef = useRef(null);
   const arrowRef = useRef(null);
-  const triggerRef = useRef(null);
   const [isOpen, setIsOpen] = useState(isOpenDefault);
   const [wasUpdated, setWasUpdated] = useState(false);
+
+  const randomString = useMemo(() => {
+    return Math.random()
+      .toString(36)
+      .substring(2, 15);
+  });
 
   useEffect(() => {
     if (!isOpen && wasUpdated) {
@@ -47,7 +52,7 @@ const Popover = ({ placement, renderContent, children, isOpenDefault }) => {
     if (
       contentRef.current.contains(e.target) ||
       arrowRef.current.contains(e.target) ||
-      triggerRef.current.contains(e.target)
+      (e.target.id && e.target.id === `popover-trigger-${randomString}`)
     ) {
       // inside click
       return false;
@@ -76,31 +81,30 @@ const Popover = ({ placement, renderContent, children, isOpenDefault }) => {
     <Manager>
       <Reference>
         {({ ref }) => {
-          return (
-            <div ref={triggerRef}>
-              {React.Children.map(children, (child) => {
-                return React.cloneElement(children, {
-                  ref,
-                  onClick: () => {
-                    setIsOpen(!isOpen);
-                    if (typeof child.props.onClick !== 'undefined') {
-                      child.props.onClick();
-                    }
-                  },
-                });
-              })}
-            </div>
-          );
+          return React.Children.map(children, (child) => {
+            let childId = '';
+            if (typeof child.props.id !== 'undefined') {
+              childId = `${child.props.id} `;
+            }
+            return React.cloneElement(children, {
+              ref,
+              id: `${childId}popover-trigger-${randomString}`,
+              onClick: () => {
+                setIsOpen(!isOpen);
+                if (typeof child.props.onClick !== 'undefined') {
+                  child.props.onClick();
+                }
+              },
+            });
+          });
         }}
       </Reference>
       <Popper placement={placement}>
         {({ placement: position, ref, style, scheduleUpdate, arrowProps }) => {
-          if (!wasUpdated && isOpen) {
-            setWasUpdated(true);
-            scheduleUpdate();
-          }
+          const containerId = `popover-container-${randomString}`;
           return (
             <PopoverContainer
+              id={containerId}
               isOpen={isOpen}
               ref={ref}
               style={style}
@@ -114,6 +118,7 @@ const Popover = ({ placement, renderContent, children, isOpenDefault }) => {
                 scheduleUpdate={scheduleUpdate}
                 renderContent={renderContent}
                 isOpen={isOpen}
+                containerId={containerId}
               />
             </PopoverContainer>
           );

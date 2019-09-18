@@ -60,9 +60,6 @@ storiesOf('Popover', module)
           placement={select(
             'placement',
             {
-              auto: 'auto',
-              'auto-start': 'auto-start',
-              'auto-end': 'auto-end',
               top: 'top',
               'top-start': 'top-start',
               'top-end': 'top-end',
@@ -76,11 +73,13 @@ storiesOf('Popover', module)
               'left-start': 'left-start',
               'left-end': 'left-end',
             },
-            'auto'
+            'bottom'
           )}
           renderContent={() => <span>Hello</span>}
         >
-          <button type="button">Button</button>
+          <button style={{ width: '100px', height: '100px' }} type="button">
+            Button
+          </button>
         </Popover>
       </div>
     );
