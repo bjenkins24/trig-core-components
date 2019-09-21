@@ -57,29 +57,11 @@ storiesOf('Popover', module)
         `}
       >
         <Popover
-          placement={select(
-            'placement',
-            {
-              top: 'top',
-              'top-start': 'top-start',
-              'top-end': 'top-end',
-              right: 'right',
-              'right-start': 'right-start',
-              'right-end': 'right-end',
-              bottom: 'bottom',
-              'bottom-start': 'bottom-start',
-              'bottom-end': 'bottom-end',
-              left: 'left',
-              'left-start': 'left-start',
-              'left-end': 'left-end',
-            },
-            'bottom'
-          )}
-          renderContent={() => <span>Hello</span>}
+          renderPopover={() => {
+            return <div>Hello Friends</div>;
+          }}
         >
-          <button style={{ width: '100px', height: '100px' }} type="button">
-            Button
-          </button>
+          <button type="button">Hello</button>
         </Popover>
       </div>
     );
