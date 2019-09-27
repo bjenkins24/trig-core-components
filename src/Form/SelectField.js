@@ -49,7 +49,7 @@ const StyledSelect = styled(Select)`
       border: solid 0.1rem ${({ scTheme }) => scTheme.ps[100]};
       &--is-focused {
         box-shadow: none;
-        border: solid 0.1rem ${({ scTheme }) => scTheme.ps[300]};
+        border: solid 0.1rem ${({ scTheme }) => scTheme.ps[200]};
       }
     }
     &__value-container {
