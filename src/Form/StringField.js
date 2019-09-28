@@ -25,6 +25,11 @@ const Container = styled(VerticalGroup)`
   ${getWidth}
 `;
 
+const StyledLabel = styled(Label)`
+  display: block;
+  margin-bottom: 0.6rem;
+`;
+
 const stringFieldTypes = {
   label: PropTypes.string,
   labelProps: PropTypes.shape(labelTypes),
@@ -46,7 +51,7 @@ const StringField = ({ label, width, className, labelProps, ...restProps }) => {
 
   return (
     <Container width={width} className={className}>
-      <Label>{label}</Label>
+      <StyledLabel>{label}</StyledLabel>
       <Input type="text" {...restProps} />
     </Container>
   );

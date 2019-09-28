@@ -37,6 +37,11 @@ const Container = styled.div`
   ${getWidth};
 `;
 
+const StyledLabel = styled(Label)`
+  display: block;
+  margin-bottom: 0.6rem;
+`;
+
 const StyledSelect = styled(Select)`
   ${Body1Styles}
   .react-select {
@@ -91,9 +96,9 @@ const SelectField = ({
   return (
     <Container width={width} className={className}>
       {label && (
-        <Label htmlFor={htmlFor} {...labelProps}>
+        <StyledLabel htmlFor={htmlFor} {...labelProps}>
           {label}
-        </Label>
+        </StyledLabel>
       )}
       <StyledSelect
         className="react-select-container"
