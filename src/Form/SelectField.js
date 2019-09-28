@@ -40,6 +40,9 @@ const Container = styled.div`
 const StyledSelect = styled(Select)`
   ${Body1Styles}
   .react-select {
+    &__single-value {
+      margin-top: -0.1rem;
+    }
     &__placeholder {
       color: ${({ scTheme }) => scTheme.ps[100]};
       margin-top: -0.1rem;
