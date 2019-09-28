@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, text } from '@storybook/addon-knobs';
 import StringField from '../src/Form/StringField';
 import SelectField from '../src/Form/SelectField';
+import Checkbox from '../src/Form/Checkbox';
 import Label from '../src/Form/Label';
 import './consoleOverrides';
 import themeForProvider from './theme';
@@ -44,4 +45,5 @@ storiesOf('Form', module)
     return <SelectFieldWrapper />;
   })
   .add('Label', () => <Label>My awesome field</Label>)
+  .add('Checkbox', () => <Checkbox />)
   .addDecorator(withKnobs);
