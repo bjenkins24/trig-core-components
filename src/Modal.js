@@ -48,6 +48,11 @@ const CloseButton = styled(Icon).attrs({ size: 1.6, type: 'close' })`
   }
 `;
 
+const modalTypes = {
+  children: PropTypes.node.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
+};
+
 const Modal = ({ children, onRequestClose, ...restProps }) => {
   return (
     <>
@@ -65,9 +70,6 @@ const Modal = ({ children, onRequestClose, ...restProps }) => {
   );
 };
 
-Modal.propTypes = {
-  children: PropTypes.node.isRequired,
-  onRequestClose: PropTypes.func.isRequired,
-};
+Modal.propTypes = modalTypes;
 
 export default Modal;

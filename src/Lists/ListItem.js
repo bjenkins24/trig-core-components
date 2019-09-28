@@ -35,6 +35,17 @@ const Actions = styled(HorizontalGroup)`
   margin-left: auto;
 `;
 
+const listItemTypes = {
+  renderItem: PropTypes.func,
+  renderContent: PropTypes.func.isRequired,
+  actions: PropTypes.arrayOf(PropTypes.node),
+};
+
+const defaultProps = {
+  renderItem: () => null,
+  actions: [],
+};
+
 const ListItem = ({ renderItem, renderContent, actions }) => {
   return (
     <Container>
@@ -47,15 +58,7 @@ const ListItem = ({ renderItem, renderContent, actions }) => {
   );
 };
 
-ListItem.defaultProps = {
-  renderItem: () => null,
-  actions: [],
-};
-
-ListItem.propTypes = {
-  renderItem: PropTypes.func,
-  renderContent: PropTypes.func.isRequired,
-  actions: PropTypes.arrayOf(PropTypes.node),
-};
+ListItem.propTypes = listItemTypes;
+ListItem.defaultProps = defaultProps;
 
 export default ListItem;

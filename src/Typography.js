@@ -74,12 +74,16 @@ const Heading4 = styled.h4`
   ${buttonStyles};
 `;
 
-const Body1 = styled.span`
+const Body1Styles = css`
   font-size: 1.6rem;
   line-height: 1.7;
   font-weight: ${getWeight};
   color: ${getColor()};
   ${buttonStyles};
+`;
+
+const Body1 = styled.span`
+  ${Body1Styles}
 `;
 
 const Body2 = styled.span`
@@ -114,6 +118,7 @@ export {
   Heading3,
   Heading4,
   Body1,
+  Body1Styles,
   Body2,
   Body3,
   TinyText,

@@ -69,8 +69,10 @@ const theme = {
   a5: '#FCCC79',
   a5c: primary,
 
+  // OTHER
   // Box-shadow
   sh: shadow,
+  br: '0.4rem',
 };
 
 export default theme;

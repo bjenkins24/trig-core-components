@@ -7,6 +7,10 @@ const StyledLabel = styled(Body1)`
   color: ${({ theme }) => theme.ps[200]};
 `;
 
+export const labelTypes = {
+  children: PropTypes.string.isRequired,
+};
+
 const Label = ({ children, ...restProps }) => {
   return (
     <StyledLabel as="label" {...restProps}>
@@ -15,8 +19,6 @@ const Label = ({ children, ...restProps }) => {
   );
 };
 
-Label.propTypes = {
-  children: PropTypes.string.isRequired,
-};
+Label.propTypes = labelTypes;
 
 export default Label;

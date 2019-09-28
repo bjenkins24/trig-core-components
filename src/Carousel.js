@@ -175,7 +175,7 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
         tabindex={0}
         aria-label="See previous deck"
       >
-        <Icon type="left-arrow" />
+        <Icon type="arrow-left" />
       </Previous>
       <SliderMask>
         <SliderContent style={animateProps}>{renderSlides()}</SliderContent>
@@ -188,7 +188,7 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
         tabindex={0}
         aria-label="See next deck"
       >
-        <Icon type="right-arrow" />
+        <Icon type="arrow-right" />
       </Next>
     </Slider>
   );

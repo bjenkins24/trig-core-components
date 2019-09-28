@@ -13,4 +13,9 @@ const percentType = (props, propName, componentName) => {
   return true;
 };
 
+export const refType = PropTypes.oneOfType([
+  PropTypes.func,
+  PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+]);
+
 export const widthType = PropTypes.oneOfType([percentType, PropTypes.number]);

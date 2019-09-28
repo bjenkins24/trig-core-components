@@ -36,6 +36,15 @@ const getPadding = ({ tabIndex }) => {
   `;
 };
 
+const tabTypes = {
+  tabIndex: PropTypes.number.isRequired,
+  dark: PropTypes.bool,
+};
+
+const defaultProps = {
+  dark: false,
+};
+
 const Tab = ({ tabIndex, dark, ...restProps }) => {
   const { selectedTab, setSelectedTab, tabRefs } = useContext(TabContext);
   const isSelected = selectedTab === tabIndex;
@@ -68,13 +77,7 @@ const Tab = ({ tabIndex, dark, ...restProps }) => {
   );
 };
 
-Tab.defaultProps = {
-  dark: false,
-};
-
-Tab.propTypes = {
-  tabIndex: PropTypes.number.isRequired,
-  dark: PropTypes.bool,
-};
+Tab.defaultProps = defaultProps;
+Tab.propTypes = tabTypes;
 
 export default Tab;

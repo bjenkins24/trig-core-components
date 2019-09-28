@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 
 export const TabContext = React.createContext();
 
+const tabsTypes = {
+  children: PropTypes.node.isRequired,
+};
+
 const Tabs = ({ children, ...restProps }) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [tabRefs, setTabRefs] = useState([]);
@@ -37,8 +41,6 @@ const Tabs = ({ children, ...restProps }) => {
   );
 };
 
-Tabs.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+Tabs.propTypes = tabsTypes;
 
 export default Tabs;
