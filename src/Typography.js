@@ -86,13 +86,15 @@ const Body1 = styled.span`
   ${Body1Styles}
 `;
 
-const Body2 = styled.span`
+const Body2Styles = css`
   font-size: 1.4rem;
   line-height: 1.7;
   font-weight: ${getWeight};
   color: ${getColor()};
   ${buttonStyles};
 `;
+
+const Body2 = styled.span``;
 
 const Body3 = styled.span`
   font-size: 1.1rem;
@@ -120,6 +122,7 @@ export {
   Body1,
   Body1Styles,
   Body2,
+  Body2Styles,
   Body3,
   TinyText,
 };

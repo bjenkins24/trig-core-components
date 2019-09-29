@@ -5,8 +5,8 @@ import Select from 'react-select';
 import Label, { labelTypes } from './Label';
 import useTheme from '../utils/useTheme';
 import getWidth from '../utils/getWidth';
-import { widthType } from '../utils/propTypes';
-import { Body1Styles } from '../Typography';
+import { widthType, sizeProp } from '../utils/propTypes';
+import { Body1Styles, Body2Styles } from '../Typography';
 
 const selectFieldTypes = {
   options: PropTypes.arrayOf(
@@ -19,6 +19,7 @@ const selectFieldTypes = {
   onChange: PropTypes.func.isRequired,
   width: widthType,
   labelProps: labelTypes,
+  size: sizeProp,
   label: PropTypes.string,
   htmlFor: PropTypes.string,
   className: PropTypes.string,
@@ -27,6 +28,7 @@ const selectFieldTypes = {
 const defaultProps = {
   value: null,
   width: 20,
+  size: 'md',
   htmlFor: '',
   labelProps: {},
   label: '',
@@ -42,8 +44,22 @@ const StyledLabel = styled(Label)`
   margin-bottom: 0.6rem;
 `;
 
+const getSize = (type) => ({ size }) => {
+  const sizeMap = {
+    font: {
+      sm: Body2Styles,
+      md: Body1Styles,
+    },
+    padding: {
+      sm: 'padding: 0.5rem 1.2rem',
+      md: 'padding: 0.5rem 1.6rem',
+    },
+  };
+  return sizeMap[type][size];
+};
+
 const StyledSelect = styled(Select)`
-  ${Body1Styles}
+  ${getSize('font')}
   .react-select {
     &__single-value {
       margin-top: -0.1rem;
@@ -61,7 +77,7 @@ const StyledSelect = styled(Select)`
       }
     }
     &__value-container {
-      padding: 0.4rem 1.6rem;
+      ${getSize('padding')}
     }
     &__option {
       cursor: pointer;
@@ -88,6 +104,7 @@ const SelectField = ({
   htmlFor,
   className,
   label,
+  size,
   labelProps,
   ...restProps
 }) => {
@@ -101,6 +118,7 @@ const SelectField = ({
         </StyledLabel>
       )}
       <StyledSelect
+        size={size}
         className="react-select-container"
         classNamePrefix="react-select"
         value={value}
