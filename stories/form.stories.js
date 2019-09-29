@@ -45,5 +45,5 @@ storiesOf('Form', module)
     return <SelectFieldWrapper />;
   })
   .add('Label', () => <Label>My awesome field</Label>)
-  .add('Checkbox', () => <Checkbox />)
+  .add('Checkbox', () => <Checkbox label="React (4)" />)
   .addDecorator(withKnobs);

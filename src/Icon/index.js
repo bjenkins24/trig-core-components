@@ -23,6 +23,7 @@ const Container = styled.div`
 
 const StyledSvg = styled.svg`
   color: ${({ color }) => (color ? getColor() : 'inherit')};
+  margin: 0 auto;
 `;
 
 const CountContainer = styled.div`
