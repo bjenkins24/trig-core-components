@@ -49,7 +49,7 @@ const Selected = styled.div`
   opacity: 0;
   color: ${({ theme }) => theme.bs[200]};
   height: 1.5rem;
-  width: 1.5rem;
+  width: 1.6rem;
   transition: all 0.2s;
 `;
 
