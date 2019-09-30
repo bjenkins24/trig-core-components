@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Body1 } from '../Typography';
 import { HorizontalGroup } from '../Groups';
+import { Body1 } from '../Typography';
 import Icon from '../Icon';
-import { posType } from '../utils/propTypes';
 
 const LabelContainer = styled.label`
   display: inline-block;
   cursor: pointer;
   position: relative;
 
-  &:hover .trig-checkbox--unselected {
+  &:hover .trig-checkbox__container {
     border: 0.1rem solid ${({ theme }) => theme.s};
   }
 `;
@@ -24,40 +23,33 @@ const HiddenInput = styled.input.attrs({
   height: 0;
   width: 0;
 
-  /* Unselected */
-  &:checked ~ div:nth-of-type(1) {
-    opacity: 0;
+  /* Container */
+  &:checked + div {
+    border: 0.1rem solid ${({ theme }) => theme.s};
+    background: ${({ theme }) => theme.s};
   }
 
   /* Selected */
-  &:checked ~ div:nth-of-type(2) {
+  &:checked + div > div {
     opacity: 1;
   }
 `;
 
-const Unselected = styled.div`
+const CheckboxContainer = styled.div`
   width: 1.5rem;
   height: 1.5rem;
-  display: block;
   border: 0.1rem solid ${({ theme }) => theme.ps[100]};
   border-radius: 0.2rem;
-  opacity: 1;
   transition: all 0.2s;
 `;
 
 const Selected = styled.div`
-  background: ${({ theme }) => theme.s};
   display: flex;
   cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   opacity: 0;
   color: ${({ theme }) => theme.bs[200]};
   height: 1.5rem;
   width: 1.5rem;
-  border: 0.1rem solid ${({ theme }) => theme.s};
-  border-radius: 0.2rem;
   transition: all 0.2s;
 `;
 
@@ -68,28 +60,43 @@ const StyledIcon = styled(Icon)`
 `;
 
 const checkboxTypes = {
-  label: PropTypes.string,
-  labelPos: posType,
+  label: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  children: PropTypes.func,
 };
 
 const defaultProps = {
   label: '',
-  labelPos: 'end',
+  children: null,
 };
 
-const Checkbox = ({ label, labelPos, ...restProps }) => {
-  return (
-    <LabelContainer>
-      <HorizontalGroup margin={0.8}>
-        {label && labelPos === 'start' && <Body1 color="ps.200">{label}</Body1>}
-        <div>
-          <HiddenInput {...restProps} />
-          <Unselected className="trig-checkbox--unselected" />
+const Checkbox = ({ label, children, ...restProps }) => {
+  const CheckboxComponent = () => {
+    return (
+      <div>
+        <HiddenInput {...restProps} />
+        <CheckboxContainer className="trig-checkbox__container">
+          {/* <Unselected className="trig-checkbox--unselected" /> */}
           <Selected>
             <StyledIcon type="check" size={1.2} />
           </Selected>
-        </div>
-        {label && labelPos === 'end' && <Body1 color="ps.200">{label}</Body1>}
+        </CheckboxContainer>
+      </div>
+    );
+  };
+
+  if (children) {
+    return (
+      <LabelContainer>
+        {children({ renderCheckbox: () => <CheckboxComponent /> })}
+      </LabelContainer>
+    );
+  }
+
+  return (
+    <LabelContainer>
+      <HorizontalGroup margin={0.8}>
+        <CheckboxComponent />
+        {label && <Body1 color="ps.200">{label}</Body1>}
       </HorizontalGroup>
     </LabelContainer>
   );
