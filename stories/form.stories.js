@@ -5,6 +5,8 @@ import { withKnobs, text, select } from '@storybook/addon-knobs';
 import StringField from '../src/Form/StringField';
 import SelectField from '../src/Form/SelectField';
 import Checkbox from '../src/Form/Checkbox';
+import { HorizontalGroup } from '../src/Groups';
+import { Body1 } from '../src/Typography';
 import Label from '../src/Form/Label';
 import './consoleOverrides';
 import themeForProvider from './theme';
@@ -55,7 +57,11 @@ storiesOf('Form', module)
   .add('Checkbox Custom Label', () => (
     <Checkbox>
       {({ renderCheckbox }) => {
-        return <div>Hello {renderCheckbox()}</div>;
+        return (
+          <HorizontalGroup margin={10}>
+            <Body1 color="ps.200">Hello</Body1> {renderCheckbox()}
+          </HorizontalGroup>
+        );
       }}
     </Checkbox>
   ))
