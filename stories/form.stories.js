@@ -51,5 +51,10 @@ storiesOf('Form', module)
     );
   })
   .add('Label', () => <Label>My awesome field</Label>)
-  .add('Checkbox', () => <Checkbox label="React (4)" />)
+  .add('Checkbox', () => (
+    <Checkbox
+      label="React (4)"
+      labelPos={select('Position', { start: 'start', end: 'end' }, 'end')}
+    />
+  ))
   .addDecorator(withKnobs);

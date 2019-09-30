@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Body1 } from '../Typography';
 import { HorizontalGroup } from '../Groups';
 import Icon from '../Icon';
+import { posType } from '../utils/propTypes';
 
 const LabelContainer = styled.label`
   display: inline-block;
@@ -42,7 +43,6 @@ const Unselected = styled.div`
   border-radius: 0.2rem;
   opacity: 1;
   transition: all 0.2s;
-  transform: translateY(-0.05rem);
 `;
 
 const Selected = styled.div`
@@ -51,7 +51,7 @@ const Selected = styled.div`
   cursor: pointer;
   position: absolute;
   top: 50%;
-  transform: translateY(calc(-50% - 0.1rem));
+  transform: translateY(-50%);
   opacity: 0;
   color: ${({ theme }) => theme.bs[200]};
   height: 1.5rem;
@@ -69,16 +69,19 @@ const StyledIcon = styled(Icon)`
 
 const checkboxTypes = {
   label: PropTypes.string,
+  labelPos: posType,
 };
 
 const defaultProps = {
   label: '',
+  labelPos: 'end',
 };
 
-const Checkbox = ({ label, ...restProps }) => {
+const Checkbox = ({ label, labelPos, ...restProps }) => {
   return (
     <LabelContainer>
       <HorizontalGroup margin={0.8}>
+        {label && labelPos === 'start' && <Body1 color="ps.200">{label}</Body1>}
         <div>
           <HiddenInput {...restProps} />
           <Unselected className="trig-checkbox--unselected" />
@@ -86,7 +89,7 @@ const Checkbox = ({ label, ...restProps }) => {
             <StyledIcon type="check" size={1.2} />
           </Selected>
         </div>
-        {label && <Body1 color="ps.200">{label}</Body1>}
+        {label && labelPos === 'end' && <Body1 color="ps.200">{label}</Body1>}
       </HorizontalGroup>
     </LabelContainer>
   );
