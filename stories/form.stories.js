@@ -8,6 +8,7 @@ import Checkbox from '../src/Form/Checkbox';
 import { HorizontalGroup } from '../src/Groups';
 import { Body1 } from '../src/Typography';
 import Label from '../src/Form/Label';
+import DateRangeField from '../src/Form/DateRangeField';
 import './consoleOverrides';
 import themeForProvider from './theme';
 
@@ -65,4 +66,5 @@ storiesOf('Form', module)
       }}
     </Checkbox>
   ))
+  .add('DateRangeField', () => <DateRangeField />)
   .addDecorator(withKnobs);
