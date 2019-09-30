@@ -195,7 +195,7 @@ const Typography = ({
   className,
   ...restProps
 }) => {
-  if (!separator) return <Component {...restProps} />;
+  if (!separator) return <Component className={className} {...restProps} />;
 
   const getStyle = () => {
     if (marginBottom) {
