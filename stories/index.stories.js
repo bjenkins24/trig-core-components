@@ -282,4 +282,7 @@ storiesOf('Typography', module)
         </tbody>
       </table>
     );
+  })
+  .add('separator', () => {
+    return <Heading2 separator>Hello there</Heading2>;
   });

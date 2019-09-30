@@ -1,5 +1,9 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
+import Separator from './Separator';
+import { HorizontalGroup } from './Groups';
 import { getColor } from './utils/getColor';
 
 const getWeight = ({ weight }) => {
@@ -25,7 +29,7 @@ const buttonStyles = ({ as }) => {
   `;
 };
 
-const Huge = styled.h1`
+const HugeStyles = css`
   font-size: 6.4rem;
   line-height: 1.3;
   color: ${getColor()};
@@ -35,44 +39,82 @@ const Huge = styled.h1`
   ${buttonStyles};
 `;
 
-const Heading1 = styled.h1`
+const HugeComponent = styled.h1`
+  ${HugeStyles}
+`;
+
+const Huge = (props) => <Typography Component={HugeComponent} {...props} />;
+
+const Heading1Styles = css`
   font-size: 3.4rem;
   line-height: 1.3;
   color: ${getColor()};
   font-weight: 500;
   margin-top: 0;
-  margin-bottom: 1.6rem;
+  margin-bottom: ${({ noMargin }) => (noMargin ? 0 : '1.6rem')};
   ${buttonStyles};
 `;
 
-const Heading2 = styled.h2`
+const Heading1Component = styled.h1`
+  ${Heading1Styles};
+`;
+
+const Heading1 = (props) => (
+  <Typography Component={Heading1Component} marginBottom {...props} />
+);
+
+const Heading2Styles = css`
   font-size: 2.6rem;
   line-height: 1.3;
   font-weight: 600;
   color: ${getColor('s')};
   margin-top: 0;
-  margin-bottom: 1.6rem;
+  margin-bottom: ${({ noMargin }) => (noMargin ? 0 : '1.6rem')};
   ${buttonStyles};
 `;
 
-const Heading3 = styled.h3`
+const Heading2Component = styled.h2`
+  ${Heading2Styles}
+`;
+
+const Heading2 = (props) => (
+  <Typography Component={Heading2Component} marginBottom {...props} />
+);
+
+const Heading3Styles = css`
   font-size: 1.5rem;
   line-height: 1.5;
   font-weight: 600;
   color: ${getColor()};
   margin-top: 0;
-  margin-bottom: 1.6rem;
+  margin-bottom: ${({ noMargin }) => (noMargin ? 0 : '1.6rem')};
   ${buttonStyles};
 `;
 
-const Heading4 = styled.h4`
+const Heading3Component = styled.h3`
+  ${Heading3Styles};
+`;
+
+const Heading3 = (props) => (
+  <Typography Component={Heading3Component} marginBottom {...props} />
+);
+
+const Heading4Styles = css`
   font-size: 1.3rem;
   line-height: 1.7;
   color: ${getColor('bcs.200')};
   margin-top: 0;
-  margin-bottom: 1.6rem;
+  margin-bottom: ${({ noMargin }) => (noMargin ? 0 : '1.6rem')};
   ${buttonStyles};
 `;
+
+const Heading4Component = styled.h4`
+  ${Heading4Styles};
+`;
+
+const Heading4 = (props) => (
+  <Typography Component={Heading4Component} marginBottom {...props} />
+);
 
 const Body1Styles = css`
   font-size: 1.6rem;
@@ -82,9 +124,11 @@ const Body1Styles = css`
   ${buttonStyles};
 `;
 
-const Body1 = styled.span`
+const Body1Component = styled.span`
   ${Body1Styles}
 `;
+
+const Body1 = (props) => <Typography Component={Body1Component} {...props} />;
 
 const Body2Styles = css`
   font-size: 1.4rem;
@@ -94,9 +138,13 @@ const Body2Styles = css`
   ${buttonStyles};
 `;
 
-const Body2 = styled.span``;
+const Body2Component = styled.span`
+  ${Body2Styles}
+`;
 
-const Body3 = styled.span`
+const Body2 = (props) => <Typography Component={Body2Component} {...props} />;
+
+const Body3Styles = css`
   font-size: 1.1rem;
   line-height: 1.7;
   font-weight: ${getWeight};
@@ -104,7 +152,13 @@ const Body3 = styled.span`
   ${buttonStyles};
 `;
 
-const TinyText = styled.span`
+const Body3Component = styled.span`
+  ${Body3Styles}
+`;
+
+const Body3 = (props) => <Typography Component={Body3Component} {...props} />;
+
+const TinyTextStyles = css`
   font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.3;
@@ -113,16 +167,84 @@ const TinyText = styled.span`
   ${buttonStyles};
 `;
 
+const TinyTextComponent = styled.span`
+  ${TinyTextStyles};
+`;
+
+const TinyText = (props) => (
+  <Typography Component={TinyTextComponent} {...props} />
+);
+
+const typographyTypes = {
+  Component: PropTypes.node.isRequired,
+  separator: PropTypes.bool,
+  marginBottom: PropTypes.bool,
+  className: PropTypes.string,
+};
+
+const defaultProps = {
+  separator: false,
+  marginBottom: false,
+  className: '',
+};
+
+const Typography = ({
+  Component,
+  separator,
+  marginBottom,
+  className,
+  ...restProps
+}) => {
+  if (!separator) return <Component {...restProps} />;
+
+  const getStyle = () => {
+    if (marginBottom) {
+      return { marginBottom: '1.6rem' };
+    }
+    return {};
+  };
+
+  return (
+    <HorizontalGroup className={className} style={getStyle()}>
+      <Component
+        style={{ flexShrink: 0, paddingRight: '1.6rem' }}
+        noMargin={marginBottom}
+        {...restProps}
+      />
+      <Separator />
+    </HorizontalGroup>
+  );
+};
+
+Typography.propTypes = typographyTypes;
+Typography.defaultProps = defaultProps;
+
 export {
+  HugeStyles,
+  HugeComponent,
   Huge,
+  Heading1Styles,
+  Heading1Component,
   Heading1,
+  Heading2Styles,
+  Heading2Component,
   Heading2,
+  Heading3Styles,
+  Heading3Component,
   Heading3,
+  Heading4Styles,
+  Heading4Component,
   Heading4,
-  Body1,
   Body1Styles,
-  Body2,
+  Body1Component,
+  Body1,
   Body2Styles,
+  Body2Component,
+  Body2,
+  Body3Styles,
+  Body3Component,
   Body3,
+  TinyTextStyles,
+  TinyTextComponent,
   TinyText,
 };
