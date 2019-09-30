@@ -75,7 +75,6 @@ const Checkbox = ({ label, children, ...restProps }) => {
       <div>
         <HiddenInput {...restProps} />
         <CheckboxContainer className="trig-checkbox__container">
-          {/* <Unselected className="trig-checkbox--unselected" /> */}
           <Selected>
             <StyledIcon type="check" size={1.2} />
           </Selected>
