@@ -66,5 +66,13 @@ storiesOf('Form', module)
       }}
     </Checkbox>
   ))
-  .add('DateRangeField', () => <DateRangeField />)
+  .add('DateRangeField', () => (
+    <div
+      css={`
+        width: 37rem;
+      `}
+    >
+      <DateRangeField />
+    </div>
+  ))
   .addDecorator(withKnobs);
