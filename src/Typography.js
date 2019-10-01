@@ -128,7 +128,10 @@ const Body1Component = styled.span`
   ${Body1Styles}
 `;
 
-const Body1 = (props) => <Typography Component={Body1Component} {...props} />;
+const Body1 = (props) => {
+  console.log('props: ', props);
+  return <Typography Component={Body1Component} {...props} />;
+};
 
 const Body2Styles = css`
   font-size: 1.4rem;
