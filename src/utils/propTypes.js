@@ -18,4 +18,22 @@ export const refType = PropTypes.oneOfType([
   PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
 ]);
 
+export const placementType = PropTypes.oneOf([
+  'auto',
+  'auto-start',
+  'auto-end',
+  'top',
+  'top-start',
+  'top-end',
+  'right',
+  'right-start',
+  'right-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
+  'left',
+  'left-start',
+  'left-end',
+]);
+
 export const widthType = PropTypes.oneOfType([percentType, PropTypes.number]);

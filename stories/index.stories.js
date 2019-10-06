@@ -19,6 +19,7 @@ import ButtonSelect from '../src/Buttons/ButtonSelect';
 import Icon from '../src/Icon';
 import Avatar from '../src/Avatar';
 import { Tabs, TabList, Tab, TabPanel } from '../src/Tabs';
+import Popover from '../src/Popover';
 import Deck from '../src/Deck';
 import {
   Huge,
@@ -133,6 +134,17 @@ const stories2 = storiesOf('Tabs', module)
   ));
 
 stories2.addDecorator(withKnobs);
+
+storiesOf('Popover', module)
+  .addDecorator((story) => (
+    <ThemeProvider theme={theme}>{story()}</ThemeProvider>
+  ))
+  .add('default', () => (
+    <Popover renderPopover={() => <span>Sup</span>}>
+      <button type="button">Toggle!</button>
+    </Popover>
+  ))
+  .addDecorator(withKnobs);
 
 storiesOf('Icons', module)
   .addDecorator((story) => (
