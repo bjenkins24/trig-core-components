@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "npm-clean": "rimraf package-lock.json && rimraf node_modules && npm install"
   },
   "husky": {
     "hooks": {
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/bjenkins24/trig-core-components#readme",
   "dependencies": {
+    "acuity-calendar": "github:AcuityScheduling/acuity-calendar#65382deef6c9578a7f0d2572a1e4e9a6866ac944",
     "date-fns": "^2.0.1",
     "lodash": "^4.17.11",
     "precise-commits": "^1.0.2",
@@ -35,6 +37,7 @@
     "react-spring": "^8.0.27",
     "react-truncate": "^2.4.0",
     "reactstrap": "^8.0.1",
+    "rimraf": "^3.0.0",
     "styled-components": "^5.0.0-beta.8"
   },
   "devDependencies": {
