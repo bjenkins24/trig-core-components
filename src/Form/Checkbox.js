@@ -41,6 +41,7 @@ const CheckboxContainer = styled.div`
   border: 0.1rem solid ${({ theme }) => theme.ps[100]};
   border-radius: 0.2rem;
   transition: all 0.2s;
+  display: flex;
 `;
 
 const Selected = styled.div`
@@ -48,8 +49,7 @@ const Selected = styled.div`
   cursor: pointer;
   opacity: 0;
   color: ${({ theme }) => theme.bs[200]};
-  height: 1.5rem;
-  width: 1.6rem;
+  margin: 0 auto;
   transition: all 0.2s;
 `;
 

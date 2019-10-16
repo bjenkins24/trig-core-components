@@ -129,7 +129,6 @@ const Body1Component = styled.span`
 `;
 
 const Body1 = (props) => {
-  console.log('props: ', props);
   return <Typography Component={Body1Component} {...props} />;
 };
 

@@ -140,8 +140,10 @@ storiesOf('Popover', module)
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
   .add('default', () => (
-    <Popover renderPopover={() => <span>Sup</span>}>
-      <button type="button">Toggle!</button>
+    <Popover renderPopover={() => <span>Hello</span>}>
+      <button type="button" test="sup">
+        Trigger
+      </button>
     </Popover>
   ))
   .addDecorator(withKnobs);
