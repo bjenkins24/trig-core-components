@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { css } from 'styled-components';
-import { Body1 } from '../Typography';
+import { Body1Component } from '../Typography';
 import { TabContext } from './Tabs';
 
 const getColor = ({ theme, isSelected, dark }) => {
@@ -50,7 +50,7 @@ const Tab = ({ tabIndex, dark, ...restProps }) => {
   const isSelected = selectedTab === tabIndex;
 
   return (
-    <Body1
+    <Body1Component
       ref={tabRefs[tabIndex]}
       css={`
         margin-bottom: 0.8rem;

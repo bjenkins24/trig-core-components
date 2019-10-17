@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { VerticalGroup } from '../Groups';
+import { VerticalGroup, HorizontalGroup } from '../Groups';
 import { Body2 } from '../Typography';
+import Icon from '../Icon';
 import Popover from '../Popover';
 import DatePicker from './DatePicker';
-import {
-  format,
-  subMonths,
-  addDays,
-  differenceInDays,
-  isBefore,
-} from '../utils/dateFns';
+import { format, addDays, differenceInDays, isBefore } from '../utils/dateFns';
 
 /**
  * Make sure the start and end date and start and end time sync correctly, so users can't do
@@ -26,9 +21,13 @@ import {
 const syncStartEnd = ({ field, value, currentStart, currentEnd }) => {
   let newStart = field === 'start' ? value : currentStart;
   let newEnd = field === 'end' ? value : currentEnd;
-  if (!isBefore(newEnd, newStart)) return { start: newStart, end: newEnd };
+  if (!newStart || !newEnd || !isBefore(newEnd, newStart))
+    return { start: newStart, end: newEnd };
 
-  const totalDaysRange = differenceInDays(currentEnd, currentStart);
+  let totalDaysRange = 0;
+  if (currentEnd && currentStart) {
+    totalDaysRange = differenceInDays(currentEnd, currentStart);
+  }
   const fieldMap = {
     start: () => {
       newEnd = addDays(newStart, totalDaysRange);
@@ -72,33 +71,53 @@ const ContentContainer = styled.div`
   display: flex;
 `;
 
+const IconButton = styled.button`
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0 0.2rem;
+  outline: none;
+  &:hover,
+  &:active,
+  &:focus {
+    svg {
+      color: ${({ theme }) => theme.p};
+    }
+  }
+`;
+
 const EndContent = styled(Body2)`
+  display: flex;
+  align-items: center;
   margin-left: auto;
 `;
 
 const dateRangeFieldTypes = {
-  defaultStartDate: PropTypes.instanceOf(Date),
-  defaultEndDate: PropTypes.instanceOf(Date),
+  startDate: PropTypes.instanceOf(Date),
+  endDate: PropTypes.instanceOf(Date),
+  clearStart: PropTypes.func,
+  clearEnd: PropTypes.func,
   onSelectStart: PropTypes.func,
   onSelectEnd: PropTypes.func,
 };
 
 const defaultProps = {
-  defaultStartDate: subMonths(new Date(), 1),
-  defaultEndDate: new Date(),
+  startDate: null,
+  endDate: null,
+  clearStart: () => null,
+  clearEnd: () => null,
   onSelectStart: () => null,
   onSelectEnd: () => null,
 };
 
 const DateRangeField = ({
-  defaultStartDate,
-  defaultEndDate,
+  startDate,
+  endDate,
   onSelectStart,
   onSelectEnd,
+  clearStart,
+  clearEnd,
 }) => {
-  const [startDate, setStartDate] = useState(defaultStartDate);
-  const [endDate, setEndDate] = useState(defaultEndDate);
-
   const getCorrectDate = (type) => {
     const typeMap = {
       start: startDate,
@@ -119,16 +138,40 @@ const DateRangeField = ({
             currentStart: startDate,
             currentEnd: endDate,
           });
-          setStartDate(start);
-          setEndDate(end);
           closePopover();
           const typeMap = {
-            start: onSelectStart,
-            end: onSelectEnd,
+            start: () => onSelectStart(start),
+            end: () => onSelectEnd(end),
           };
           typeMap[type]();
         }}
       />
+    );
+  };
+
+  const renderEndContent = (type) => {
+    const typeMap = {
+      start: {
+        date: startDate,
+        clear: clearStart,
+      },
+      end: {
+        date: endDate,
+        clear: clearEnd,
+      },
+    };
+    const { date, clear } = typeMap[type];
+    if (!date) {
+      return <Icon type="calendar" color="ps.200" size={1.6} />;
+    }
+
+    return (
+      <HorizontalGroup margin={1.6}>
+        <span>{format(date, 'MMMM d, yyyy')}</span>
+        <IconButton type="button" onClick={clear}>
+          <Icon type="close" size={1.2} color="ps.200" />
+        </IconButton>
+      </HorizontalGroup>
     );
   };
 
@@ -142,7 +185,7 @@ const DateRangeField = ({
         <Button>
           <ContentContainer>
             <Body2 color="ps.200">Starting</Body2>
-            <EndContent>{format(startDate, 'MMMM d, yyyy')}</EndContent>
+            <EndContent>{renderEndContent('start')}</EndContent>
           </ContentContainer>
         </Button>
       </Popover>
@@ -154,7 +197,7 @@ const DateRangeField = ({
         <Button>
           <ContentContainer>
             <Body2 color="ps.200">Ending</Body2>
-            <EndContent>{format(endDate, 'MMMM d, yyyy')}</EndContent>
+            <EndContent>{renderEndContent('end')}</EndContent>
           </ContentContainer>
         </Button>
       </Popover>

@@ -8,10 +8,31 @@ import Checkbox from '../src/Form/Checkbox';
 import { HorizontalGroup } from '../src/Groups';
 import { Body1 } from '../src/Typography';
 import Label from '../src/Form/Label';
-import DatePicker from '../src/Form/DatePicker';
 import DateRangeField from '../src/Form/DateRangeField';
 import './consoleOverrides';
 import themeForProvider from './theme';
+
+const DateRangeFieldWrapper = () => {
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  return (
+    <div
+      css={`
+        width: 37rem;
+      `}
+    >
+      <DateRangeField
+        startDate={startDate}
+        endDate={endDate}
+        onSelectStart={(date) => setStartDate(date)}
+        onSelectEnd={(date) => setEndDate(date)}
+        clearStart={() => setStartDate(null)}
+        clearEnd={() => setEndDate(null)}
+      />
+    </div>
+  );
+};
 
 // eslint-disable-next-line react/prop-types
 const SelectFieldWrapper = ({ size }) => {
@@ -67,23 +88,5 @@ storiesOf('Form', module)
       }}
     </Checkbox>
   ))
-  .add('DateRangeField', () => (
-    <div
-      css={`
-        width: 37rem;
-      `}
-    >
-      <DateRangeField />
-    </div>
-  ))
-  .add('DatePicker', () => (
-    <div
-      css={`
-        width: 37rem;
-        background: ${({ theme }) => theme.p};
-      `}
-    >
-      <DatePicker />
-    </div>
-  ))
+  .add('DateRangeField', () => <DateRangeFieldWrapper />)
   .addDecorator(withKnobs);
