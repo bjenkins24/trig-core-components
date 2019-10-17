@@ -80,6 +80,7 @@ storiesOf('Form', module)
     <div
       css={`
         width: 37rem;
+        background: ${({ theme }) => theme.p};
       `}
     >
       <DatePicker />

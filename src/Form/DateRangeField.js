@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { VerticalGroup } from '../Groups';
 import { Body2 } from '../Typography';
+import Popover from '../Popover';
+import DatePicker from './DatePicker';
 
 const Button = styled.button.attrs({
   type: 'button',
@@ -33,18 +35,22 @@ const EndContent = styled(Body2)`
 const DateRangeField = () => {
   return (
     <VerticalGroup>
-      <Button>
-        <ContentContainer>
-          <Body2 color="ps.200">Starting</Body2>
-          <EndContent>January 2, 2019</EndContent>
-        </ContentContainer>
-      </Button>
-      <Button>
-        <ContentContainer>
-          <Body2 color="ps.200">Ending</Body2>
-          <EndContent>March 15, 2019</EndContent>
-        </ContentContainer>
-      </Button>
+      <Popover renderPopover={() => <DatePicker />}>
+        <Button>
+          <ContentContainer>
+            <Body2 color="ps.200">Starting</Body2>
+            <EndContent>January 2, 2019</EndContent>
+          </ContentContainer>
+        </Button>
+      </Popover>
+      <Popover renderPopover={() => <DatePicker />}>
+        <Button>
+          <ContentContainer>
+            <Body2 color="ps.200">Ending</Body2>
+            <EndContent>March 15, 2019</EndContent>
+          </ContentContainer>
+        </Button>
+      </Popover>
     </VerticalGroup>
   );
 };

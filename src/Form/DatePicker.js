@@ -1,8 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Calendar from 'react-calendar/dist/entry.nostyle';
+import Icon from '../Icon';
 import { Body2Styles } from '../Typography';
 import { format } from '../utils/dateFns';
+
+const calendarTheme = () => {
+  return css`
+    background: ${({ theme }) => theme.p};
+    color: ${({ theme }) => theme.pc};
+  `;
+};
 
 const Container = styled.div`
   .react-calendar {
@@ -14,21 +22,23 @@ const Container = styled.div`
     }
     &__tile {
       ${Body2Styles}
+      ${calendarTheme}
       width: 3.6rem;
       height: 3.6rem;
       &--active {
         background: ${({ theme }) => theme.s};
         border-radius: 50%;
-        color: ${({ theme }) => theme.sc};
+        color: ${({ theme }) => theme.sc} !important;
       }
       &:hover {
-        background: ${({ theme }) => theme.ps[100]};
+        background: ${({ theme }) => theme.s};
+        color: ${({ theme }) => theme.sc};
         border-radius: 50%;
       }
     }
     &__month-view {
-      &__days__day-neighboringMonth {
-        color: ${({ theme }) => theme.ps[100]};
+      &__days__day--neighboringMonth {
+        color: ${({ theme }) => theme.ps[200]};
       }
       &__weekdays__weekday {
         ${Body2Styles}
@@ -40,11 +50,22 @@ const Container = styled.div`
         }
       }
     }
-    &__navigation__next2-button {
-      display: none;
-    }
-    &__navigation__prev2-button {
-      display: none;
+    &__navigation {
+      margin-bottom: 1.6rem;
+      &__arrow {
+        ${calendarTheme};
+      }
+      &__label {
+        ${Body2Styles}
+        ${calendarTheme}
+        font-weight: 600;
+      }
+      &__next2-button {
+        display: none;
+      }
+      &__prev2-button {
+        display: none;
+      }
     }
   }
 `;
@@ -54,13 +75,14 @@ const DatePicker = () => {
     <Container>
       <Calendar
         formatShortWeekday={(locale, date) => {
-          return format(date, 'EEEEE');
+          return format(date, 'EEEEEE');
         }}
         calendarType="US"
         showFixedNumberOfWeeks
+        nextLabel={<Icon size={1.2} type="arrow-right" />}
+        prevLabel={<Icon size={1.2} type="arrow-left" />}
         maxDetail="month"
         minDetail="month"
-        nextLabel2
       />
     </Container>
   );
