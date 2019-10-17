@@ -8,11 +8,8 @@ import DatePicker from './DatePicker';
 import {
   format,
   subMonths,
-  isSameDay,
-  setMinutes,
-  getMinutes,
-  setHours,
-  getHours,
+  addDays,
+  differenceInDays,
   isBefore,
 } from '../utils/dateFns';
 
@@ -27,46 +24,29 @@ import {
  * @returns {*}
  */
 const syncStartEnd = ({ field, value, currentStart, currentEnd }) => {
-  try {
-    let newStart = field === 'start' ? value : currentStart;
-    let newEnd = field === 'end' ? value : currentEnd;
+  let newStart = field === 'start' ? value : currentStart;
+  let newEnd = field === 'end' ? value : currentEnd;
+  if (!isBefore(newEnd, newStart)) return { start: newStart, end: newEnd };
 
-    if (isSameDay(currentStart, currentEnd) && field === 'start') {
-      // Start and end the same, changing the start date should change end to match
-      newEnd = setMinutes(
-        setHours(newStart, getHours(currentEnd)),
-        getMinutes(currentEnd)
-      );
-    } else if (isBefore(newEnd, newStart) && field === 'end') {
-      // End changed to be before start, don't let that happen - change start to match end
-      newStart = setMinutes(
-        setHours(newEnd, getHours(currentStart)),
-        getMinutes(currentStart)
-      );
+  const totalDaysRange = differenceInDays(currentEnd, currentStart);
+  const fieldMap = {
+    start: () => {
+      newEnd = addDays(newStart, totalDaysRange);
+      return {
+        start: newStart,
+        end: newEnd,
+      };
+    },
+    end: () => {
+      newStart = addDays(newEnd, totalDaysRange * -1);
+      return {
+        start: newStart,
+        end: newEnd,
+      };
+    },
+  };
 
-      // If it's still before the new start then that means that times were different
-      // we'll just adjust the start time to be an hour before the end time
-      if (isBefore(newEnd, newStart)) {
-        newStart = setMinutes(
-          setHours(newEnd, getHours(currentEnd) - 1),
-          getMinutes(currentEnd)
-        );
-      }
-    } else if (isBefore(newEnd, newStart) && field === 'start') {
-      // Start changed to be after end, don't let that happen - change end to match start
-      newEnd = setMinutes(
-        setHours(newStart, getHours(currentEnd)),
-        getMinutes(currentEnd)
-      );
-    }
-
-    return {
-      start: newStart,
-      end: newEnd,
-    };
-  } catch (e) {
-    return console.error(e);
-  }
+  return fieldMap[field]();
 };
 
 const Button = styled.button.attrs({
