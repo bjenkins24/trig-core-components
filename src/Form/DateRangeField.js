@@ -5,7 +5,69 @@ import { VerticalGroup } from '../Groups';
 import { Body2 } from '../Typography';
 import Popover from '../Popover';
 import DatePicker from './DatePicker';
-import { format, subMonths } from '../utils/dateFns';
+import {
+  format,
+  subMonths,
+  isSameDay,
+  setMinutes,
+  getMinutes,
+  setHours,
+  getHours,
+  isBefore,
+} from '../utils/dateFns';
+
+/**
+ * Make sure the start and end date and start and end time sync correctly, so users can't do
+ * things like set the end date before the start date
+ *
+ * @param field
+ * @param value
+ * @param subField
+ * @param values
+ * @returns {*}
+ */
+const syncStartEnd = ({ field, value, currentStart, currentEnd }) => {
+  try {
+    let newStart = field === 'start' ? value : currentStart;
+    let newEnd = field === 'end' ? value : currentEnd;
+
+    if (isSameDay(currentStart, currentEnd) && field === 'start') {
+      // Start and end the same, changing the start date should change end to match
+      newEnd = setMinutes(
+        setHours(newStart, getHours(currentEnd)),
+        getMinutes(currentEnd)
+      );
+    } else if (isBefore(newEnd, newStart) && field === 'end') {
+      // End changed to be before start, don't let that happen - change start to match end
+      newStart = setMinutes(
+        setHours(newEnd, getHours(currentStart)),
+        getMinutes(currentStart)
+      );
+
+      // If it's still before the new start then that means that times were different
+      // we'll just adjust the start time to be an hour before the end time
+      if (isBefore(newEnd, newStart)) {
+        newStart = setMinutes(
+          setHours(newEnd, getHours(currentEnd) - 1),
+          getMinutes(currentEnd)
+        );
+      }
+    } else if (isBefore(newEnd, newStart) && field === 'start') {
+      // Start changed to be after end, don't let that happen - change end to match start
+      newEnd = setMinutes(
+        setHours(newStart, getHours(currentEnd)),
+        getMinutes(currentEnd)
+      );
+    }
+
+    return {
+      start: newStart,
+      end: newEnd,
+    };
+  } catch (e) {
+    return console.error(e);
+  }
+};
 
 const Button = styled.button.attrs({
   type: 'button',
@@ -37,28 +99,65 @@ const EndContent = styled(Body2)`
 const dateRangeFieldTypes = {
   defaultStartDate: PropTypes.instanceOf(Date),
   defaultEndDate: PropTypes.instanceOf(Date),
+  onSelectStart: PropTypes.func,
+  onSelectEnd: PropTypes.func,
 };
 
 const defaultProps = {
   defaultStartDate: subMonths(new Date(), 1),
   defaultEndDate: new Date(),
+  onSelectStart: () => null,
+  onSelectEnd: () => null,
 };
 
-const DateRangeField = ({ defaultStartDate, defaultEndDate }) => {
+const DateRangeField = ({
+  defaultStartDate,
+  defaultEndDate,
+  onSelectStart,
+  onSelectEnd,
+}) => {
   const [startDate, setStartDate] = useState(defaultStartDate);
   const [endDate, setEndDate] = useState(defaultEndDate);
+
+  const getCorrectDate = (type) => {
+    const typeMap = {
+      start: startDate,
+      end: endDate,
+    };
+    return typeMap[type];
+  };
+
+  // eslint-disable-next-line react/prop-types
+  const renderDatePicker = ({ closePopover, type }) => {
+    return (
+      <DatePicker
+        value={getCorrectDate(type)}
+        onChange={(date) => {
+          const { start, end } = syncStartEnd({
+            field: type,
+            value: date,
+            currentStart: startDate,
+            currentEnd: endDate,
+          });
+          setStartDate(start);
+          setEndDate(end);
+          closePopover();
+          const typeMap = {
+            start: onSelectStart,
+            end: onSelectEnd,
+          };
+          typeMap[type]();
+        }}
+      />
+    );
+  };
 
   return (
     <VerticalGroup>
       <Popover
-        renderPopover={({ closePopover }) => (
-          <DatePicker
-            onChange={(date) => {
-              setStartDate(date);
-              closePopover();
-            }}
-          />
-        )}
+        renderPopover={({ closePopover }) =>
+          renderDatePicker({ closePopover, type: 'start' })
+        }
       >
         <Button>
           <ContentContainer>
@@ -68,14 +167,9 @@ const DateRangeField = ({ defaultStartDate, defaultEndDate }) => {
         </Button>
       </Popover>
       <Popover
-        renderPopover={({ closePopover }) => (
-          <DatePicker
-            onChange={(date) => {
-              setEndDate(date);
-              closePopover();
-            }}
-          />
-        )}
+        renderPopover={({ closePopover }) =>
+          renderDatePicker({ closePopover, type: 'end' })
+        }
       >
         <Button>
           <ContentContainer>
