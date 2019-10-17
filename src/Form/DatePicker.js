@@ -12,6 +12,13 @@ const calendarTheme = () => {
   `;
 };
 
+const StyledIcon = styled(Icon)`
+  &:hover {
+    transform: scale(1.5);
+    transition: transform 0.2s;
+  }
+`;
+
 const Container = styled.div`
   .react-calendar {
     width: 25.3rem;
@@ -84,8 +91,8 @@ const DatePicker = (props) => {
         }}
         calendarType="US"
         showFixedNumberOfWeeks
-        nextLabel={<Icon size={1.2} type="arrow-right" />}
-        prevLabel={<Icon size={1.2} type="arrow-left" />}
+        nextLabel={<StyledIcon size={1.2} type="arrow-right" />}
+        prevLabel={<StyledIcon size={1.2} type="arrow-left" />}
         maxDetail="month"
         minDetail="month"
         {...props}
