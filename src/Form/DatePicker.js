@@ -58,6 +58,7 @@ const Container = styled.div`
       &__label {
         ${Body2Styles}
         ${calendarTheme}
+        cursor: default !important;
         font-weight: 600;
       }
       &__next2-button {
@@ -70,7 +71,7 @@ const Container = styled.div`
   }
 `;
 
-const DatePicker = () => {
+const DatePicker = (props) => {
   return (
     <Container>
       <Calendar
@@ -83,6 +84,7 @@ const DatePicker = () => {
         prevLabel={<Icon size={1.2} type="arrow-left" />}
         maxDetail="month"
         minDetail="month"
+        {...props}
       />
     </Container>
   );

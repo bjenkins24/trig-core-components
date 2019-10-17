@@ -55,7 +55,9 @@ const Popover = ({ children, renderPopover }) => {
         {({ TransitionProps }) => (
           <ClickAwayListener onClickAway={onClose}>
             <Grow {...TransitionProps}>
-              <PopoverContainer>{renderPopover()}</PopoverContainer>
+              <PopoverContainer>
+                {renderPopover({ closePopover: onClose })}
+              </PopoverContainer>
             </Grow>
           </ClickAwayListener>
         )}

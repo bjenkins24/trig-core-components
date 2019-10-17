@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { VerticalGroup } from '../Groups';
 import { Body2 } from '../Typography';
 import Popover from '../Popover';
 import DatePicker from './DatePicker';
+import { format, subMonths } from '../utils/dateFns';
 
 const Button = styled.button.attrs({
   type: 'button',
@@ -32,27 +34,61 @@ const EndContent = styled(Body2)`
   margin-left: auto;
 `;
 
-const DateRangeField = () => {
+const dateRangeFieldTypes = {
+  defaultStartDate: PropTypes.instanceOf(Date),
+  defaultEndDate: PropTypes.instanceOf(Date),
+};
+
+const defaultProps = {
+  defaultStartDate: subMonths(new Date(), 1),
+  defaultEndDate: new Date(),
+};
+
+const DateRangeField = ({ defaultStartDate, defaultEndDate }) => {
+  const [startDate, setStartDate] = useState(defaultStartDate);
+  const [endDate, setEndDate] = useState(defaultEndDate);
+
   return (
     <VerticalGroup>
-      <Popover renderPopover={() => <DatePicker />}>
+      <Popover
+        renderPopover={({ closePopover }) => (
+          <DatePicker
+            onChange={(date) => {
+              setStartDate(date);
+              closePopover();
+            }}
+          />
+        )}
+      >
         <Button>
           <ContentContainer>
             <Body2 color="ps.200">Starting</Body2>
-            <EndContent>January 2, 2019</EndContent>
+            <EndContent>{format(startDate, 'MMMM d, yyyy')}</EndContent>
           </ContentContainer>
         </Button>
       </Popover>
-      <Popover renderPopover={() => <DatePicker />}>
+      <Popover
+        renderPopover={({ closePopover }) => (
+          <DatePicker
+            onChange={(date) => {
+              setEndDate(date);
+              closePopover();
+            }}
+          />
+        )}
+      >
         <Button>
           <ContentContainer>
             <Body2 color="ps.200">Ending</Body2>
-            <EndContent>March 15, 2019</EndContent>
+            <EndContent>{format(endDate, 'MMMM d, yyyy')}</EndContent>
           </ContentContainer>
         </Button>
       </Popover>
     </VerticalGroup>
   );
 };
+
+DateRangeField.propTypes = dateRangeFieldTypes;
+DateRangeField.defaultProps = defaultProps;
 
 export default DateRangeField;
