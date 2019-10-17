@@ -25,15 +25,19 @@ const Container = styled.div`
       ${calendarTheme}
       width: 3.6rem;
       height: 3.6rem;
-      &--active {
-        background: ${({ theme }) => theme.s};
+
+      &--active,
+      &:hover {
         border-radius: 50%;
-        color: ${({ theme }) => theme.sc} !important;
       }
+      &--active,
       &:hover {
         background: ${({ theme }) => theme.s};
-        color: ${({ theme }) => theme.sc};
-        border-radius: 50%;
+        color: ${({ theme }) => theme.sc} !important;
+      }
+      &--now {
+        color: ${({ theme }) => theme.ss[300]};
+        font-weight: 700;
       }
     }
     &__month-view {
