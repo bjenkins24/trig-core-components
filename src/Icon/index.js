@@ -13,7 +13,7 @@ files.keys().forEach(files);
 
 const getTitle = ({ title, mappedIcon, type }) => {
   if (title) return title;
-  return get(mappedIcon, 'title', `${capitalize(type)} icon`);
+  return get(mappedIcon, 'title', `${capitalize(type)} Icon`);
 };
 
 const Container = styled.div`

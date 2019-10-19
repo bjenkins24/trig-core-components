@@ -168,6 +168,7 @@ const DateRangeField = ({
     if (!date) {
       return (
         <Icon
+          title="Select date"
           type="calendar"
           color="ps.200"
           size={1.6}
