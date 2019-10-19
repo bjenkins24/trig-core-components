@@ -65,6 +65,13 @@ const Container = styled.div`
     &__navigation {
       margin-bottom: 1.6rem;
       &__arrow {
+        &[disabled] {
+          cursor: default;
+          color: ${({ theme }) => theme.ps[400]};
+          &:hover {
+            transform: scale(1);
+          }
+        }
         ${calendarTheme};
         transition: transform 0.2s;
         &:hover {
