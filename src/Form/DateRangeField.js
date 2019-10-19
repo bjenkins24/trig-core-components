@@ -21,12 +21,14 @@ import { format, addDays, differenceInDays, isBefore } from '../utils/dateFns';
 const syncStartEnd = ({ field, value, currentStart, currentEnd }) => {
   let newStart = field === 'start' ? value : currentStart;
   let newEnd = field === 'end' ? value : currentEnd;
+
   if (!isBefore(newEnd, newStart)) return { start: newStart, end: newEnd };
 
   const totalDaysRange = differenceInDays(currentEnd, currentStart);
   const fieldMap = {
     start: () => {
       newEnd = addDays(newStart, totalDaysRange);
+      if (currentEnd && !currentStart) newEnd = null;
       return {
         start: newStart,
         end: newEnd,
@@ -34,6 +36,7 @@ const syncStartEnd = ({ field, value, currentStart, currentEnd }) => {
     },
     end: () => {
       newStart = addDays(newEnd, totalDaysRange * -1);
+      if (currentStart && !currentEnd) newStart = null;
       return {
         start: newStart,
         end: newEnd,
@@ -125,19 +128,13 @@ const DateRangeField = ({
   // eslint-disable-next-line react/prop-types
   const renderDatePicker = ({ closePopover, type }) => {
     const typeMap = {
-      start: {
-        date: startDate,
-        onChange: ({ start }) => onSelectStart(start),
-      },
-      end: {
-        date: endDate,
-        onChange: ({ end }) => onSelectEnd(end),
-      },
+      start: startDate,
+      end: endDate,
     };
 
     return (
       <DatePicker
-        value={typeMap[type].date}
+        value={typeMap[type]}
         onChange={(date) => {
           const { start, end } = syncStartEnd({
             field: type,
@@ -146,7 +143,8 @@ const DateRangeField = ({
             currentEnd: endDate,
           });
           closePopover();
-          typeMap[type].onChange({ start, end });
+          onSelectStart(start);
+          onSelectEnd(end);
         }}
       />
     );
