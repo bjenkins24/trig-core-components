@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import get from 'lodash/get';
@@ -60,29 +60,32 @@ const defaultProps = {
   color: null,
 };
 
-const Icon = ({ type, size, title, desc, color, count, ...restProps }) => {
-  const mappedIcon = mapIconTypes(type);
+const Icon = forwardRef(
+  ({ type, size, title, desc, color, count, ...restProps }, ref) => {
+    const mappedIcon = mapIconTypes(type);
 
-  return (
-    <Container {...restProps}>
-      {count !== 0 && (
-        <CountContainer count={count}>
-          <Count color="sc">{count}</Count>
-        </CountContainer>
-      )}
-      <StyledSvg
-        width={`${size}rem`}
-        height={`${size}rem`}
-        color={color}
-        role="img"
-      >
-        <title>{getTitle({ title, mappedIcon, type })}</title>
-        <desc>{desc}</desc>
-        <use xlinkHref={`#${mappedIcon.type}`} />
-      </StyledSvg>
-    </Container>
-  );
-};
+    return (
+      <Container {...restProps}>
+        {count !== 0 && (
+          <CountContainer count={count}>
+            <Count color="sc">{count}</Count>
+          </CountContainer>
+        )}
+        <StyledSvg
+          ref={ref}
+          width={`${size}rem`}
+          height={`${size}rem`}
+          color={color}
+          role="img"
+        >
+          <title>{getTitle({ title, mappedIcon, type })}</title>
+          <desc>{desc}</desc>
+          <use xlinkHref={`#${mappedIcon.type}`} />
+        </StyledSvg>
+      </Container>
+    );
+  }
+);
 
 Icon.propTypes = iconTypes;
 Icon.defaultProps = defaultProps;

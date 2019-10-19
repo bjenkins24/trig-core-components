@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { VerticalGroup, HorizontalGroup } from '../Groups';
@@ -21,13 +21,9 @@ import { format, addDays, differenceInDays, isBefore } from '../utils/dateFns';
 const syncStartEnd = ({ field, value, currentStart, currentEnd }) => {
   let newStart = field === 'start' ? value : currentStart;
   let newEnd = field === 'end' ? value : currentEnd;
-  if (!newStart || !newEnd || !isBefore(newEnd, newStart))
-    return { start: newStart, end: newEnd };
+  if (!isBefore(newEnd, newStart)) return { start: newStart, end: newEnd };
 
-  let totalDaysRange = 0;
-  if (currentEnd && currentStart) {
-    totalDaysRange = differenceInDays(currentEnd, currentStart);
-  }
+  const totalDaysRange = differenceInDays(currentEnd, currentStart);
   const fieldMap = {
     start: () => {
       newEnd = addDays(newStart, totalDaysRange);
@@ -65,6 +61,10 @@ const Button = styled.button.attrs({
   &:last-child {
     border-radius: ${({ theme }) => `0 0 ${theme.br} ${theme.br}`};
   }
+  &:hover .DateRangeField__Button__Label,
+  &:hover .DateRangeField__CalendarIcon svg {
+    color: ${({ theme }) => theme.ps[300]};
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -75,7 +75,8 @@ const IconButton = styled.button`
   border: 0;
   background: none;
   cursor: pointer;
-  padding: 0 0.2rem;
+  padding: 0.6rem;
+  margin: -0.4rem;
   outline: none;
   &:hover,
   &:active,
@@ -118,6 +119,8 @@ const DateRangeField = ({
   clearStart,
   clearEnd,
 }) => {
+  const calendarRefStart = useRef(null);
+  const calendarRefEnd = useRef(null);
   const getCorrectDate = (type) => {
     const typeMap = {
       start: startDate,
@@ -149,7 +152,8 @@ const DateRangeField = ({
     );
   };
 
-  const renderEndContent = (type) => {
+  // eslint-disable-next-line react/prop-types
+  const renderEndContent = ({ type, calendarRef }) => {
     const typeMap = {
       start: {
         date: startDate,
@@ -162,13 +166,20 @@ const DateRangeField = ({
     };
     const { date, clear } = typeMap[type];
     if (!date) {
-      return <Icon type="calendar" color="ps.200" size={1.6} />;
+      return (
+        <Icon
+          type="calendar"
+          color="ps.200"
+          size={1.6}
+          className="DateRangeField__CalendarIcon"
+        />
+      );
     }
 
     return (
       <HorizontalGroup margin={1.6}>
         <span>{format(date, 'MMMM d, yyyy')}</span>
-        <IconButton type="button" onClick={clear}>
+        <IconButton type="button" onClick={clear} ref={calendarRef}>
           <Icon type="close" size={1.2} color="ps.200" />
         </IconButton>
       </HorizontalGroup>
@@ -178,26 +189,39 @@ const DateRangeField = ({
   return (
     <VerticalGroup>
       <Popover
+        preventClickRef={calendarRefStart}
         renderPopover={({ closePopover }) =>
           renderDatePicker({ closePopover, type: 'start' })
         }
       >
-        <Button>
+        <Button hasDate={!!startDate}>
           <ContentContainer>
-            <Body2 color="ps.200">Starting</Body2>
-            <EndContent>{renderEndContent('start')}</EndContent>
+            <Body2 color="ps.200" className="DateRangeField__Button__Label">
+              Starting
+            </Body2>
+            <EndContent>
+              {renderEndContent({
+                type: 'start',
+                calendarRef: calendarRefStart,
+              })}
+            </EndContent>
           </ContentContainer>
         </Button>
       </Popover>
       <Popover
+        preventClickRef={calendarRefEnd}
         renderPopover={({ closePopover }) =>
           renderDatePicker({ closePopover, type: 'end' })
         }
       >
-        <Button>
+        <Button hasDate={!!endDate}>
           <ContentContainer>
-            <Body2 color="ps.200">Ending</Body2>
-            <EndContent>{renderEndContent('end')}</EndContent>
+            <Body2 color="ps.200" className="DateRangeField__Button__Label">
+              Ending
+            </Body2>
+            <EndContent>
+              {renderEndContent({ type: 'end', calendarRef: calendarRefEnd })}
+            </EndContent>
           </ContentContainer>
         </Button>
       </Popover>

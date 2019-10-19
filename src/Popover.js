@@ -5,9 +5,10 @@ import Grow from '@material-ui/core/Grow';
 import Popper from '@material-ui/core/Popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { Body1Styles } from './Typography';
-import { placementType } from './utils/propTypes';
+import { placementType, refType } from './utils/propTypes';
 
 const popoverTypes = {
+  preventClickRef: refType,
   placement: placementType,
   children: PropTypes.node.isRequired,
   renderPopover: PropTypes.func.isRequired,
@@ -15,6 +16,7 @@ const popoverTypes = {
 
 const defaultProps = {
   placement: 'bottom',
+  preventClickRef: null,
 };
 
 const PopoverContainer = styled.div`
@@ -26,7 +28,7 @@ const PopoverContainer = styled.div`
   color: ${({ theme }) => theme.pc};
 `;
 
-const Popover = ({ children, renderPopover }) => {
+const Popover = ({ children, renderPopover, preventClickRef }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   let id = useRef((Math.random() + 1).toString(36).substring(7)).current;
@@ -40,10 +42,19 @@ const Popover = ({ children, renderPopover }) => {
     return React.cloneElement(child, {
       'aria-describedby': id,
       onClick: (event) => {
-        setAnchorEl(anchorEl ? null : event.currentTarget);
         if (typeof child.onClick === 'function') {
           child.onClick();
         }
+        const { current } = preventClickRef;
+        if (
+          event.target === current ||
+          (typeof current !== 'undefined' &&
+            current !== null &&
+            current.contains(event.target))
+        ) {
+          return true;
+        }
+        return setAnchorEl(anchorEl ? null : event.currentTarget);
       },
     });
   });
