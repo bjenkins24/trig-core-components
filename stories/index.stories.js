@@ -141,9 +141,7 @@ storiesOf('Popover', module)
   ))
   .add('default', () => (
     <Popover renderPopover={() => <span>Hello</span>}>
-      <button type="button" test="sup">
-        Trigger
-      </button>
+      <button type="button">Trigger</button>
     </Popover>
   ))
   .addDecorator(withKnobs);

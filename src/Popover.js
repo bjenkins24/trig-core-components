@@ -38,6 +38,22 @@ const Popover = ({ children, renderPopover, preventClickRef }) => {
     setAnchorEl(null);
   };
 
+  const shouldPreventClick = (event) => {
+    if (!preventClickRef) {
+      return false;
+    }
+
+    const { current } = preventClickRef;
+    if (
+      event.target === current ||
+      (current !== null && current.contains(event.target))
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
   const trigger = React.Children.map(children, (child) => {
     return React.cloneElement(child, {
       'aria-describedby': id,
@@ -45,15 +61,9 @@ const Popover = ({ children, renderPopover, preventClickRef }) => {
         if (typeof child.onClick === 'function') {
           child.onClick();
         }
-        const { current } = preventClickRef;
-        if (
-          event.target === current ||
-          (typeof current !== 'undefined' &&
-            current !== null &&
-            current.contains(event.target))
-        ) {
-          return true;
-        }
+
+        if (shouldPreventClick(event)) return true;
+
         return setAnchorEl(anchorEl ? null : event.currentTarget);
       },
     });

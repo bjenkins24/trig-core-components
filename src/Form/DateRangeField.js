@@ -121,19 +121,23 @@ const DateRangeField = ({
 }) => {
   const calendarRefStart = useRef(null);
   const calendarRefEnd = useRef(null);
-  const getCorrectDate = (type) => {
-    const typeMap = {
-      start: startDate,
-      end: endDate,
-    };
-    return typeMap[type];
-  };
 
   // eslint-disable-next-line react/prop-types
   const renderDatePicker = ({ closePopover, type }) => {
+    const typeMap = {
+      start: {
+        date: startDate,
+        onChange: ({ start }) => onSelectStart(start),
+      },
+      end: {
+        date: endDate,
+        onChange: ({ end }) => onSelectEnd(end),
+      },
+    };
+
     return (
       <DatePicker
-        value={getCorrectDate(type)}
+        value={typeMap[type].date}
         onChange={(date) => {
           const { start, end } = syncStartEnd({
             field: type,
@@ -142,11 +146,7 @@ const DateRangeField = ({
             currentEnd: endDate,
           });
           closePopover();
-          const typeMap = {
-            start: () => onSelectStart(start),
-            end: () => onSelectEnd(end),
-          };
-          typeMap[type]();
+          typeMap[type].onChange({ start, end });
         }}
       />
     );
