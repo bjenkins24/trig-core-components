@@ -21,6 +21,14 @@ const Container = styled.div`
       outline: none;
     }
     &__tile {
+      &[disabled] {
+        color: ${({ theme }) => theme.ps[400]};
+        cursor: default;
+        &:hover {
+          background: none;
+          color: ${({ theme }) => theme.ps[400]} !important;
+        }
+      }
       ${Body2Styles}
       ${calendarTheme}
       width: 3.6rem;

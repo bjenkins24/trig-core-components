@@ -11,12 +11,6 @@ import { format, addDays, differenceInDays, isBefore } from '../utils/dateFns';
 /**
  * Make sure the start and end date and start and end time sync correctly, so users can't do
  * things like set the end date before the start date
- *
- * @param field
- * @param value
- * @param subField
- * @param values
- * @returns {*}
  */
 const syncStartEnd = ({ field, value, currentStart, currentEnd }) => {
   let newStart = field === 'start' ? value : currentStart;
@@ -128,13 +122,20 @@ const DateRangeField = ({
   // eslint-disable-next-line react/prop-types
   const renderDatePicker = ({ closePopover, type }) => {
     const typeMap = {
-      start: startDate,
-      end: endDate,
+      start: {
+        date: startDate,
+        activeStartDate: !startDate && endDate ? endDate : new Date(),
+      },
+      end: {
+        date: endDate,
+        activeStartDate: !endDate && startDate ? startDate : new Date(),
+      },
     };
 
     return (
       <DatePicker
-        value={typeMap[type]}
+        activeStartDate={typeMap[type].activeStartDate}
+        value={typeMap[type].date}
         onChange={(date) => {
           const { start, end } = syncStartEnd({
             field: type,
@@ -146,6 +147,7 @@ const DateRangeField = ({
           onSelectStart(start);
           onSelectEnd(end);
         }}
+        maxDate={new Date()}
       />
     );
   };
