@@ -3,6 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import Carousel from '../src/Carousel';
+import Carousel2 from '../src/Carousel2';
 import './consoleOverrides';
 import themeForProvider from './theme';
 
@@ -60,4 +61,5 @@ storiesOf('Carousel', module)
       </Item>
     </Carousel>
   ))
+  .add('another try', () => <Carousel2 />)
   .addDecorator(withKnobs);
