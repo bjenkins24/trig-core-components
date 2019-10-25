@@ -71,6 +71,7 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
   const totalItems = React.Children.count(children);
   const [currentPosition, setCurrentPosition] = useState(0);
   const [lastPosition, setLastPosition] = useState(0);
+  const [isLastSlide, setIsLastSlide] = useState(false);
 
   const setPosition = (direction) => {
     let directionSign = -1;
@@ -95,6 +96,11 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
     if (nextSlidesMoved > totalItems) {
       slidesToScroll = slidesPerPage - (nextSlidesMoved - totalItems);
       totalMovement = percentWidthPerItem * slidesToScroll * directionSign;
+    }
+    if (lastPosition === 0 && currentPosition !== 0) {
+      setIsLastSlide(true);
+    } else {
+      setIsLastSlide(false);
     }
     setCurrentPosition(currentPosition + totalMovement);
   };
@@ -123,16 +129,13 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
     transform: `translate3d(${currentPosition}%, 0px 0px)`,
   });
 
-  const isPrevDisabled = currentPosition === 0;
-  console.log('totalItems: ', totalItems);
-
   return (
     <Slider>
       <Previous
         onClick={() => {
           setPosition('prev');
         }}
-        disabled={isPrevDisabled}
+        disabled={currentPosition === 0}
         aria-label="See previous deck"
       >
         <Icon type="arrow-left" />
@@ -141,6 +144,7 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
         <SliderContent style={animateProps}>{renderSlides()}</SliderContent>
       </SliderMask>
       <Next
+        disabled={isLastSlide}
         onClick={() => {
           setPosition('next');
         }}
