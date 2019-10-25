@@ -129,16 +129,19 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
     transform: `translate3d(${currentPosition}%, 0px 0px)`,
   });
 
+  const isPrevDisabled = currentPosition === 0;
+  const isNextDisabled = isLastSlide;
+
   return (
     <Slider>
       <Previous
         onClick={() => {
           setPosition('prev');
         }}
-        disabled={currentPosition === 0}
+        disabled={isPrevDisabled}
         aria-label="See previous deck"
       >
-        <Icon type="arrow-left" />
+        <Icon type="arrow-left" color={!isPrevDisabled ? 'pc' : 'ps.100'} />
       </Previous>
       <SliderMask>
         <SliderContent style={animateProps}>{renderSlides()}</SliderContent>
@@ -147,10 +150,10 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
         onClick={() => {
           setPosition('next');
         }}
-        disabled={isLastSlide}
+        disabled={isNextDisabled}
         aria-label="See next deck"
       >
-        <Icon type="arrow-right" />
+        <Icon type="arrow-right" color={!isNextDisabled ? 'pc' : 'ps.100'} />
       </Next>
     </Slider>
   );
