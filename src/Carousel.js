@@ -11,10 +11,11 @@ const Slider = styled.div`
   touch-action: pan-y;
 `;
 
-const Previous = styled.span`
+const Previous = styled.button`
   background: rgba(20, 20, 20, 0.5);
   color: white;
   left: 0;
+  border: 0;
   cursor: pointer;
   position: absolute;
   top: 0;
@@ -26,10 +27,11 @@ const Previous = styled.span`
   text-align: center;
 `;
 
-const Next = styled.span`
+const Next = styled.button`
   background: rgba(20, 20, 20, 0.5);
   color: white;
   right: 0;
+  border: 0;
   cursor: pointer;
   position: absolute;
   top: 0;
@@ -115,13 +117,15 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
     transform: `translate3d(${currentPosition}%, 0px 0px)`,
   });
 
+  const isPrevDisabled = currentPosition === 0;
+
   return (
     <Slider>
       <Previous
         onClick={() => {
           setPosition('prev');
         }}
-        role="button"
+        disabled={isPrevDisabled}
         tabindex={0}
         aria-label="See previous deck"
       >
