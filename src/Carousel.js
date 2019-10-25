@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
 import { useSpring, animated } from 'react-spring';
-import styled from 'styled-components';
 import Icon from './Icon';
 
 const Slider = styled.div`
@@ -11,10 +11,9 @@ const Slider = styled.div`
   touch-action: pan-y;
 `;
 
-const Previous = styled.button`
+const buttonStyle = css`
   background: rgba(20, 20, 20, 0.5);
   color: white;
-  left: 0;
   border: 0;
   cursor: pointer;
   position: absolute;
@@ -25,22 +24,17 @@ const Previous = styled.button`
   display: flex;
   justify-content: center;
   text-align: center;
+  outline: none;
 `;
 
-const Next = styled.button`
-  background: rgba(20, 20, 20, 0.5);
-  color: white;
+const Previous = styled.button.attrs({ type: 'button' })`
+  ${buttonStyle}
+  left: 0;
+`;
+
+const Next = styled.button.attrs({ type: 'button' })`
+  ${buttonStyle}
   right: 0;
-  border: 0;
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 20;
-  width: 4%;
-  display: flex;
-  justify-content: center;
-  text-align: center;
 `;
 
 const SliderMask = styled.div`
@@ -60,6 +54,17 @@ const Slide = styled.div`
   vertical-align: top;
   width: ${({ slidesPerPage }) => 100 / slidesPerPage}%;
 `;
+
+const defaultProps = {
+  slidesPerPage: 5,
+  defaultSlidesToScroll: 5,
+};
+
+const carouselTypes = {
+  children: PropTypes.node.isRequired,
+  slidesPerPage: PropTypes.number,
+  defaultSlidesToScroll: PropTypes.number,
+};
 
 const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
   const totalItems = React.Children.count(children);
@@ -126,10 +131,9 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
           setPosition('prev');
         }}
         disabled={isPrevDisabled}
-        tabindex={0}
         aria-label="See previous deck"
       >
-        <Icon type="left-arrow" />
+        <Icon type="arrow-left" />
       </Previous>
       <SliderMask>
         <SliderContent style={animateProps}>{renderSlides()}</SliderContent>
@@ -138,25 +142,15 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
         onClick={() => {
           setPosition('next');
         }}
-        role="button"
-        tabindex={0}
         aria-label="See next deck"
       >
-        <Icon type="right-arrow" />
+        <Icon type="arrow-right" />
       </Next>
     </Slider>
   );
 };
 
-Carousel.defaultProps = {
-  slidesPerPage: 5,
-  defaultSlidesToScroll: 5,
-};
-
-Carousel.propTypes = {
-  children: PropTypes.node.isRequired,
-  slidesPerPage: PropTypes.number,
-  defaultSlidesToScroll: PropTypes.number,
-};
+Carousel.defaultProps = defaultProps;
+Carousel.propTypes = carouselTypes;
 
 export default Carousel;
