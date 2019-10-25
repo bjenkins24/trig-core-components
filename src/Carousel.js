@@ -9,6 +9,7 @@ const Slider = styled.div`
   margin: 0;
   padding: 0 4%;
   touch-action: pan-y;
+  overflow-x: hidden;
 `;
 
 const buttonStyle = css`
@@ -123,6 +124,7 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
   });
 
   const isPrevDisabled = currentPosition === 0;
+  console.log('totalItems: ', totalItems);
 
   return (
     <Slider>
