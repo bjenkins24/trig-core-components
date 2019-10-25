@@ -1,5 +1,6 @@
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+
 import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import Carousel from '../src/Carousel';
@@ -13,9 +14,17 @@ const Item = styled.div`
   border: 1px solid black;
 `;
 
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+  }
+`;
 storiesOf('Carousel', module)
   .addDecorator((story) => (
-    <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
+    <>
+      <GlobalStyle />
+      <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
+    </>
   ))
   .add('default', () => (
     <Carousel>
