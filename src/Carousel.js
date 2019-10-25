@@ -144,10 +144,10 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
         <SliderContent style={animateProps}>{renderSlides()}</SliderContent>
       </SliderMask>
       <Next
-        disabled={isLastSlide}
         onClick={() => {
           setPosition('next');
         }}
+        disabled={isLastSlide}
         aria-label="See next deck"
       >
         <Icon type="arrow-right" />
