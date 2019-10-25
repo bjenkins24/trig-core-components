@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { rgba } from 'polished';
 import { useSpring, useTransition, animated, config } from 'react-spring';
 import styled, { css } from 'styled-components';
 import Truncate from 'react-truncate';
-import { Heading2, Body2, Body3, TinyText } from './Typography';
+import {
+  Heading2,
+  Body2Component,
+  Body3Component,
+  TinyText,
+} from './Typography';
 import Icon from './Icon';
 import Avatar from './Avatar';
 import { HorizontalGroup, VerticalGroup } from './Groups';
@@ -11,30 +17,34 @@ import { HorizontalGroup, VerticalGroup } from './Groups';
 const DeckThumbnail = styled(animated.div)`
   display: flex;
   flex-direction: column;
-  transform: translateY(-100%);
   padding: 1.6rem;
+  position: absolute;
+  bottom: 0;
+  width: calc(100% - 3.2rem);
 `;
 
 const DeckHover = styled(animated.div)`
   display: flex;
   flex-direction: column;
-  transform: translateY(-100%);
   padding: 1.6rem;
 `;
 
 const getBackground = ({ theme, isHovered, image }) => {
   if (image && !isHovered) {
     return css`
-      background: linear-gradient(0deg, rgba(${theme.cs},0.90) 25%, rgba(${theme.csc},.8) 80%), url('${image}');
+      background: linear-gradient(0deg, ${rgba(theme.s, 0.9)} 25%, ${rgba(
+      theme.sc,
+      0.8
+    )} 80%), url('${image}');
       background-size: cover;
-      box-shadow: inset 0 0 0 1000px rgba(${theme.cs}, .25);
+      box-shadow: inset 0 0 0 1000px ${rgba(theme.s, 0.25)};
     `;
   }
   if (image && isHovered) {
     return css`
       background: url('${image}');
       background-size: cover;
-      box-shadow: inset 0 0 0 1000px rgba(${theme.cs}, .9);
+      box-shadow: inset 0 0 0 1000px ${rgba(theme.s, 0.9)};
     `;
   }
   return false;
@@ -44,10 +54,9 @@ const Wrapper = styled(animated.div)`
   position: relative;
   border-radius: ${({ theme }) => theme.br};
   ${getBackground}
-  padding-top: calc(3 / 4 * 20%);
-  height: 0;
-  width: 20%;
-  color: rgb(${({ theme }) => theme.csc});
+  width: 100%;
+  height: 135px;
+  color: ${({ theme }) => theme.sc};
   cursor: pointer;
 `;
 
@@ -60,11 +69,10 @@ const Deck = ({
   description,
   ...restProps
 }) => {
-  const totalCountLength = `${totalCards}${totalFollowers}`.length;
   const [isHovered, setIsHovered] = useState(false);
   const animateProps = useSpring({
     transform: isHovered ? 'translate(-20%, -20%)' : 'translate(0px, 0px)',
-    width: isHovered ? '25%' : '20%',
+    width: isHovered ? '105%' : '100%',
     paddingTop: isHovered ? 'calc(3 / 4 * 25%)' : 'calc(3 / 4 * 20%)',
   });
   const transitions = useTransition(!isHovered, null, {
@@ -82,7 +90,7 @@ const Deck = ({
         email={user.email}
         size={2.4}
         css={`
-          color: rgb(${({ theme }) => theme.cp});
+          color: ${({ theme }) => theme.p};
         `}
       />
     );
@@ -101,7 +109,7 @@ const Deck = ({
         item ? (
           <DeckThumbnail key={key} style={props}>
             <Heading2
-              color="csc"
+              color="sc"
               css={`
                 overflow-wrap: break-word;
                 margin-top: auto;
@@ -109,26 +117,37 @@ const Deck = ({
             >
               <Truncate lines={4}>{title}</Truncate>
             </Heading2>
-            <HorizontalGroup margin={1.6}>
+            <div
+              css={`
+                display: flex;
+              `}
+            >
               <AvatarWrapper user={user} />
-              <HorizontalGroup margin={0.8}>
-                <Icon type="cards" size={2.2} />
-                <Body3 weight="bold" color="csc">
-                  {totalCards} {totalCountLength <= 3 && ' Cards'}
-                </Body3>
+              <HorizontalGroup
+                margin={0.8}
+                css={`
+                  margin-left: auto;
+                `}
+              >
+                <HorizontalGroup margin={0.8}>
+                  <Icon type="cards" size={2.2} />
+                  <Body3Component weight="bold" color="sc">
+                    {totalCards}
+                  </Body3Component>
+                </HorizontalGroup>
+                <HorizontalGroup margin={0.8}>
+                  <Icon type="followers" size={1.6} />
+                  <Body3Component weight="bold" color="sc">
+                    {totalFollowers}
+                  </Body3Component>
+                </HorizontalGroup>
               </HorizontalGroup>
-              <HorizontalGroup margin={0.8}>
-                <Icon type="followers" size={1.6} />
-                <Body3 weight="bold" color="csc">
-                  {totalFollowers} {totalCountLength <= 3 && ' Followers'}
-                </Body3>
-              </HorizontalGroup>
-            </HorizontalGroup>
+            </div>
           </DeckThumbnail>
         ) : (
           <DeckHover style={props} key={key}>
             <Heading2
-              color="csc"
+              color="sc"
               css={`
                 overflow-wrap: break-word;
                 margin-bottom: 0.3rem;
@@ -136,15 +155,15 @@ const Deck = ({
             >
               <Truncate lines={2}>{title}</Truncate>
             </Heading2>
-            <Body2
-              color="csc"
+            <Body2Component
+              color="sc"
               as="p"
               css={`
                 margin: 0 0 0.8rem 0;
               `}
             >
               <Truncate lines={4}>{description}</Truncate>
-            </Body2>
+            </Body2Component>
             <HorizontalGroup margin={0.8}>
               <AvatarWrapper user={user} />
               <VerticalGroup
@@ -152,10 +171,10 @@ const Deck = ({
                   margin-top: 0.1rem;
                 `}
               >
-                <TinyText color="csc">
+                <TinyText color="sc">
                   {user.firstName} {user.lastName}
                 </TinyText>
-                <TinyText color="csc">{user.position}</TinyText>
+                <TinyText color="sc">{user.position}</TinyText>
               </VerticalGroup>
             </HorizontalGroup>
           </DeckHover>
