@@ -39,6 +39,22 @@ const ripple = keyframes`
 
 const getVariantStyles = ({ variant }) => {
   switch (variant) {
+    case 'inverse-pl':
+      return css`
+        background: none;
+        border: 0.1rem solid ${({ theme }) => theme.ps[100]};
+        span {
+          color: ${({ theme }) => theme.ps[100]};
+          font-weight: 400;
+        }
+        &:hover {
+          background: ${({ theme }) => theme.s};
+          border: 0.1rem solid ${({ theme }) => theme.s};
+          span {
+            color: ${({ theme }) => theme.sc};
+          }
+        }
+      `;
     case 'inverse-pc':
       return css`
         background: none;
@@ -112,7 +128,7 @@ const StyledButton = styled.button`
 
 const buttonTypes = {
   children: PropTypes.node.isRequired,
-  variant: PropTypes.oneOf(['s', 'inverse-s', 'inverse-pc']),
+  variant: PropTypes.oneOf(['s', 'inverse-s', 'inverse-pc', 'inverse-pl']),
   size: sizeProp,
 };
 

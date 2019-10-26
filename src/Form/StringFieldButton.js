@@ -36,7 +36,9 @@ const StringFieldButton = ({ width, ...restProps }) => {
   return (
     <Container width={width}>
       <StyledStringField width="80%" {...restProps} />
-      <StyledButton size="lg">Add</StyledButton>
+      <StyledButton variant="inverse-pl" size="lg">
+        Add
+      </StyledButton>
     </Container>
   );
 };
