@@ -1,6 +1,7 @@
 import { css } from 'styled-components';
 
 const getWidth = ({ width }) => {
+  console.log('width: ', width);
   if (typeof width === 'string' && width.includes('%')) {
     return css`
       width: ${width};

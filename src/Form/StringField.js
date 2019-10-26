@@ -12,6 +12,7 @@ const Input = styled.input`
   font-size: 1.6rem;
   line-height: 1.7;
   padding: 0.95rem 1.6rem;
+  ${getWidth}
   &::placeholder {
     color: ${({ theme }) => theme.ps[100]};
   }
@@ -46,7 +47,9 @@ const defaultProps = {
 
 const StringField = ({ label, width, className, labelProps, ...restProps }) => {
   if (!label) {
-    return <Input type="text" {...restProps} />;
+    return (
+      <Input type="text" width={width} className={className} {...restProps} />
+    );
   }
 
   return (
