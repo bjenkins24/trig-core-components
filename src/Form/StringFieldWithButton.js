@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StringField from './StringField';
 import { HorizontalGroup } from '../Groups';
@@ -34,26 +35,34 @@ const Container = styled(HorizontalGroup)`
   }
 `;
 
-const stringFieldButtonTypes = {
+const stringFieldWithButtonTypes = {
   width: widthType,
+  buttonContent: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
+    .isRequired,
+  onClickButton: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
-  width: 50,
+  width: 20,
 };
 
-const StringFieldButton = ({ width, ...restProps }) => {
+const StringFieldWithButton = ({
+  width,
+  buttonContent,
+  onClickButton,
+  ...restProps
+}) => {
   return (
     <Container width={width}>
       <StyledStringField width="100%" {...restProps} />
-      <StyledButton variant="inverse-pl" size="lg">
-        Add
+      <StyledButton variant="inverse-pl" size="lg" onClick={onClickButton}>
+        {buttonContent}
       </StyledButton>
     </Container>
   );
 };
 
-StringFieldButton.propTypes = stringFieldButtonTypes;
-StringFieldButton.defaultProps = defaultProps;
+StringFieldWithButton.propTypes = stringFieldWithButtonTypes;
+StringFieldWithButton.defaultProps = defaultProps;
 
-export default StringFieldButton;
+export default StringFieldWithButton;

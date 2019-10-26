@@ -142,7 +142,7 @@ const Button = ({ children, variant, ...restProps }) => {
   const Text = getTypography(restProps.size);
 
   return (
-    <StyledButton variant={variant} {...restProps}>
+    <StyledButton type="button" variant={variant} {...restProps}>
       <Text color="sc" weight="bold">
         {children}
       </Text>

@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 import StringField from '../src/Form/StringField';
-import StringFieldButton from '../src/Form/StringFieldButton';
+import StringFieldWithButton from '../src/Form/StringFieldWithButton';
 import SelectField from '../src/Form/SelectField';
 import Checkbox from '../src/Form/Checkbox';
 import { HorizontalGroup } from '../src/Groups';
@@ -91,8 +91,10 @@ storiesOf('Form', module)
     </Checkbox>
   ))
   .add('DateRangeField', () => <DateRangeFieldWrapper />)
-  .add('StringField Button', () => (
-    <StringFieldButton
+  .add('StringField with Button', () => (
+    <StringFieldWithButton
+      buttonContent="Add"
+      onClickButton={() => console.log('sup')}
       width="100%"
       placeholder={text('placeholder', 'Enter your url...')}
     />
