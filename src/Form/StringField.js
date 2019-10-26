@@ -11,7 +11,7 @@ const Input = styled.input`
   border: 0.1rem solid ${({ theme }) => theme.ps[100]};
   font-size: 1.6rem;
   line-height: 1.7;
-  padding: 0.9rem 1.6rem;
+  padding: 0.95rem 1.6rem;
   &::placeholder {
     color: ${({ theme }) => theme.ps[100]};
   }
