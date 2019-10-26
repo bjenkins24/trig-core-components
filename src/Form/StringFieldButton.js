@@ -9,6 +9,7 @@ import { widthType } from '../utils/propTypes';
 const StyledButton = styled(Button)`
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  flex-shrink: 0;
   &:hover span {
     color: ${({ theme }) => theme.sc} !important;
   }
@@ -44,7 +45,7 @@ const defaultProps = {
 const StringFieldButton = ({ width, ...restProps }) => {
   return (
     <Container width={width}>
-      <StyledStringField width="80%" {...restProps} />
+      <StyledStringField width="100%" {...restProps} />
       <StyledButton variant="inverse-pl" size="lg">
         Add
       </StyledButton>
