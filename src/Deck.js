@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { rgba } from 'polished';
-import { useSpring, useTransition, animated, config } from 'react-spring';
+import { useTransition, animated, config } from 'react-spring';
 import styled, { css } from 'styled-components';
 import Truncate from 'react-truncate';
 import {
@@ -55,7 +55,7 @@ const Wrapper = styled(animated.div)`
   border-radius: ${({ theme }) => theme.br};
   ${getBackground}
   width: 100%;
-  height: 135px;
+  height: 100%;
   color: ${({ theme }) => theme.sc};
   cursor: pointer;
 `;
@@ -70,11 +70,6 @@ const Deck = ({
   ...restProps
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const animateProps = useSpring({
-    transform: isHovered ? 'translate(-20%, -20%)' : 'translate(0px, 0px)',
-    width: isHovered ? '105%' : '100%',
-    paddingTop: isHovered ? 'calc(3 / 4 * 25%)' : 'calc(3 / 4 * 20%)',
-  });
   const transitions = useTransition(!isHovered, null, {
     from: { opacity: 0, display: 'none' },
     enter: { opacity: 1, display: 'flex' },
@@ -102,7 +97,6 @@ const Deck = ({
       isHovered={isHovered}
       onMouseEnter={() => setIsHovered(!isHovered)}
       onMouseLeave={() => setIsHovered(!isHovered)}
-      style={animateProps}
       {...restProps}
     >
       {transitions.map(({ item, key, props }) =>
@@ -124,7 +118,7 @@ const Deck = ({
             >
               <AvatarWrapper user={user} />
               <HorizontalGroup
-                margin={0.8}
+                margin={1.6}
                 css={`
                   margin-left: auto;
                 `}
@@ -162,7 +156,7 @@ const Deck = ({
                 margin: 0 0 0.8rem 0;
               `}
             >
-              <Truncate lines={4}>{description}</Truncate>
+              <Truncate lines={3}>{description}</Truncate>
             </Body2Component>
             <HorizontalGroup margin={0.8}>
               <AvatarWrapper user={user} />

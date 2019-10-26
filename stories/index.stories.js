@@ -172,24 +172,31 @@ storiesOf('Deck', module)
   ))
   .addDecorator(withKnobs)
   .add('default', () => (
-    <Deck
+    <div
       css={`
-        margin: 100px;
+        width: 20%;
+        height: 200px;
       `}
-      user={{
-        firstName: 'Brian',
-        lastName: 'Jenkins',
-        position: 'President, CEO',
-      }}
-      image="https://code.org/images/fill-480x360/tutorials/hoc2018/danceparty-characters.jpg"
-      totalFollowers={number('followers', 9)}
-      totalCards={number('cards', 22)}
-      title={text('title', 'Onboarding Support')}
-      description={text(
-        'description',
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea'
-      )}
-    />
+    >
+      <Deck
+        css={`
+          margin: 100px;
+        `}
+        user={{
+          firstName: 'Brian',
+          lastName: 'Jenkins',
+          position: 'President, CEO',
+        }}
+        image="https://code.org/images/fill-480x360/tutorials/hoc2018/danceparty-characters.jpg"
+        totalFollowers={number('followers', 9)}
+        totalCards={number('cards', 22)}
+        title={text('title', 'Onboarding Support')}
+        description={text(
+          'description',
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea'
+        )}
+      />
+    </div>
   ));
 
 storiesOf('Avatar', module)
