@@ -42,9 +42,12 @@ const getBackground = ({ theme, isHovered, image }) => {
   }
   if (image && isHovered) {
     return css`
-      background: url('${image}');
+      background: linear-gradient(0deg, ${rgba(theme.s, 0.9)} 25%, ${rgba(
+      theme.sc,
+      0.8
+    )} 80%), url('${image}');
       background-size: cover;
-      box-shadow: inset 0 0 0 1000px ${rgba(theme.s, 0.9)};
+      box-shadow: inset 0 0 0 1000px ${rgba(theme.s, 0.6)};
     `;
   }
   return false;
@@ -54,6 +57,7 @@ const Wrapper = styled(animated.div)`
   position: relative;
   border-radius: ${({ theme }) => theme.br};
   ${getBackground}
+  transition: all 200ms;
   width: 100%;
   height: 100%;
   color: ${({ theme }) => theme.sc};
