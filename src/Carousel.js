@@ -12,11 +12,27 @@ const Slider = styled.div`
   overflow-x: hidden;
 `;
 
+const getTransition = ({ disabled }) => {
+  if (disabled) return false;
+  return css`
+    transition: all 200ms;
+    & .Carousel__Arrow svg {
+      transition: all 200ms;
+    }
+    &:hover {
+      background: rgba(0, 0, 0, 0.4);
+      & .Carousel__Arrow svg {
+        transform: scale(1.2);
+      }
+    }
+  `;
+};
+
 const buttonStyle = css`
-  background: rgba(20, 20, 20, 0.5);
+  background: rgba(0, 0, 0, 0.3);
   color: white;
   border: 0;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
   position: absolute;
   top: 0;
   bottom: 0;
@@ -26,6 +42,7 @@ const buttonStyle = css`
   justify-content: center;
   text-align: center;
   outline: none;
+  ${getTransition}
 `;
 
 const Previous = styled.button.attrs({ type: 'button' })`
@@ -141,7 +158,11 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
         disabled={isPrevDisabled}
         aria-label="See previous deck"
       >
-        <Icon type="arrow-left" color={!isPrevDisabled ? 'pc' : 'ps.100'} />
+        <Icon
+          className="Carousel__Arrow"
+          type="arrow-left"
+          color={!isPrevDisabled ? 'pc' : 'ps.100'}
+        />
       </Previous>
       <SliderMask>
         <SliderContent style={animateProps}>{renderSlides()}</SliderContent>
@@ -153,7 +174,11 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
         disabled={isNextDisabled}
         aria-label="See next deck"
       >
-        <Icon type="arrow-right" color={!isNextDisabled ? 'pc' : 'ps.100'} />
+        <Icon
+          className="Carousel__Arrow"
+          type="arrow-right"
+          color={!isNextDisabled ? 'pc' : 'ps.100'}
+        />
       </Next>
     </Slider>
   );
