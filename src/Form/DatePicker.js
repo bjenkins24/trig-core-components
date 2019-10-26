@@ -43,10 +43,6 @@ const Container = styled.div`
         background: ${({ theme }) => theme.s};
         color: ${({ theme }) => theme.sc} !important;
       }
-      &--now {
-        color: ${({ theme }) => theme.ss[300]};
-        font-weight: 700;
-      }
     }
     &__month-view {
       &__days__day--neighboringMonth {
