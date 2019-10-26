@@ -113,8 +113,6 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
     if (nextSlidesMoved > totalItems) {
       slidesToScroll = slidesPerPage - (nextSlidesMoved - totalItems);
       totalMovement = percentWidthPerItem * slidesToScroll * directionSign;
-    }
-    if (lastPosition === 0 && currentPosition !== 0) {
       setIsLastSlide(true);
     } else {
       setIsLastSlide(false);
@@ -147,39 +145,43 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
   });
 
   const isPrevDisabled = currentPosition === 0;
-  const isNextDisabled = isLastSlide;
+  const isNextDisabled = isLastSlide || totalItems < defaultSlidesToScroll;
 
   return (
     <Slider>
-      <Previous
-        onClick={() => {
-          setPosition('prev');
-        }}
-        disabled={isPrevDisabled}
-        aria-label="See previous deck"
-      >
-        <Icon
-          className="Carousel__Arrow"
-          type="arrow-left"
-          color={!isPrevDisabled ? 'pc' : 'ps.100'}
-        />
-      </Previous>
+      {!isPrevDisabled && (
+        <Previous
+          onClick={() => {
+            setPosition('prev');
+          }}
+          disabled={isPrevDisabled}
+          aria-label="See previous deck"
+        >
+          <Icon
+            className="Carousel__Arrow"
+            type="arrow-left"
+            color={!isPrevDisabled ? 'pc' : 'ps.100'}
+          />
+        </Previous>
+      )}
       <SliderMask>
         <SliderContent style={animateProps}>{renderSlides()}</SliderContent>
       </SliderMask>
-      <Next
-        onClick={() => {
-          setPosition('next');
-        }}
-        disabled={isNextDisabled}
-        aria-label="See next deck"
-      >
-        <Icon
-          className="Carousel__Arrow"
-          type="arrow-right"
-          color={!isNextDisabled ? 'pc' : 'ps.100'}
-        />
-      </Next>
+      {!isNextDisabled && (
+        <Next
+          onClick={() => {
+            setPosition('next');
+          }}
+          disabled={isNextDisabled}
+          aria-label="See next deck"
+        >
+          <Icon
+            className="Carousel__Arrow"
+            type="arrow-right"
+            color={!isNextDisabled ? 'pc' : 'ps.100'}
+          />
+        </Next>
+      )}
     </Slider>
   );
 };
