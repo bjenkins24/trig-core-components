@@ -13,6 +13,7 @@ storiesOf('Lists', module)
   .addDecorator((story) => (
     <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
   ))
+  .addDecorator(withKnobs)
   .add('List Item', () => (
     <div
       css={`
@@ -52,5 +53,4 @@ storiesOf('Lists', module)
         secondary={text('secondary', 'Oct 27, 2018 at 5:35pm')}
       />
     </div>
-  ))
-  .addDecorator(withKnobs);
+  ));

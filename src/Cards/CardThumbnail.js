@@ -69,7 +69,7 @@ const IconGroup = styled(HorizontalGroup).attrs({ margin: 0.4 })`
 
 const StyledIcon = styled(Icon).attrs({ size: 1.6, color: 's' })``;
 
-const HorizontalDots = styled(StyledIcon).attrs({ type: 'horizontal-dots' })`
+const HorizontalDots = styled(StyledIcon)`
   margin: 0 0.4rem 0 auto;
   cursor: pointer;
 `;
@@ -140,7 +140,7 @@ const CardThumbnail = ({
             </IconGroup>
           </HorizontalGroup>
         </div>
-        <HorizontalDots />
+        <HorizontalDots type="horizontal-dots" />
       </HorizontalGroup>
     </Container>
   );

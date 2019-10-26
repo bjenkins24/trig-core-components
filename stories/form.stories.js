@@ -61,6 +61,7 @@ storiesOf('Form', module)
   .addDecorator((story) => (
     <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
   ))
+  .addDecorator(withKnobs)
   .add('StringField', () => (
     <StringField
       label={text('label', 'My Cool Label')}
@@ -88,5 +89,4 @@ storiesOf('Form', module)
       }}
     </Checkbox>
   ))
-  .add('DateRangeField', () => <DateRangeFieldWrapper />)
-  .addDecorator(withKnobs);
+  .add('DateRangeField', () => <DateRangeFieldWrapper />);

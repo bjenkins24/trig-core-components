@@ -27,5 +27,5 @@ storiesOf('Modals', module)
   .addDecorator((story) => (
     <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
   ))
-  .add('default', () => <ModalStory />)
-  .addDecorator(withKnobs);
+  .addDecorator(withKnobs)
+  .add('default', () => <ModalStory />);

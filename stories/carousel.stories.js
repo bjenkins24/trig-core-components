@@ -26,6 +26,7 @@ storiesOf('Carousel', module)
       <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
     </>
   ))
+  .addDecorator(withKnobs)
   .add('default', () => (
     <Carousel>
       <Item>
@@ -68,5 +69,4 @@ storiesOf('Carousel', module)
         <h1>Slide 13</h1>
       </Item>
     </Carousel>
-  ))
-  .addDecorator(withKnobs);
+  ));

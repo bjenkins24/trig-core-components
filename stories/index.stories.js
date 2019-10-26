@@ -45,11 +45,11 @@ const icons = {
   file: 'file',
 };
 
-const stories = storiesOf('Button', module)
+storiesOf('Button', module)
   .addDecorator((story) => {
     return <ThemeProvider theme={theme}>{story()}</ThemeProvider>;
   })
-
+  .addDecorator(withKnobs)
   .add('default', () => {
     return (
       <Button
@@ -112,12 +112,11 @@ const stories = storiesOf('Button', module)
     );
   });
 
-stories.addDecorator(withKnobs);
-
-const stories2 = storiesOf('Tabs', module)
+storiesOf('Tabs', module)
   .addDecorator((story) => (
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
+  .addDecorator(withKnobs)
   .add('default', () => (
     <Tabs>
       <TabList dark={boolean('Dark', false)}>
@@ -133,23 +132,22 @@ const stories2 = storiesOf('Tabs', module)
     </Tabs>
   ));
 
-stories2.addDecorator(withKnobs);
-
 storiesOf('Popover', module)
   .addDecorator((story) => (
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
+  .addDecorator(withKnobs)
   .add('default', () => (
     <Popover renderPopover={() => <span>Hello</span>}>
       <button type="button">Trigger</button>
     </Popover>
-  ))
-  .addDecorator(withKnobs);
+  ));
 
 storiesOf('Icons', module)
   .addDecorator((story) => (
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
+  .addDecorator(withKnobs)
   .add('default', () => (
     <Icon size={number('size', 3.2)} type={select('Icon', icons, 'deck')} />
   ))
@@ -166,13 +164,13 @@ storiesOf('Icons', module)
         count={number('count', 5)}
       />
     </div>
-  ))
-  .addDecorator(withKnobs);
+  ));
 
 storiesOf('Deck', module)
   .addDecorator((story) => (
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
+  .addDecorator(withKnobs)
   .add('default', () => (
     <Deck
       css={`
@@ -192,21 +190,20 @@ storiesOf('Deck', module)
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea'
       )}
     />
-  ))
-  .addDecorator(withKnobs);
+  ));
 
 storiesOf('Avatar', module)
   .addDecorator((story) => (
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
+  .addDecorator(withKnobs)
   .add('default', () => (
     <Avatar
       firstName={text('first name', 'Brian')}
       lastName={text('last name', 'Jenkins')}
       size={number('size', 3.2)}
     />
-  ))
-  .addDecorator(withKnobs);
+  ));
 
 const sample = 'Sample Text';
 const lorem =

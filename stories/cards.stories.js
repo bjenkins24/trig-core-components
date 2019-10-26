@@ -18,6 +18,7 @@ storiesOf('Cards', module)
   .addDecorator((story) => (
     <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
   ))
+  .addDecorator(withKnobs)
   .add('Thumbnail', () => (
     <CardThumbnail
       title={text('title', 'Why AI is Going to Take Your Job')}
@@ -39,5 +40,4 @@ storiesOf('Cards', module)
       isFavorited={boolean('isFavorited', false)}
       totalComments={number('totalComments', 45)}
     />
-  ))
-  .addDecorator(withKnobs);
+  ));
