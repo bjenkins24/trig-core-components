@@ -92,5 +92,8 @@ storiesOf('Form', module)
   ))
   .add('DateRangeField', () => <DateRangeFieldWrapper />)
   .add('StringField Button', () => (
-    <StringFieldButton placeholder={text('placeholder', 'Enter your url...')} />
+    <StringFieldButton
+      width="100%"
+      placeholder={text('placeholder', 'Enter your url...')}
+    />
   ));
