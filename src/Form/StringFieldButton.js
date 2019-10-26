@@ -6,8 +6,12 @@ import Button from '../Buttons';
 import getWidth from '../utils/getWidth';
 import { widthType } from '../utils/propTypes';
 
-const Container = styled(HorizontalGroup)`
-  ${getWidth}
+const StyledButton = styled(Button)`
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  &:hover span {
+    color: ${({ theme }) => theme.sc} !important;
+  }
 `;
 
 const StyledStringField = styled(StringField)`
@@ -19,9 +23,14 @@ const StyledStringField = styled(StringField)`
   }
 `;
 
-const StyledButton = styled(Button)`
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+const Container = styled(HorizontalGroup)`
+  ${getWidth}
+  & ${StyledStringField}:focus ~ ${StyledButton} {
+    border: 0.1rem solid ${({ theme }) => theme.ps[200]};
+    span {
+      color: ${({ theme }) => theme.ps[200]};
+    }
+  }
 `;
 
 const stringFieldButtonTypes = {

@@ -54,6 +54,7 @@ storiesOf('Button', module)
             secondary: 's',
             'inverse-secondary': 'inverse-s',
             'inverse-primary-contrast': 'inverse-pc',
+            'inverse-primary-low': 'inverse-pl',
           },
           's'
         )}

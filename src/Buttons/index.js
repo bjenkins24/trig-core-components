@@ -47,7 +47,8 @@ const getVariantStyles = ({ variant }) => {
           color: ${({ theme }) => theme.ps[100]};
           font-weight: 400;
         }
-        &:hover {
+        &:hover,
+        &:focus {
           background: ${({ theme }) => theme.s};
           border: 0.1rem solid ${({ theme }) => theme.s};
           span {
