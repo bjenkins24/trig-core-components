@@ -43,7 +43,7 @@ const Count = styled(TinyText)`
   padding-top: 0.1rem;
 `;
 
-const iconTypes = {
+export const iconTypes = {
   type: iconTypePropTypes.isRequired,
   size: PropTypes.number,
   title: PropTypes.string,

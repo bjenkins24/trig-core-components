@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes, css } from 'styled-components';
 import { sizeProp } from '../utils/propTypes';
+import { HorizontalGroup } from '../Groups';
+import Icon, { iconTypes } from '../Icon';
 import { Body1, Body2, Body3 } from '../Typography';
 
 const getHeight = ({ size }) => {
@@ -36,6 +38,12 @@ const ripple = keyframes`
       transform: scale(40, 40);
     }
 `;
+
+const iconVariantColor = {
+  'inverse-pl': 'ps.100',
+  'inverse-pc': 'pc',
+  s: 'sc',
+};
 
 const getVariantStyles = ({ variant }) => {
   switch (variant) {
@@ -130,22 +138,29 @@ const StyledButton = styled.button`
 export const buttonTypes = {
   children: PropTypes.node.isRequired,
   variant: PropTypes.oneOf(['s', 'inverse-s', 'inverse-pc', 'inverse-pl']),
+  iconProps: PropTypes.shape(iconTypes),
   size: sizeProp,
 };
 
 const defaultProps = {
   size: 'md',
   variant: 's',
+  iconProps: null,
 };
 
-const Button = ({ children, variant, ...restProps }) => {
+const Button = ({ children, variant, iconProps, ...restProps }) => {
   const Text = getTypography(restProps.size);
 
   return (
     <StyledButton type="button" variant={variant} {...restProps}>
-      <Text color="sc" weight="bold">
-        {children}
-      </Text>
+      <HorizontalGroup margin={0.8}>
+        {iconProps && (
+          <Icon color={iconVariantColor[variant]} size={1.6} {...iconProps} />
+        )}
+        <Text color="sc" weight="bold">
+          {children}
+        </Text>
+      </HorizontalGroup>
     </StyledButton>
   );
 };
