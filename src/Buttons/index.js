@@ -127,7 +127,7 @@ const StyledButton = styled.button`
   }
 `;
 
-const buttonTypes = {
+export const buttonTypes = {
   children: PropTypes.node.isRequired,
   variant: PropTypes.oneOf(['s', 'inverse-s', 'inverse-pc', 'inverse-pl']),
   size: sizeProp,

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
+import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 import StringField from '../src/Form/StringField';
@@ -93,8 +94,10 @@ storiesOf('Form', module)
   .add('DateRangeField', () => <DateRangeFieldWrapper />)
   .add('StringField with Button', () => (
     <StringFieldWithButton
-      buttonContent="Add"
-      onClickButton={() => console.log('sup')}
+      buttonProps={{
+        children: 'Add',
+        onClick: action('clicked'),
+      }}
       width="100%"
       placeholder={text('placeholder', 'Enter your url...')}
     />

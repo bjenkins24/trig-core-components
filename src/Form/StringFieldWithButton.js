@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StringField from './StringField';
 import { HorizontalGroup } from '../Groups';
-import Button from '../Buttons';
+import Button, { buttonTypes } from '../Buttons';
 import getWidth from '../utils/getWidth';
 import { widthType } from '../utils/propTypes';
 
@@ -37,27 +37,26 @@ const Container = styled(HorizontalGroup)`
 
 const stringFieldWithButtonTypes = {
   width: widthType,
-  buttonContent: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
-    .isRequired,
-  onClickButton: PropTypes.func.isRequired,
+  buttonProps: PropTypes.shape(buttonTypes).isRequired,
 };
 
 const defaultProps = {
   width: 20,
 };
 
-const StringFieldWithButton = ({
-  width,
-  buttonContent,
-  onClickButton,
-  ...restProps
-}) => {
+const StringFieldWithButton = ({ width, buttonProps, ...restProps }) => {
   return (
     <Container width={width}>
-      <StyledStringField width="100%" {...restProps} />
-      <StyledButton variant="inverse-pl" size="lg" onClick={onClickButton}>
-        {buttonContent}
-      </StyledButton>
+      <StyledStringField
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            buttonProps.onClick();
+          }
+        }}
+        width="100%"
+        {...restProps}
+      />
+      <StyledButton variant="inverse-pl" size="lg" {...buttonProps} />
     </Container>
   );
 };
