@@ -55,6 +55,7 @@ const Selected = styled.div`
 
 const StyledIcon = styled(Icon)`
   margin: 0 auto;
+  margin-left: 1px;
   align-self: center;
   transform: translate(-0.05rem, 0);
 `;

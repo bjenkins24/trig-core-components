@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 import StringField from '../src/Form/StringField';
+import TextField from '../src/Form/TextField';
 import StringFieldWithButton from '../src/Form/StringFieldWithButton';
 import SelectField from '../src/Form/SelectField';
 import Checkbox from '../src/Form/Checkbox';
@@ -71,6 +72,7 @@ storiesOf('Form', module)
       width={text('width', '20')}
     />
   ))
+  .add('TextField', () => <TextField />)
   .add('SelectField', () => {
     return (
       <SelectFieldWrapper
