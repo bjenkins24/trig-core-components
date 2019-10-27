@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Label, { labelTypes } from './Label';
 import getWidth from '../utils/getWidth';
 import { widthType } from '../utils/propTypes';
 import { VerticalGroup } from '../Groups';
 
-const Input = styled.input`
+export const inputStyles = css`
   border-radius: ${({ theme }) => theme.br};
   border: 0.1rem solid ${({ theme }) => theme.ps[100]};
   font-size: 1.6rem;
@@ -20,6 +20,10 @@ const Input = styled.input`
     outline: none;
     border: 0.1rem solid ${({ theme }) => theme.ps[200]};
   }
+`;
+
+const Input = styled.input`
+  ${inputStyles}
 `;
 
 const Container = styled(VerticalGroup)`
