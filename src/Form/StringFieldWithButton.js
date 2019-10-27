@@ -37,26 +37,41 @@ const Container = styled(HorizontalGroup)`
 
 const stringFieldWithButtonTypes = {
   width: widthType,
+  onSubmit: PropTypes.func.isRequired,
   buttonProps: PropTypes.shape(buttonTypes).isRequired,
+  buttonContent: PropTypes.node.isRequired,
 };
 
 const defaultProps = {
   width: 20,
 };
 
-const StringFieldWithButton = ({ width, buttonProps, ...restProps }) => {
+const StringFieldWithButton = ({
+  width,
+  onSubmit,
+  buttonContent,
+  buttonProps,
+  ...restProps
+}) => {
   return (
     <Container width={width}>
       <StyledStringField
         onKeyDown={(event) => {
           if (event.key === 'Enter') {
-            buttonProps.onClick();
+            onSubmit();
           }
         }}
         width="100%"
         {...restProps}
       />
-      <StyledButton variant="inverse-pl" size="lg" {...buttonProps} />
+      <StyledButton
+        variant="inverse-pl"
+        size="lg"
+        onClick={onSubmit}
+        {...buttonProps}
+      >
+        {buttonContent}
+      </StyledButton>
     </Container>
   );
 };
