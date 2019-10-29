@@ -2,47 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Select from 'react-select';
-import Label, { labelTypes } from './Label';
+import LabelContainer from './LabelContainer';
 import useTheme from '../utils/useTheme';
-import getWidth from '../utils/getWidth';
 import { widthType, sizeProp } from '../utils/propTypes';
 import { Body1Styles, Body2Styles } from '../Typography';
-
-const selectFieldTypes = {
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      label: PropTypes.string,
-    })
-  ).isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onChange: PropTypes.func.isRequired,
-  width: widthType,
-  labelProps: labelTypes,
-  size: sizeProp,
-  label: PropTypes.string,
-  htmlFor: PropTypes.string,
-  className: PropTypes.string,
-};
-
-const defaultProps = {
-  value: null,
-  width: 20,
-  size: 'md',
-  htmlFor: '',
-  labelProps: {},
-  label: '',
-  className: '',
-};
-
-const Container = styled.div`
-  ${getWidth};
-`;
-
-const StyledLabel = styled(Label)`
-  display: block;
-  margin-bottom: 0.6rem;
-`;
 
 const getSize = (type) => ({ size }) => {
   const sizeMap = {
@@ -96,46 +59,50 @@ const StyledSelect = styled(Select)`
   }
 `;
 
-const SelectField = ({
-  options,
-  value,
-  onChange,
-  width,
-  htmlFor,
-  className,
-  label,
-  size,
-  labelProps,
-  ...restProps
-}) => {
+const selectFieldTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.string,
+    })
+  ).isRequired,
+  width: widthType,
+  size: sizeProp,
+  label: PropTypes.string,
+};
+
+const defaultProps = {
+  width: 20,
+  size: 'md',
+  label: '',
+};
+
+const SelectField = ({ options, label, size, ...restProps }) => {
   const scTheme = useTheme();
 
   return (
-    <Container width={width} className={className}>
-      {label && (
-        <StyledLabel htmlFor={htmlFor} {...labelProps}>
-          {label}
-        </StyledLabel>
+    <LabelContainer
+      label={label}
+      Component={(props) => (
+        <StyledSelect
+          size={size}
+          className="react-select-container"
+          classNamePrefix="react-select"
+          scTheme={scTheme}
+          theme={(theme) => ({
+            ...theme,
+            colors: {
+              ...theme.colors,
+              primary25: scTheme.ss[200],
+              primary: scTheme.s,
+            },
+          })}
+          options={options}
+          {...props}
+        />
       )}
-      <StyledSelect
-        size={size}
-        className="react-select-container"
-        classNamePrefix="react-select"
-        value={value}
-        scTheme={scTheme}
-        theme={(theme) => ({
-          ...theme,
-          colors: {
-            ...theme.colors,
-            primary25: scTheme.ss[200],
-            primary: scTheme.s,
-          },
-        })}
-        options={options}
-        onChange={onChange}
-        {...restProps}
-      />
-    </Container>
+      {...restProps}
+    />
   );
 };
 
