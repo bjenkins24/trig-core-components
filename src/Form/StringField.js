@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import Label, { labelTypes } from './Label';
+import LabelContainer from './LabelContainer';
 import getWidth from '../utils/getWidth';
-import { widthType } from '../utils/propTypes';
-import { VerticalGroup } from '../Groups';
 
 export const inputStyles = css`
   border-radius: ${({ theme }) => theme.br};
@@ -26,41 +24,25 @@ const Input = styled.input`
   ${inputStyles}
 `;
 
-const Container = styled(VerticalGroup)`
-  ${getWidth}
-`;
-
-const StyledLabel = styled(Label)`
-  display: block;
-  margin-bottom: 0.6rem;
-`;
-
 const stringFieldTypes = {
   label: PropTypes.string,
-  labelProps: PropTypes.shape(labelTypes),
-  className: PropTypes.string,
-  width: widthType,
 };
 
 const defaultProps = {
   label: '',
-  labelProps: {},
-  className: '',
-  width: 20,
 };
 
-const StringField = ({ label, width, className, labelProps, ...restProps }) => {
+const StringField = ({ label, ...restProps }) => {
   if (!label) {
-    return (
-      <Input type="text" width={width} className={className} {...restProps} />
-    );
+    return <Input type="text" {...restProps} />;
   }
 
   return (
-    <Container width={width} className={className}>
-      <StyledLabel>{label}</StyledLabel>
-      <Input type="text" {...restProps} />
-    </Container>
+    <LabelContainer
+      Component={(props) => <Input type="text" {...props} />}
+      label={label}
+      {...restProps}
+    />
   );
 };
 

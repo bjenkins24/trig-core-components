@@ -73,7 +73,10 @@ storiesOf('Form', module)
     />
   ))
   .add('TextField', () => (
-    <TextField placeholder="This is where a placeholder would go" />
+    <TextField
+      placeholder={text('placeholder', 'This is where a placeholder would go')}
+      label={text('label', 'Description')}
+    />
   ))
   .add('SelectField', () => {
     return (
