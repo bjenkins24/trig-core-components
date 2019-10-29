@@ -72,7 +72,9 @@ storiesOf('Form', module)
       width={text('width', '20')}
     />
   ))
-  .add('TextField', () => <TextField />)
+  .add('TextField', () => (
+    <TextField placeholder="This is where a placeholder would go" />
+  ))
   .add('SelectField', () => {
     return (
       <SelectFieldWrapper
