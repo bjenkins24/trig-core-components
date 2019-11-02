@@ -10,16 +10,6 @@ const SelectFieldStyled = styled(SelectField)`
   margin-bottom: 1.6rem;
 `;
 
-const selectTagFieldTypes = {
-  value: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      label: PropTypes.string,
-    })
-  ).isRequired,
-  onChange: PropTypes.func.isRequired,
-};
-
 const { ValueContainer, Placeholder } = components;
 
 /* eslint-disable react/prop-types */
@@ -39,7 +29,22 @@ const CustomValueContainer = ({ children, ...props }) => {
 };
 /* eslint-enable react/prop-types */
 
-const SelectTagField = ({ value, onChange, ...restProps }) => {
+const selectTagFieldTypes = {
+  value: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.string,
+    })
+  ).isRequired,
+  onChange: PropTypes.func.isRequired,
+  className: PropTypes.string,
+};
+
+const defaultProps = {
+  className: '',
+};
+
+const SelectTagField = ({ value, onChange, className, ...restProps }) => {
   const removeTag = (tagKey) => {
     return value.filter((item, itemKey) => {
       if (itemKey === tagKey) return false;
@@ -48,7 +53,7 @@ const SelectTagField = ({ value, onChange, ...restProps }) => {
   };
 
   return (
-    <div>
+    <div className={className}>
       <SelectFieldStyled
         isMulti
         isClearable={false}
@@ -75,5 +80,6 @@ const SelectTagField = ({ value, onChange, ...restProps }) => {
 };
 
 SelectTagField.propTypes = selectTagFieldTypes;
+SelectTagField.defaultProps = defaultProps;
 
 export default SelectTagField;
