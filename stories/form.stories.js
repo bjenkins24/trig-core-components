@@ -8,6 +8,7 @@ import TextField from '../src/Form/TextField';
 import StringFieldWithButton from '../src/Form/StringFieldWithButton';
 import SelectField from '../src/Form/SelectField';
 import Checkbox from '../src/Form/Checkbox';
+import Tag from '../src/Form/Tag';
 import { HorizontalGroup } from '../src/Groups';
 import { Body1 } from '../src/Typography';
 import Label from '../src/Form/Label';
@@ -106,4 +107,7 @@ storiesOf('Form', module)
       width="100%"
       placeholder={text('placeholder', 'Enter your url...')}
     />
+  ))
+  .add('Tag', () => (
+    <Tag onRequestClose={action('hello')}>{text('content', 'Development')}</Tag>
   ));
