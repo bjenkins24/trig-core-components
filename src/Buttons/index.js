@@ -43,10 +43,26 @@ const iconVariantColor = {
   'inverse-pl': 'ps.100',
   'inverse-pc': 'pc',
   s: 'sc',
+  transparent: 'ps.100',
+  'transparent-dark': 'p',
 };
 
 const getVariantStyles = ({ variant }) => {
   switch (variant) {
+    case 'transparent-dark':
+      return css`
+        background: none;
+        border: 0;
+        span {
+          color: ${({ theme }) => theme.p};
+          font-weight: 400;
+        }
+        &:hover {
+          span {
+            color: ${({ theme }) => theme.ps[200]};
+          }
+        }
+      `;
     case 'transparent':
       return css`
         background: none;
@@ -157,6 +173,7 @@ export const buttonTypes = {
     'inverse-pc',
     'inverse-pl',
     'transparent',
+    'transparent-dark',
   ]),
   iconProps: PropTypes.shape(iconTypes),
   size: sizeProp,

@@ -52,6 +52,7 @@ storiesOf('Button', module)
           'variant',
           {
             transparent: 'transparent',
+            'transparent-dark': 'transparent-dark',
             s: 's',
             'inverse-s': 'inverse-s',
             'inverse-pc': 'inverse-pc',
