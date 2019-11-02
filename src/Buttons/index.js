@@ -47,6 +47,20 @@ const iconVariantColor = {
 
 const getVariantStyles = ({ variant }) => {
   switch (variant) {
+    case 'transparent':
+      return css`
+        background: none;
+        border: 0;
+        span {
+          color: ${({ theme }) => theme.ps[100]};
+          font-weight: 400;
+        }
+        &:hover {
+          span {
+            color: ${({ theme }) => theme.ps[200]};
+          }
+        }
+      `;
     case 'inverse-pl':
       return css`
         background: none;
@@ -137,7 +151,13 @@ const StyledButton = styled.button`
 
 export const buttonTypes = {
   children: PropTypes.node.isRequired,
-  variant: PropTypes.oneOf(['s', 'inverse-s', 'inverse-pc', 'inverse-pl']),
+  variant: PropTypes.oneOf([
+    's',
+    'inverse-s',
+    'inverse-pc',
+    'inverse-pl',
+    'transparent',
+  ]),
   iconProps: PropTypes.shape(iconTypes),
   size: sizeProp,
 };

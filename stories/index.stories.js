@@ -51,10 +51,11 @@ storiesOf('Button', module)
         variant={select(
           'variant',
           {
-            secondary: 's',
-            'inverse-secondary': 'inverse-s',
-            'inverse-primary-contrast': 'inverse-pc',
-            'inverse-primary-low': 'inverse-pl',
+            transparent: 'transparent',
+            s: 's',
+            'inverse-s': 'inverse-s',
+            'inverse-pc': 'inverse-pc',
+            'inverse-pl': 'inverse-pl',
           },
           's'
         )}
