@@ -14,6 +14,10 @@ export const inputStyles = css`
   &::placeholder {
     color: ${({ theme }) => theme.ps[100]};
   }
+  &[disabled] {
+    background: ${({ theme }) => theme.ps[50]};
+    border: 0.1rem solid ${({ theme }) => theme.ps[50]};
+  }
   &:focus {
     outline: none;
     border: 0.1rem solid ${({ theme }) => theme.ps[200]};

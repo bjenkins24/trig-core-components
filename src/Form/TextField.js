@@ -9,6 +9,7 @@ const TextArea = styled.textarea`
   ${inputStyles}
   height: ${({ height }) => (height ? `${height}rem` : 'auto')};
   padding: 1.6rem;
+  resize: none;
 `;
 
 const textFieldTypes = {
