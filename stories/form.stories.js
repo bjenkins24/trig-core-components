@@ -7,6 +7,7 @@ import StringField from '../src/Form/StringField';
 import TextField from '../src/Form/TextField';
 import StringFieldWithButton from '../src/Form/StringFieldWithButton';
 import SelectField from '../src/Form/SelectField';
+import SelectTagField from '../src/Form/SelectTagField';
 import Checkbox from '../src/Form/Checkbox';
 import Tag from '../src/Form/Tag';
 import { HorizontalGroup } from '../src/Groups';
@@ -39,11 +40,11 @@ const DateRangeFieldWrapper = () => {
 };
 
 // eslint-disable-next-line react/prop-types
-const SelectFieldWrapper = ({ size }) => {
+const SelectFieldWrapper = ({ size, Component, ...restProps }) => {
   const [selectedValue, setSelectedValue] = useState(null);
 
   return (
-    <SelectField
+    <Component
       label="My Cool Label"
       value={selectedValue}
       size={size}
@@ -57,6 +58,7 @@ const SelectFieldWrapper = ({ size }) => {
         { value: 6, label: 'Sixth one' },
         { value: 7, label: 'Seventh one' },
       ]}
+      {...restProps}
     />
   );
 };
@@ -82,6 +84,15 @@ storiesOf('Form', module)
   .add('SelectField', () => {
     return (
       <SelectFieldWrapper
+        Component={SelectField}
+        size={select('Size', { sm: 'sm', md: 'md', lg: 'lg' }, 'md')}
+      />
+    );
+  })
+  .add('SelectTagField', () => {
+    return (
+      <SelectFieldWrapper
+        Component={SelectTagField}
         size={select('Size', { sm: 'sm', md: 'md', lg: 'lg' }, 'md')}
       />
     );

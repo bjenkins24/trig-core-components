@@ -24,6 +24,12 @@ const getSize = (type) => ({ size }) => {
 const StyledSelect = styled(Select)`
   ${getSize('font')}
   .react-select {
+    &__clear-indicator {
+      display: none;
+    }
+    &__multi-value {
+      display: none;
+    }
     &__single-value {
       margin-top: -0.1rem;
     }
