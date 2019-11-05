@@ -1,94 +1,330 @@
-import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import Quill from 'quill';
-import 'quill/dist/quill.snow.css';
+import React from 'react';
+import { Editor } from 'slate-react';
+import { isKeyHotkey } from 'is-hotkey';
+import Plain from 'slate-plain-serializer';
+import Icon from '../Icon';
 
-const Container = styled.div``;
+/**
+ * Define the default node type.
+ *
+ * @type {String}
+ */
 
-const fontSizes = {
-  '8': '11px',
-  '9': '12px',
-  '10': '13px',
-  '11': '14px',
-  '12': '15px',
-  '14': '17px',
-  '18': '21px',
-  '24': '27px',
-  '30': '33px',
-  '36': '39px',
-  '48': '51px',
-  '60': '63px',
-  '72': '74px',
-  '96': '98px',
-};
+const DEFAULT_NODE = 'paragraph';
 
-const documentEditorTypes = {
-  placeholder: PropTypes.string,
-};
+/**
+ * Define hotkey matchers.
+ *
+ * @type {Function}
+ */
 
-const defaultProps = {
-  placeholder: 'Compose and epic...',
-};
+const isBoldHotkey = isKeyHotkey('mod+b');
+const isItalicHotkey = isKeyHotkey('mod+i');
+const isUnderlinedHotkey = isKeyHotkey('mod+u');
+const isCodeHotkey = isKeyHotkey('mod+`');
 
-const DocumentEditor = ({ placeholder }) => {
-  const quill = useRef(null);
+const initialValue = Plain.deserialize('');
 
-  useEffect(() => {
-    const fontSizeStyle = Quill.import('attributors/style/size');
-    fontSizeStyle.whitelist = Object.values(fontSizes);
-    Quill.register(fontSizeStyle, true);
-    /* eslint-disable no-new */
-    quill.current = new Quill('#editor', {
-      modules: {
-        toolbar: '#toolbar',
-      },
-      placeholder,
-      theme: 'snow',
-    });
-  }, []);
+/**
+ * The rich text example.
+ *
+ * @type {Component}
+ */
 
-  return (
-    <Container>
-      <div id="toolbar">
-        <button
-          type="button"
-          onClick={() => quill.current && quill.current.history.undo()}
+class DocumentEditor extends React.Component {
+  /**
+   * Deserialize the initial editor value.
+   *
+   * @type {Object}
+   */
+
+  state = {
+    value: initialValue,
+  };
+
+  /**
+   * Check if the current selection has a mark with `type` in it.
+   *
+   * @param {String} type
+   * @return {Boolean}
+   */
+
+  hasMark = (type) => {
+    const { value } = this.state;
+    return value.activeMarks.some((mark) => mark.type === type);
+  };
+
+  /**
+   * Check if the any of the currently selected blocks are of `type`.
+   *
+   * @param {String} type
+   * @return {Boolean}
+   */
+
+  hasBlock = (type) => {
+    const { value } = this.state;
+    return value.blocks.some((node) => node.type === type);
+  };
+
+  /**
+   * Store a reference to the `editor`.
+   *
+   * @param {Editor} editor
+   */
+
+  ref = (editor) => {
+    this.editor = editor;
+  };
+
+  /**
+   * Render.
+   *
+   * @return {Element}
+   */
+
+  /**
+   * Render a mark-toggling toolbar button.
+   *
+   * @param {String} type
+   * @param {String} icon
+   * @return {Element}
+   */
+
+  renderMarkButton = (type, icon) => {
+    const isActive = this.hasMark(type);
+
+    return (
+      <button
+        type="button"
+        onMouseDown={(event) => this.onClickMark(event, type)}
+        isActive={isActive}
+      >
+        <Icon type={icon} size={1.8} />
+      </button>
+    );
+  };
+
+  /**
+   * Render a block-toggling toolbar button.
+   *
+   * @param {String} type
+   * @param {String} icon
+   * @return {Element}
+   */
+
+  renderBlockButton = (type, icon) => {
+    let isActive = this.hasBlock(type);
+
+    if (['numbered-list', 'bulleted-list'].includes(type)) {
+      const {
+        value: { document, blocks },
+      } = this.state;
+
+      if (blocks.size > 0) {
+        const parent = document.getParent(blocks.first().key);
+        isActive = this.hasBlock('list-item') && parent && parent.type === type;
+      }
+    }
+
+    return (
+      <button
+        type="button"
+        onMouseDown={(event) => this.onClickBlock(event, type)}
+        isActive={isActive}
+      >
+        <Icon type={icon} size={1.8} />
+      </button>
+    );
+  };
+
+  /**
+   * Render a Slate block.
+   *
+   * @param {Object} props
+   * @return {Element}
+   */
+
+  renderBlock = (props, editor, next) => {
+    const { attributes, children, node } = props;
+
+    switch (node.type) {
+      case 'block-quote':
+        return <blockquote {...attributes}>{children}</blockquote>;
+      case 'bulleted-list':
+        return <ul {...attributes}>{children}</ul>;
+      case 'heading-one':
+        return <h1 {...attributes}>{children}</h1>;
+      case 'heading-two':
+        return <h2 {...attributes}>{children}</h2>;
+      case 'list-item':
+        return <li {...attributes}>{children}</li>;
+      case 'numbered-list':
+        return <ol {...attributes}>{children}</ol>;
+      default:
+        return next();
+    }
+  };
+
+  /**
+   * Render a Slate mark.
+   *
+   * @param {Object} props
+   * @return {Element}
+   */
+
+  renderMark = (props, editor, next) => {
+    const { children, mark, attributes } = props;
+
+    switch (mark.type) {
+      case 'bold':
+        return <strong {...attributes}>{children}</strong>;
+      case 'code':
+        return <code {...attributes}>{children}</code>;
+      case 'italic':
+        return <em {...attributes}>{children}</em>;
+      case 'underlined':
+        return <u {...attributes}>{children}</u>;
+      default:
+        return next();
+    }
+  };
+
+  /**
+   * On change, save the new `value`.
+   *
+   * @param {Editor} editor
+   */
+
+  onChange = ({ value }) => {
+    this.setState({ value });
+  };
+
+  /**
+   * On key down, if it's a formatting command toggle a mark.
+   *
+   * @param {Event} event
+   * @param {Editor} editor
+   * @return {Change}
+   */
+
+  onKeyDown = (event, editor, next) => {
+    let mark;
+
+    if (isBoldHotkey(event)) {
+      mark = 'bold';
+    } else if (isItalicHotkey(event)) {
+      mark = 'italic';
+    } else if (isUnderlinedHotkey(event)) {
+      mark = 'underlined';
+    } else if (isCodeHotkey(event)) {
+      mark = 'code';
+    } else {
+      return next();
+    }
+
+    event.preventDefault();
+    return editor.toggleMark(mark);
+  };
+
+  /**
+   * When a mark button is clicked, toggle the current mark.
+   *
+   * @param {Event} event
+   * @param {String} type
+   */
+
+  onClickMark = (event, type) => {
+    event.preventDefault();
+    this.editor.toggleMark(type);
+  };
+
+  /**
+   * When a block button is clicked, toggle the block type.
+   *
+   * @param {Event} event
+   * @param {String} type
+   */
+
+  onClickBlock = (event, type) => {
+    event.preventDefault();
+
+    const { editor } = this;
+    const { value } = editor;
+    const { document } = value;
+
+    // Handle everything but list buttons.
+    if (type !== 'bulleted-list' && type !== 'numbered-list') {
+      const isActive = this.hasBlock(type);
+      const isList = this.hasBlock('list-item');
+
+      if (isList) {
+        editor
+          .setBlocks(isActive ? DEFAULT_NODE : type)
+          .unwrapBlock('bulleted-list')
+          .unwrapBlock('numbered-list');
+      } else {
+        editor.setBlocks(isActive ? DEFAULT_NODE : type);
+      }
+    } else {
+      // Handle the extra wrapping required for list buttons.
+      const isList = this.hasBlock('list-item');
+      const isType = value.blocks.some((block) => {
+        return !!document.getClosest(
+          block.key,
+          (parent) => parent.type === type
+        );
+      });
+
+      if (isList && isType) {
+        editor
+          .setBlocks(DEFAULT_NODE)
+          .unwrapBlock('bulleted-list')
+          .unwrapBlock('numbered-list');
+      } else if (isList) {
+        editor
+          .unwrapBlock(
+            type === 'bulleted-list' ? 'numbered-list' : 'bulleted-list'
+          )
+          .wrapBlock(type);
+      } else {
+        editor.setBlocks('list-item').wrapBlock(type);
+      }
+    }
+  };
+
+  render() {
+    const { value } = this.state;
+    return (
+      <div>
+        <div>
+          {this.renderMarkButton('bold', 'bold')}
+          {this.renderMarkButton('italic', 'italic')}
+          {this.renderMarkButton('underlined', 'underline')}
+          {this.renderMarkButton('code', 'code')}
+          {this.renderBlockButton('heading-one', 'number-one')}
+          {this.renderBlockButton('heading-two', 'number-two')}
+          {this.renderBlockButton('block-quote', 'quote')}
+          {this.renderBlockButton('numbered-list', 'list-ordered')}
+          {this.renderBlockButton('bulleted-list', 'list-unordered')}
+        </div>
+        <Editor
+          spellCheck
+          autoFocus
+          placeholder="Enter some rich text..."
+          ref={this.ref}
+          value={value}
+          onChange={this.onChange}
+          onKeyDown={this.onKeyDown}
+          renderBlock={this.renderBlock}
+          renderMark={this.renderMark}
         />
-        <button
-          type="button"
-          onClick={() => quill.current && quill.current.history.redo()}
-        />
-        <span className="ql-formats">
-          <select className="ql-size">
-            {Object.keys(fontSizes).map((label) => (
-              <option value={fontSizes[label]} selected={label === '11'}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </span>
-        <button type="button" className="ql-bold" />
-        <button type="button" className="ql-italic" />
-        <button type="button" className="ql-underline" />
-        <button type="button" className="ql-color" />
-        <button type="button" className="ql-background" />
-        <span className="ql-formats">
-          <button type="button" className="ql-align" value="" />
-          <button type="button" className="ql-align" value="center" />
-          <button type="button" className="ql-align" value="right" />
-          <button type="button" className="ql-align" value="justify" />
-        </span>
-        <button type="button" className="ql-link" />
-        <button type="button" className="ql-image" />
-        <button type="button" className="ql-video" />
       </div>
-      <div id="editor" />
-    </Container>
-  );
-};
+    );
+  }
+}
 
-DocumentEditor.propTypes = documentEditorTypes;
-DocumentEditor.defaultProps = defaultProps;
+/**
+ * Export.
+ */
 
 export default DocumentEditor;
