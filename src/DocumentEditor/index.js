@@ -17,6 +17,21 @@ const Toolbar = styled.div`
   border-bottom: 0.1rem solid ${({ theme }) => theme.ps[50]};
 `;
 
+const StyledButton = styled(Button)`
+  margin: 0.8rem 0.4rem;
+  background: ${({ theme, isActive }) => (isActive ? theme.ps[50] : 'none')};
+  padding: 1.2rem;
+  & span {
+    color: ${({ theme, isActive }) => (isActive ? theme.p : theme.ps[400])};
+  }
+  &:hover {
+    background: ${({ theme }) => theme.ps[50]};
+    & span {
+      color: ${({ theme }) => theme.p};
+    }
+  }
+`;
+
 const StyledEditor = styled(Editor)`
   padding: 1.6rem;
   height: 20rem;
@@ -55,7 +70,7 @@ class DocumentEditor extends React.Component {
     const isActive = this.hasMark(type);
 
     return (
-      <Button
+      <StyledButton
         variant="transparent"
         onMouseDown={(event) => {
           this.onClickMark(event, type);
@@ -63,7 +78,7 @@ class DocumentEditor extends React.Component {
         isActive={isActive}
       >
         <Icon type={icon} size={1.6} />
-      </Button>
+      </StyledButton>
     );
   };
 
@@ -82,13 +97,13 @@ class DocumentEditor extends React.Component {
     }
 
     return (
-      <Button
+      <StyledButton
         variant="transparent"
         onMouseDown={(event) => this.onClickBlock(event, type)}
         isActive={isActive}
       >
         <Icon type={icon} size={1.6} />
-      </Button>
+      </StyledButton>
     );
   };
 
