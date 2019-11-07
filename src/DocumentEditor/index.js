@@ -1,22 +1,29 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Editor } from 'slate-react';
 import { isKeyHotkey } from 'is-hotkey';
 import Plain from 'slate-plain-serializer';
+import { Body2Styles } from '../Typography';
+import Button from '../Buttons';
 import Icon from '../Icon';
 
-/**
- * Define the default node type.
- *
- * @type {String}
- */
+const Container = styled.div`
+  ${Body2Styles}
+  border-bottom: 0.1rem solid ${({ theme }) => theme.ps[50]};
+`;
+
+const Toolbar = styled.div`
+  border-top: 0.1rem solid ${({ theme }) => theme.ps[50]};
+  border-bottom: 0.1rem solid ${({ theme }) => theme.ps[50]};
+`;
+
+const StyledEditor = styled(Editor)`
+  padding: 1.6rem;
+  height: 20rem;
+  overflow-y: auto;
+`;
 
 const DEFAULT_NODE = 'paragraph';
-
-/**
- * Define hotkey matchers.
- *
- * @type {Function}
- */
 
 const isBoldHotkey = isKeyHotkey('mod+b');
 const isItalicHotkey = isKeyHotkey('mod+i');
@@ -25,92 +32,40 @@ const isCodeHotkey = isKeyHotkey('mod+`');
 
 const initialValue = Plain.deserialize('');
 
-/**
- * The rich text example.
- *
- * @type {Component}
- */
-
 class DocumentEditor extends React.Component {
-  /**
-   * Deserialize the initial editor value.
-   *
-   * @type {Object}
-   */
-
   state = {
     value: initialValue,
   };
-
-  /**
-   * Check if the current selection has a mark with `type` in it.
-   *
-   * @param {String} type
-   * @return {Boolean}
-   */
 
   hasMark = (type) => {
     const { value } = this.state;
     return value.activeMarks.some((mark) => mark.type === type);
   };
 
-  /**
-   * Check if the any of the currently selected blocks are of `type`.
-   *
-   * @param {String} type
-   * @return {Boolean}
-   */
-
   hasBlock = (type) => {
     const { value } = this.state;
     return value.blocks.some((node) => node.type === type);
   };
 
-  /**
-   * Store a reference to the `editor`.
-   *
-   * @param {Editor} editor
-   */
-
   ref = (editor) => {
     this.editor = editor;
   };
-
-  /**
-   * Render.
-   *
-   * @return {Element}
-   */
-
-  /**
-   * Render a mark-toggling toolbar button.
-   *
-   * @param {String} type
-   * @param {String} icon
-   * @return {Element}
-   */
 
   renderMarkButton = (type, icon) => {
     const isActive = this.hasMark(type);
 
     return (
-      <button
-        type="button"
-        onMouseDown={(event) => this.onClickMark(event, type)}
+      <Button
+        variant="transparent"
+        onMouseDown={(event) => {
+          this.onClickMark(event, type);
+        }}
         isActive={isActive}
       >
-        <Icon type={icon} size={1.8} />
-      </button>
+        <Icon type={icon} size={1.6} />
+      </Button>
     );
   };
-
-  /**
-   * Render a block-toggling toolbar button.
-   *
-   * @param {String} type
-   * @param {String} icon
-   * @return {Element}
-   */
 
   renderBlockButton = (type, icon) => {
     let isActive = this.hasBlock(type);
@@ -127,22 +82,15 @@ class DocumentEditor extends React.Component {
     }
 
     return (
-      <button
-        type="button"
+      <Button
+        variant="transparent"
         onMouseDown={(event) => this.onClickBlock(event, type)}
         isActive={isActive}
       >
-        <Icon type={icon} size={1.8} />
-      </button>
+        <Icon type={icon} size={1.6} />
+      </Button>
     );
   };
-
-  /**
-   * Render a Slate block.
-   *
-   * @param {Object} props
-   * @return {Element}
-   */
 
   renderBlock = (props, editor, next) => {
     const { attributes, children, node } = props;
@@ -165,13 +113,6 @@ class DocumentEditor extends React.Component {
     }
   };
 
-  /**
-   * Render a Slate mark.
-   *
-   * @param {Object} props
-   * @return {Element}
-   */
-
   renderMark = (props, editor, next) => {
     const { children, mark, attributes } = props;
 
@@ -189,23 +130,9 @@ class DocumentEditor extends React.Component {
     }
   };
 
-  /**
-   * On change, save the new `value`.
-   *
-   * @param {Editor} editor
-   */
-
   onChange = ({ value }) => {
     this.setState({ value });
   };
-
-  /**
-   * On key down, if it's a formatting command toggle a mark.
-   *
-   * @param {Event} event
-   * @param {Editor} editor
-   * @return {Change}
-   */
 
   onKeyDown = (event, editor, next) => {
     let mark;
@@ -226,24 +153,10 @@ class DocumentEditor extends React.Component {
     return editor.toggleMark(mark);
   };
 
-  /**
-   * When a mark button is clicked, toggle the current mark.
-   *
-   * @param {Event} event
-   * @param {String} type
-   */
-
   onClickMark = (event, type) => {
     event.preventDefault();
     this.editor.toggleMark(type);
   };
-
-  /**
-   * When a block button is clicked, toggle the block type.
-   *
-   * @param {Event} event
-   * @param {String} type
-   */
 
   onClickBlock = (event, type) => {
     event.preventDefault();
@@ -295,8 +208,8 @@ class DocumentEditor extends React.Component {
   render() {
     const { value } = this.state;
     return (
-      <div>
-        <div>
+      <Container>
+        <Toolbar>
           {this.renderMarkButton('bold', 'bold')}
           {this.renderMarkButton('italic', 'italic')}
           {this.renderMarkButton('underlined', 'underline')}
@@ -306,8 +219,8 @@ class DocumentEditor extends React.Component {
           {this.renderBlockButton('block-quote', 'quote')}
           {this.renderBlockButton('numbered-list', 'list-ordered')}
           {this.renderBlockButton('bulleted-list', 'list-unordered')}
-        </div>
-        <Editor
+        </Toolbar>
+        <StyledEditor
           spellCheck
           autoFocus
           placeholder="Enter some rich text..."
@@ -318,7 +231,7 @@ class DocumentEditor extends React.Component {
           renderBlock={this.renderBlock}
           renderMark={this.renderMark}
         />
-      </div>
+      </Container>
     );
   }
 }
