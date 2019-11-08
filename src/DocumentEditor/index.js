@@ -238,9 +238,9 @@ class DocumentEditor extends React.Component {
         <StyledEditor
           spellCheck
           autoFocus
-          placeholder="Enter some rich text..."
           ref={this.ref}
           value={value}
+          placeholder="My fantastically awesome idea goes here..."
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
           renderBlock={this.renderBlock}
