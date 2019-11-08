@@ -36,6 +36,7 @@
     "react": "^16.8.6",
     "react-calendar": "^2.19.2",
     "react-dom": "^16.8.6",
+    "react-dropzone-uploader": "^2.10.2",
     "react-modal": "^3.10.1",
     "react-select": "^3.0.5",
     "react-spring": "^8.0.27",
