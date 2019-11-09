@@ -50,6 +50,7 @@ export const iconTypes = {
   desc: PropTypes.string,
   color: PropTypes.string,
   count: PropTypes.number,
+  defaultIfNoExtension: PropTypes.string,
 };
 
 const defaultProps = {
@@ -58,11 +59,27 @@ const defaultProps = {
   title: '',
   count: 0,
   color: null,
+  defaultIfNoExtension: null,
 };
 
 const Icon = forwardRef(
-  ({ type, size, title, desc, color, count, ...restProps }, ref) => {
+  (
+    {
+      type,
+      size,
+      title,
+      desc,
+      color,
+      count,
+      defaultIfNoExtension,
+      ...restProps
+    },
+    ref
+  ) => {
     const mappedIcon = mapIconTypes(type);
+    if (!mappedIcon.type.includes('type-') && defaultIfNoExtension) {
+      mappedIcon.type = defaultIfNoExtension;
+    }
 
     return (
       <Container {...restProps}>

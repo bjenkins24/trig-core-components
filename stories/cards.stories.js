@@ -33,7 +33,7 @@ storiesOf('Cards', module)
       image={text('image', 'https://picsum.photos/300/300')}
       type={select(
         'type',
-        { youtube: 'youtube', doc: 'doc', xls: 'xls', ppt: 'ppt' },
+        { youtube: 'youtube', doc: 'doc', xls: 'xls', ppt: 'ppt', code: 'sh' },
         'youtube'
       )}
       totalFavorites={number('totalFavorites', 10)}

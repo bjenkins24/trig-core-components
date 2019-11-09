@@ -11,4 +11,12 @@ storiesOf('Uploader', module)
     <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
   ))
   .addDecorator(withKnobs)
-  .add('default', () => <Uploader />);
+  .add('default', () => (
+    <div
+      css={`
+        width: 70rem;
+      `}
+    >
+      <Uploader />
+    </div>
+  ));

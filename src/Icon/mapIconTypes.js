@@ -1,6 +1,25 @@
 const prefix = 'type-';
 const mapIconTypes = (type) => {
   switch (type) {
+    // Code like stuff
+    case 'sh':
+    case 'php':
+    case 'tpl':
+    case 'html':
+    case 'css':
+      return {
+        type: `${prefix}code`,
+        title: 'Terminal Icon',
+      };
+
+    // Javascript
+    case 'js':
+    case 'jsx':
+      return {
+        type: `${prefix}code`,
+        title: 'Javascript Icon',
+      };
+
     // Microsoft word
     case 'docx':
     case 'docm':
