@@ -30,6 +30,12 @@ const Container = styled.div`
   }
 `;
 
+const Remove = styled(Icon)`
+  &:hover svg {
+    color: ${({ theme }) => theme.ss[900]};
+  }
+`;
+
 const LabelStyled = styled.label`
   width: 100%;
   height: 8.5rem;
@@ -187,7 +193,7 @@ const Uploader = ({ submitContent }) => {
           ) : (
             <Icon type="check-circle" size={1.6} color="s" />
           ),
-          <Icon type="close" color="s" size={1.6} onClick={remove} />,
+          <Remove type="close" color="s" size={1.6} onClick={remove} />,
         ]}
       />
       // <ListItem
