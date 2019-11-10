@@ -56,6 +56,7 @@ const getVariantStyles = ({ variant }) => {
         span {
           color: ${({ theme }) => theme.p};
           font-weight: 400;
+          transition: all 0.2s;
         }
         &:hover {
           span {
@@ -70,6 +71,7 @@ const getVariantStyles = ({ variant }) => {
         span {
           color: ${({ theme }) => theme.ps[100]};
           font-weight: 400;
+          transition: all 0.2s;
         }
         &:hover {
           span {

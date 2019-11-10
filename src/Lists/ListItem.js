@@ -9,6 +9,7 @@ const Container = styled.li`
   display: flex;
   padding-right: 1.6rem;
   cursor: pointer;
+  background: ${({ theme }) => theme.b};
 `;
 
 const Item = styled.div`
@@ -46,9 +47,9 @@ const defaultProps = {
   actions: [],
 };
 
-const ListItem = ({ renderItem, renderContent, actions }) => {
+const ListItem = ({ renderItem, renderContent, actions, ...restProps }) => {
   return (
-    <Container>
+    <Container {...restProps}>
       <Item>
         <ItemContent>{renderItem()}</ItemContent>
       </Item>

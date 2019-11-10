@@ -60,15 +60,27 @@ const PreviewImage = styled(Image)`
   max-height: 5.6rem;
 `;
 
+const ButtonGroup = styled.div`
+  display: flex;
+`;
+
+const CancelButton = styled(Button)`
+  padding: 0;
+`;
+
+const SubmitFilesButton = styled(Button)`
+  margin-left: auto;
+`;
+
 const uploaderTypes = {
-  submitContent: PropTypes.string,
+  submitButtonContent: PropTypes.string,
 };
 
 const defaultProps = {
-  submitContent: 'Create Cards',
+  submitButtonContent: 'Create Cards',
 };
 
-const Uploader = ({ submitContent }) => {
+const Uploader = ({ submitButtonContent }) => {
   /* eslint-disable react/prop-types */
   const Input = ({ accept, onFiles, getFilesFromEvent }) => {
     return (
@@ -116,31 +128,18 @@ const Uploader = ({ submitContent }) => {
     };
 
     return (
-      <div
-        css={`
-          display: flex;
-        `}
-      >
-        <Button
-          css={`
-            padding: 0;
-          `}
-          size="lg"
-          variant="transparent"
-        >
+      <ButtonGroup>
+        <CancelButton size="lg" variant="transparent">
           Cancel
-        </Button>
-        <Button
-          css={`
-            margin-left: auto;
-          `}
+        </CancelButton>
+        <SubmitFilesButton
           size="lg"
           onClick={handleSubmit}
           disabled={disabled || disabledDefault}
         >
-          {submitContent}
-        </Button>
-      </div>
+          {submitButtonContent}
+        </SubmitFilesButton>
+      </ButtonGroup>
     );
   };
 
