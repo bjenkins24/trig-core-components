@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone-uploader';
 import { HorizontalGroup } from './Groups';
-import ListItemContent from './Lists/ListItemContent';
-import ListItem from './Lists/ListItem';
+import { List, ListItem, ListItemContent } from './Lists';
 import Button from './Buttons';
 import Image from './Image';
 import Icon from './Icon';
@@ -46,9 +45,8 @@ const InputContent = styled(HorizontalGroup)`
   margin: 0 auto;
 `;
 
-const Previews = styled.div`
+const StyledList = styled(List)`
   margin: 3.2rem 0;
-  border-radius: ${({ theme }) => theme.br};
 `;
 
 const PreviewImage = styled(Image)`
@@ -151,7 +149,7 @@ const Uploader = ({ submitContent }) => {
     return (
       <div>
         <div {...dropzoneProps}>{files.length < maxFiles && input}</div>
-        <Previews>{previews}</Previews>
+        <StyledList>{previews}</StyledList>
         {files.length > 0 && submitButton}
       </div>
     );
