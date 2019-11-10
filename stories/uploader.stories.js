@@ -17,6 +17,6 @@ storiesOf('Uploader', module)
         width: 70rem;
       `}
     >
-      <Uploader />
+      <Uploader uploadUrl="http://httpbin.org/post" />
     </div>
   ));
