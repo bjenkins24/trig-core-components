@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { HorizontalGroup } from '../Groups';
 
-const Container = styled.div`
+const Container = styled.li`
   min-height: 7.2rem;
   border: 0.1rem solid ${({ theme }) => theme.ps[100]};
   display: flex;

@@ -119,6 +119,15 @@ const Uploader = ({ submitContent }) => {
       >
         <Button
           css={`
+            padding: 0;
+          `}
+          size="lg"
+          variant="transparent"
+        >
+          Cancel
+        </Button>
+        <Button
+          css={`
             margin-left: auto;
           `}
           size="lg"
