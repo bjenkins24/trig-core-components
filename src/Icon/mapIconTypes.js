@@ -7,6 +7,8 @@ const mapIconTypes = (type) => {
     case 'tpl':
     case 'html':
     case 'css':
+    case 'py':
+    case 'R':
       return {
         type: `${prefix}code`,
         title: 'Terminal Icon',
@@ -42,6 +44,7 @@ const mapIconTypes = (type) => {
     case 'xltx':
     case 'xlw':
     case 'xls':
+    case 'csv':
       return {
         type: `${prefix}xls`,
         title: 'Microsoft Excel Icon',

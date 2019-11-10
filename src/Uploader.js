@@ -8,6 +8,7 @@ import ListItem from './Lists/ListItem';
 import Button from './Buttons';
 import Image from './Image';
 import Icon from './Icon';
+import Loading from './Loading';
 import { Body2 } from './Typography';
 
 const toTitleCase = (str) => {
@@ -148,7 +149,7 @@ const Uploader = ({ submitContent }) => {
   };
 
   const Preview = ({ meta, fileWithMeta }) => {
-    const { name, previewUrl } = meta;
+    const { name, previewUrl, status } = meta;
     const { remove } = fileWithMeta;
     const fileExtension = name.split('.').pop();
 
@@ -173,7 +174,14 @@ const Uploader = ({ submitContent }) => {
             secondary="Click to edit details"
           />
         )}
-        actions={[<Icon type="close" color="s" size={1.6} onClick={remove} />]}
+        actions={[
+          status !== 'done' ? (
+            <Loading size={1.6} />
+          ) : (
+            <Icon type="check-circle" size={1.6} color="s" />
+          ),
+          <Icon type="close" color="s" size={1.6} onClick={remove} />,
+        ]}
       />
       // <ListItem
       //   renderItem={() => <Icon type="file" />}
