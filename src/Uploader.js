@@ -78,6 +78,7 @@ const uploaderTypes = {
   onSubmit: PropTypes.func,
   onCancel: PropTypes.func,
   onUpload: PropTypes.func,
+  onFileClick: PropTypes.func,
   className: PropTypes.string,
 };
 
@@ -86,16 +87,18 @@ const defaultProps = {
   onSubmit: () => null,
   onCancel: () => null,
   onUpload: () => null,
+  onFileClick: () => null,
   className: '',
 };
 
 const Uploader = ({
-  submitButtonContent,
-  className,
   onSubmit,
   uploadUrl,
   onUpload,
+  onFileClick,
   onCancel,
+  submitButtonContent,
+  className,
   ...restProps
 }) => {
   return (
@@ -168,6 +171,7 @@ const Uploader = ({
 
           return (
             <ListItem
+              onClick={() => onFileClick({ file: fileWithMeta, meta })}
               renderItem={() => renderItem}
               renderContent={() => (
                 <ListItemContent
