@@ -29,26 +29,22 @@
     "date-fns": "^2.0.1",
     "immutable": "^4.0.0-rc.12",
     "is-hotkey": "^0.1.6",
-    "lodash": "^4.17.11",
     "polished": "^3.4.1",
-    "precise-commits": "^1.0.2",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
     "react-calendar": "^2.19.2",
-    "react-dom": "^16.8.6",
     "react-dropzone-uploader": "^2.10.2",
     "react-modal": "^3.10.1",
     "react-select": "^3.0.5",
     "react-spring": "^8.0.27",
     "react-truncate": "^2.4.0",
-    "rimraf": "^3.0.0",
     "slate": "^0.47.8",
     "slate-plain-serializer": "^0.7.10",
-    "slate-react": "^0.22.9",
-    "styled-components": "^5.0.0-beta.8"
+    "slate-react": "^0.22.9"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
     "@storybook/addon-actions": "^5.2.1",
     "@storybook/addon-knobs": "^5.2.1",
     "@storybook/addon-links": "^5.2.1",
@@ -67,9 +63,21 @@
     "husky": "^3.0.0",
     "image-webpack-loader": "^5.0.0",
     "lint-staged": "^9.2.0",
+    "lodash": "^4.17.11",
+    "precise-commits": "^1.0.2",
     "prettier": "1.18.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "rimraf": "^3.0.0",
+    "styled-components": "^5.0.0-beta.8",
     "svg-sprite-loader": "^4.1.6",
     "typescript": "^3.6.3"
+  },
+  "peerDependencies": {
+    "react-dom": "^16.8.6",
+    "react": "^16.8.6",
+    "lodash": "^4.17.11",
+    "styled-components": "^5.0.0-beta.8"
   },
   "lint-staged": {
     "*.js": [
