@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "build": "webpack",
     "npm-clean": "rimraf package-lock.json && rimraf node_modules && npm install"
   },
   "husky": {
@@ -30,7 +31,6 @@
     "immutable": "^4.0.0-rc.12",
     "is-hotkey": "^0.1.6",
     "polished": "^3.4.1",
-    "prop-types": "^15.7.2",
     "react-calendar": "^2.19.2",
     "react-dropzone-uploader": "^2.10.2",
     "react-modal": "^3.10.1",
@@ -66,18 +66,23 @@
     "lodash": "^4.17.11",
     "precise-commits": "^1.0.2",
     "prettier": "1.18.2",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "rimraf": "^3.0.0",
     "styled-components": "^5.0.0-beta.8",
     "svg-sprite-loader": "^4.1.6",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "webpack": "^4.41.2",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-cli": "^3.3.10"
   },
   "peerDependencies": {
-    "react-dom": "^16.8.6",
-    "react": "^16.8.6",
     "lodash": "^4.17.11",
-    "styled-components": "^5.0.0-beta.8"
+    "prop-types": "^15.7.2",
+    "styled-components": "^5.0.0-beta.8",
+    "react-dom": "^16.8.6",
+    "react": "^16.8.6"
   },
   "lint-staged": {
     "*.js": [
