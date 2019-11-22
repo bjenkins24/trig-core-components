@@ -1,4 +1,8 @@
 {
   "presets": ["@babel/env", "@babel/preset-react"],
-  "plugins": ["babel-plugin-styled-components"]
+  "plugins": [
+    "lodash",
+    "babel-plugin-styled-components",
+    "@babel/plugin-proposal-class-properties"
+  ]
 }

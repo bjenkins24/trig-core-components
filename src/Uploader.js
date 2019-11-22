@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Dropzone from 'react-dropzone-uploader';
 import { HorizontalGroup } from './Groups';
 import { List, ListItem, ListItemContent } from './Lists';
-import Button from './Buttons';
+import { Button } from './Buttons';
 import Image from './Image';
 import Icon from './Icon';
 import Loading from './Loading';

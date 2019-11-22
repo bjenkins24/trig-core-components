@@ -9,7 +9,7 @@ import {
   boolean,
   date,
 } from '@storybook/addon-knobs';
-import CardThumbnail from '../src/Cards/CardThumbnail';
+import Card from '../src/Card';
 import Avatar from '../src/Avatar';
 import './consoleOverrides';
 import themeForProvider from './theme';
@@ -20,7 +20,7 @@ storiesOf('Cards', module)
   ))
   .addDecorator(withKnobs)
   .add('Thumbnail', () => (
-    <CardThumbnail
+    <Card
       title={text('title', 'Why AI is Going to Take Your Job')}
       dateTime={date('dateTime', new Date())}
       renderAvatar={() => (

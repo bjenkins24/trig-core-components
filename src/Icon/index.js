@@ -1,8 +1,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import get from 'lodash/get';
-import capitalize from 'lodash/capitalize';
+import { get, capitalize } from 'lodash';
 import { TinyText } from '../Typography';
 import { getColor } from '../utils/getColor';
 import mapIconTypes from './mapIconTypes';

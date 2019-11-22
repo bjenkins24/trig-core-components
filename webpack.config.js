@@ -3,13 +3,19 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   mode: 'production',
-  entry: './src/index.js',
+  entry: { './index': './src/index.js' },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'webpack-numbers.js',
+    filename: '[name].js',
   },
   plugins: [new BundleAnalyzerPlugin()],
-  externals: ['styled-components', 'lodash', 'react', 'prop-types'],
+  externals: [
+    'styled-components',
+    'lodash',
+    'react',
+    'react-dom',
+    'prop-types',
+  ],
   module: {
     rules: [
       {

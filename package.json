@@ -1,8 +1,8 @@
 {
-  "name": "trig-core-components",
+  "name": "@trig/core-components",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
@@ -20,7 +20,7 @@
     "url": "git+https://github.com/bjenkins24/trig-core-components.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/bjenkins24/trig-core-components/issues"
   },
@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
     "@babel/preset-react": "^7.7.0",
     "@storybook/addon-actions": "^5.2.1",
@@ -52,6 +53,7 @@
     "@storybook/react": "^5.2.1",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
+    "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-styled-components": "^1.10.6",
     "eslint": "^5.3.0",
     "eslint-config-airbnb": "^17.1.1",
@@ -84,6 +86,11 @@
     "react-dom": "^16.8.6",
     "react": "^16.8.6"
   },
+  "files": [
+    "README.md",
+    "src/",
+    "dist/"
+  ],
   "lint-staged": {
     "*.js": [
       "precise-commits",

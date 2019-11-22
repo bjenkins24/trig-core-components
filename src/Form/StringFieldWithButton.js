@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StringField from './StringField';
 import { HorizontalGroup } from '../Groups';
-import Button, { buttonTypes } from '../Buttons';
+import { Button, buttonTypes } from '../Buttons';
 import getWidth from '../utils/getWidth';
 import { widthType } from '../utils/propTypes';
 

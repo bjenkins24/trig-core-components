@@ -6,10 +6,7 @@ import { withKnobs, select, number, text } from '@storybook/addon-knobs';
 
 import { ThemeProvider } from 'styled-components';
 import './consoleOverrides';
-import Button from '../src/Buttons';
-import ButtonToggle from '../src/Buttons/ButtonToggle';
-import Fab from '../src/Buttons/Fab';
-import ButtonSelect from '../src/Buttons/ButtonSelect';
+import { Button, ButtonToggle, Fab, ButtonSelect } from '../src/Buttons';
 import Icon from '../src/Icon';
 import Avatar from '../src/Avatar';
 import Popover from '../src/Popover';

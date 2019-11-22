@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 const getColor = (defaultColor = 'p') => ({ theme, color }) => {
   return get(theme, color, get(theme, defaultColor));

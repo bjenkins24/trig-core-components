@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import get from 'lodash/get';
+import { get } from 'lodash';
 import Separator from './Separator';
 import { HorizontalGroup } from './Groups';
 import { getColor } from './utils/getColor';

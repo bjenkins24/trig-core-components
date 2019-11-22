@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Truncate from 'react-truncate';
-import { Heading3, Heading4, TinyText } from '../Typography';
-import { HorizontalGroup } from '../Groups';
-import Icon from '../Icon';
-import { cardType } from '../utils/propTypes';
-import { format } from '../utils/dateFns';
+import { Heading3, Heading4, TinyText } from './Typography';
+import { HorizontalGroup } from './Groups';
+import Icon from './Icon';
+import { cardType } from './utils/propTypes';
+import { format } from './utils/dateFns';
 
 const Container = styled.div`
   background: ${({ theme }) => theme.bs[200]};
@@ -74,7 +74,7 @@ const HorizontalDots = styled(StyledIcon)`
   cursor: pointer;
 `;
 
-const cardThumbnailTypes = {
+const cardTypes = {
   title: PropTypes.string.isRequired,
   dateTime: PropTypes.instanceOf(Date).isRequired,
   renderAvatar: PropTypes.node,
@@ -91,7 +91,7 @@ const defaultProps = {
   image: null,
 };
 
-const CardThumbnail = ({
+const Card = ({
   title,
   dateTime,
   renderAvatar,
@@ -128,7 +128,7 @@ const CardThumbnail = ({
           <HorizontalGroup margin={1.6}>
             <IconGroup>
               {!isFavorited ? (
-                <StyledIcon type="heart" />
+                <cardTypes type="heart" />
               ) : (
                 <StyledIcon type="heart-filled" />
               )}
@@ -146,7 +146,7 @@ const CardThumbnail = ({
   );
 };
 
-CardThumbnail.propTypes = cardThumbnailTypes;
-CardThumbnail.defaultProps = defaultProps;
+Card.propTypes = cardTypes;
+Card.defaultProps = defaultProps;
 
-export default CardThumbnail;
+export default Card;
