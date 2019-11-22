@@ -8,7 +8,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     library: '@trig-app/core-components',
-    librayTarget: 'umd',
+    libraryTarget: 'umd',
     globalObject: 'this',
   },
   plugins: [new BundleAnalyzerPlugin()],
