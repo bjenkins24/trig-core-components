@@ -1,10 +1,10 @@
 {
-  "name": "@trig/core-components",
-  "version": "1.0.0",
+  "name": "@trig-app/core-components",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"No test specified\"",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "webpack",
