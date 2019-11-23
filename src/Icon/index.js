@@ -2,7 +2,6 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { get, capitalize } from 'lodash';
-import { TinyText } from '../Typography';
 import { getColor } from '../utils/getColor';
 import mapIconTypes from './mapIconTypes';
 import iconTypePropTypes from './iconTypePropTypes';
@@ -38,9 +37,14 @@ const CountContainer = styled.div`
   top: -0.6rem;
 `;
 
-const Count = styled(TinyText)`
+const Count = styled.span`
   margin: 0 auto;
   padding-top: 0.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.sc};
 `;
 
 export const iconTypes = {

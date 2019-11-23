@@ -3,7 +3,11 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   mode: 'production',
-  entry: { './index': './src/index.js' },
+  entry: {
+    './index': './src/index.js',
+    './Typography': './src/Typography.js',
+    './Icon': './src/Icon/index.js',
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
