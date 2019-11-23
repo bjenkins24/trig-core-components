@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { get } from 'lodash';
 import Separator from './Separator';
-import { HorizontalGroup } from './Groups';
 import { getColor } from './utils/getColor';
 
 const getWeight = ({ weight }) => {
@@ -177,6 +176,11 @@ const TinyText = (props) => (
   <Typography Component={TinyTextComponent} {...props} />
 );
 
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const typographyTypes = {
   Component: PropTypes.node.isRequired,
   separator: PropTypes.bool,
@@ -207,14 +211,14 @@ const Typography = ({
   };
 
   return (
-    <HorizontalGroup className={className} style={getStyle()}>
+    <Container className={className} style={getStyle()}>
       <Component
         style={{ flexShrink: 0, paddingRight: '1.6rem' }}
         noMargin={marginBottom}
         {...restProps}
       />
       <Separator />
-    </HorizontalGroup>
+    </Container>
   );
 };
 
