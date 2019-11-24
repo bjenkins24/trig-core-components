@@ -17,6 +17,8 @@ import {
   Heading2,
   Heading3,
   Heading4,
+  BodyBiggest,
+  BodyBig,
   Body1,
   Body2,
   Body3,
@@ -234,6 +236,22 @@ storiesOf('Typography', module)
             </td>
             <td>
               <Heading4>{sample}</Heading4>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Body1>BodyBiggest</Body1>
+            </td>
+            <td>
+              <BodyBiggest as="p">{lorem}</BodyBiggest>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <Body1>BodyBig</Body1>
+            </td>
+            <td>
+              <BodyBig as="p">{lorem}</BodyBig>
             </td>
           </tr>
           <tr>

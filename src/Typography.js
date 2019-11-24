@@ -115,6 +115,30 @@ const Heading4 = (props) => (
   <Typography Component={Heading4Component} marginBottom {...props} />
 );
 
+const BodyBiggestStyles = css`
+  font-size: 2.1rem;
+  line-height: 1.5;
+  font-weight: ${getWeight};
+  color: ${getColor()};
+  ${buttonStyles};
+`;
+
+const BodyBiggest = styled.span`
+  ${BodyBiggestStyles}
+`;
+
+const BodyBigStyles = css`
+  font-size: 1.8rem;
+  line-height: 1.5;
+  font-weight: ${getWeight};
+  color: ${getColor()};
+  ${buttonStyles};
+`;
+
+const BodyBig = styled.span`
+  ${BodyBigStyles}
+`;
+
 const Body1Styles = css`
   font-size: 1.6rem;
   line-height: 1.7;
@@ -241,6 +265,10 @@ export {
   Heading4Styles,
   Heading4Component,
   Heading4,
+  BodyBiggestStyles,
+  BodyBiggest,
+  BodyBigStyles,
+  BodyBig,
   Body1Styles,
   Body1Component,
   Body1,
