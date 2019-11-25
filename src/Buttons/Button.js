@@ -4,13 +4,14 @@ import styled, { keyframes, css } from 'styled-components';
 import { sizeProp } from '../utils/propTypes';
 import { HorizontalGroup } from '../Groups';
 import Icon, { iconTypes } from '../Icon';
-import { Body1, Body2, Body3 } from '../Typography';
+import { BodyBiggest, Body1, Body2, Body3 } from '../Typography';
 
 const getHeight = ({ size }) => {
   const sizeMap = {
     sm: '2.4rem',
     md: '4rem',
     lg: '4.8rem',
+    hg: '7.1rem',
   };
   return sizeMap[size];
 };
@@ -20,6 +21,7 @@ const getTypography = (size) => {
     sm: Body3,
     md: Body2,
     lg: Body1,
+    hg: BodyBiggest,
   };
   return textMap[size];
 };
@@ -164,7 +166,8 @@ const StyledButton = styled.button`
   }
 
   &:focus:not(:active)::after {
-    animation: ${ripple} 1s ease-out;
+    animation: ${ripple} ${({ size }) => (size === 'hg' ? '0.5' : '1')}s
+      ease-out;
   }
 `;
 

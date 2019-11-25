@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const sizeProp = PropTypes.oneOf(['sm', 'md', 'lg']);
+export const sizeProp = PropTypes.oneOf(['sm', 'md', 'lg', 'hg']);
 export const cardType = PropTypes.oneOf(['doc']);
 
 const percentType = (props, propName, componentName) => {
