@@ -130,6 +130,7 @@ const getVariantStyles = ({ variant }) => {
         border: 0.1rem solid ${({ theme }) => theme.s};
         &:hover {
           background: ${({ theme }) => theme.ss[800]};
+          border: 0.1rem solid ${({ theme }) => theme.ss[800]};
         }
       `;
   }
@@ -145,7 +146,7 @@ const StyledButton = styled.button`
   border-radius: ${({ theme }) => theme.br};
   padding: 0 1.6rem;
   cursor: pointer;
-  transition: background 150ms ease-in;
+  transition: all 150ms ease-in;
   outline: none;
 
   &:after {
