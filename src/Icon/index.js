@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { get, capitalize } from 'lodash';
-import { getColor } from '../utils/getColor';
+import { getColor } from '../utils';
 import mapIconTypes from './mapIconTypes';
 import iconTypePropTypes from './iconTypePropTypes';
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getColor, getColorContrast, getColorShade } from '../utils/getColor';
+import { getColor, getColorContrast, getColorShade } from '../utils';
 
 const defaultSize = 5.6;
 

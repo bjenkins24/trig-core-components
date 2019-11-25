@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { get } from 'lodash';
 import Separator from './Separator';
-import { getColor } from './utils/getColor';
+import { getColor } from './utils';
 
 const getWeight = ({ weight }) => {
   const weightMap = {

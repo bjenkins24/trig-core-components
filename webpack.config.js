@@ -6,8 +6,9 @@ module.exports = {
   entry: {
     './index': './src/index.js',
     './Typography': './src/Typography.js',
-    './Icon': './src/Icon/index.js',
     './Groups': './src/Groups.js',
+    './Icon': './src/Icon/index.js',
+    './Buttons': './src/Buttons/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
