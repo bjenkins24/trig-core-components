@@ -2,7 +2,8 @@ const path = require('path');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
+  devtool: 'eval-source-map',
   entry: {
     './index': './src/index.js',
     './Typography': './src/Typography.js',
