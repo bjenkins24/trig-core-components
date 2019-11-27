@@ -35,6 +35,8 @@ const icons = {
   document: 'document',
   link: 'link',
   file: 'file',
+  aggregate: 'aggregate',
+  organize: 'organize',
 };
 
 storiesOf('Button', module)
