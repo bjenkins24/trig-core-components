@@ -15,7 +15,7 @@ const percentType = (props, propName, componentName) => {
 
 export const refType = PropTypes.oneOfType([
   PropTypes.func,
-  PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  PropTypes.shape({ current: PropTypes.any }),
 ]);
 
 export const placementType = PropTypes.oneOf([
