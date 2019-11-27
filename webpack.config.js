@@ -3,6 +3,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   mode: 'production',
+  target: 'node',
   entry: {
     './index': './src/index.js',
     './Typography': './src/Typography.js',
