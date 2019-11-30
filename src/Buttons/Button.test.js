@@ -50,4 +50,10 @@ describe('<Button />', () => {
     const button = mount(<Button theme={theme}>{text}</Button>);
     expect(button.text()).toEqual(text);
   });
+
+  it('takes a className', () => {
+    const exampleClass = 'example-class';
+    const button = shallow(<Button className={exampleClass} />);
+    expect(button.hasClass(exampleClass)).toEqual(true);
+  });
 });
