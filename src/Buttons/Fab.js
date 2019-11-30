@@ -15,7 +15,7 @@ const Fab = styled.div`
   cursor: pointer;
   transition: background 150ms;
   &:hover {
-    background: ${getColorShade('s', 600)};
+    background: ${getColorShade({ default: 's', shade: 600 })};
   }
 `;
 

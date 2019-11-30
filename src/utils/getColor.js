@@ -5,29 +5,27 @@ const getColor = (defaultColor = 'p') => ({ theme, color }) => {
 };
 
 const getColorContrast = (defaultColor = 'p') => ({ theme, color }) => {
-  return get(theme, `${color}c`, get(theme, `${defaultColor}c`));
+  return getColor(`${defaultColor}c`)({ theme, color: `color${color}` });
 };
 
-const getColorContrastShade = (defaultColor = 'p', shade = 600) => ({
+const getColorContrastShade = ({ defaultColor = 'p', shade = 600 }) => ({
   theme,
   color,
 }) => {
-  return get(
+  return getColorContrast(`${defaultColor}.${shade}`)({
     theme,
-    `${color}cs.${shade}`,
-    get(theme, `${defaultColor}cs.${shade}`)
-  );
+    color: `${color}.${shade}`,
+  });
 };
 
-const getColorShade = (defaultColor = 'p', shade = 600) => ({
+const getColorShade = ({ defaultColor = 'p', shade = 600 }) => ({
   theme,
   color,
 }) => {
-  return get(
+  return getColor(`${defaultColor}.${shade}`)({
     theme,
-    `${color}s.${shade}`,
-    get(theme, `${defaultColor}s.${shade}`)
-  );
+    color: `${color}.${shade}`,
+  });
 };
 
 export { getColor, getColorShade, getColorContrast, getColorContrastShade };
