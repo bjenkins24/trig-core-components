@@ -8,7 +8,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "webpack",
-    "npm-clean": "rimraf package-lock.json && rimraf node_modules && npm install"
+    "npm-clean": "rimraf package-lock.json && rimraf node_modules && npm install",
+    "lint": "eslint ."
   },
   "husky": {
     "hooks": {
