@@ -6,23 +6,25 @@ import { HorizontalGroup } from '../Groups';
 import Icon, { iconTypes } from '../Icon';
 import { BodyBiggest, Body1, Body2, Body3 } from '../Typography';
 
+export const textMap = {
+  sm: Body3,
+  md: Body2,
+  lg: Body1,
+  hg: BodyBiggest,
+};
+
+export const heightMap = {
+  sm: '2.4rem',
+  md: '4rem',
+  lg: '4.8rem',
+  hg: '7.1rem',
+};
+
 const getHeight = ({ size }) => {
-  const sizeMap = {
-    sm: '2.4rem',
-    md: '4rem',
-    lg: '4.8rem',
-    hg: '7.1rem',
-  };
-  return sizeMap[size];
+  return heightMap[size];
 };
 
 const getTypography = (size) => {
-  const textMap = {
-    sm: Body3,
-    md: Body2,
-    lg: Body1,
-    hg: BodyBiggest,
-  };
   return textMap[size];
 };
 
