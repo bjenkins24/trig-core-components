@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest --runInBand",
     "test:watch": "jest --watch --runInBand",
+    "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --watch",
     "test:coverage": "jest --coverage --runInBand",
+    "coverage": "open-cli coverage/lcov-report/index.html",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "webpack",
@@ -74,6 +76,7 @@
     "jest-styled-components": "^6.3.4",
     "lint-staged": "^9.2.0",
     "lodash": "^4.17.11",
+    "open-cli": "^5.0.0",
     "precise-commits": "^1.0.2",
     "prettier": "1.18.2",
     "prop-types": "^15.7.2",

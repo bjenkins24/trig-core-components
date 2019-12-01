@@ -11,4 +11,5 @@ module.exports = {
   ],
   snapshotSerializers: ['enzyme-to-json/serializer'],
   testEnvironment: 'jest-environment-jsdom',
+  collectCoverageFrom: ['**/src/**/*.js', '!dist/src/**/*.js'],
 };
