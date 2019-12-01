@@ -4,6 +4,9 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 module.exports = {
   mode: 'production',
   target: 'node',
+  resolve: {
+    modules: ['node_modules', 'src'],
+  },
   entry: {
     './index': './src/index.js',
     './Typography': './src/Typography.js',

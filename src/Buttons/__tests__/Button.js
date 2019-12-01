@@ -1,9 +1,10 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import theme from '../../stories/theme';
-import Button, { textMap, heightMap } from './Button';
-import Icon from '../Icon';
-import { testIsClickable, testIfTakesClassName } from '../../jest.utils';
+import { render } from 'test-utils';
+import theme from '../../../stories/theme';
+import Button, { textMap, heightMap } from '../Button';
+import Icon from '../../Icon';
+import { testIsClickable, testIfTakesClassName } from '../../../jest.utils';
 
 describe('<Button />', () => {
   it('is clickable', () => {
@@ -15,7 +16,9 @@ describe('<Button />', () => {
   });
 
   it('renders Icon with icon prop', () => {
-    const button = mount(<Button theme={theme} iconProps={{ type: 'deck' }} />);
+    const button = render(
+      <Button theme={theme} iconProps={{ type: 'deck' }} />
+    );
     expect(button.find(Icon).exists()).toEqual(true);
   });
 

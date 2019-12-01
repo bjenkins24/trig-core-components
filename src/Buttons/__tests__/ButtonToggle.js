@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ButtonToggle from './Button';
+import ButtonToggle from '../Button';
 
 test('Button toggle is clickable', () => {
   // Render a checkbox with label in the document
