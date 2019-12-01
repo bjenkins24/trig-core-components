@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import { Heading3, Heading4 } from '../Typography';
 import { HorizontalGroup, VerticalGroup } from '../Groups';
 
-const Primary = styled(Heading3)`
+export const Primary = styled(Heading3)`
   margin-bottom: 0;
   padding-top: 0.3rem;
 `;
 
-const Secondary = styled(Heading4)`
+export const Secondary = styled(Heading4)`
   font-weight: 400;
   margin-bottom: 0;
 `;
@@ -24,9 +24,9 @@ const listItemContentTypes = {
   secondary: PropTypes.string.isRequired,
 };
 
-const ListItemContent = ({ renderItem, primary, secondary }) => {
+const ListItemContent = ({ renderItem, primary, secondary, ...restProps }) => {
   return (
-    <HorizontalGroup margin={1.6}>
+    <HorizontalGroup margin={1.6} {...restProps}>
       {renderItem()}
       <VerticalGroup>
         <Primary>{primary}</Primary>
