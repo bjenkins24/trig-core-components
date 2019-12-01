@@ -5,8 +5,7 @@ import theme from '../../stories/theme';
 import { testIsClickable } from '../../jest.utils';
 
 const exampleClass = 'example-class';
-console.time('startSync');
-console.time('startASync');
+
 describe('<ListItem />', () => {
   let component;
   beforeAll(() => {
