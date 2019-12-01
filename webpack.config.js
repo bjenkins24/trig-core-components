@@ -5,7 +5,7 @@ module.exports = {
   mode: 'production',
   target: 'node',
   resolve: {
-    modules: ['node_modules', 'src'],
+    modules: ['node_modules', path.resolve(__dirname, 'src')],
   },
   entry: {
     './index': './src/index.js',

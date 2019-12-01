@@ -1,6 +1,8 @@
+const path = require('path');
+
 module.exports = {
   verbose: true,
-  moduleDirectories: ['node_modules', 'test'],
+  moduleDirectories: ['node_modules', path.resolve(__dirname, 'src')],
   testPathIgnorePatterns: ['node_modules', '.git'],
   setupFilesAfterEnv: [
     '<rootDir>/jest.setup.js',

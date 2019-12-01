@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { render } from 'test-utils';
+import { render } from 'test/utils';
+import Button, { textMap, heightMap } from 'Buttons/Button';
 import theme from '../../../stories/theme';
-import Button, { textMap, heightMap } from '../Button';
 import Icon from '../../Icon';
 import { testIsClickable, testIfTakesClassName } from '../../../jest.utils';
 
