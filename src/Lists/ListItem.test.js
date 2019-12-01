@@ -2,18 +2,16 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { ListItem } from './index';
 import theme from '../../stories/theme';
+import { testIsClickable } from '../../jest.utils';
 
 const exampleClass = 'example-class';
 
 describe('<ListItem />', () => {
   let component;
-  let mockCallBack;
   beforeAll(() => {
-    mockCallBack = jest.fn();
     component = mount(
       <ListItem
         className={exampleClass}
-        onClick={mockCallBack}
         theme={theme}
         renderContent={() => <div className="my-content" />}
         renderItem={() => <div className="my-item" />}
@@ -38,8 +36,10 @@ describe('<ListItem />', () => {
   });
 
   it('is clickable', () => {
-    component.simulate('click');
-    expect(mockCallBack.mock.calls.length).toEqual(1);
+    const listItemTest = (props) => (
+      <ListItem renderContent={() => null} {...props} />
+    );
+    testIsClickable(listItemTest);
   });
 
   it('takes a className', () => {

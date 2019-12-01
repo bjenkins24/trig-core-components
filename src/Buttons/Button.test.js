@@ -3,14 +3,15 @@ import { mount, shallow } from 'enzyme';
 import theme from '../../stories/theme';
 import Button, { textMap, heightMap } from './Button';
 import Icon from '../Icon';
+import { testIsClickable, testIfTakesClassName } from '../../jest.utils';
 
 describe('<Button />', () => {
   it('is clickable', () => {
-    const mockCallBack = jest.fn();
-    const button = shallow(<Button onClick={mockCallBack} />);
+    testIsClickable(Button);
+  });
 
-    button.simulate('click');
-    expect(mockCallBack.mock.calls.length).toEqual(1);
+  it('takes a className', () => {
+    testIfTakesClassName(Button);
   });
 
   it('renders Icon with icon prop', () => {
