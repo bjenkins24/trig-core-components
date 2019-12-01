@@ -4,9 +4,9 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "jest --verbose",
-    "test:watch": "jest --verbose --watch",
-    "test:coverage": "jest --coverage",
+    "test": "jest --verbose --runInBand",
+    "test:watch": "jest --verbose --watch --runInBand",
+    "test:coverage": "jest --verbose --coverage --runInBand",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "webpack",
