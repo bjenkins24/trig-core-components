@@ -1,11 +1,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { ListItem } from './index';
+import ListItem, { ItemContent } from './ListItem';
 import theme from '../../stories/theme';
 import { testIsClickable } from '../../jest.utils';
 
 const exampleClass = 'example-class';
-
+console.time('startSync');
+console.time('startASync');
 describe('<ListItem />', () => {
   let component;
   beforeAll(() => {
@@ -44,5 +45,12 @@ describe('<ListItem />', () => {
 
   it('takes a className', () => {
     expect(component.hasClass(exampleClass)).toEqual(true);
+  });
+
+  it('renderItem defaults to null', () => {
+    const thisComponent = mount(
+      <ListItem theme={theme} renderContent={() => null} />
+    );
+    expect(thisComponent.find(ItemContent).isEmptyRender()).toEqual(true);
   });
 });

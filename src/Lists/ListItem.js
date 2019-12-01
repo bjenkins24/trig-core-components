@@ -21,7 +21,7 @@ const Item = styled.div`
   flex-shrink: 0;
 `;
 
-const ItemContent = styled.div`
+export const ItemContent = styled.div`
   margin: 0 auto;
   align-self: center;
 `;
