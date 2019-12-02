@@ -4,7 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "is-ci \"test:coverage\" \"test:watch\"",
+    "test:coverage": "jest --coverage",
     "test:watch": "jest --watch --runInBand",
     "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --watch",
     "coverage": "open-cli coverage/lcov-report/index.html",
@@ -71,6 +72,7 @@
     "eslint-plugin-react": "^7.14.2",
     "husky": "^3.0.0",
     "image-webpack-loader": "^5.0.0",
+    "is-ci-cli": "^2.0.0",
     "jest": "^24.9.0",
     "jest-styled-components": "^6.3.4",
     "lint-staged": "^9.2.0",
