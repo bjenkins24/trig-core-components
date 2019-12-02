@@ -16,4 +16,12 @@ module.exports = {
     '!dist/src/**/*.js',
     '!**/src/test/**/*.js',
   ],
+  coverageThreshold: {
+    global: {
+      statements: 19,
+      branches: 7,
+      lines: 19,
+      functions: 19,
+    },
+  },
 };
