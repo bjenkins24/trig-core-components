@@ -3,8 +3,8 @@ import {
   getColorContrast,
   getColorContrastShade,
   getColorShade,
-} from './getColor';
-import theme from '../../stories/theme';
+} from '../getColor';
+import theme from '../../../stories/theme';
 
 describe('getColor()', () => {
   it('passes color correctly', () => {
