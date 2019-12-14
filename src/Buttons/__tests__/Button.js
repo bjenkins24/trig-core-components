@@ -1,63 +1,76 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
 import { render } from 'test/utils';
+import user from '@testing-library/user-event';
 import Button, { textMap, heightMap } from 'Buttons/Button';
-import theme from '../../../stories/theme';
-import Icon from '../../Icon';
-import { testIsClickable, testIfTakesClassName } from '../../../jest.utils';
 
-describe('<Button />', () => {
-  it('is clickable', () => {
-    testIsClickable(Button);
+test('is clickable', () => {
+  const mockCallBack = jest.fn();
+  const { getByRole } = render(<Button onClick={mockCallBack} />);
+  user.click(getByRole('button'));
+
+  expect(mockCallBack.mock.calls.length).toEqual(1);
+});
+
+test('takes a className', () => {
+  const exampleClass = 'example-class';
+  const { getByRole } = render(<Button className={exampleClass} />);
+
+  expect(getByRole('button')).toHaveClass(exampleClass);
+});
+
+test('renders Icon with icon prop', () => {
+  const title = 'Deck';
+  const { queryByTitle, rerender } = render(
+    <Button iconProps={{ type: 'deck', title }} />
+  );
+  expect(queryByTitle(title)).toBeTruthy();
+
+  // Check default title
+  rerender(<Button iconProps={{ type: 'deck' }} />);
+  expect(queryByTitle(/deck icon/i)).toBeTruthy();
+});
+
+test('renders correct sizes', () => {
+  const { rerender, getByRole } = render(<Button />);
+
+  Object.keys(textMap).forEach((size) => {
+    rerender(<Button size={size} />);
+    expect(getByRole('button')).toHaveStyleRule('height', heightMap[size]);
   });
+});
 
-  it('takes a className', () => {
-    testIfTakesClassName(Button);
+test('renders transparent button transparent', () => {
+  const transparents = ['transparent', 'transparent-dark'];
+
+  const { rerender, getByRole } = render(<Button />);
+
+  transparents.forEach((variant) => {
+    rerender(<Button variant={variant} />);
+    const button = getByRole('button');
+    expect(button).toHaveStyleRule('background', 'none');
+    expect(button).toHaveStyleRule('border', '0');
   });
+});
 
-  it('renders Icon with icon prop', () => {
-    const button = render(
-      <Button theme={theme} iconProps={{ type: 'deck' }} />
-    );
-    expect(button.find(Icon).exists()).toEqual(true);
+test('renders inverse button no background', () => {
+  const inverses = ['inverse-pl', 'inverse-pc', 'inverse-s'];
+
+  const { rerender, getByRole } = render(<Button />);
+
+  inverses.forEach((variant) => {
+    rerender(<Button variant={variant} />);
+    expect(getByRole('button')).toHaveStyleRule('background', 'none');
   });
+});
 
-  it('renders correct sizes', () => {
-    Object.keys(textMap).forEach((size) => {
-      const button = mount(<Button size={size} theme={theme} />);
-      expect(button.find(textMap[size]).exists()).toEqual(true);
-      expect(button).toHaveStyleRule('height', heightMap[size]);
-    });
-  });
+test("renders test's children", () => {
+  const text = 'Example';
+  const { getByText } = render(<Button>{text}</Button>);
+  expect(getByText(text)).toBeTruthy();
+});
 
-  it('renders transparent button transparent', () => {
-    const transparents = ['transparent', 'transparent-dark'];
-
-    transparents.forEach((variant) => {
-      const button = mount(<Button variant={variant} theme={theme} />);
-      expect(button).toHaveStyleRule('background', 'none');
-      expect(button).toHaveStyleRule('border', '0');
-    });
-  });
-
-  it('renders inverse button no background', () => {
-    const inverses = ['inverse-pl', 'inverse-pc', 'inverse-s'];
-
-    inverses.forEach((variant) => {
-      const button = mount(<Button theme={theme} variant={variant} />);
-      expect(button).toHaveStyleRule('background', 'none');
-    });
-  });
-
-  it("renders it's children", () => {
-    const text = 'Example';
-    const button = mount(<Button theme={theme}>{text}</Button>);
-    expect(button.text()).toEqual(text);
-  });
-
-  it('takes a className', () => {
-    const exampleClass = 'example-class';
-    const button = shallow(<Button className={exampleClass} />);
-    expect(button.hasClass(exampleClass)).toEqual(true);
-  });
+test('takes a className', () => {
+  const exampleClass = 'example-class';
+  const { getByRole } = render(<Button className={exampleClass} />);
+  expect(getByRole('button')).toHaveClass(exampleClass);
 });

@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import { ThemeProvider } from 'styled-components';
 import { render as rtlRender } from '@testing-library/react';
-import themes from '../../stories/theme';
+import theme from '../../stories/theme';
 
-const render = (ui, { theme = themes, ...options }) => {
+const render = (ui, options) => {
   const Wrapper = ({ children }) => {
-    return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+    const finalTheme = get(options, 'theme', theme);
+    return <ThemeProvider theme={finalTheme}>{children}</ThemeProvider>;
   };
 
   Wrapper.propTypes = {

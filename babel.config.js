@@ -17,6 +17,7 @@ module.exports = function(api) {
 
   if (isTest) {
     plugins.push('transform-require-context');
+    plugins.push('@babel/plugin-transform-runtime');
   }
 
   return {
