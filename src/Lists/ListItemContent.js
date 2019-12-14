@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import { Heading3, Heading4 } from '../Typography';
 import { HorizontalGroup, VerticalGroup } from '../Groups';
 
-export const Primary = styled(Heading3)`
+const Primary = styled(Heading3)`
   margin-bottom: 0;
   padding-top: 0.3rem;
 `;
 
-export const Secondary = styled(Heading4)`
+const Secondary = styled(Heading4)`
   font-weight: 400;
   margin-bottom: 0;
 `;
