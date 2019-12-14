@@ -3,26 +3,34 @@ import { render } from 'test/utils';
 import user from '@testing-library/user-event';
 import Button, { textMap, heightMap } from 'Buttons/Button';
 
-test('is clickable', () => {
+test('renders and takes basic props', () => {
   const mockCallBack = jest.fn();
-  const { getByRole } = render(<Button onClick={mockCallBack} />);
-  user.click(getByRole('button'));
-
-  expect(mockCallBack.mock.calls.length).toEqual(1);
-});
-
-test('takes a className', () => {
   const exampleClass = 'example-class';
-  const { getByRole } = render(<Button className={exampleClass} />);
+  const text = 'Example';
 
-  expect(getByRole('button')).toHaveClass(exampleClass);
+  const { getByRole, getByText } = render(
+    <Button className={exampleClass} onClick={mockCallBack}>
+      {text}
+    </Button>
+  );
+
+  const button = getByRole('button');
+
+  // Clickable
+  user.click(button);
+  expect(mockCallBack.mock.calls.length).toEqual(1);
+
+  expect(button).toHaveClass(exampleClass);
+  expect(getByText(text)).toBeTruthy();
 });
 
 test('renders Icon with icon prop', () => {
   const title = 'Deck';
+
   const { queryByTitle, rerender } = render(
     <Button iconProps={{ type: 'deck', title }} />
   );
+
   expect(queryByTitle(title)).toBeTruthy();
 
   // Check default title
@@ -61,16 +69,4 @@ test('renders inverse button no background', () => {
     rerender(<Button variant={variant} />);
     expect(getByRole('button')).toHaveStyleRule('background', 'none');
   });
-});
-
-test("renders test's children", () => {
-  const text = 'Example';
-  const { getByText } = render(<Button>{text}</Button>);
-  expect(getByText(text)).toBeTruthy();
-});
-
-test('takes a className', () => {
-  const exampleClass = 'example-class';
-  const { getByRole } = render(<Button className={exampleClass} />);
-  expect(getByRole('button')).toHaveClass(exampleClass);
 });
