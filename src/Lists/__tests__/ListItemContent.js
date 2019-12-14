@@ -25,3 +25,10 @@ test('renders with basic props', () => {
   expect(getByText(item)).toBeTruthy();
   expect(getByText(item)).toBeTruthy();
 });
+
+test('renderItem defaults to null', () => {
+  const { getByTestId } = render(
+    <ListItemContent primary="primary" secondary="secondary" />
+  );
+  expect(getByTestId('listItemContent__renderItemNull').firstChild).toBeNull();
+});

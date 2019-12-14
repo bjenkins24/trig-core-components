@@ -15,7 +15,7 @@ const Secondary = styled(Heading4)`
 `;
 
 const defaultProps = {
-  renderItem: () => null,
+  renderItem: () => <span data-testid="listItemContent__renderItemNull" />,
 };
 
 const listItemContentTypes = {
