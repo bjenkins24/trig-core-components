@@ -1,14 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from 'test/utils';
+import user from '@testing-library/user-event';
 import ButtonToggle from '../Button';
 
 test('Button toggle is clickable', () => {
   // Render a checkbox with label in the document
   const mockCallBack = jest.fn();
-  const button = shallow(
+  const { getByRole } = render(
     <ButtonToggle onClick={mockCallBack}>Hello</ButtonToggle>
   );
 
-  button.simulate('click');
+  user.click(getByRole('button'));
   expect(mockCallBack.mock.calls.length).toEqual(1);
 });
