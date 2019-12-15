@@ -79,7 +79,7 @@ const cardTypes = {
   dateTime: PropTypes.instanceOf(Date).isRequired,
   renderAvatar: PropTypes.node,
   image: PropTypes.string,
-  type: cardType,
+  type: cardType.isRequired,
   totalFavorites: PropTypes.number.isRequired,
   isFavorited: PropTypes.bool.isRequired,
   totalComments: PropTypes.number.isRequired,
@@ -87,7 +87,6 @@ const cardTypes = {
 
 const defaultProps = {
   renderAvatar: () => null,
-  type: null,
   image: null,
 };
 
@@ -128,7 +127,7 @@ const Card = ({
           <HorizontalGroup margin={1.6}>
             <IconGroup>
               {!isFavorited ? (
-                <cardTypes type="heart" />
+                <StyledIcon type="heart" />
               ) : (
                 <StyledIcon type="heart-filled" />
               )}
