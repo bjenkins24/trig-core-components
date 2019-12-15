@@ -140,7 +140,11 @@ const Carousel = ({
         newIndex -= totalItems;
       }
       return (
-        <Slide slidesPerPage={slidesPerPage} slideSpacing={slideSpacing}>
+        <Slide
+          key={newIndex}
+          slidesPerPage={slidesPerPage}
+          slideSpacing={slideSpacing}
+        >
           {React.Children.map(children, (item, key) => {
             if (key === newIndex) return React.cloneElement(item);
             return false;
