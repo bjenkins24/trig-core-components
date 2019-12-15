@@ -25,36 +25,38 @@ const buildCard = (props) => {
   );
 };
 
-test('renders and takes basic props', () => {
-  const {
-    getAllByText,
-    getByText,
-    getByTitle,
-    getByTestId,
-    queryByAltText,
-    rerender,
-  } = render(buildCard());
+describe('<Card />', () => {
+  it('renders and takes basic props', () => {
+    const {
+      getAllByText,
+      getByText,
+      getByTitle,
+      getByTestId,
+      queryByAltText,
+      rerender,
+    } = render(buildCard());
 
-  expect(getByText(totalFavorites.toString())).toBeTruthy();
-  expect(getByText(totalComments.toString())).toBeTruthy();
-  expect(getAllByText(title)).toBeTruthy();
-  expect(getByTitle(/heart filled icon/i)).toBeTruthy();
-  expect(getByTestId(/card__avatar-null/i)).toBeTruthy();
-  expect(queryByAltText(alt)).toBeNull();
+    expect(getByText(totalFavorites.toString())).toBeTruthy();
+    expect(getByText(totalComments.toString())).toBeTruthy();
+    expect(getAllByText(title)).toBeTruthy();
+    expect(getByTitle(/heart filled icon/i)).toBeTruthy();
+    expect(getByTestId(/card__avatar-null/i)).toBeTruthy();
+    expect(queryByAltText(alt)).toBeNull();
 
-  rerender(buildCard({ isFavorited: false }));
-  expect(getByTitle(/heart icon/i)).toBeTruthy();
-});
+    rerender(buildCard({ isFavorited: false }));
+    expect(getByTitle(/heart icon/i)).toBeTruthy();
+  });
 
-test('renders thumbnail', () => {
-  const { getByAltText } = render(buildCard({ image: 'testimage.png' }));
-  expect(getByAltText(alt)).toBeTruthy();
-});
+  it('renders thumbnail', () => {
+    const { getByAltText } = render(buildCard({ image: 'testimage.png' }));
+    expect(getByAltText(alt)).toBeTruthy();
+  });
 
-test('renders avatar', () => {
-  const avatarText = 'avatar-text';
-  const { getByText } = render(
-    buildCard({ renderAvatar: () => <div>{avatarText}</div> })
-  );
-  expect(getByText(avatarText)).toBeTruthy();
+  it('renders avatar', () => {
+    const avatarText = 'avatar-text';
+    const { getByText } = render(
+      buildCard({ renderAvatar: () => <div>{avatarText}</div> })
+    );
+    expect(getByText(avatarText)).toBeTruthy();
+  });
 });

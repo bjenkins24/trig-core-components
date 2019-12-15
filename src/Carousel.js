@@ -12,8 +12,7 @@ const Slider = styled.div`
   overflow-x: hidden;
 `;
 
-const getTransition = ({ disabled }) => {
-  if (disabled) return false;
+const getTransition = () => {
   return css`
     transition: all 200ms;
     & .Carousel__Arrow svg {
@@ -32,12 +31,11 @@ const buttonStyle = css`
   background: rgba(0, 0, 0, 0.3);
   color: white;
   border: 0;
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+  cursor: pointer;
   position: absolute;
   top: 0;
   bottom: 0;
   z-index: 20;
-  width: 4%;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -47,11 +45,13 @@ const buttonStyle = css`
 
 const Previous = styled.button.attrs({ type: 'button' })`
   ${buttonStyle}
+  width: calc(4% - ${({ slideSpacing }) => slideSpacing}rem);
   left: 0;
 `;
 
 const Next = styled.button.attrs({ type: 'button' })`
   ${buttonStyle}
+  width: 4%;
   right: 0;
 `;
 
@@ -63,6 +63,10 @@ const SliderContent = styled(animated.div)`
   white-space: nowrap;
 `;
 
+const getWidth = ({ slidesPerPage, slideSpacing }) => {
+  return `calc(${100 / slidesPerPage}% - ${slideSpacing}rem)`;
+};
+
 const Slide = styled.div`
   box-sizing: border-box;
   z-index: 1;
@@ -70,21 +74,30 @@ const Slide = styled.div`
   position: relative;
   white-space: normal;
   vertical-align: top;
-  width: ${({ slidesPerPage }) => 100 / slidesPerPage}%;
+  width: ${getWidth};
+  margin-right: ${({ slideSpacing }) => slideSpacing}rem;
 `;
 
 const defaultProps = {
   slidesPerPage: 5,
   defaultSlidesToScroll: 5,
+  slideSpacing: 0.4,
 };
 
 const carouselTypes = {
   children: PropTypes.node.isRequired,
   slidesPerPage: PropTypes.number,
   defaultSlidesToScroll: PropTypes.number,
+  slideSpacing: PropTypes.number,
 };
 
-const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
+const Carousel = ({
+  children,
+  slidesPerPage,
+  defaultSlidesToScroll,
+  slideSpacing,
+  ...restProps
+}) => {
   const totalItems = React.Children.count(children);
   const [currentPosition, setCurrentPosition] = useState(0);
   const [lastPosition, setLastPosition] = useState(0);
@@ -122,14 +135,15 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
 
   const renderSlides = () => {
     return [...Array(totalItems)].map((u, i) => {
-      let newIndex = i;
-      while (newIndex > totalItems - 1) {
-        newIndex -= totalItems;
-      }
       return (
-        <Slide slidesPerPage={slidesPerPage}>
+        <Slide
+          key={`slide-${i + 1}`}
+          data-testid={`carousel__slide-${i + 1}`}
+          slidesPerPage={slidesPerPage}
+          slideSpacing={slideSpacing}
+        >
           {React.Children.map(children, (item, key) => {
-            if (key === newIndex) return React.cloneElement(item);
+            if (key === i) return React.cloneElement(item);
             return false;
           })}
         </Slide>
@@ -144,42 +158,33 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
     transform: `translate3d(${currentPosition}%, 0px 0px)`,
   });
 
-  const isPrevDisabled = currentPosition === 0;
-  const isNextDisabled = isLastSlide || totalItems < defaultSlidesToScroll;
+  const isPrevShowing = currentPosition !== 0;
+  const isNextShowing = !isLastSlide && totalItems > defaultSlidesToScroll;
 
   return (
-    <Slider>
-      {!isPrevDisabled && (
+    <Slider {...restProps}>
+      {isPrevShowing && (
         <Previous
+          slideSpacing={slideSpacing}
           onClick={() => {
             setPosition('prev');
           }}
-          disabled={isPrevDisabled}
-          aria-label="See previous deck"
+          aria-label="Go to previous page"
         >
-          <Icon
-            className="Carousel__Arrow"
-            type="arrow-left"
-            color={!isPrevDisabled ? 'pc' : 'ps.100'}
-          />
+          <Icon className="Carousel__Arrow" type="arrow-left" color="pc" />
         </Previous>
       )}
       <SliderMask>
         <SliderContent style={animateProps}>{renderSlides()}</SliderContent>
       </SliderMask>
-      {!isNextDisabled && (
+      {isNextShowing && (
         <Next
           onClick={() => {
             setPosition('next');
           }}
-          disabled={isNextDisabled}
-          aria-label="See next deck"
+          aria-label="Go to next page"
         >
-          <Icon
-            className="Carousel__Arrow"
-            type="arrow-right"
-            color={!isNextDisabled ? 'pc' : 'ps.100'}
-          />
+          <Icon className="Carousel__Arrow" type="arrow-right" color="pc" />
         </Next>
       )}
     </Slider>
