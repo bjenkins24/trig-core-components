@@ -79,4 +79,11 @@ describe('<Carousel>', () => {
     expect(slide).toHaveStyleRule('margin-right', '0.8rem');
     expect(slide).toHaveStyleRule('width', 'calc(20% - 0.8rem)');
   });
+
+  it("doesn't render slides two pages away", () => {
+    const { queryByText } = render(
+      buildCarousel({ slidesToRender: 6, slidesPerPage: 2 })
+    );
+    expect(queryByText(`${text} 5`)).toBeNull();
+  });
 });
