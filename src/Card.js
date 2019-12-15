@@ -77,7 +77,7 @@ const HorizontalDots = styled(StyledIcon)`
 const cardTypes = {
   title: PropTypes.string.isRequired,
   dateTime: PropTypes.instanceOf(Date).isRequired,
-  renderAvatar: PropTypes.node,
+  renderAvatar: PropTypes.func,
   image: PropTypes.string,
   type: cardType.isRequired,
   totalFavorites: PropTypes.number.isRequired,
@@ -86,7 +86,7 @@ const cardTypes = {
 };
 
 const defaultProps = {
-  renderAvatar: () => null,
+  renderAvatar: () => <span data-testid="card__avatar-null" />,
   image: null,
 };
 
