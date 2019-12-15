@@ -3,6 +3,7 @@ import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
+import Deck from '../src/Deck';
 import Carousel from '../src/Carousel';
 import './consoleOverrides';
 import themeForProvider from './theme';
@@ -10,9 +11,26 @@ import themeForProvider from './theme';
 const Item = styled.div`
   height: 200px;
   width: 100%;
-  background: blue;
-  border: 1px solid black;
 `;
+
+const MyDeck = () => {
+  return (
+    <Item>
+      <Deck
+        user={{
+          firstName: 'Brian',
+          lastName: 'Jenkins',
+          position: 'President, CEO',
+        }}
+        image="https://code.org/images/fill-480x360/tutorials/hoc2018/danceparty-characters.jpg"
+        totalFollowers={9}
+        totalCards={22}
+        title="Onboarding Support"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea"
+      />
+    </Item>
+  );
+};
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -29,9 +47,15 @@ storiesOf('Carousel', module)
   .addDecorator(withKnobs)
   .add('default', () => (
     <Carousel>
-      <Item>
-        <h1>Slide 1</h1>
-      </Item>
+      <MyDeck />
+      <MyDeck />
+      <MyDeck />
+      <MyDeck />
+      <MyDeck />
+      <MyDeck />
+      <MyDeck />
+      <MyDeck />
+      <MyDeck />
       <Item>
         <h1>Slide 2</h1>
       </Item>

@@ -84,7 +84,12 @@ const carouselTypes = {
   defaultSlidesToScroll: PropTypes.number,
 };
 
-const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
+const Carousel = ({
+  children,
+  slidesPerPage,
+  defaultSlidesToScroll,
+  ...restProps
+}) => {
   const totalItems = React.Children.count(children);
   const [currentPosition, setCurrentPosition] = useState(0);
   const [lastPosition, setLastPosition] = useState(0);
@@ -148,7 +153,7 @@ const Carousel = ({ children, slidesPerPage, defaultSlidesToScroll }) => {
   const isNextDisabled = isLastSlide || totalItems < defaultSlidesToScroll;
 
   return (
-    <Slider>
+    <Slider {...restProps}>
       {!isPrevDisabled && (
         <Previous
           onClick={() => {
