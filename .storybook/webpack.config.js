@@ -18,6 +18,11 @@ module.exports = async ({ config, mode }) => {
     return true;
   });
 
+  config.resolve.modules = [
+    ...(config.resolve.modules || []),
+    path.resolve(__dirname, '../src'),
+  ];
+
   // Return the altered configg
   return config;
 };

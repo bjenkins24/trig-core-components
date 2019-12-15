@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Truncate from 'react-truncate';
-import { Heading3, Heading4, TinyText } from './Typography';
-import { HorizontalGroup } from './Groups';
-import Icon from './Icon';
-import { cardType } from './utils/propTypes';
-import { format } from './utils/dateFns';
+import { Heading3, Heading4, TinyText } from 'Typography';
+import { HorizontalGroup } from 'Groups';
+import Image from 'Image';
+import Icon from 'Icon';
+import { cardType } from 'utils/propTypes';
+import { format } from 'utils/dateFns';
 
 const Container = styled.div`
   background: ${({ theme }) => theme.bs[200]};
@@ -41,7 +42,7 @@ const ThumbnailContainer = styled.div`
   overflow: hidden;
 `;
 
-const Thumbnail = styled.img`
+const Thumbnail = styled(Image)`
   width: 100%;
 `;
 
@@ -77,17 +78,16 @@ const HorizontalDots = styled(StyledIcon)`
 const cardTypes = {
   title: PropTypes.string.isRequired,
   dateTime: PropTypes.instanceOf(Date).isRequired,
-  renderAvatar: PropTypes.node,
+  renderAvatar: PropTypes.func,
   image: PropTypes.string,
-  type: cardType,
+  type: cardType.isRequired,
   totalFavorites: PropTypes.number.isRequired,
   isFavorited: PropTypes.bool.isRequired,
   totalComments: PropTypes.number.isRequired,
 };
 
 const defaultProps = {
-  renderAvatar: () => null,
-  type: null,
+  renderAvatar: () => <span data-testid="card__avatar-null" />,
   image: null,
 };
 
@@ -120,7 +120,7 @@ const Card = ({
           <TypeIcon type={type} size={1.6} />
         </Type>
         <ThumbnailContainer>
-          <Thumbnail src={image} />
+          <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
         </ThumbnailContainer>
       </ClickableArea>
       <HorizontalGroup>
@@ -128,7 +128,7 @@ const Card = ({
           <HorizontalGroup margin={1.6}>
             <IconGroup>
               {!isFavorited ? (
-                <cardTypes type="heart" />
+                <StyledIcon type="heart" />
               ) : (
                 <StyledIcon type="heart-filled" />
               )}

@@ -30,19 +30,17 @@ const avatarTypes = {
   image: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   firstName: PropTypes.string,
   lastName: PropTypes.string,
-  email: PropTypes.string,
   size: PropTypes.number,
 };
 
 const defaultProps = {
   image: '',
-  email: '',
   firstName: '',
   lastName: '',
   size: 3.2,
 };
 
-const Avatar = ({ image, size, firstName, lastName, email, ...restProps }) => {
+const Avatar = ({ image, size, firstName, lastName, ...restProps }) => {
   const getAlt = () => {
     if (firstName && lastName) {
       return `${firstName} ${lastName}`;
@@ -52,9 +50,6 @@ const Avatar = ({ image, size, firstName, lastName, email, ...restProps }) => {
     }
     if (lastName) {
       return lastName;
-    }
-    if (email) {
-      return email;
     }
     return 'A user';
   };

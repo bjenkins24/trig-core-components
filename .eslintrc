@@ -17,5 +17,11 @@
   "env": {
     "browser": true,
     "jest/globals": true
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/src/**"],
+      "settings": { "import/resolver": "webpack" }
+    }
+  ]
 }

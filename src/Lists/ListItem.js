@@ -51,7 +51,9 @@ const ListItem = ({ renderItem, renderContent, actions, ...restProps }) => {
   return (
     <Container {...restProps}>
       <Item>
-        <ItemContent>{renderItem()}</ItemContent>
+        <ItemContent data-testid="listItem__itemContent">
+          {renderItem()}
+        </ItemContent>
       </Item>
       <Content>{renderContent()}</Content>
       <Actions margin={1.6}>{actions.map((action) => action)}</Actions>

@@ -11,7 +11,7 @@ files.keys().forEach(files);
 
 const getTitle = ({ title, mappedIcon, type }) => {
   if (title) return title;
-  return get(mappedIcon, 'title', `${capitalize(type)} Icon`);
+  return get(mappedIcon, 'title', `${capitalize(type.replace('-', ' '))} Icon`);
 };
 
 const Container = styled.div`

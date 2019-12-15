@@ -177,7 +177,9 @@ const Body3Styles = css`
   ${buttonStyles};
 `;
 
-const Body3Component = styled.span`
+const Body3Component = styled.span.attrs({
+  'data-testid': 'typography',
+})`
   ${Body3Styles}
 `;
 
@@ -197,7 +199,11 @@ const TinyTextComponent = styled.span`
 `;
 
 const TinyText = (props) => (
-  <Typography Component={TinyTextComponent} {...props} />
+  <Typography
+    data-testid="typography"
+    Component={TinyTextComponent}
+    {...props}
+  />
 );
 
 const Container = styled.div`
@@ -235,7 +241,11 @@ const Typography = ({
   };
 
   return (
-    <Container className={className} style={getStyle()}>
+    <Container
+      data-testid="typography"
+      className={className}
+      style={getStyle()}
+    >
       <Component
         style={{ flexShrink: 0, paddingRight: '1.6rem' }}
         noMargin={marginBottom}

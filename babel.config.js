@@ -8,12 +8,17 @@ module.exports = function(api) {
     '@babel/env',
     ['@babel/preset-react', { modules: isTest ? 'commonjs' : false }],
   ];
+
   const plugins = [
     'babel-plugin-styled-components',
     '@babel/plugin-proposal-class-properties',
     'transform-react-remove-prop-types',
-    'transform-require-context',
   ];
+
+  if (isTest) {
+    plugins.push('transform-require-context');
+    plugins.push('@babel/plugin-transform-runtime');
+  }
 
   return {
     presets,
