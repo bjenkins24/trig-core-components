@@ -143,6 +143,7 @@ const Carousel = ({
       return (
         <Slide
           key={newIndex}
+          data-testid={`carousel__slide-${i + 1}`}
           slidesPerPage={slidesPerPage}
           slideSpacing={slideSpacing}
         >
@@ -162,43 +163,33 @@ const Carousel = ({
     transform: `translate3d(${currentPosition}%, 0px 0px)`,
   });
 
-  const isPrevDisabled = currentPosition === 0;
-  const isNextDisabled = isLastSlide || totalItems < defaultSlidesToScroll;
+  const isPrevShowing = currentPosition !== 0;
+  const isNextShowing = !isLastSlide && totalItems > defaultSlidesToScroll;
 
   return (
     <Slider {...restProps}>
-      {!isPrevDisabled && (
+      {isPrevShowing && (
         <Previous
           slideSpacing={slideSpacing}
           onClick={() => {
             setPosition('prev');
           }}
-          disabled={isPrevDisabled}
-          aria-label="See previous deck"
+          aria-label="Go to previous page"
         >
-          <Icon
-            className="Carousel__Arrow"
-            type="arrow-left"
-            color={!isPrevDisabled ? 'pc' : 'ps.100'}
-          />
+          <Icon className="Carousel__Arrow" type="arrow-left" color="pc" />
         </Previous>
       )}
       <SliderMask>
         <SliderContent style={animateProps}>{renderSlides()}</SliderContent>
       </SliderMask>
-      {!isNextDisabled && (
+      {isNextShowing && (
         <Next
           onClick={() => {
             setPosition('next');
           }}
-          disabled={isNextDisabled}
-          aria-label="See next deck"
+          aria-label="Go to next page"
         >
-          <Icon
-            className="Carousel__Arrow"
-            type="arrow-right"
-            color={!isNextDisabled ? 'pc' : 'ps.100'}
-          />
+          <Icon className="Carousel__Arrow" type="arrow-right" color="pc" />
         </Next>
       )}
     </Slider>

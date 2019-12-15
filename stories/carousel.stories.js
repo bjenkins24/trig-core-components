@@ -8,8 +8,10 @@ import Carousel from '../src/Carousel';
 import './consoleOverrides';
 import themeForProvider from './theme';
 
+const height = 20.4;
+
 const Item = styled.div`
-  height: 200px;
+  height: ${height}rem;
   width: 100%;
 `;
 
@@ -48,7 +50,7 @@ storiesOf('Carousel', module)
   .add('default', () => (
     <Carousel
       css={`
-        height: 200px;
+        height: ${height}rem;
       `}
     >
       <MyDeck />
