@@ -37,7 +37,6 @@ const buttonStyle = css`
   top: 0;
   bottom: 0;
   z-index: 20;
-  width: 4%;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -47,11 +46,13 @@ const buttonStyle = css`
 
 const Previous = styled.button.attrs({ type: 'button' })`
   ${buttonStyle}
+  width: calc(4% - ${({ slideSpacing }) => slideSpacing}rem);
   left: 0;
 `;
 
 const Next = styled.button.attrs({ type: 'button' })`
   ${buttonStyle}
+  width: 4%;
   right: 0;
 `;
 
@@ -168,6 +169,7 @@ const Carousel = ({
     <Slider {...restProps}>
       {!isPrevDisabled && (
         <Previous
+          slideSpacing={slideSpacing}
           onClick={() => {
             setPosition('prev');
           }}
