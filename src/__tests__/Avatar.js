@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from 'test/utils';
-// import user from '@testing-library/user-event';
 import Avatar from 'Avatar';
 
 const firstName = 'brian';
