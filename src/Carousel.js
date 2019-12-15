@@ -12,8 +12,7 @@ const Slider = styled.div`
   overflow-x: hidden;
 `;
 
-const getTransition = ({ disabled }) => {
-  if (disabled) return false;
+const getTransition = () => {
   return css`
     transition: all 200ms;
     & .Carousel__Arrow svg {
@@ -32,7 +31,7 @@ const buttonStyle = css`
   background: rgba(0, 0, 0, 0.3);
   color: white;
   border: 0;
-  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+  cursor: pointer;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -136,19 +135,15 @@ const Carousel = ({
 
   const renderSlides = () => {
     return [...Array(totalItems)].map((u, i) => {
-      let newIndex = i;
-      while (newIndex > totalItems - 1) {
-        newIndex -= totalItems;
-      }
       return (
         <Slide
-          key={newIndex}
+          key={`slide-${i + 1}`}
           data-testid={`carousel__slide-${i + 1}`}
           slidesPerPage={slidesPerPage}
           slideSpacing={slideSpacing}
         >
           {React.Children.map(children, (item, key) => {
-            if (key === newIndex) return React.cloneElement(item);
+            if (key === i) return React.cloneElement(item);
             return false;
           })}
         </Slide>
