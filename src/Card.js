@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Truncate from 'react-truncate';
-import { Heading3, Heading4, TinyText } from 'Typography';
+import { Heading1, Heading3, Heading4, TinyText } from 'Typography';
 import { HorizontalGroup } from 'Groups';
 import Image from 'Image';
 import Icon from 'Icon';
@@ -58,6 +58,12 @@ const Type = styled.div`
   display: flex;
   align-items: center;
   z-index: 1;
+`;
+
+const PlaceholderThumbnail = styled.div`
+  background: ${({ theme }) => theme.s};
+  color: ${({ theme }) => theme.sc};
+  padding: 3.2rem 1.6rem 1.6rem;
 `;
 
 const TypeIcon = styled(Icon)`
@@ -120,7 +126,19 @@ const Card = ({
           <TypeIcon type={type} size={1.6} />
         </Type>
         <ThumbnailContainer>
-          <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
+          {image ? (
+            <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
+          ) : (
+            <PlaceholderThumbnail>
+              <Heading1
+                css={`
+                  color: ${({ theme }) => theme.sc};
+                `}
+              >
+                <Truncate lines={4}>{title}</Truncate>
+              </Heading1>
+            </PlaceholderThumbnail>
+          )}
         </ThumbnailContainer>
       </ClickableArea>
       <HorizontalGroup>
