@@ -63,6 +63,10 @@ const SliderContent = styled(animated.div)`
   white-space: nowrap;
 `;
 
+const getWidth = ({ slidesPerPage, slideSpacing }) => {
+  return `calc(${100 / slidesPerPage}% - ${slideSpacing}rem)`;
+};
+
 const Slide = styled.div`
   box-sizing: border-box;
   z-index: 1;
@@ -70,24 +74,28 @@ const Slide = styled.div`
   position: relative;
   white-space: normal;
   vertical-align: top;
-  width: ${({ slidesPerPage }) => 100 / slidesPerPage}%;
+  width: ${getWidth};
+  margin-right: ${({ slideSpacing }) => slideSpacing}rem;
 `;
 
 const defaultProps = {
   slidesPerPage: 5,
   defaultSlidesToScroll: 5,
+  slideSpacing: 0.4,
 };
 
 const carouselTypes = {
   children: PropTypes.node.isRequired,
   slidesPerPage: PropTypes.number,
   defaultSlidesToScroll: PropTypes.number,
+  slideSpacing: PropTypes.number,
 };
 
 const Carousel = ({
   children,
   slidesPerPage,
   defaultSlidesToScroll,
+  slideSpacing,
   ...restProps
 }) => {
   const totalItems = React.Children.count(children);
@@ -132,7 +140,7 @@ const Carousel = ({
         newIndex -= totalItems;
       }
       return (
-        <Slide slidesPerPage={slidesPerPage}>
+        <Slide slidesPerPage={slidesPerPage} slideSpacing={slideSpacing}>
           {React.Children.map(children, (item, key) => {
             if (key === newIndex) return React.cloneElement(item);
             return false;

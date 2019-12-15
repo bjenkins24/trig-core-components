@@ -46,7 +46,11 @@ storiesOf('Carousel', module)
   ))
   .addDecorator(withKnobs)
   .add('default', () => (
-    <Carousel>
+    <Carousel
+      css={`
+        height: 200px;
+      `}
+    >
       <MyDeck />
       <MyDeck />
       <MyDeck />
