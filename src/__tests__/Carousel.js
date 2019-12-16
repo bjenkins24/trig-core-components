@@ -5,6 +5,15 @@ import Carousel from 'Carousel';
 
 const text = 'Slide';
 
+const makeGetButtons = (queryByLabelText) => {
+  return () => {
+    return {
+      prev: queryByLabelText(/go to previous page/i),
+      next: queryByLabelText(/go to next page/i),
+    };
+  };
+};
+
 // eslint-disable-next-line react/prop-types
 const buildCarousel = ({ slidesToRender, ...restProps }) => {
   const getSlides = () => {
@@ -43,12 +52,7 @@ describe('<Carousel>', () => {
       buildCarousel({ slidesToRender: 11, slidesPerPage: 5 })
     );
 
-    const getButtons = () => {
-      return {
-        prev: queryByLabelText(/go to previous page/i),
-        next: queryByLabelText(/go to next page/i),
-      };
-    };
+    const getButtons = makeGetButtons(queryByLabelText);
 
     let buttons = getButtons();
     expect(buttons.prev).toBeNull();
@@ -80,10 +84,20 @@ describe('<Carousel>', () => {
     expect(slide).toHaveStyleRule('width', 'calc(20% - 0.8rem)');
   });
 
-  it("doesn't render slides two pages away", () => {
-    const { queryByText } = render(
-      buildCarousel({ slidesToRender: 6, slidesPerPage: 2 })
+  it("doesn't render slides three pages away", () => {
+    const { queryByText, queryByLabelText, rerender } = render(
+      buildCarousel({ slidesToRender: 8, slidesPerPage: 2 })
     );
-    expect(queryByText(`${text} 5`)).toBeNull();
+    expect(queryByText(`${text} 7`)).toBeNull();
+
+    rerender(buildCarousel({ slidesToRender: 16, slidesPerPage: 2 }));
+
+    const getButtons = makeGetButtons(queryByLabelText);
+    const buttons = getButtons();
+    user.click(buttons.next);
+    user.click(buttons.next);
+    user.click(buttons.next);
+
+    expect(queryByText(`${text} 1`)).toBeNull();
   });
 });
