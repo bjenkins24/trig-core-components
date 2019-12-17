@@ -31,25 +31,16 @@ const DeckHover = styled.div`
   padding: 1.6rem;
 `;
 
-const getBackground = ({ theme, isHovered, image }) => {
-  if (image && !isHovered) {
+const getBackground = (isHovered) => ({ theme, image }) => {
+  const opacity = isHovered ? 0.6 : 0.25;
+  if (image) {
     return css`
       background: linear-gradient(0deg, ${rgba(theme.s, 0.9)} 25%, ${rgba(
       theme.sc,
       0.8
     )} 80%), url('${image}');
       background-size: cover;
-      box-shadow: inset 0 0 0 1000px ${rgba(theme.s, 0.25)};
-    `;
-  }
-  if (image && isHovered) {
-    return css`
-      background: linear-gradient(0deg, ${rgba(theme.s, 0.9)} 25%, ${rgba(
-      theme.sc,
-      0.8
-    )} 80%), url('${image}');
-      background-size: cover;
-      box-shadow: inset 0 0 0 1000px ${rgba(theme.s, 0.6)};
+      box-shadow: inset 0 0 0 1000px ${rgba(theme.s, opacity)};
     `;
   }
   return false;
@@ -58,13 +49,14 @@ const getBackground = ({ theme, isHovered, image }) => {
 const Wrapper = styled.div`
   position: relative;
   border-radius: ${({ theme }) => theme.br};
-  ${getBackground}
+  ${getBackground(false)}
   transition: all 200ms;
   width: 100%;
   height: 100%;
   color: ${({ theme }) => theme.sc};
   cursor: pointer;
   &:hover {
+    ${getBackground(true)}
     .deck__thumbnail {
       opacity: 0;
     }
@@ -73,6 +65,25 @@ const Wrapper = styled.div`
     }
   }
 `;
+
+const defaultProps = {
+  image: '',
+};
+
+const deckTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  totalCards: PropTypes.number.isRequired,
+  totalFollowers: PropTypes.number.isRequired,
+  image: PropTypes.string,
+  user: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    position: PropTypes.string,
+    email: PropTypes.string,
+    image: PropTypes.string,
+  }).isRequired,
+};
 
 const Deck = ({
   title,
@@ -148,7 +159,6 @@ const Deck = ({
         </Heading2>
         <Body2Component
           color="sc"
-          as="p"
           css={`
             margin: 0 0 0.8rem 0;
           `}
@@ -173,23 +183,7 @@ const Deck = ({
   );
 };
 
-Deck.defaultProps = {
-  image: '',
-};
-
-Deck.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  totalCards: PropTypes.number.isRequired,
-  totalFollowers: PropTypes.number.isRequired,
-  image: PropTypes.string,
-  user: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
-    position: PropTypes.string,
-    email: PropTypes.string,
-    image: PropTypes.string,
-  }).isRequired,
-};
+Deck.defaultProps = defaultProps;
+Deck.propTypes = deckTypes;
 
 export default Deck;
