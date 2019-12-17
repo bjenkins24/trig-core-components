@@ -17,16 +17,24 @@ const user = {
   email: 'brian@example',
 };
 
+const buildDeck = (props) => {
+  return (
+    <Deck
+      totalCards={totalCards}
+      totalFollowers={totalFollowers}
+      user={user}
+      title={title}
+      description={description}
+      image="http://exampleimage.png"
+      {...props}
+    />
+  );
+};
+
 describe('<Deck />', () => {
   it('renders and takes basic props', () => {
-    const { getByText, getAllByText } = render(
-      <Deck
-        totalCards={totalCards}
-        totalFollowers={totalFollowers}
-        user={user}
-        title={title}
-        description={description}
-      />
+    const { getByText, getAllByText, getByRole, rerender } = render(
+      buildDeck()
     );
 
     expect(getByText(`${totalCards}`)).toBeTruthy();
@@ -35,5 +43,16 @@ describe('<Deck />', () => {
     expect(getByText(`${user.position}`)).toBeTruthy();
     expect(getByText(`${user.firstName} ${user.lastName}`)).toBeTruthy();
     expect(getAllByText(`${title}`)).toBeTruthy();
+
+    expect(getByRole('link')).toHaveStyleRule(
+      'background',
+      expect.stringContaining('url')
+    );
+    rerender(buildDeck({ image: '' }));
+
+    expect(getByRole('link')).not.toHaveStyleRule(
+      'background',
+      expect.stringContaining('url')
+    );
   });
 });

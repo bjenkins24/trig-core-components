@@ -33,17 +33,26 @@ const DeckHover = styled.div`
 
 const getBackground = (isHovered) => ({ theme, image }) => {
   const opacity = isHovered ? 0.6 : 0.25;
+  let backgroundCss = css`
+    background: linear-gradient(
+      0deg,
+      ${rgba(theme.s, 0.9)} 25%,
+      ${rgba(theme.sc, 0.8)} 80%
+    );
+  `;
   if (image) {
-    return css`
+    backgroundCss = css`
       background: linear-gradient(0deg, ${rgba(theme.s, 0.9)} 25%, ${rgba(
       theme.sc,
       0.8
     )} 80%), url('${image}');
-      background-size: cover;
-      box-shadow: inset 0 0 0 1000px ${rgba(theme.s, opacity)};
-    `;
+   `;
   }
-  return false;
+  return css`
+    ${backgroundCss}
+    background-size: cover;
+    box-shadow: inset 0 0 0 1000px ${rgba(theme.s, opacity)};
+  `;
 };
 
 const Wrapper = styled.div`
