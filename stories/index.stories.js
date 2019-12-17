@@ -168,7 +168,10 @@ storiesOf('Deck', module)
           lastName: 'Jenkins',
           position: 'President, CEO',
         }}
-        image="https://code.org/images/fill-480x360/tutorials/hoc2018/danceparty-characters.jpg"
+        image={text(
+          'image',
+          'https://code.org/images/fill-480x360/tutorials/hoc2018/danceparty-characters.jpg'
+        )}
         totalFollowers={number('followers', 9)}
         totalCards={number('cards', 22)}
         title={text('title', 'Onboarding Support')}

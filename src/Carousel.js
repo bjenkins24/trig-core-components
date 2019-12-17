@@ -133,8 +133,23 @@ const Carousel = ({
     setCurrentPosition(currentPosition + totalMovement);
   };
 
+  const getSlidePage = (slidePosition) => {
+    return Math.floor(slidePosition / slidesPerPage) + 1;
+  };
+
+  const getCurrentPage = () => {
+    if (currentPosition === 0) {
+      return 1;
+    }
+    return Math.abs(currentPosition) / 100 + 1;
+  };
+
   const renderSlides = () => {
     return [...Array(totalItems)].map((u, i) => {
+      let renderSlide = true;
+      if (Math.abs(getCurrentPage() - getSlidePage(i)) >= 3) {
+        renderSlide = false;
+      }
       return (
         <Slide
           key={`slide-${i + 1}`}
@@ -142,10 +157,11 @@ const Carousel = ({
           slidesPerPage={slidesPerPage}
           slideSpacing={slideSpacing}
         >
-          {React.Children.map(children, (item, key) => {
-            if (key === i) return React.cloneElement(item);
-            return false;
-          })}
+          {renderSlide &&
+            React.Children.map(children, (item, key) => {
+              if (key === i) return React.cloneElement(item);
+              return false;
+            })}
         </Slide>
       );
     });
