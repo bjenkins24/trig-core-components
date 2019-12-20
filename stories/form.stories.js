@@ -132,5 +132,7 @@ storiesOf('Form', module)
     />
   ))
   .add('Tag', () => (
-    <Tag onRequestClose={action('hello')}>{text('content', 'Development')}</Tag>
+    <Tag onRequestRemove={action('hello')}>
+      {text('content', 'Development')}
+    </Tag>
   ));

@@ -20,7 +20,7 @@ const Content = styled(Body3)`
   cursor: default;
 `;
 
-const Close = styled.div`
+const Remove = styled.div`
   background: ${({ theme }) => theme.ss[300]};
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
@@ -44,7 +44,7 @@ const IconStyled = styled(Icon)`
 
 const tagTypes = {
   children: PropTypes.node.isRequired,
-  onRequestClose: PropTypes.func.isRequired,
+  onRequestRemove: PropTypes.func.isRequired,
   iconProps: iconTypes,
 };
 
@@ -52,15 +52,21 @@ const defaultProps = {
   iconProps: {},
 };
 
-const Tag = ({ children, onRequestClose, iconProps, ...restProps }) => {
+const Tag = ({ children, onRequestRemove, iconProps, ...restProps }) => {
   return (
-    <Container {...restProps}>
+    <Container data-testid="tag" {...restProps}>
       <Content weight="bold" color="sc">
         {children}
       </Content>
-      <Close onClick={onRequestClose}>
-        <IconStyled type="close" color="bs.200" size={0.8} {...iconProps} />
-      </Close>
+      <Remove aria-label="Remove" onClick={onRequestRemove}>
+        <IconStyled
+          title="Remove Button"
+          type="close"
+          color="bs.200"
+          size={0.8}
+          {...iconProps}
+        />
+      </Remove>
     </Container>
   );
 };
