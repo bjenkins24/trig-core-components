@@ -8,6 +8,7 @@ module.exports = {
     '<rootDir>/jest.setup.js',
     'jest-styled-components',
     '@testing-library/jest-dom/extend-expect',
+    'jest-axe/extend-expect',
   ],
   snapshotSerializers: ['enzyme-to-json/serializer'],
   testEnvironment: 'jest-environment-jsdom',

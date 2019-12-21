@@ -54,7 +54,7 @@ const defaultProps = {
 
 const Tag = ({ children, onRequestRemove, iconProps, ...restProps }) => {
   return (
-    <Container data-testid="tag" {...restProps}>
+    <Container {...restProps}>
       <Content weight="bold" color="sc">
         {children}
       </Content>
