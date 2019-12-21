@@ -51,9 +51,10 @@ const CloseButton = styled(Icon).attrs({ size: 1.6, type: 'close' })`
 const modalTypes = {
   children: PropTypes.node.isRequired,
   onRequestClose: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 };
 
-const Modal = ({ children, onRequestClose, ...restProps }) => {
+const Modal = ({ children, onRequestClose, isOpen, ...restProps }) => {
   return (
     <>
       <GlobalStyle />
@@ -61,6 +62,7 @@ const Modal = ({ children, onRequestClose, ...restProps }) => {
         contentLabel="Modal"
         closeTimeoutMS={transitionTimeMS}
         onRequestClose={onRequestClose}
+        isOpen={isOpen}
         {...restProps}
       >
         <CloseButton
