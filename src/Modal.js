@@ -63,7 +63,11 @@ const Modal = ({ children, onRequestClose, ...restProps }) => {
         onRequestClose={onRequestClose}
         {...restProps}
       >
-        <CloseButton onClick={onRequestClose} />
+        <CloseButton
+          role="button"
+          aria-label="Close"
+          onClick={onRequestClose}
+        />
         {children}
       </ReactModal>
     </>
