@@ -58,7 +58,7 @@ const Tag = ({ children, onRequestRemove, iconProps, ...restProps }) => {
       <Content weight="bold" color="sc">
         {children}
       </Content>
-      <Remove aria-label="Remove" onClick={onRequestRemove}>
+      <Remove aria-label="Remove" role="button" onClick={onRequestRemove}>
         <IconStyled
           title="Remove Button"
           type="close"

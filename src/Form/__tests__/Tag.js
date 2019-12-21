@@ -9,7 +9,13 @@ describe('<Tag />', () => {
     const testId = 'test';
     const exampleClass = 'example-class';
     const mockCallback = jest.fn();
-    const { getByText, getByLabelText, getByTitle, getByTestId } = render(
+    const {
+      getByText,
+      getByLabelText,
+      getByTitle,
+      getByTestId,
+      getByRole,
+    } = render(
       <Tag
         data-testid={testId}
         onRequestRemove={mockCallback}
@@ -19,11 +25,12 @@ describe('<Tag />', () => {
       </Tag>
     );
 
-    expect(getByText(tagText)).toBeTruthy();
+    expect(getByText(tagText)).toBeInTheDocument();
+    expect(getByRole('button')).toBeInTheDocument();
 
     user.click(getByLabelText('Remove'));
     expect(mockCallback.mock.calls.length).toEqual(1);
-    expect(getByTitle(/remove button/i)).toBeTruthy();
+    expect(getByTitle(/remove button/i)).toBeInTheDocument();
     expect(getByTestId(testId)).toHaveClass(exampleClass);
   });
 });
