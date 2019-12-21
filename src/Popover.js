@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Grow from '@material-ui/core/Grow';
+import { uniqueId } from 'lodash';
 import Popper from '@material-ui/core/Popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { Body1Styles } from './Typography';
@@ -31,7 +32,7 @@ const PopoverContainer = styled.div`
 const Popover = ({ children, renderPopover, preventClickRef }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  let id = useRef((Math.random() + 1).toString(36).substring(7)).current;
+  let id = useRef(uniqueId('popover')).current;
   id = open ? id : undefined;
 
   const onClose = () => {
@@ -58,14 +59,15 @@ const Popover = ({ children, renderPopover, preventClickRef }) => {
     return React.cloneElement(child, {
       'aria-describedby': id,
       role: 'button',
-      onClick: (event) => {
-        if (typeof child.onClick === 'function') {
-          child.onClick();
+      onClick: (e) => {
+        const { onClick } = child.props;
+        if (typeof onClick === 'function') {
+          onClick(e);
         }
 
-        if (shouldPreventClick(event)) return true;
+        if (shouldPreventClick(e)) return true;
 
-        return setAnchorEl(anchorEl ? null : event.currentTarget);
+        return setAnchorEl(anchorEl ? null : e.currentTarget);
       },
     });
   });

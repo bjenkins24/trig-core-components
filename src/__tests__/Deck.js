@@ -37,11 +37,11 @@ describe('<Deck />', () => {
       buildDeck()
     );
 
-    expect(getByText(`${totalCards}`)).toBeTruthy();
-    expect(getByText(`${totalFollowers}`)).toBeTruthy();
-    expect(getByText(`${description}`)).toBeTruthy();
-    expect(getByText(`${user.position}`)).toBeTruthy();
-    expect(getByText(`${user.firstName} ${user.lastName}`)).toBeTruthy();
+    expect(getByText(`${totalCards}`)).toBeInTheDocument();
+    expect(getByText(`${totalFollowers}`)).toBeInTheDocument();
+    expect(getByText(`${description}`)).toBeInTheDocument();
+    expect(getByText(`${user.position}`)).toBeInTheDocument();
+    expect(getByText(`${user.firstName} ${user.lastName}`)).toBeInTheDocument();
     expect(getAllByText(`${title}`)).toBeTruthy();
 
     expect(getByRole('link')).toHaveStyleRule(

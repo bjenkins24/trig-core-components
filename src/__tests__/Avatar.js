@@ -13,10 +13,10 @@ describe('<Avatar />', () => {
   it('renders and takes basic props', () => {
     const { getByTitle, rerender, getByText } = render(<Avatar />);
 
-    expect(getByTitle('A user')).toBeTruthy();
+    expect(getByTitle('A user')).toBeInTheDocument();
 
     rerender(<Avatar firstName={firstName} lastName={lastName} />);
-    expect(getByText(initials)).toBeTruthy();
+    expect(getByText(initials)).toBeInTheDocument();
   });
 
   it('only shows one initial with small avatar', () => {
@@ -25,12 +25,12 @@ describe('<Avatar />', () => {
       <Avatar size={1.6} firstName={firstName} lastName={lastName} />
     );
     expect(queryByText(initials)).toBeNull();
-    expect(getByText(`${lastInitial}`)).toBeTruthy();
+    expect(getByText(`${lastInitial}`)).toBeInTheDocument();
   });
 
   it('only renders one initial', () => {
     const { getByText } = render(<Avatar firstName={firstName} />);
-    expect(getByText(`${firstInitial}`)).toBeTruthy();
+    expect(getByText(`${firstInitial}`)).toBeInTheDocument();
   });
 
   it('renders image if it exists', () => {
@@ -39,12 +39,12 @@ describe('<Avatar />', () => {
       <Avatar image={testImage} firstName={firstName} lastName={lastName} />
     );
     expect(queryByText(initials)).toBeNull();
-    expect(getByAltText(fullName)).toBeTruthy();
+    expect(getByAltText(fullName)).toBeInTheDocument();
 
     rerender(<Avatar image={testImage} firstName={firstName} />);
-    expect(getByAltText(firstName)).toBeTruthy();
+    expect(getByAltText(firstName)).toBeInTheDocument();
 
     rerender(<Avatar image={testImage} lastName={lastName} />);
-    expect(getByAltText(lastName)).toBeTruthy();
+    expect(getByAltText(lastName)).toBeInTheDocument();
   });
 });

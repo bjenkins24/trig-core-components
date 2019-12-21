@@ -22,7 +22,7 @@ describe('<Button />', () => {
     expect(mockCallBack.mock.calls.length).toEqual(1);
 
     expect(button).toHaveClass(exampleClass);
-    expect(getByText(text)).toBeTruthy();
+    expect(getByText(text)).toBeInTheDocument();
   });
 
   it('renders Icon with icon prop', () => {
@@ -32,11 +32,11 @@ describe('<Button />', () => {
       <Button iconProps={{ type: 'deck', title }} />
     );
 
-    expect(queryByTitle(title)).toBeTruthy();
+    expect(queryByTitle(title)).toBeInTheDocument();
 
     // Check default title
     rerender(<Button iconProps={{ type: 'deck' }} />);
-    expect(queryByTitle(/deck icon/i)).toBeTruthy();
+    expect(queryByTitle(/deck icon/i)).toBeInTheDocument();
   });
 
   it('renders correct sizes', () => {

@@ -11,11 +11,11 @@ describe('<Checkbox />', () => {
       <Checkbox />
     );
 
-    expect(getByTestId('labelContainer')).toBeTruthy();
-    expect(getByRole('checkbox')).toBeTruthy();
+    expect(getByTestId('labelContainer')).toBeInTheDocument();
+    expect(getByRole('checkbox')).toBeInTheDocument();
 
     rerender(<Checkbox label={labelText} />);
-    expect(getByText(labelText)).toBeTruthy();
+    expect(getByText(labelText)).toBeInTheDocument();
   });
 
   it('renders custom with render props', () => {
@@ -33,16 +33,16 @@ describe('<Checkbox />', () => {
     );
 
     // It needs to be in a label container
-    expect(getByTestId('labelContainer')).toBeTruthy();
-    expect(getByRole('checkbox')).toBeTruthy();
-    expect(getByText(randomText)).toBeTruthy();
+    expect(getByTestId('labelContainer')).toBeInTheDocument();
+    expect(getByRole('checkbox')).toBeInTheDocument();
+    expect(getByText(randomText)).toBeInTheDocument();
   });
 
   it('shows and hides check', () => {
     const { getByTitle, getByRole, queryByTitle } = render(
       <Checkbox checked />
     );
-    expect(getByTitle(/check icon/i)).toBeTruthy();
+    expect(getByTitle(/check icon/i)).toBeInTheDocument();
     user.click(getByRole('checkbox'));
     expect(queryByTitle(/check icon/i)).toBeNull();
   });

@@ -23,10 +23,10 @@ describe('<LabelContainer />', () => {
   it('renders and takes basic props', () => {
     const { getByLabelText, getByTestId, container } = buildLabelContainer();
 
-    expect(getByLabelText(label)).toBeTruthy();
+    expect(getByLabelText(label)).toBeInTheDocument();
     expect(container.firstChild).toHaveStyleRule('width', '12rem');
     expect(container.firstChild).toHaveClass(exampleClass);
-    expect(getByTestId(inputId)).toBeTruthy();
+    expect(getByTestId(inputId)).toBeInTheDocument();
   });
 
   it('the input is accessible', async () => {

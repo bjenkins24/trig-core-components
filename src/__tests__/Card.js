@@ -36,20 +36,20 @@ describe('<Card />', () => {
       rerender,
     } = render(buildCard());
 
-    expect(getByText(totalFavorites.toString())).toBeTruthy();
-    expect(getByText(totalComments.toString())).toBeTruthy();
+    expect(getByText(totalFavorites.toString())).toBeInTheDocument();
+    expect(getByText(totalComments.toString())).toBeInTheDocument();
     expect(getAllByText(title)).toBeTruthy();
-    expect(getByTitle(/heart filled icon/i)).toBeTruthy();
-    expect(getByTestId(/card__avatar-null/i)).toBeTruthy();
+    expect(getByTitle(/heart filled icon/i)).toBeInTheDocument();
+    expect(getByTestId(/card__avatar-null/i)).toBeInTheDocument();
     expect(queryByAltText(alt)).toBeNull();
 
     rerender(buildCard({ isFavorited: false }));
-    expect(getByTitle(/heart icon/i)).toBeTruthy();
+    expect(getByTitle(/heart icon/i)).toBeInTheDocument();
   });
 
   it('renders thumbnail', () => {
     const { getByAltText } = render(buildCard({ image: 'testimage.png' }));
-    expect(getByAltText(alt)).toBeTruthy();
+    expect(getByAltText(alt)).toBeInTheDocument();
   });
 
   it('renders avatar', () => {
@@ -57,6 +57,6 @@ describe('<Card />', () => {
     const { getByText } = render(
       buildCard({ renderAvatar: () => <div>{avatarText}</div> })
     );
-    expect(getByText(avatarText)).toBeTruthy();
+    expect(getByText(avatarText)).toBeInTheDocument();
   });
 });

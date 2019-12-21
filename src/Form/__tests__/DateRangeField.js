@@ -24,8 +24,8 @@ describe('<DateRangeField />', () => {
   it('renders with basic props', () => {
     const { getAllByTitle, getByText } = render(<DateRangeFieldWrapper />);
 
-    expect(getByText(/starting/i)).toBeTruthy();
-    expect(getByText(/ending/i)).toBeTruthy();
+    expect(getByText(/starting/i)).toBeInTheDocument();
+    expect(getByText(/ending/i)).toBeInTheDocument();
     expect(getAllByTitle(/select date/i)).toBeTruthy();
   });
 });

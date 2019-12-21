@@ -56,22 +56,22 @@ describe('<Carousel>', () => {
 
     let buttons = getButtons();
     expect(buttons.prev).toBeNull();
-    expect(buttons.next).toBeTruthy();
+    expect(buttons.next).toBeInTheDocument();
 
     user.click(buttons.next);
     buttons = getButtons();
-    expect(buttons.prev).toBeTruthy();
-    expect(buttons.next).toBeTruthy();
+    expect(buttons.prev).toBeInTheDocument();
+    expect(buttons.next).toBeInTheDocument();
 
     user.click(buttons.next);
     buttons = getButtons();
-    expect(buttons.prev).toBeTruthy();
+    expect(buttons.prev).toBeInTheDocument();
     expect(buttons.next).toBeNull();
 
     user.click(buttons.prev);
     buttons = getButtons();
-    expect(buttons.prev).toBeTruthy();
-    expect(buttons.next).toBeTruthy();
+    expect(buttons.prev).toBeInTheDocument();
+    expect(buttons.next).toBeInTheDocument();
   });
 
   it('adds slide spacing and width correctly', () => {

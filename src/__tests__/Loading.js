@@ -6,6 +6,6 @@ describe('<Loading />', () => {
   it('renders and takes basic props', () => {
     const { getByTitle } = render(<Loading />);
 
-    expect(getByTitle(/loading icon/i)).toBeTruthy();
+    expect(getByTitle(/loading icon/i)).toBeInTheDocument();
   });
 });
