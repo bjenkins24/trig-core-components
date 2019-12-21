@@ -26,6 +26,7 @@ describe('<Tag />', () => {
     );
 
     expect(getByText(tagText)).toBeInTheDocument();
+    // Remove button
     expect(getByRole('button')).toBeInTheDocument();
 
     user.click(getByLabelText('Remove'));
