@@ -57,6 +57,7 @@ const Popover = ({ children, renderPopover, preventClickRef }) => {
   const trigger = React.Children.map(children, (child) => {
     return React.cloneElement(child, {
       'aria-describedby': id,
+      role: 'button',
       onClick: (event) => {
         if (typeof child.onClick === 'function') {
           child.onClick();
