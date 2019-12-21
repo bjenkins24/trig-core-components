@@ -8,6 +8,15 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { Body1Styles } from './Typography';
 import { placementType, refType } from './utils/propTypes';
 
+const PopoverContainer = styled.div`
+  ${Body1Styles}
+  border-radius: ${({ theme }) => theme.br};
+  background: ${({ theme }) => theme.p};
+  box-shadow: ${({ theme }) => theme.sh};
+  padding: 1.6rem;
+  color: ${({ theme }) => theme.pc};
+`;
+
 const popoverTypes = {
   preventClickRef: refType,
   placement: placementType,
@@ -19,15 +28,6 @@ const defaultProps = {
   placement: 'bottom',
   preventClickRef: null,
 };
-
-const PopoverContainer = styled.div`
-  ${Body1Styles}
-  border-radius: ${({ theme }) => theme.br};
-  background: ${({ theme }) => theme.p};
-  box-shadow: ${({ theme }) => theme.sh};
-  padding: 1.6rem;
-  color: ${({ theme }) => theme.pc};
-`;
 
 const Popover = ({ children, renderPopover, preventClickRef }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -59,15 +59,15 @@ const Popover = ({ children, renderPopover, preventClickRef }) => {
     return React.cloneElement(child, {
       'aria-describedby': id,
       role: 'button',
-      onClick: (e) => {
+      onClick: (event) => {
         const { onClick } = child.props;
         if (typeof onClick === 'function') {
-          onClick(e);
+          onClick(event);
         }
 
-        if (shouldPreventClick(e)) return true;
+        if (shouldPreventClick(event)) return true;
 
-        return setAnchorEl(anchorEl ? null : e.currentTarget);
+        return setAnchorEl(event.currentTarget);
       },
     });
   });
@@ -77,7 +77,10 @@ const Popover = ({ children, renderPopover, preventClickRef }) => {
       {trigger}
       <Popper id={id} open={open} anchorEl={anchorEl} transition>
         {({ TransitionProps }) => (
-          <ClickAwayListener onClickAway={onClose}>
+          <ClickAwayListener
+            data-testid="popover__clickAwayListener"
+            onClickAway={onClose}
+          >
             <Grow {...TransitionProps}>
               <PopoverContainer>
                 {renderPopover({ closePopover: onClose })}
