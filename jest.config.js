@@ -16,6 +16,7 @@ module.exports = {
     '**/src/**/*.js',
     '!dist/src/**/*.js',
     '!**/src/test/**/*.js',
+    '!**/src/**/index.js',
   ],
   coverageThreshold: {
     global: {

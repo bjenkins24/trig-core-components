@@ -4,7 +4,9 @@ import Separator from 'Separator';
 
 describe('<Separator />', () => {
   it('renders and takes basic props', () => {
-    const { container } = render(<Separator size={3} />);
+    const { container, rerender } = render(<Separator size={3} />);
     expect(container.firstChild).toHaveStyleRule('height', '3rem');
+    rerender(<Separator />);
+    expect(container.firstChild).toHaveStyleRule('height', '0.1rem');
   });
 });
