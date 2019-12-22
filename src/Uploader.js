@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone-uploader';
+import { uniqueId } from 'lodash';
 import { HorizontalGroup } from './Groups';
 import { List, ListItem, ListItemContent } from './Lists';
 import { Button } from './Buttons';
@@ -80,6 +81,7 @@ const uploaderTypes = {
   onUpload: PropTypes.func,
   onFileClick: PropTypes.func,
   className: PropTypes.string,
+  DropzoneComponent: PropTypes.node,
 };
 
 const defaultProps = {
@@ -89,6 +91,7 @@ const defaultProps = {
   onUpload: () => null,
   onFileClick: () => null,
   className: '',
+  DropzoneComponent: Dropzone,
 };
 
 const Uploader = ({
@@ -97,13 +100,14 @@ const Uploader = ({
   onUpload,
   onFileClick,
   onCancel,
+  DropzoneComponent,
   submitButtonContent,
   className,
   ...restProps
 }) => {
   return (
     <Container className={className}>
-      <Dropzone
+      <DropzoneComponent
         getUploadParams={() => {
           return { url: uploadUrl };
         }}
@@ -140,6 +144,7 @@ const Uploader = ({
                 </Body2>
               </InputContent>
               <input
+                data-testid="uploader__fileInput"
                 style={{ display: 'none' }}
                 type="file"
                 accept={accept}
@@ -159,7 +164,7 @@ const Uploader = ({
           const fileExtension = name.split('.').pop();
 
           const renderItem = previewUrl ? (
-            <PreviewImage src={previewUrl} />
+            <PreviewImage src={previewUrl} alt={`${name} preview`} />
           ) : (
             <Icon
               type={fileExtension}
@@ -171,6 +176,8 @@ const Uploader = ({
 
           return (
             <ListItem
+              role="button"
+              data-testid="uploader__listItem "
               onClick={() => onFileClick({ file: fileWithMeta, meta })}
               renderItem={() => renderItem}
               renderContent={() => (
@@ -181,11 +188,23 @@ const Uploader = ({
               )}
               actions={[
                 status !== 'done' ? (
-                  <Loading size={1.6} />
+                  <Loading key={uniqueId('actions')} size={1.6} />
                 ) : (
-                  <Icon type="check-circle" size={1.6} color="s" />
+                  <Icon
+                    key={uniqueId('actions')}
+                    type="check-circle"
+                    size={1.6}
+                    color="s"
+                  />
                 ),
-                <Remove type="close" color="s" size={1.6} onClick={remove} />,
+                <Remove
+                  role="button"
+                  key={uniqueId('actions')}
+                  type="close"
+                  color="s"
+                  size={1.6}
+                  onClick={remove}
+                />,
               ]}
             />
           );
@@ -208,6 +227,7 @@ const Uploader = ({
           return (
             <ButtonGroup>
               <CancelButton
+                data-testid="uploader__cancelButton"
                 onClick={() => {
                   files.forEach((file) => file.remove());
                   onCancel();
@@ -218,6 +238,7 @@ const Uploader = ({
                 Cancel
               </CancelButton>
               <SubmitFilesButton
+                data-testid="uploader__submitFiles"
                 size="lg"
                 onClick={() => {
                   onUploaderSubmit(
