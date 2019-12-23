@@ -37,8 +37,9 @@ const reducer = (state, action) => {
       return { ...state, selectedPosition: action.payload };
     case 'setLastPosition':
       return { ...state, lastPosition: action.payload };
+    /* istanbul ignore next */
     default:
-      throw new Error();
+      throw new Error('The action you dispatched was not allowed.');
   }
 };
 
