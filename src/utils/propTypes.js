@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 export const sizeProp = PropTypes.oneOf(['sm', 'md', 'lg', 'hg']);
 export const cardType = PropTypes.oneOf(['doc']);
 
-const percentType = (props, propName, componentName) => {
+export const percentType = (props, propName, componentName) => {
   const propValue = props[propName];
   if (typeof propValue === 'string' && !propValue.includes('%')) {
     return new Error(
