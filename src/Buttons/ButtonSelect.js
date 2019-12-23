@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Heading3, Heading4 } from '../Typography';
 import { getColor } from '../utils';
 import Icon from '../Icon';
-import iconTypePropTypes from '../Icon/iconTypePropTypes';
 
 const Container = styled.div`
   width: 14.8rem;
@@ -48,7 +47,7 @@ const buttonSelectTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  iconType: iconTypePropTypes.isRequired,
+  iconType: PropTypes.string.isRequired,
 };
 
 const ButtonSelect = ({ title, description, iconType, color }) => {

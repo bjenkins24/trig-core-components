@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { get, capitalize } from 'lodash';
 import { getColor } from '../utils';
 import mapIconTypes from './mapIconTypes';
-import iconTypePropTypes from './iconTypePropTypes';
 
 const files = require.context('./icons', false, /.*\.svg$/);
 files.keys().forEach(files);
@@ -48,7 +47,7 @@ const Count = styled.span`
 `;
 
 export const iconTypes = {
-  type: iconTypePropTypes.isRequired,
+  type: PropTypes.string.isRequired,
   size: PropTypes.number,
   title: PropTypes.string,
   desc: PropTypes.string,
@@ -101,7 +100,10 @@ const Icon = forwardRef(
         >
           <title>{getTitle({ title, mappedIcon, type })}</title>
           <desc>{desc}</desc>
-          <use xlinkHref={`#${mappedIcon.type}`} />
+          <use
+            data-testid={mappedIcon.type}
+            xlinkHref={`#${mappedIcon.type}`}
+          />
         </StyledSvg>
       </Container>
     );
