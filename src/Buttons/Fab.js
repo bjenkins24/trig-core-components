@@ -17,6 +17,9 @@ const Fab = styled.div`
   &:hover {
     background: ${getColorShade({ default: 's', shade: 600 })};
   }
+  & > * {
+    margin: 0 auto;
+  }
 `;
 
 export default Fab;

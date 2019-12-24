@@ -73,13 +73,7 @@ storiesOf('Button', module)
   .add('Fab', () => {
     return (
       <Fab>
-        <Icon
-          css={`
-            margin: 0 auto;
-          `}
-          type="cards"
-          color="sc"
-        />
+        <Icon type="cards" color="sc" />
       </Fab>
     );
   })
