@@ -37,5 +37,7 @@ describe('<ButtonToggle />', () => {
     // If we didn't override the onClick for the icon this would
     // get called three times
     expect(mockCallBack.mock.calls.length).toEqual(2);
+    // Run default case
+    user.click(buttons[2]);
   });
 });
