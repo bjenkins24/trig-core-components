@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { uniqueId } from 'lodash';
 import { components } from 'react-select';
 import SelectField from './SelectField';
 import { HorizontalGroup } from '../Groups';
@@ -68,7 +69,10 @@ const SelectTagField = ({ value, onChange, className, ...restProps }) => {
         <HorizontalGroup margin={0.8}>
           {value.reverse().map((item, key) => {
             return (
-              <Tag onRequestClose={() => onChange(removeTag(key))}>
+              <Tag
+                key={uniqueId('tag')}
+                onRequestClose={() => onChange(removeTag(key))}
+              >
                 {item.label}
               </Tag>
             );

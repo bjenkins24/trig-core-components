@@ -95,14 +95,17 @@ const SelectField = ({ options, label, size, ...restProps }) => {
           className="react-select-container"
           classNamePrefix="react-select"
           scTheme={scTheme}
-          theme={(theme) => ({
-            ...theme,
-            colors: {
-              ...theme.colors,
-              primary25: scTheme.ss[200],
-              primary: scTheme.s,
-            },
-          })}
+          theme={
+            /* istanbul ignore next */
+            (theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                primary25: scTheme.ss[200],
+                primary: scTheme.s,
+              },
+            })
+          }
           options={options}
           {...props}
         />
