@@ -38,12 +38,11 @@ describe('getColorContrastShade()', () => {
     expect(color).toEqual(theme.sc[shade]);
   });
   it('works with the default', () => {
-    const shade = 300;
-    const color = getColorContrastShade({ default: 'p', shade })({
+    const color = getColorContrastShade({ default: 'p' })({
       theme,
       color: 'not_existing',
     });
-    expect(color).toEqual(theme.pc[shade]);
+    expect(color).toEqual(theme.pc[600]);
   });
 });
 
@@ -57,11 +56,10 @@ describe('getColorShade()', () => {
     expect(color).toEqual(theme.s[shade]);
   });
   it('works with the default', () => {
-    const shade = 300;
-    const color = getColorShade({ default: 'p', shade })({
+    const color = getColorShade({ default: 'p' })({
       theme,
       color: 'not_existing',
     });
-    expect(color).toEqual(theme.p[shade]);
+    expect(color).toEqual(theme.p[600]);
   });
 });
