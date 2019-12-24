@@ -50,9 +50,15 @@ const buttonSelectTypes = {
   iconType: PropTypes.string.isRequired,
 };
 
-const ButtonSelect = ({ title, description, iconType, color }) => {
+const ButtonSelect = ({
+  title,
+  description,
+  iconType,
+  color,
+  ...restProps
+}) => {
   return (
-    <Container color={color}>
+    <Container color={color} {...restProps}>
       <IconContainer color={color}>
         <StyledIcon color={`${color}c`} type={iconType} size={3.2} />
       </IconContainer>
