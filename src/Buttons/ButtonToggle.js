@@ -79,6 +79,7 @@ const ButtonToggle = ({ children }) => {
         return (
           <Button
             style={animateProps}
+            role="button"
             isFirstChild={i === 0}
             isLastChild={totalChildren === i + 1}
             selected={selectedButton === i}
