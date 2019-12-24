@@ -14,8 +14,12 @@ const SelectFieldStyled = styled(SelectField)`
 const { ValueContainer, Placeholder } = components;
 
 /* eslint-disable react/prop-types */
-const CustomValueContainer = ({ children, ...props }) => {
-  const { isFocused, selectProps } = props;
+export const CustomValueContainer = ({
+  children,
+  selectProps,
+  isFocused,
+  ...props
+}) => {
   const { inputValue, placeholder } = selectProps;
   return (
     <ValueContainer {...props}>
@@ -71,7 +75,7 @@ const SelectTagField = ({ value, onChange, className, ...restProps }) => {
             return (
               <Tag
                 key={uniqueId('tag')}
-                onRequestClose={() => onChange(removeTag(key))}
+                onRequestRemove={() => onChange(removeTag(key))}
               >
                 {item.label}
               </Tag>

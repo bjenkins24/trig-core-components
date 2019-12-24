@@ -9,7 +9,7 @@
     "test:watch": "jest --watch --runInBand",
     "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --watch",
     "coverage": "open-cli coverage/lcov-report/index.html",
-    "vc": "npm run test:coverage && npm run coverage",
+    "t:oc": "npm run test:coverage && npm run coverage",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "webpack",
