@@ -25,10 +25,10 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-      statements: 65,
-      branches: 44,
-      lines: 66,
-      functions: 63,
+      statements: 80,
+      branches: 67,
+      functions: 75,
+      lines: 80,
     },
   },
   watchPlugins: [
