@@ -24,7 +24,7 @@
       "settings": { "import/resolver": "webpack" }
     },
     {
-      "files": ["**/__tests__/**"],
+      "files": ["**/__tests__/**", "**/src/test/**"],
       "rules": {
         "react/prop-types": 0,
         "jsx-a11y/click-events-have-key-events": 0,

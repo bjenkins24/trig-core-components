@@ -40,10 +40,12 @@ const stringFieldWithButtonTypes = {
   onSubmit: PropTypes.func.isRequired,
   buttonProps: PropTypes.shape(buttonTypes).isRequired,
   buttonContent: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
 
 const defaultProps = {
   width: 20,
+  className: '',
 };
 
 const StringFieldWithButton = ({
@@ -51,10 +53,11 @@ const StringFieldWithButton = ({
   onSubmit,
   buttonContent,
   buttonProps,
+  className,
   ...restProps
 }) => {
   return (
-    <Container width={width}>
+    <Container className={className} width={width}>
       <StyledStringField
         onKeyDown={(event) => {
           if (event.key === 'Enter') {

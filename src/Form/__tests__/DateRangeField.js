@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { render } from 'test/utils';
+import user from '@testing-library/user-event';
 import DateRangeField from 'Form/DateRangeField';
 
 const DateRangeFieldWrapper = () => {
@@ -22,10 +23,15 @@ const DateRangeFieldWrapper = () => {
 
 describe('<DateRangeField />', () => {
   it('renders with basic props', () => {
-    const { getAllByTitle, getByText } = render(<DateRangeFieldWrapper />);
+    const { getAllByTitle, getByText, getAllByRole, getByTitle } = render(
+      <DateRangeFieldWrapper />
+    );
 
+    const buttons = getAllByRole('button');
     expect(getByText(/starting/i)).toBeInTheDocument();
     expect(getByText(/ending/i)).toBeInTheDocument();
-    expect(getAllByTitle(/select date/i)).toBeTruthy();
+    expect(getAllByTitle(/select date/i)[0]).toBeInTheDocument();
+    user.click(buttons[0]);
+    expect(getByTitle(/arrow right icon/i)).toBeInTheDocument();
   });
 });
