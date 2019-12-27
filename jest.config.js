@@ -10,7 +10,6 @@ module.exports = {
     '@testing-library/jest-dom/extend-expect',
     'jest-axe/extend-expect',
   ],
-  snapshotSerializers: ['enzyme-to-json/serializer'],
   testEnvironment: 'jest-environment-jsdom',
   collectCoverageFrom: [
     '**/src/**/*.js',
