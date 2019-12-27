@@ -1,6 +1,6 @@
 {
   "name": "@trig-app/core-components",
-  "version": "0.1.14",
+  "version": "0.1.12",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -13,8 +13,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "webpack",
-    "publish": "npm run build && npm run test:coverage && np --no-tests",
-    "publish:no-checks": "np --no-tests",
+    "release": "npm run build && npm run test:coverage && np --no-tests",
+    "release:no-checks": "np --no-tests ",
     "npm-clean": "rimraf package-lock.json && rimraf node_modules && npm install",
     "lint": "eslint ."
   },
