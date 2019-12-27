@@ -24,3 +24,10 @@ jobs:
         npm test
       env:
         CI: true
+    - name: Codecov
+      uses: codecov/codecov-action@v1.0.5
+      with:
+        # Repository upload token - get it from codecov.io
+        token: 14db530f-e3a5-4472-8a5d-001872a90d6a
+        # Specify whether or not CI build should fail if Codecov runs into an error during upload
+        fail_ci_if_error: true
