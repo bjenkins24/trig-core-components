@@ -24,7 +24,7 @@
       "settings": { "import/resolver": "webpack" }
     },
     {
-      "files": ["**/__tests__/**", "**/src/test/**"],
+      "files": ["**/__tests__/**", "**/src/test/**", 'jest.setup.js'],
       "rules": {
         "react/prop-types": 0,
         "jsx-a11y/click-events-have-key-events": 0,

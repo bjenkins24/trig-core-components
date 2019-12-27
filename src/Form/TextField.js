@@ -7,7 +7,7 @@ import { widthType } from '../utils/propTypes';
 
 const TextArea = styled.textarea`
   ${inputStyles}
-  height: ${({ height }) => (height ? `${height}rem` : 'auto')};
+  height: ${({ height }) => `${height}rem`};
   padding: 1.6rem;
   resize: none;
 `;

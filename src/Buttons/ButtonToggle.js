@@ -85,9 +85,7 @@ const ButtonToggle = ({ children }) => {
             selected={selectedButton === i}
             onClick={() => {
               const onClick = get(child, 'props.onClick', () => false);
-              if (onClick) {
-                onClick();
-              }
+              onClick();
               setSelectedButton(i);
             }}
           >

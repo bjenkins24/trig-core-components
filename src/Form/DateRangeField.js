@@ -41,8 +41,8 @@ const syncStartEnd = ({ field, value, currentStart, currentEnd }) => {
   return fieldMap[field]();
 };
 
-const Button = styled.button.attrs({
-  type: 'button',
+const Button = styled.div.attrs({
+  role: 'button',
 })`
   cursor: pointer;
   outline: none;
@@ -93,19 +93,15 @@ const EndContent = styled(Body2)`
 const dateRangeFieldTypes = {
   startDate: PropTypes.instanceOf(Date),
   endDate: PropTypes.instanceOf(Date),
-  clearStart: PropTypes.func,
-  clearEnd: PropTypes.func,
-  onSelectStart: PropTypes.func,
-  onSelectEnd: PropTypes.func,
+  clearStart: PropTypes.func.isRequired,
+  clearEnd: PropTypes.func.isRequired,
+  onSelectStart: PropTypes.func.isRequired,
+  onSelectEnd: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
   startDate: null,
   endDate: null,
-  clearStart: () => null,
-  clearEnd: () => null,
-  onSelectStart: () => null,
-  onSelectEnd: () => null,
 };
 
 const DateRangeField = ({
@@ -158,10 +154,12 @@ const DateRangeField = ({
       start: {
         date: startDate,
         clear: clearStart,
+        removeTitleText: 'Remove start date',
       },
       end: {
         date: endDate,
         clear: clearEnd,
+        removeTitleText: 'Remove end date',
       },
     };
     const { date, clear } = typeMap[type];
@@ -181,7 +179,12 @@ const DateRangeField = ({
       <HorizontalGroup margin={1.6}>
         <span>{format(date, 'MMMM d, yyyy')}</span>
         <IconButton type="button" onClick={clear} ref={calendarRef}>
-          <Icon type="close" size={1.2} color="ps.200" />
+          <Icon
+            type="close"
+            size={1.2}
+            color="ps.200"
+            title={typeMap[type].removeTitleText}
+          />
         </IconButton>
       </HorizontalGroup>
     );
@@ -195,7 +198,7 @@ const DateRangeField = ({
           renderDatePicker({ closePopover, type: 'start' })
         }
       >
-        <Button hasDate={!!startDate}>
+        <Button data-testid="dateRangeField__start" hasDate={!!startDate}>
           <ContentContainer>
             <Body2 color="ps.200" className="DateRangeField__Button__Label">
               Starting
@@ -215,7 +218,7 @@ const DateRangeField = ({
           renderDatePicker({ closePopover, type: 'end' })
         }
       >
-        <Button hasDate={!!endDate}>
+        <Button data-testid="dateRangeField__end" hasDate={!!endDate}>
           <ContentContainer>
             <Body2 color="ps.200" className="DateRangeField__Button__Label">
               Ending

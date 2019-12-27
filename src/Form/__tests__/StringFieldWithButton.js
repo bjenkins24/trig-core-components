@@ -21,5 +21,6 @@ describe('<StringFieldWithButton />', () => {
     user.click(getByRole('button'));
     fireEvent.keyDown(getByRole('textbox'), { key: 'Enter', code: 13 });
     expect(mockCallBack.mock.calls.length).toEqual(2);
+    fireEvent.keyDown(getByRole('textbox'), { key: 't' });
   });
 });
