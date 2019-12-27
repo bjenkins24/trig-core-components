@@ -50,7 +50,7 @@ const Heading1Styles = css`
   color: ${getColor()};
   font-weight: 500;
   margin-top: 0;
-  margin-bottom: ${({ noMargin }) => (noMargin ? 0 : '1.6rem')};
+  margin-bottom: 1.6rem;
   ${buttonStyles};
 `;
 
@@ -68,7 +68,7 @@ const Heading2Styles = css`
   font-weight: 600;
   color: ${getColor('s')};
   margin-top: 0;
-  margin-bottom: ${({ noMargin }) => (noMargin ? 0 : '1.6rem')};
+  margin-bottom: 1.6rem;
   ${buttonStyles};
 `;
 
@@ -86,7 +86,7 @@ const Heading3Styles = css`
   font-weight: 600;
   color: ${getColor()};
   margin-top: 0;
-  margin-bottom: ${({ noMargin }) => (noMargin ? 0 : '1.6rem')};
+  margin-bottom: 1.6rem;
   ${buttonStyles};
 `;
 
@@ -103,7 +103,7 @@ const Heading4Styles = css`
   line-height: 1.7;
   color: ${getColor('bcs.200')};
   margin-top: 0;
-  margin-bottom: ${({ noMargin }) => (noMargin ? 0 : '1.6rem')};
+  margin-bottom: 1.6rem;
   ${buttonStyles};
 `;
 
@@ -214,44 +214,24 @@ const Container = styled.div`
 const typographyTypes = {
   Component: PropTypes.node.isRequired,
   separator: PropTypes.bool,
-  marginBottom: PropTypes.bool,
   className: PropTypes.string,
 };
 
 const defaultProps = {
   separator: false,
-  marginBottom: false,
   className: '',
 };
 
-const Typography = ({
-  Component,
-  separator,
-  marginBottom,
-  className,
-  ...restProps
-}) => {
+const Typography = ({ Component, separator, className, ...restProps }) => {
   if (!separator) return <Component className={className} {...restProps} />;
 
-  const getStyle = () => {
-    if (marginBottom) {
-      return { marginBottom: '1.6rem' };
-    }
-    return {};
-  };
-
   return (
-    <Container
-      data-testid="typography"
-      className={className}
-      style={getStyle()}
-    >
+    <Container data-testid="typography" className={className}>
       <Component
         style={{ flexShrink: 0, paddingRight: '1.6rem' }}
-        noMargin={marginBottom}
         {...restProps}
       />
-      <Separator />
+      <Separator data-testid="typography__separator" />
     </Container>
   );
 };
