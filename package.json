@@ -13,6 +13,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "webpack",
+    "publish": "npm run build && npm run test:coverage && np --no-tests",
+    "publish:no-checks": "np --no-tests",
     "npm-clean": "rimraf package-lock.json && rimraf node_modules && npm install",
     "lint": "eslint ."
   },
@@ -83,6 +85,7 @@
     "lint-staged": "^9.2.0",
     "lodash": "^4.17.11",
     "mockdate": "^2.0.5",
+    "np": "^5.2.1",
     "open-cli": "^5.0.0",
     "precise-commits": "^1.0.2",
     "prettier": "1.18.2",

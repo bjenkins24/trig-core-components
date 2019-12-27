@@ -1,5 +1,5 @@
 const path = require('path');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   mode: 'production',
@@ -21,7 +21,9 @@ module.exports = {
     libraryTarget: 'umd',
     globalObject: 'this',
   },
-  plugins: [new BundleAnalyzerPlugin()],
+  plugins: [
+    /* new BundleAnalyzerPlugin() */
+  ],
   externals: [
     'styled-components',
     'lodash',
