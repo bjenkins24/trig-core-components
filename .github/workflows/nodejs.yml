@@ -2,6 +2,10 @@ name: Node CI
 
 on: [push]
 
+env:
+    TRIG_NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+    CODE_COV_TOKEN: ${{ secrets.CODE_COV_TOKEN }}
+
 jobs:
   build:
 
@@ -19,6 +23,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install and test
       run: |
+        npm config set //registry.npmjs.org/:_authToken=$TRIG_NPM_TOKEN
         npm ci
         npm run lint
         npm test
@@ -28,6 +33,6 @@ jobs:
       uses: codecov/codecov-action@v1.0.5
       with:
         # Repository upload token - get it from codecov.io
-        token: 14db530f-e3a5-4472-8a5d-001872a90d6a
+        token: $CODE_COV_TOKEN
         # Specify whether or not CI build should fail if Codecov runs into an error during upload
         fail_ci_if_error: true
