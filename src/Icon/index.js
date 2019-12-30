@@ -45,7 +45,7 @@ import Underline from './icons/Underline';
 export { FileIcon };
 
 export const iconComponents = {
-  aggregrate: Aggregate,
+  aggregate: Aggregate,
   'arrow-down': ArrowDown,
   'arrow-left': ArrowLeft,
   'arrow-right': ArrowRight,
