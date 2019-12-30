@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { HorizontalGroup } from '../Groups';
 import { Body3 } from '../Typography';
-import Icon, { iconTypes } from '../Icon';
+import Icon from '../Icon';
+import { iconTypes } from '../Icon/IconWrapper';
 
 const Container = styled(HorizontalGroup)`
   height: 2.8rem;
