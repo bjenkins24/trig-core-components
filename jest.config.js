@@ -16,6 +16,7 @@ module.exports = {
     '!dist/src/**/*.js',
     '!**/src/test/**/*.js',
     '!**/src/index.js',
+    '!**/src/Icon/icons/**/*.js',
     '!**/src/Lists/index.js',
     '!**/src/utils/index.js',
     '!**/src/Form/index.js',

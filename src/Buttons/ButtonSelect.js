@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Heading3, Heading4 } from '../Typography';
-import { getColor } from '../utils';
-import Icon from '../Icon';
+import Icon, { iconComponents } from 'Icon';
+import { Heading3, Heading4 } from 'Typography';
+import { getColor } from 'utils';
 
 const Container = styled.div`
   width: 14.8rem;
@@ -29,10 +29,6 @@ const IconContainer = styled.div`
   background: ${getColor()};
 `;
 
-const StyledIcon = styled(Icon)`
-  margin: 0 auto;
-`;
-
 const Title = styled(Heading3)`
   text-align: center;
 `;
@@ -47,7 +43,7 @@ const buttonSelectTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  iconType: PropTypes.string.isRequired,
+  iconType: PropTypes.oneOf(Object.keys(iconComponents)).isRequired,
 };
 
 const ButtonSelect = ({
@@ -60,7 +56,14 @@ const ButtonSelect = ({
   return (
     <Container color={color} {...restProps}>
       <IconContainer color={color}>
-        <StyledIcon color={`${color}c`} type={iconType} size={3.2} />
+        <Icon
+          type={iconType}
+          css={`
+            margin: 0 auto;
+          `}
+          color={`${color}c`}
+          size={3.2}
+        />
       </IconContainer>
       <Title>{title}</Title>
       <Description>{description}</Description>

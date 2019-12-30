@@ -1,11 +1,16 @@
-const prefix = 'type-';
+import File from './icons/File';
+import TypeCode from './icons/TypeCode';
+import TypeDoc from './icons/TypeDoc';
+import TypeXls from './icons/TypeXls';
+import TypePpt from './icons/TypePpt';
+import TypeYoutube from './icons/TypeYoutube';
 
-const terminal = { type: `${prefix}code`, title: 'Terminal Icon' };
-const js = { type: `${prefix}code`, title: 'Javascript Icon' };
-const docx = { type: `${prefix}doc`, title: 'Microsoft Word Document Icon' };
-const xls = { type: `${prefix}xls`, result: 'Microsoft Excel Icon' };
-const ppt = { type: `${prefix}ppt`, result: 'Microsoft Powerpoint Icon' };
-const youtube = { type: `${prefix}youtube`, title: 'Youtube Video' };
+const terminal = { type: TypeCode, title: 'Terminal Icon' };
+const js = { type: TypeCode, title: 'Javascript Icon' };
+const docx = { type: TypeDoc, title: 'Microsoft Word Document Icon' };
+const xls = { type: TypeXls, title: 'Microsoft Excel Icon' };
+const ppt = { type: TypePpt, title: 'Microsoft Powerpoint Icon' };
+const youtube = { type: TypeYoutube, title: 'Youtube Video' };
 
 const types = {
   // Code
@@ -53,5 +58,5 @@ export default (type) => {
   if (typeof types[type] !== 'undefined') {
     return types[type];
   }
-  return { type };
+  return { type: File, title: 'File Icon' };
 };

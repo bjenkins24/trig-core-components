@@ -97,10 +97,10 @@ storiesOf('Button', module)
   .add('Toggle', () => {
     return (
       <ButtonToggle>
-        <Icon onClick={action('clicked row')} type="row-view" size={1.6} />
+        <Icon type="row-view" onClick={action('clicked row')} size={1.6} />
         <Icon
-          onClick={action('clicked thumbnail')}
           type="thumbnail-view"
+          onClick={action('clicked thumbnail')}
           size={1.6}
         />
       </ButtonToggle>
@@ -123,9 +123,7 @@ storiesOf('Icons', module)
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
   .addDecorator(withKnobs)
-  .add('default', () => (
-    <Icon size={number('size', 3.2)} type={select('Icon', icons, 'deck')} />
-  ))
+  .add('default', () => <Icon type="deck" size={number('size', 3.2)} />)
   .add('with count', () => (
     <div
       css={`

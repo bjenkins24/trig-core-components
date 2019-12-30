@@ -5,7 +5,7 @@ import Truncate from 'react-truncate';
 import { Heading1, Heading3, Heading4, TinyText } from 'Typography';
 import { HorizontalGroup } from 'Groups';
 import Image from 'Image';
-import Icon from 'Icon';
+import Icon, { FileIcon } from 'Icon';
 import { cardType } from 'utils/propTypes';
 import { format } from 'utils/dateFns';
 
@@ -66,7 +66,7 @@ const PlaceholderThumbnail = styled.div`
   padding: 3.2rem 1.6rem 1.6rem;
 `;
 
-const TypeIcon = styled(Icon)`
+const TypeIcon = styled(FileIcon)`
   margin: 0 auto;
 `;
 
@@ -153,7 +153,7 @@ const Card = ({
               <TinyText color="s">{totalFavorites}</TinyText>
             </IconGroup>
             <IconGroup>
-              <StyledIcon type="comments" />
+              <StyledIcon type="comment" />
               <TinyText color="s">{totalComments}</TinyText>
             </IconGroup>
           </HorizontalGroup>

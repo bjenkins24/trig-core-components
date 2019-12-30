@@ -1,116 +1,105 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { get, capitalize } from 'lodash';
-import { getColor } from '../utils';
-import mapIconTypes from './mapIconTypes';
+import { get } from 'lodash';
+import FileIcon from './FileIcon';
+import Aggregate from './icons/Aggregate';
+import ArrowDown from './icons/ArrowDown';
+import ArrowLeft from './icons/ArrowLeft';
+import ArrowRight from './icons/ArrowRight';
+import ArrowUp from './icons/ArrowUp';
+import Avatar from './icons/Avatar';
+import Bell from './icons/Bell';
+import Bold from './icons/Bold';
+import Calendar from './icons/Calendar';
+import Cards from './icons/Cards';
+import Check from './icons/Check';
+import CheckCircle from './icons/CheckCircle';
+import Close from './icons/Close';
+import Code from './icons/Code';
+import Comment from './icons/Comment';
+import Deck from './icons/Deck';
+import Document from './icons/Document';
+import File from './icons/File';
+import Followers from './icons/Followers';
+import Heart from './icons/Heart';
+import HeartFilled from './icons/HeartFilled';
+import HorizontalDots from './icons/HorizontalDots';
+import Italic from './icons/Italic';
+import Link from './icons/Link';
+import ListOrdered from './icons/ListOrdered';
+import ListUnordered from './icons/ListUnordered';
+import Loading from './icons/Loading';
+import NumberOne from './icons/NumberOne';
+import NumberTwo from './icons/NumberTwo';
+import Organize from './icons/Organize';
+import Quote from './icons/Quote';
+import RowView from './icons/RowView';
+import ThumbnailView from './icons/ThumbnailView';
+import TypeCode from './icons/TypeCode';
+import TypeDoc from './icons/TypeDoc';
+import TypePpt from './icons/TypePpt';
+import TypeXls from './icons/TypeXls';
+import TypeYoutube from './icons/TypeYoutube';
+import Underline from './icons/Underline';
 
-const files = require.context('./icons', false, /.*\.svg$/);
-files.keys().forEach(files);
+export { FileIcon };
 
-const getTitle = ({ title, mappedIcon, type }) => {
-  if (title) return title;
-  return get(mappedIcon, 'title', `${capitalize(type.replace('-', ' '))} Icon`);
+export const iconComponents = {
+  aggregrate: Aggregate,
+  'arrow-down': ArrowDown,
+  'arrow-left': ArrowLeft,
+  'arrow-right': ArrowRight,
+  'arrow-up': ArrowUp,
+  avatar: Avatar,
+  bell: Bell,
+  bold: Bold,
+  calendar: Calendar,
+  cards: Cards,
+  check: Check,
+  'check-circle': CheckCircle,
+  close: Close,
+  code: Code,
+  comment: Comment,
+  deck: Deck,
+  document: Document,
+  file: File,
+  followers: Followers,
+  heart: Heart,
+  'heart-filled': HeartFilled,
+  'horizontal-dots': HorizontalDots,
+  italic: Italic,
+  link: Link,
+  'list-ordered': ListOrdered,
+  'list-unordered': ListUnordered,
+  loading: Loading,
+  'number-one': NumberOne,
+  'number-two': NumberTwo,
+  organize: Organize,
+  quote: Quote,
+  'row-view': RowView,
+  'thumbnail-view': ThumbnailView,
+  'type-code': TypeCode,
+  'type-doc': TypeDoc,
+  'type-ppt': TypePpt,
+  'type-xls': TypeXls,
+  'type-youtube': TypeYoutube,
+  underline: Underline,
 };
 
-const Container = styled.div`
-  display: flex;
-  position: relative;
-`;
-
-const StyledSvg = styled.svg`
-  color: ${({ color }) => (color ? getColor() : 'inherit')};
-  margin: 0 auto;
-  transition: all 0.2s;
-`;
-
-const CountContainer = styled.div`
-  width: ${({ count }) => (count > 9 ? '1.7rem' : '1.4rem')};
-  height: 1.4rem;
-  background: ${({ theme }) => theme.s};
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  right: -0.6rem;
-  top: -0.6rem;
-`;
-
-const Count = styled.span`
-  margin: 0 auto;
-  padding-top: 0.1rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  line-height: 1.3;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.sc};
-`;
-
-export const iconTypes = {
-  type: PropTypes.string.isRequired,
-  size: PropTypes.number,
-  title: PropTypes.string,
-  desc: PropTypes.string,
-  color: PropTypes.string,
-  count: PropTypes.number,
-  defaultIfNoExtension: PropTypes.string,
+const iconTypes = {
+  type: PropTypes.oneOf(Object.keys(iconComponents)).isRequired,
 };
 
-const defaultProps = {
-  size: 3.2,
-  desc: '',
-  title: '',
-  count: 0,
-  color: null,
-  defaultIfNoExtension: null,
-};
-
-const Icon = forwardRef(
-  (
-    {
-      type,
-      size,
-      title,
-      desc,
-      color,
-      count,
-      defaultIfNoExtension,
-      ...restProps
-    },
-    ref
-  ) => {
-    const mappedIcon = mapIconTypes(type);
-    if (!mappedIcon.type.includes('type-') && defaultIfNoExtension) {
-      mappedIcon.type = defaultIfNoExtension;
-    }
-
-    return (
-      <Container {...restProps}>
-        {count !== 0 && (
-          <CountContainer count={count}>
-            <Count color="sc">{count}</Count>
-          </CountContainer>
-        )}
-        <StyledSvg
-          ref={ref}
-          width={`${size}rem`}
-          height={`${size}rem`}
-          color={color}
-          role="img"
-        >
-          <title>{getTitle({ title, mappedIcon, type })}</title>
-          <desc>{desc}</desc>
-          <use
-            data-testid={mappedIcon.type}
-            xlinkHref={`#${mappedIcon.type}`}
-          />
-        </StyledSvg>
-      </Container>
-    );
+const Icon = ({ type, ...restProps }) => {
+  const IconComponent = get(iconComponents, type, '');
+  if (!IconComponent) {
+    // eslint-disable-next-line no-console
+    console.error(`The icon type you passed: ${type}, does not exist`);
+    return false;
   }
-);
+  return <IconComponent {...restProps} />;
+};
 
 Icon.propTypes = iconTypes;
-Icon.defaultProps = defaultProps;
 
 export default Icon;

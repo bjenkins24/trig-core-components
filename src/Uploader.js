@@ -7,7 +7,7 @@ import { HorizontalGroup } from './Groups';
 import { List, ListItem, ListItemContent } from './Lists';
 import { Button } from './Buttons';
 import Image from './Image';
-import Icon from './Icon';
+import Icon, { FileIcon } from './Icon';
 import Loading from './Loading';
 import { Body2 } from './Typography';
 
@@ -166,12 +166,7 @@ const Uploader = ({
           const renderItem = previewUrl ? (
             <PreviewImage src={previewUrl} alt={`${name} preview`} />
           ) : (
-            <Icon
-              type={fileExtension}
-              color="pc"
-              size={2.4}
-              defaultIfNoExtension="file"
-            />
+            <FileIcon type={fileExtension} color="pc" size={2.4} />
           );
 
           return (

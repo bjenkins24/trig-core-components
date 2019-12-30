@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import styled, { keyframes, css } from 'styled-components';
 import { sizeProp } from 'utils/propTypes';
 import { HorizontalGroup } from 'Groups';
-import Icon, { iconTypes } from 'Icon';
+import Icon from 'Icon';
+import { iconTypes } from 'Icon/IconWrapper';
 import { BodyBiggest, Body1, Body2, Body3 } from 'Typography';
 
 export const textMap = {
