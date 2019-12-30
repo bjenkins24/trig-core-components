@@ -14,7 +14,8 @@
     "build-storybook": "build-storybook",
     "build": "webpack",
     "release": "npm run build && npm run test:coverage && np --no-tests",
-    "release:no-checks": "np --no-tests ",
+    "release:no-checks": "np --no-tests",
+    "release:yolo": "np --yolo",
     "npm-clean": "rimraf package-lock.json && rimraf node_modules && npm install",
     "lint": "eslint ."
   },
