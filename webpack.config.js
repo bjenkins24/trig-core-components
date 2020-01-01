@@ -13,6 +13,7 @@ module.exports = {
     './Groups': './src/Groups.js',
     './Icon': './src/Icon/index.js',
     './Buttons': './src/Buttons/index.js',
+    './Logo': './src/Logo.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

@@ -8,6 +8,7 @@ import { ThemeProvider } from 'styled-components';
 import './consoleOverrides';
 import { Button, ButtonToggle, Fab, ButtonSelect } from '../src/Buttons';
 import Icon from '../src/Icon';
+import Logo from '../src/Logo';
 import Avatar from '../src/Avatar';
 import Popover from '../src/Popover';
 import Deck from '../src/Deck';
@@ -137,6 +138,15 @@ storiesOf('Icons', module)
         count={number('count', 5)}
       />
     </div>
+  ));
+
+storiesOf('Logo', module)
+  .addDecorator((story) => (
+    <ThemeProvider theme={theme}>{story()}</ThemeProvider>
+  ))
+  .addDecorator(withKnobs)
+  .add('default', () => (
+    <Logo type={select('type', ['dark', 'light'], 'dark')} />
   ));
 
 storiesOf('Deck', module)
