@@ -36,6 +36,7 @@
   "homepage": "https://github.com/bjenkins24/trig-core-components#readme",
   "dependencies": {
     "@material-ui/core": "^4.5.1",
+    "@trig-app/constants": "^0.1.1",
     "date-fns": "^2.0.1",
     "polished": "^3.4.1",
     "react-calendar": "^2.19.2",
