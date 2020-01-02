@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { get } from 'lodash';
+import { device } from '@trig-app/constants';
 import Separator from './Separator';
 import { getColor } from './utils';
 
@@ -30,6 +31,9 @@ const buttonStyles = ({ as }) => {
 
 const HugeStyles = css`
   font-size: 6.4rem;
+  @media ${device.xs} {
+    font-size: 4.8rem;
+  }
   line-height: 1.3;
   color: ${getColor()};
   font-weight: 500;
