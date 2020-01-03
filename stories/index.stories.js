@@ -125,6 +125,7 @@ storiesOf('Icons', module)
   ))
   .addDecorator(withKnobs)
   .add('default', () => <Icon type="deck" size={number('size', 3.2)} />)
+  .add('hamburger', () => <Icon type="hamburger" size={number('size', 3.2)} />)
   .add('with count', () => (
     <div
       css={`

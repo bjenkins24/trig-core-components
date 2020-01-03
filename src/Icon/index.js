@@ -21,6 +21,7 @@ import Deck from './icons/Deck';
 import Document from './icons/Document';
 import File from './icons/File';
 import Followers from './icons/Followers';
+import Hamburger from './icons/Hamburger';
 import Heart from './icons/Heart';
 import HeartFilled from './icons/HeartFilled';
 import HorizontalDots from './icons/HorizontalDots';
@@ -64,6 +65,7 @@ export const iconComponents = {
   document: Document,
   file: File,
   followers: Followers,
+  hamburger: Hamburger,
   heart: Heart,
   'heart-filled': HeartFilled,
   'horizontal-dots': HorizontalDots,
