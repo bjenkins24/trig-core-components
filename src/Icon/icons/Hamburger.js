@@ -38,11 +38,12 @@ const Bar3 = styled.div`
 
 const hamburgerTypes = {
   color: PropTypes.string,
-  onClick: PropTypes.function.isRequired,
+  onClick: PropTypes.function,
 };
 
 const defaultProps = {
   color: 'pc',
+  onClick: () => null,
 };
 
 const Hamburger = ({ color, onClick, ...restProps }) => {
@@ -51,7 +52,7 @@ const Hamburger = ({ color, onClick, ...restProps }) => {
     <Container
       onClick={() => {
         setIsOpen(!isOpen);
-        onClick(isOpen);
+        onClick();
       }}
       {...restProps}
     >
