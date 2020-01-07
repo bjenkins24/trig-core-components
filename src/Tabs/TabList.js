@@ -5,7 +5,7 @@ import { useSpring, animated } from 'react-spring';
 import { HorizontalGroup } from '../Groups';
 import { TabContext } from './Tabs';
 
-const separatorHeight = '0.3rem';
+const separatorHeight = '0.2rem';
 
 const Separator = styled.div`
   height: ${separatorHeight};
