@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { getColor } from 'utils';
@@ -38,24 +38,17 @@ const Bar3 = styled.div`
 
 const hamburgerTypes = {
   color: PropTypes.string,
-  onClick: PropTypes.function,
+  isOpen: PropTypes.bool,
 };
 
 const defaultProps = {
   color: 'pc',
-  onClick: () => null,
+  isOpen: false,
 };
 
-const Hamburger = ({ color, onClick, ...restProps }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Hamburger = ({ color, isOpen, ...restProps }) => {
   return (
-    <Container
-      onClick={() => {
-        setIsOpen(!isOpen);
-        onClick();
-      }}
-      {...restProps}
-    >
+    <Container {...restProps}>
       <Bar1 isOpen={isOpen} color={color} />
       <Bar2 data-testid="hamburger__bar2" isOpen={isOpen} color={color} />
       <Bar3 isOpen={isOpen} color={color} />
