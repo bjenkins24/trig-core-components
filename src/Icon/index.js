@@ -19,6 +19,7 @@ import Code from './icons/Code';
 import Comment from './icons/Comment';
 import Deck from './icons/Deck';
 import Document from './icons/Document';
+import Facebook from './icons/Facebook';
 import File from './icons/File';
 import Followers from './icons/Followers';
 import Hamburger from './icons/Hamburger';
@@ -27,6 +28,7 @@ import HeartFilled from './icons/HeartFilled';
 import HorizontalDots from './icons/HorizontalDots';
 import Italic from './icons/Italic';
 import Link from './icons/Link';
+import LinkedIn from './icons/LinkedIn';
 import ListOrdered from './icons/ListOrdered';
 import ListUnordered from './icons/ListUnordered';
 import Loading from './icons/Loading';
@@ -36,6 +38,7 @@ import Organize from './icons/Organize';
 import Quote from './icons/Quote';
 import RowView from './icons/RowView';
 import ThumbnailView from './icons/ThumbnailView';
+import Twitter from './icons/Twitter';
 import TypeCode from './icons/TypeCode';
 import TypeDoc from './icons/TypeDoc';
 import TypePpt from './icons/TypePpt';
@@ -63,6 +66,7 @@ export const iconComponents = {
   comment: Comment,
   deck: Deck,
   document: Document,
+  facebook: Facebook,
   file: File,
   followers: Followers,
   hamburger: Hamburger,
@@ -71,6 +75,7 @@ export const iconComponents = {
   'horizontal-dots': HorizontalDots,
   italic: Italic,
   link: Link,
+  linkedIn: LinkedIn,
   'list-ordered': ListOrdered,
   'list-unordered': ListUnordered,
   loading: Loading,
@@ -79,6 +84,7 @@ export const iconComponents = {
   organize: Organize,
   quote: Quote,
   'row-view': RowView,
+  twitter: Twitter,
   'thumbnail-view': ThumbnailView,
   'type-code': TypeCode,
   'type-doc': TypeDoc,
