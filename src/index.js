@@ -58,6 +58,7 @@ export const {
 } = Typography;
 
 export { default as Image } from './Image';
+export { default as Logo } from './Logo';
 export { default as Avatar } from './Avatar';
 export { default as Carousel } from './Carousel';
 export { default as Deck } from './Deck';
