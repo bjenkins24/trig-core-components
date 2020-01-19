@@ -162,6 +162,7 @@ export const buttonTypes = {
   iconProps: PropTypes.shape(iconTypes),
   size: sizeProp,
   disabled: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {
@@ -169,16 +170,63 @@ const defaultProps = {
   variant: 's',
   iconProps: null,
   disabled: false,
+  onClick: () => null,
 };
 
-const Button = ({ children, variant, iconProps, disabled, ...restProps }) => {
+const Button = ({
+  children,
+  variant,
+  iconProps,
+  disabled,
+  onClick,
+  ...restProps
+}) => {
   const Text = getTypography(restProps.size);
+
+  const rippleEffect = (event) => {
+    const btn = event.currentTarget;
+    const x = event.pageX - btn.offsetLeft;
+    const y = event.pageY - btn.offsetTop;
+
+    const duration = 500;
+    let animationFrame;
+    let animationStart;
+
+    const animationStep = (timestamp) => {
+      if (!animationStart) {
+        animationStart = timestamp;
+      }
+
+      const frame = timestamp - animationStart;
+      if (frame < duration) {
+        const easing = (frame / duration) * (2 - frame / duration);
+
+        const circle = `circle at ${x}px ${y}px`;
+        const color = `rgba(0, 0, 0, ${0.3 * (1 - easing)})`;
+        const stop = `${90 * easing}%`;
+
+        btn.style.backgroundImage = `radial-gradient(${circle}, ${color}, ${stop}, transparent ${stop})`;
+
+        animationFrame = window.requestAnimationFrame(animationStep);
+      } else {
+        btn.style.backgroundImage = 'none';
+        window.cancelAnimationFrame(animationFrame);
+      }
+    };
+
+    animationFrame = window.requestAnimationFrame(animationStep);
+  };
 
   return (
     <StyledButton
       type="button"
       variant={variant}
       disabled={disabled}
+      onClick={(event) => {
+        rippleEffect(event);
+        // Make sure onclick still works
+        onClick(event);
+      }}
       {...restProps}
     >
       <HorizontalGroup margin={0.8}>
