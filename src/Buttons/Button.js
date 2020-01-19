@@ -131,13 +131,15 @@ const StyledButton = styled.button`
   height: ${getHeight};
   border: 0;
   ${getVariantStyles};
+  & .button__text {
+    margin: 0 auto;
+  }
   &[disabled] {
     cursor: not-allowed;
     background: #e6e5e5;
     border: solid 1px #d2d2d2;
     & .button__text {
       color: #b2b2b2;
-      margin: 0 auto;
     }
   }
   position: relative;
