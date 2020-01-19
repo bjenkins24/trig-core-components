@@ -146,6 +146,15 @@ const StyledButton = styled.button`
   height: ${getHeight};
   border: 0;
   ${getVariantStyles};
+  &[disabled] {
+    cursor: not-allowed;
+    background: #e6e5e5;
+    border: solid 1px #d2d2d2;
+    & .button__text {
+      color: #b2b2b2;
+      margin: 0 auto;
+    }
+  }
   position: relative;
   overflow: hidden;
   border-radius: ${({ theme }) => theme.br};
@@ -186,24 +195,37 @@ export const buttonTypes = {
   ]),
   iconProps: PropTypes.shape(iconTypes),
   size: sizeProp,
+  disabled: PropTypes.bool,
 };
 
 const defaultProps = {
   size: 'md',
   variant: 's',
   iconProps: null,
+  disabled: false,
 };
 
-const Button = ({ children, variant, iconProps, ...restProps }) => {
+const Button = ({ children, variant, iconProps, disabled, ...restProps }) => {
   const Text = getTypography(restProps.size);
 
   return (
-    <StyledButton type="button" variant={variant} {...restProps}>
+    <StyledButton
+      type="button"
+      variant={variant}
+      disabled={disabled}
+      {...restProps}
+    >
       <HorizontalGroup margin={0.8}>
         {iconProps && (
           <Icon color={iconVariantColor[variant]} size={1.6} {...iconProps} />
         )}
-        <Text color="sc" weight="bold">
+        <Text
+          className="button__text"
+          disabled={disabled}
+          color="sc"
+          weight="bold"
+          as="div"
+        >
           {children}
         </Text>
       </HorizontalGroup>
