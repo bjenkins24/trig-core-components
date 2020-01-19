@@ -6,10 +6,18 @@ import Icon from './Icon';
 
 const transitionTimeMS = 150;
 
+const padding = 4;
+
 const GlobalStyle = createGlobalStyle`
 .ReactModal {
   &__Body--open, &__Html--open {
     overflow: hidden;
+    ${({ mainSelector }) => {
+      if (!mainSelector) return false;
+      return `& ${mainSelector} {
+        filter: blur(1px);
+      }`;
+    }}
   }
   &__Overlay {
     display: flex;
@@ -29,10 +37,9 @@ const GlobalStyle = createGlobalStyle`
     right: auto !important;
     bottom: auto !important;
     left: 50% !important;
-    padding: 4rem !important;
-    background: ${({ theme }) => theme.cbl};
-    /*border: 0 !important;*/
+    padding: ${padding}rem !important;
     transform: translateX(-50%);
+    max-height: calc(100% - ${padding * 4}rem);
   }
 }
 `;
@@ -42,7 +49,6 @@ const CloseButton = styled(Icon).attrs({ size: 1.6, type: 'close' })`
   top: 2.4rem;
   right: 2.4rem;
   cursor: pointer;
-  transition: color ${transitionTimeMS}ms ease-in-out;
   color: ${({ theme }) => theme.bcs[200]} !important;
   &:hover {
     color: ${({ theme }) => theme.bc} !important;
@@ -53,12 +59,23 @@ const modalTypes = {
   children: PropTypes.node.isRequired,
   onRequestClose: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
+  mainSelector: PropTypes.string,
 };
 
-const Modal = ({ children, onRequestClose, isOpen, ...restProps }) => {
+const defaultProps = {
+  mainSelector: '',
+};
+
+const Modal = ({
+  children,
+  onRequestClose,
+  isOpen,
+  mainSelector,
+  ...restProps
+}) => {
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyle mainSelector={mainSelector} />
       <ReactModal
         contentLabel="Modal"
         closeTimeoutMS={transitionTimeMS}
@@ -78,5 +95,6 @@ const Modal = ({ children, onRequestClose, isOpen, ...restProps }) => {
 };
 
 Modal.propTypes = modalTypes;
+Modal.defaultProps = defaultProps;
 
 export default Modal;
