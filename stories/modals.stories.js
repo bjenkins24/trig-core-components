@@ -15,6 +15,15 @@ const ModalStory = () => {
       <button type="button" onClick={() => setIsOpen(true)}>
         Trigger Modal
       </button>
+      <div
+        css={`
+          background: black;
+          width: 100%;
+          height: 50px;
+          position: relative;
+          z-index: 200;
+        `}
+      />
       <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
         <Heading1>Create a New Card</Heading1>
         <Separator />

@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
     align-items: center;
     opacity: 0;
     transition: opacity ${transitionTimeMS}ms ease-in-out;
+    z-index: 1000;
     &--after-open {
       opacity: 1;
     }
