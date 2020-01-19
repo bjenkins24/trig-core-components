@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { keyframes, css } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { sizeProp } from 'utils/propTypes';
 import { HorizontalGroup } from 'Groups';
 import Icon from 'Icon';
@@ -28,21 +28,6 @@ const getHeight = ({ size }) => {
 const getTypography = (size) => {
   return textMap[size];
 };
-
-const ripple = keyframes`
-   0% {
-      transform: scale(0, 0);
-      opacity: 1;
-    }
-    20% {
-      transform: scale(25, 25);
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-      transform: scale(40, 40);
-    }
-`;
 
 const iconVariantColor = {
   'inverse-pl': 'ps.100',
@@ -162,25 +147,6 @@ const StyledButton = styled.button`
   cursor: pointer;
   transition: all 150ms ease-in;
   outline: none;
-
-  &:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.15);
-    opacity: 0;
-    border-radius: 100%;
-    transform: scale(1, 1) translate(-50%);
-    transform-origin: 50% 50%;
-  }
-
-  &:focus:not(:active)::after {
-    animation: ${ripple} ${({ size }) => (size === 'hg' ? '0.5' : '1')}s
-      ease-out;
-  }
 `;
 
 export const buttonTypes = {
