@@ -46,7 +46,7 @@ const IconStyled = styled(Icon)`
 const tagTypes = {
   children: PropTypes.node.isRequired,
   onRequestRemove: PropTypes.func.isRequired,
-  iconProps: iconTypes,
+  iconProps: PropTypes.shape({ iconTypes }),
 };
 
 const defaultProps = {
