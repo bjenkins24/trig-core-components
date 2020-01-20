@@ -47,6 +47,7 @@ const TextField = ({ label, className, width, error, ...restProps }) => {
     return (
       <Container width={width} className={className}>
         <TextArea
+          data-testid="textfield__textarea"
           type="text"
           error={error}
           className={className}
@@ -61,7 +62,12 @@ const TextField = ({ label, className, width, error, ...restProps }) => {
     <Container width={width} className={className}>
       <Label>
         <LabelContainer error={error}>{label}</LabelContainer>
-        <TextArea error={error} type="text" {...restProps} />
+        <TextArea
+          data-testid="textfield__textarea"
+          error={error}
+          type="text"
+          {...restProps}
+        />
       </Label>
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </Container>
