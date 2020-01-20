@@ -70,7 +70,7 @@ const theme = {
   a5c: primary,
 
   // Error color
-  e: '#cc0000',
+  e: '#f16969',
 
   // OTHER
   // Box-shadow
