@@ -151,6 +151,40 @@ const StyledButton = styled.button`
   outline: none;
 `;
 
+const rippleEffect = (event) => {
+  const btn = event.currentTarget;
+  const x = event.pageX - btn.offsetLeft;
+  const y = event.pageY - btn.offsetTop;
+
+  const duration = 500;
+  let animationFrame;
+  let animationStart;
+
+  const animationStep = (timestamp) => {
+    if (!animationStart) {
+      animationStart = timestamp;
+    }
+
+    const frame = timestamp - animationStart;
+    if (frame < duration) {
+      const easing = (frame / duration) * (2 - frame / duration);
+
+      const circle = `circle at ${x}px ${y}px`;
+      const color = `rgba(0, 0, 0, ${0.3 * (1 - easing)})`;
+      const stop = `${90 * easing}%`;
+
+      btn.style.backgroundImage = `radial-gradient(${circle}, ${color}, ${stop}, transparent ${stop})`;
+
+      animationFrame = window.requestAnimationFrame(animationStep);
+    } else {
+      btn.style.backgroundImage = 'none';
+      window.cancelAnimationFrame(animationFrame);
+    }
+  };
+
+  animationFrame = window.requestAnimationFrame(animationStep);
+};
+
 export const buttonTypes = {
   children: PropTypes.node.isRequired,
   variant: PropTypes.oneOf([
@@ -184,40 +218,6 @@ const Button = ({
   ...restProps
 }) => {
   const Text = getTypography(restProps.size);
-
-  const rippleEffect = (event) => {
-    const btn = event.currentTarget;
-    const x = event.pageX - btn.offsetLeft;
-    const y = event.pageY - btn.offsetTop;
-
-    const duration = 500;
-    let animationFrame;
-    let animationStart;
-
-    const animationStep = (timestamp) => {
-      if (!animationStart) {
-        animationStart = timestamp;
-      }
-
-      const frame = timestamp - animationStart;
-      if (frame < duration) {
-        const easing = (frame / duration) * (2 - frame / duration);
-
-        const circle = `circle at ${x}px ${y}px`;
-        const color = `rgba(0, 0, 0, ${0.3 * (1 - easing)})`;
-        const stop = `${90 * easing}%`;
-
-        btn.style.backgroundImage = `radial-gradient(${circle}, ${color}, ${stop}, transparent ${stop})`;
-
-        animationFrame = window.requestAnimationFrame(animationStep);
-      } else {
-        btn.style.backgroundImage = 'none';
-        window.cancelAnimationFrame(animationFrame);
-      }
-    };
-
-    animationFrame = window.requestAnimationFrame(animationStep);
-  };
 
   return (
     <StyledButton
