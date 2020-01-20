@@ -12,7 +12,6 @@ module.exports = function(api) {
   const plugins = [
     'babel-plugin-styled-components',
     '@babel/plugin-proposal-class-properties',
-    'transform-react-remove-prop-types',
   ];
 
   if (isTest) {

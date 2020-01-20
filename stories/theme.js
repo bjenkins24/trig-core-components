@@ -69,6 +69,9 @@ const theme = {
   a5: '#FCCC79',
   a5c: primary,
 
+  // Error color
+  e: '#cc0000',
+
   // OTHER
   // Box-shadow
   sh: shadow,

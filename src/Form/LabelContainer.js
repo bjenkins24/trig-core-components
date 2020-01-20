@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { uniqueId } from 'lodash';
 import Label, { labelTypes } from './Label';
 import { VerticalGroup } from '../Groups';
 import getWidth from '../utils/getWidth';
@@ -38,14 +37,12 @@ const LabelContainer = ({
   label,
   ...restProps
 }) => {
-  const [id] = useState(uniqueId('labelContainer-'));
-
   return (
     <Container width={width} className={className}>
-      <StyledLabel htmlFor={id} {...labelProps}>
+      <StyledLabel {...labelProps}>
         {label}
+        <Component {...restProps} />
       </StyledLabel>
-      <Component id={id} {...restProps} />
     </Container>
   );
 };

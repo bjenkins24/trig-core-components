@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
+import { Formik, Form } from 'formik';
 import StringField from '../src/Form/StringField';
 import TextField from '../src/Form/TextField';
 import StringFieldWithButton from '../src/Form/StringFieldWithButton';
@@ -68,11 +69,27 @@ storiesOf('Form', module)
   ))
   .addDecorator(withKnobs)
   .add('StringField', () => (
-    <StringField
-      label={text('label', 'My Cool Label')}
-      placeholder={text('placeholder', 'Placeholder')}
-      width={text('width', '20')}
-    />
+    <Formik
+      initialValues={{ sup: '' }}
+      validate={(values) => {
+        const errors = {};
+        if (!values.sup) {
+          errors.sup = 'just die';
+        }
+        return errors;
+      }}
+    >
+      {() => (
+        <Form>
+          <StringField
+            name="sup"
+            label={text('label', 'My Cool Label')}
+            placeholder={text('placeholder', 'Placeholder')}
+            width={text('width', '20')}
+          />
+        </Form>
+      )}
+    </Formik>
   ))
   .add('TextField', () => (
     <TextField
