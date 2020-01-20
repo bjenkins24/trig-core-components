@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Label, { labelTypes } from './Label';
+import Label from './Label';
 import { VerticalGroup } from '../Groups';
 import getWidth from '../utils/getWidth';
 import { widthType } from '../utils/propTypes';
@@ -16,10 +16,12 @@ const StyledLabel = styled(Label)`
 `;
 
 const labelContainerProps = {
-  Component: PropTypes.node.isRequired,
+  Component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
   width: widthType.isRequired,
   className: PropTypes.string,
-  labelProps: PropTypes.shape(labelTypes),
+  labelProps: PropTypes.shape({
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  }),
   label: PropTypes.string,
 };
 

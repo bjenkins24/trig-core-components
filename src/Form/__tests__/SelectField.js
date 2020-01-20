@@ -48,13 +48,8 @@ const SelectFieldWrapper = ({ size, ...restProps }) => {
 
 describe('<SelectField />', () => {
   it('renders with basic props', () => {
-    const { getByText, getByLabelText, rerender } = render(
-      <SelectFieldWrapper size="md" />
-    );
+    const { getByText } = render(<SelectFieldWrapper size="md" />);
     expect(getByText('First one')).toBeInTheDocument();
-    expect(getByLabelText(labelName)).toHaveStyleRule('font-size', '1.6rem');
-
-    rerender(<SelectFieldWrapper size="sm" />);
-    expect(getByLabelText(labelName)).toHaveStyleRule('font-size', '1.4rem');
+    expect(getByText(labelName)).toBeInTheDocument();
   });
 });
