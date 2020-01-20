@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { Formik, Form } from 'formik';
-import StringField from '../src/Form/StringField';
+import StringFieldFormik from '../src/Form/StringFieldFormik';
 import TextField from '../src/Form/TextField';
 import StringFieldWithButton from '../src/Form/StringFieldWithButton';
 import SelectField from '../src/Form/SelectField';
@@ -81,7 +81,7 @@ storiesOf('Form', module)
     >
       {() => (
         <Form>
-          <StringField
+          <StringFieldFormik
             name="sup"
             label={text('label', 'My Cool Label')}
             placeholder={text('placeholder', 'Placeholder')}

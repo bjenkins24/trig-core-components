@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { useField } from 'formik';
-import { isEmpty } from 'lodash';
 import { VerticalGroup } from '../Groups';
 import Label from './Label';
 import ErrorMessage from './ErrorMessage';
@@ -27,7 +25,7 @@ export const inputStyles = css`
     outline: none;
     border: 0.1rem solid ${({ theme }) => theme.ps[200]};
   }
-  ${({ hasError, theme }) => hasError && `border: 0.1rem solid ${theme.e}`}
+  ${({ error, theme }) => error && `border: solid 1px ${theme.e}`}
 `;
 
 const Input = styled.input`
@@ -41,39 +39,40 @@ const Container = styled(VerticalGroup)`
 const LabelContainer = styled.span`
   display: block;
   margin-bottom: 0.6rem;
-  ${({ hasError, theme }) => hasError && `color: ${theme.e}`}
+  ${({ error, theme }) => error && `color: ${theme.e}`}
 `;
 
-const stringFieldTypes = {
+export const stringFieldTypes = {
   label: PropTypes.string,
   className: PropTypes.string,
   width: widthType,
+  error: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
 };
 
-const defaultProps = {
+export const defaultProps = {
   label: '',
   className: '',
   width: '20rem',
+  error: null,
 };
 
-const StringField = ({ label, width, className, ...restProps }) => {
-  const [field, meta] = useField(restProps);
-
+const StringField = ({ label, width, className, error, ...restProps }) => {
   if (!label) {
     return (
-      <Input type="text" className={className} {...field} {...restProps} />
+      <Container width={width} className={className}>
+        <Input type="text" error={error} className={className} {...restProps} />
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+      </Container>
     );
   }
-
-  const hasError = meta.touched && !isEmpty(meta.error);
 
   return (
     <Container width={width} className={className}>
       <Label>
-        <LabelContainer hasError={hasError}>{label}</LabelContainer>
-        <Input hasError={hasError} type="text" {...field} {...restProps} />
+        <LabelContainer error={error}>{label}</LabelContainer>
+        <Input error={error} type="text" {...restProps} />
       </Label>
-      {hasError ? <ErrorMessage>{meta.error}</ErrorMessage> : null}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
     </Container>
   );
 };
