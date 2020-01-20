@@ -15,7 +15,7 @@ export const inputStyles = css`
   font-size: 1.6rem;
   line-height: 1.7;
   padding: 0.95rem 1.6rem;
-  ${getWidth}
+  width: calc(100% - 3.2rem - 0.2rem);
   &::placeholder {
     color: ${({ theme }) => theme.ps[100]};
   }
