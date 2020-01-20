@@ -52,7 +52,7 @@ export const stringFieldTypes = {
 export const defaultProps = {
   label: '',
   className: '',
-  width: '20rem',
+  width: 20,
   error: null,
 };
 

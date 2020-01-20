@@ -5,9 +5,13 @@ import StringField from 'Form/StringField';
 describe('<StringField />', () => {
   test('renders and takes basic props', async () => {
     const label = 'label';
-    const { getByLabelText, rerender } = render(<StringField label={label} />);
+    const { getByLabelText, getByText, rerender } = render(
+      <StringField label={label} />
+    );
 
     expect(getByLabelText(label)).toBeInTheDocument();
-    rerender(<StringField />);
+    const error = 'error';
+    rerender(<StringField error={error} />);
+    expect(getByText(error)).toBeInTheDocument();
   });
 });

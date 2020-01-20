@@ -216,7 +216,8 @@ const Container = styled.div`
 `;
 
 const typographyTypes = {
-  Component: PropTypes.node.isRequired,
+  Component: PropTypes.oneOfType([PropTypes.node.isRequired, PropTypes.func])
+    .isRequired,
   separator: PropTypes.bool,
   className: PropTypes.string,
 };

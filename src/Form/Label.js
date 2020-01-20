@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Body1 } from '../Typography';
 
 export const labelTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
 };
 
 const Label = ({ children, ...restProps }) => {
