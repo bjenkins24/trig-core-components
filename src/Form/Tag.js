@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { HorizontalGroup } from '../Groups';
 import { Body3 } from '../Typography';
 import Icon from '../Icon';
-import { iconTypes } from '../Icon/IconWrapper';
 
 const Container = styled(HorizontalGroup)`
   height: 2.8rem;
@@ -46,7 +45,7 @@ const IconStyled = styled(Icon)`
 const tagTypes = {
   children: PropTypes.node.isRequired,
   onRequestRemove: PropTypes.func.isRequired,
-  iconProps: PropTypes.shape({ iconTypes }),
+  iconProps: PropTypes.object,
 };
 
 const defaultProps = {
