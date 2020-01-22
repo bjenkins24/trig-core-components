@@ -5,12 +5,18 @@ import TextField from 'Form/TextField';
 describe('<TextField />', () => {
   it('renders and takes basic props', async () => {
     const label = 'label';
-    const { getByLabelText, rerender, container } = render(
+    const error = 'error';
+    const { getByLabelText, rerender, getByTestId, getByText } = render(
       <TextField label={label} />
     );
 
     expect(getByLabelText(label)).toBeInTheDocument();
     rerender(<TextField height={4} />);
-    expect(container.firstChild).toHaveStyleRule('height', '4rem');
+    expect(getByTestId('textfield__textarea')).toHaveStyleRule(
+      'height',
+      '4rem'
+    );
+    rerender(<TextField error={error} height={4} />);
+    expect(getByText(error));
   });
 });

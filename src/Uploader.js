@@ -81,7 +81,7 @@ const uploaderTypes = {
   onUpload: PropTypes.func,
   onFileClick: PropTypes.func,
   className: PropTypes.string,
-  DropzoneComponent: PropTypes.node,
+  DropzoneComponent: PropTypes.func,
 };
 
 const defaultProps = {

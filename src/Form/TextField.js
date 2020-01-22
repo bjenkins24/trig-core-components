@@ -1,40 +1,76 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import LabelContainer from './LabelContainer';
+import { getWidth } from 'utils';
+import { VerticalGroup } from '../Groups';
+import ErrorMessage from './ErrorMessage';
+import Label from './Label';
 import { inputStyles } from './StringField';
 import { widthType } from '../utils/propTypes';
+
+const Container = styled(VerticalGroup)`
+  ${getWidth}
+`;
 
 const TextArea = styled.textarea`
   ${inputStyles}
   height: ${({ height }) => `${height}rem`};
   padding: 1.6rem;
   resize: none;
+  ${({ error, theme }) => error && `border: solid 1px ${theme.e}`}
 `;
 
-const textFieldTypes = {
+const LabelContainer = styled.span`
+  display: block;
+  margin-bottom: 0.6rem;
+  ${({ error, theme }) => error && `color: ${theme.e}`}
+`;
+
+export const textFieldTypes = {
   width: widthType,
   height: PropTypes.number,
   label: PropTypes.string,
+  className: PropTypes.string,
+  error: PropTypes.string,
 };
 
-const defaultProps = {
+export const defaultProps = {
   width: 50,
   height: 17,
   label: '',
+  className: '',
+  error: '',
 };
 
-const TextField = ({ label, ...restProps }) => {
+const TextField = ({ label, className, width, error, ...restProps }) => {
   if (!label) {
-    return <TextArea {...restProps} />;
+    return (
+      <Container width={width} className={className}>
+        <TextArea
+          data-testid="textfield__textarea"
+          type="text"
+          error={error}
+          className={className}
+          {...restProps}
+        />
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+      </Container>
+    );
   }
 
   return (
-    <LabelContainer
-      Component={(props) => <TextArea {...props} />}
-      label={label}
-      {...restProps}
-    />
+    <Container width={width} className={className}>
+      <Label>
+        <LabelContainer error={error}>{label}</LabelContainer>
+        <TextArea
+          data-testid="textfield__textarea"
+          error={error}
+          type="text"
+          {...restProps}
+        />
+      </Label>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
+    </Container>
   );
 };
 

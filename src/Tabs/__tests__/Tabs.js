@@ -17,11 +17,11 @@ const TabComponent = ({ dark = false }) => {
   return (
     <Tabs>
       <TabList dark={dark}>
-        <Tab>{firstTabContent}</Tab>
-        <Tab>{secondTabContent}</Tab>
+        <Tab tabIndex={0}>{firstTabContent}</Tab>
+        <Tab tabIndex={-1}>{secondTabContent}</Tab>
       </TabList>
-      <TabPanel>{firstTabPanelContent}</TabPanel>
-      <TabPanel>{secondTabPanelContent}</TabPanel>
+      <TabPanel tabIndex={0}>{firstTabPanelContent}</TabPanel>
+      <TabPanel tabIndex={-1}>{secondTabPanelContent}</TabPanel>
     </Tabs>
   );
 };

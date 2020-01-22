@@ -30,9 +30,9 @@ const buttonStyles = ({ as }) => {
 };
 
 const HugeStyles = css`
-  font-size: 6.4rem;
-  @media ${device.xs} {
-    font-size: 4.8rem;
+  font-size: 4.8rem;
+  @media ${device.tabletPortraitUp} {
+    font-size: 6.4rem;
   }
   line-height: 1.3;
   color: ${getColor()};

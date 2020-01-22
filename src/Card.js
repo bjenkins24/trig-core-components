@@ -6,7 +6,6 @@ import { Heading1, Heading3, Heading4, TinyText } from 'Typography';
 import { HorizontalGroup } from 'Groups';
 import Image from 'Image';
 import Icon, { FileIcon } from 'Icon';
-import { cardType } from 'utils/propTypes';
 import { format } from 'utils/dateFns';
 
 const Container = styled.div`
@@ -86,7 +85,7 @@ const cardTypes = {
   dateTime: PropTypes.instanceOf(Date).isRequired,
   renderAvatar: PropTypes.func,
   image: PropTypes.string,
-  type: cardType.isRequired,
+  type: PropTypes.string.isRequired,
   totalFavorites: PropTypes.number.isRequired,
   isFavorited: PropTypes.bool.isRequired,
   totalComments: PropTypes.number.isRequired,

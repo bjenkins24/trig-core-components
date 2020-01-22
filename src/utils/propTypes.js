@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 export const sizeProp = PropTypes.oneOf(['sm', 'md', 'lg', 'hg']);
-export const cardType = PropTypes.oneOf(['doc']);
 
 export const percentType = (props, propName, componentName) => {
   const propValue = props[propName];
@@ -36,4 +35,7 @@ export const placementType = PropTypes.oneOf([
   'left-end',
 ]);
 
-export const widthType = PropTypes.oneOfType([percentType, PropTypes.number]);
+export const widthType = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number,
+]);

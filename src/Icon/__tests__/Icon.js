@@ -28,6 +28,6 @@ describe('<Icon />', () => {
     );
 
     rerender(<Icon type="not-an-icon-type" />);
-    expect(console.error).toHaveBeenCalledTimes(1);
+    expect(console.error).toHaveBeenCalledTimes(2);
   });
 });

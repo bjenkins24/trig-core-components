@@ -40,13 +40,14 @@ const selectTagFieldTypes = {
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       label: PropTypes.string,
     })
-  ).isRequired,
+  ),
   onChange: PropTypes.func.isRequired,
   className: PropTypes.string,
 };
 
 const defaultProps = {
   className: '',
+  value: null,
 };
 
 const SelectTagField = ({ value, onChange, className, ...restProps }) => {

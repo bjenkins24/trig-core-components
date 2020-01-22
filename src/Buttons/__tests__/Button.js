@@ -28,22 +28,22 @@ describe('<Button />', () => {
   it('renders Icon with icon prop', () => {
     const title = 'Deck';
 
-    const { queryByTitle, rerender } = render(
-      <Button iconProps={{ type: 'deck', title }} />
+    const { queryByTitle, rerender, container } = render(
+      <Button iconProps={{ type: 'deck', title }}>Button</Button>
     );
-
+    user.click(container.firstChild);
     expect(queryByTitle(title)).toBeInTheDocument();
 
     // Check default title
-    rerender(<Button iconProps={{ type: 'deck' }} />);
+    rerender(<Button iconProps={{ type: 'deck' }}>Button</Button>);
     expect(queryByTitle(/deck icon/i)).toBeInTheDocument();
   });
 
   it('renders correct sizes', () => {
-    const { rerender, getByRole } = render(<Button />);
+    const { rerender, getByRole } = render(<Button>Test</Button>);
 
     Object.keys(textMap).forEach((size) => {
-      rerender(<Button size={size} />);
+      rerender(<Button size={size}>Button</Button>);
       expect(getByRole('button')).toHaveStyleRule('height', heightMap[size]);
     });
   });
@@ -51,10 +51,10 @@ describe('<Button />', () => {
   it('renders transparent button transparent', () => {
     const transparents = ['transparent', 'transparent-dark'];
 
-    const { rerender, getByRole } = render(<Button />);
+    const { rerender, getByRole } = render(<Button>Button</Button>);
 
     transparents.forEach((variant) => {
-      rerender(<Button variant={variant} />);
+      rerender(<Button variant={variant}>Button</Button>);
       const button = getByRole('button');
       expect(button).toHaveStyleRule('background', 'none');
       expect(button).toHaveStyleRule('border', '0');
@@ -64,10 +64,10 @@ describe('<Button />', () => {
   it('renders inverse button no background', () => {
     const inverses = ['inverse-pl', 'inverse-pc', 'inverse-s'];
 
-    const { rerender, getByRole } = render(<Button />);
+    const { rerender, getByRole } = render(<Button>Button</Button>);
 
     inverses.forEach((variant) => {
-      rerender(<Button variant={variant} />);
+      rerender(<Button variant={variant}>Button</Button>);
       expect(getByRole('button')).toHaveStyleRule('background', 'none');
     });
   });
