@@ -16,6 +16,10 @@ describe('<Modal />', () => {
     expect(getByText(content)).toBeInTheDocument();
     expect(getByRole('button', { hidden: true })).toBeInTheDocument();
     expect(getByLabelText(/close/i)).toBeInTheDocument();
-    rerender(<Modal isOpen onRequestClose={() => null} mainSelector="#test" />);
+    rerender(
+      <Modal isOpen onRequestClose={() => null} mainSelector="#test">
+        {content}
+      </Modal>
+    );
   });
 });
