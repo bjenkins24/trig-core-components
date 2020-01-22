@@ -35,4 +35,7 @@ export const placementType = PropTypes.oneOf([
   'left-end',
 ]);
 
-export const widthType = PropTypes.oneOfType([percentType, PropTypes.number]);
+export const widthType = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number,
+]);

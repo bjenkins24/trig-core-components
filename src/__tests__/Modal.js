@@ -9,7 +9,9 @@ describe('<Modal />', () => {
   it('renders and takes basic props', () => {
     const content = 'content';
     const { getByText, getByRole, getByLabelText } = render(
-      <Modal isOpen>{content}</Modal>
+      <Modal isOpen onRequestClose={() => null}>
+        {content}
+      </Modal>
     );
     expect(getByText(content)).toBeInTheDocument();
     expect(getByRole('button', { hidden: true })).toBeInTheDocument();

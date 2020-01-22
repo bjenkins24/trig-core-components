@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components';
 import { sizeProp } from 'utils/propTypes';
 import { HorizontalGroup } from 'Groups';
 import Icon from 'Icon';
-import { iconTypes } from 'Icon/IconWrapper';
 import { BodyBiggest, Body1, Body2, Body3 } from 'Typography';
 
 export const textMap = {
@@ -195,7 +194,7 @@ export const buttonTypes = {
     'transparent',
     'transparent-dark',
   ]),
-  iconProps: PropTypes.shape(iconTypes),
+  iconProps: PropTypes.object,
   size: sizeProp,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,

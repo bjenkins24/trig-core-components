@@ -59,6 +59,7 @@ describe('<Uploader />', () => {
     const mockCallBack = jest.fn();
     const { getByTestId, rerender } = render(
       <Uploader
+        uploadUrl="test"
         DropzoneComponent={makeDropzoneComponent({ withBasicProps: true })}
         onSubmit={mockCallBack}
       />
@@ -68,6 +69,7 @@ describe('<Uploader />', () => {
     expect(mockFileRemoveCallback.mock.calls.length).toEqual(1);
     rerender(
       <Uploader
+        uploadUrl="test"
         DropzoneComponent={makeDropzoneComponent({ withBasicProps: true })}
       />
     );
@@ -152,6 +154,7 @@ describe('<Uploader />', () => {
             accept: 'jpg',
           },
         })}
+        uploadUrl="test"
       />
     );
 
@@ -169,6 +172,7 @@ describe('<Uploader />', () => {
 
     rerender(
       <Uploader
+        uploadUrl="test"
         DropzoneComponent={makeDropzoneComponent({
           inputComponentProps: {
             onFiles: mockOnFiles,
@@ -191,6 +195,7 @@ describe('<Uploader />', () => {
     const file = { meta: { status: 'done' }, remove: () => {} };
     const { getByText, getByTestId, rerender } = render(
       <Uploader
+        uploadUrl="test"
         submitButtonContent={submitButtonContent}
         onCancel={mockCancelCallback}
         DropzoneComponent={makeDropzoneComponent({
@@ -217,6 +222,7 @@ describe('<Uploader />', () => {
 
     rerender(
       <Uploader
+        uploadUrl="sup"
         DropzoneComponent={makeDropzoneComponent({
           submitComponentProps: {
             files: [
@@ -239,6 +245,7 @@ describe('<Uploader />', () => {
 
     const { getByText, queryByText, rerender } = render(
       <Uploader
+        uploadUrl="sup"
         submitButtonContent={submitButtonContent}
         onUpload={() => {}}
         DropzoneComponent={makeDropzoneComponent({
@@ -259,6 +266,7 @@ describe('<Uploader />', () => {
 
     rerender(
       <Uploader
+        uploadUrl="sup"
         submitButtonContent={submitButtonContent}
         onUpload={() => {}}
         DropzoneComponent={makeDropzoneComponent({
@@ -277,6 +285,7 @@ describe('<Uploader />', () => {
 
     rerender(
       <Uploader
+        uploadUrl="test"
         submitButtonContent={submitButtonContent}
         onUpload={() => {}}
         DropzoneComponent={makeDropzoneComponent({

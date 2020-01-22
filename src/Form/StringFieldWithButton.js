@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StringField from './StringField';
 import { HorizontalGroup } from '../Groups';
-import { Button, buttonTypes } from '../Buttons';
+import { Button } from '../Buttons';
 import getWidth from '../utils/getWidth';
 import { widthType } from '../utils/propTypes';
 
@@ -38,7 +38,7 @@ const Container = styled(HorizontalGroup)`
 const stringFieldWithButtonTypes = {
   width: widthType,
   onSubmit: PropTypes.func.isRequired,
-  buttonProps: PropTypes.shape(buttonTypes).isRequired,
+  buttonProps: PropTypes.object,
   buttonContent: PropTypes.node.isRequired,
   className: PropTypes.string,
 };
@@ -46,6 +46,7 @@ const stringFieldWithButtonTypes = {
 const defaultProps = {
   width: 20,
   className: '',
+  buttonProps: {},
 };
 
 const StringFieldWithButton = ({
