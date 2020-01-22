@@ -13,14 +13,18 @@ export const {
   Checkbox,
   DatePicker,
   DateRangeField,
+  Fieldset,
   Label,
   LabelContainer,
+  Legend,
   SelectField,
   SelectTagField,
   StringField,
+  StringFieldFormik,
   StringFieldWithButton,
   Tag,
   TextField,
+  TextFieldFormik,
 } = Form;
 
 export const {
