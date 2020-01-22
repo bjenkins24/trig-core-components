@@ -176,6 +176,7 @@ const rippleEffect = (event) => {
 
       animationFrame = window.requestAnimationFrame(animationStep);
     } else {
+      /* istanbul ignore next */
       btn.style.backgroundImage = 'none';
       window.cancelAnimationFrame(animationFrame);
     }

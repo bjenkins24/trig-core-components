@@ -32,7 +32,6 @@ describe('<Button />', () => {
       <Button iconProps={{ type: 'deck', title }}>Button</Button>
     );
     user.click(container.firstChild);
-    user.click(container.firstChild);
     expect(queryByTitle(title)).toBeInTheDocument();
 
     // Check default title
