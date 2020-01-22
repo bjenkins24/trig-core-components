@@ -28,10 +28,10 @@ describe('<Button />', () => {
   it('renders Icon with icon prop', () => {
     const title = 'Deck';
 
-    const { queryByTitle, rerender } = render(
+    const { queryByTitle, rerender, container } = render(
       <Button iconProps={{ type: 'deck', title }}>Button</Button>
     );
-
+    user.click(container.firstChild);
     expect(queryByTitle(title)).toBeInTheDocument();
 
     // Check default title

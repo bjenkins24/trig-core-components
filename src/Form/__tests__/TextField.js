@@ -5,7 +5,8 @@ import TextField from 'Form/TextField';
 describe('<TextField />', () => {
   it('renders and takes basic props', async () => {
     const label = 'label';
-    const { getByLabelText, rerender, getByTestId } = render(
+    const error = 'error';
+    const { getByLabelText, rerender, getByTestId, getByText } = render(
       <TextField label={label} />
     );
 
@@ -15,5 +16,7 @@ describe('<TextField />', () => {
       'height',
       '4rem'
     );
+    rerender(<TextField error={error} height={4} />);
+    expect(getByText(error));
   });
 });
