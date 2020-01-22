@@ -165,6 +165,7 @@ const rippleEffect = (event) => {
     }
 
     const frame = timestamp - animationStart;
+    /* istanbul ignore else */
     if (frame < duration) {
       const easing = (frame / duration) * (2 - frame / duration);
 
@@ -176,7 +177,6 @@ const rippleEffect = (event) => {
 
       animationFrame = window.requestAnimationFrame(animationStep);
     } else {
-      /* istanbul ignore next */
       btn.style.backgroundImage = 'none';
       window.cancelAnimationFrame(animationFrame);
     }
