@@ -25,7 +25,7 @@ export const inputStyles = css`
     outline: none;
     border: 0.1rem solid ${({ theme }) => theme.ps[200]};
   }
-  ${({ error, theme }) => error && `border: solid 1px ${theme.e}`}
+  ${({ error, theme }) => error && `border: solid 1px ${theme.e};`}
 `;
 
 const Input = styled.input`

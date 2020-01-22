@@ -6,6 +6,9 @@ import { withKnobs, text, select } from '@storybook/addon-knobs';
 import { Formik, Form } from 'formik';
 import StringFieldFormik from '../src/Form/StringFieldFormik';
 import TextField from '../src/Form/TextField';
+import TextFieldFormik from '../src/Form/TextFieldFormik';
+import Fieldset from '../src/Form/Fieldset';
+import Legend from '../src/Form/Legend';
 import StringFieldWithButton from '../src/Form/StringFieldWithButton';
 import SelectField from '../src/Form/SelectField';
 import SelectTagField from '../src/Form/SelectTagField';
@@ -68,6 +71,39 @@ storiesOf('Form', module)
     <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
   ))
   .addDecorator(withKnobs)
+  .add('Form', () => (
+    <Formik
+      initialValues={{ sup: '', joe: '' }}
+      validate={(values) => {
+        const errors = {};
+        if (!values.sup) {
+          errors.sup = 'just die';
+        }
+        if (!values.joe) {
+          errors.joe = 'just die';
+        }
+        return errors;
+      }}
+    >
+      {() => (
+        <Form>
+          <Fieldset width={40}>
+            <Legend>Stuff</Legend>
+            <StringFieldFormik
+              name="sup"
+              label={text('label', 'My Cool Label')}
+              placeholder={text('placeholder', 'Placeholder')}
+            />
+            <TextFieldFormik
+              name="joe"
+              label={text('label', 'My Cool Label')}
+              placeholder={text('placeholder', 'Placeholder')}
+            />
+          </Fieldset>
+        </Form>
+      )}
+    </Formik>
+  ))
   .add('StringField', () => (
     <Formik
       initialValues={{ sup: '' }}

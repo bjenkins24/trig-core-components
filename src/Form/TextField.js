@@ -17,13 +17,17 @@ const TextArea = styled.textarea`
   height: ${({ height }) => `${height}rem`};
   padding: 1.6rem;
   resize: none;
-  ${({ error, theme }) => error && `border: solid 1px ${theme.e}`}
 `;
 
 const LabelContainer = styled.span`
   display: block;
   margin-bottom: 0.6rem;
-  ${({ error, theme }) => error && `color: ${theme.e}`}
+  ${({ error, theme }) => error && `color: ${theme.e};`}
+`;
+
+const StyledErrorMessage = styled(ErrorMessage)`
+  /* I'm not sure why I have to do this */
+  margin-top: -0.4rem;
 `;
 
 export const textFieldTypes = {
@@ -53,7 +57,7 @@ const TextField = ({ label, className, width, error, ...restProps }) => {
           className={className}
           {...restProps}
         />
-        {error && <ErrorMessage>{error}</ErrorMessage>}
+        {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
       </Container>
     );
   }
@@ -69,7 +73,7 @@ const TextField = ({ label, className, width, error, ...restProps }) => {
           {...restProps}
         />
       </Label>
-      {error && <ErrorMessage>{error}</ErrorMessage>}
+      {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
     </Container>
   );
 };

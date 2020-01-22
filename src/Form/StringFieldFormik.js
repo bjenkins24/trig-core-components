@@ -1,7 +1,7 @@
 import React from 'react';
 import { useField } from 'formik';
 import { isEmpty } from 'lodash';
-import StringField, { stringFieldTypes, defaultProps } from './StringField';
+import StringField, { stringFieldTypes } from './StringField';
 
 const StringFieldFormik = ({ label, ...restProps }) => {
   const [field, meta] = useField(restProps);
@@ -11,6 +11,7 @@ const StringFieldFormik = ({ label, ...restProps }) => {
   return (
     <StringField
       label={label}
+      width="100%"
       {...field}
       {...restProps}
       error={hasError && meta.error}
@@ -19,6 +20,5 @@ const StringFieldFormik = ({ label, ...restProps }) => {
 };
 
 StringFieldFormik.propTypes = stringFieldTypes;
-StringFieldFormik.defaultProps = defaultProps;
 
 export default StringFieldFormik;
