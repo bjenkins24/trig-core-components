@@ -1,21 +1,23 @@
 import React from 'react';
-import { useField } from 'formik';
+import { Field } from 'formik';
 import { isEmpty } from 'lodash';
 import StringField, { stringFieldTypes } from './StringField';
 
-const StringFieldFormik = ({ label, ...restProps }) => {
-  const [field, meta] = useField(restProps);
-
-  const hasError = meta.touched && !isEmpty(meta.error);
-
+const StringFieldFormik = ({ label, name, ...restProps }) => {
   return (
-    <StringField
-      label={label}
-      width="100%"
-      {...field}
-      {...restProps}
-      error={hasError && meta.error}
-    />
+    <Field name={name}>
+      {({ field, meta }) => {
+        return (
+          <StringField
+            label={label}
+            width="100%"
+            {...field}
+            {...restProps}
+            error={meta.touched && !isEmpty(meta.error) && meta.error}
+          />
+        );
+      }}
+    </Field>
   );
 };
 
