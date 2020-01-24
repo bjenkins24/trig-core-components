@@ -4,10 +4,12 @@ import TextFieldFormik from 'Form/TextFieldFormik';
 
 jest.mock('formik', () => {
   return {
-    useField: () => [
-      { onClick: () => null },
-      { touched: true, error: 'Cool beans' },
-    ],
+    Field: ({ children }) => {
+      return children({
+        field: {},
+        meta: { error: 'Cool beans', touched: true },
+      });
+    },
   };
 });
 
