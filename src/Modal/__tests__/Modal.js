@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'test/utils';
-import Modal from 'Modal';
 import ReactModal from 'react-modal';
+import Modal from '../index';
 
 ReactModal.setAppElement('*');
 

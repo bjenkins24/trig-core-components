@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { createGlobalStyle } from 'styled-components';
 import ReactModal from 'react-modal';
-import Icon from './Icon';
+import Icon from '../Icon';
 
 const transitionTimeMS = 150;
 
@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
     ${({ mainSelector }) => {
       if (!mainSelector) return false;
-      return `& ${mainSelector} {
+      return `& ${mainSelector}:after {
         filter: blur(1px);
       }`;
     }}

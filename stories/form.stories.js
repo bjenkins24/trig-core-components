@@ -87,7 +87,7 @@ storiesOf('Form', module)
     >
       {() => (
         <Form>
-          <Fieldset width={40}>
+          <Fieldset>
             <Legend>Stuff</Legend>
             <StringFieldFormik
               name="sup"

@@ -69,6 +69,7 @@ export { default as Deck } from './Deck';
 export { default as Icon } from './Icon';
 export { default as Loading } from './Loading';
 export { default as Modal } from './Modal';
+export { default as ModalHeader } from './Modal/ModalHeader';
 export { default as Popover } from './Popover';
 export { default as Separator } from './Separator';
 export { default as Uploader } from './Uploader';
