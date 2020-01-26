@@ -2,11 +2,11 @@ import React from 'react';
 import { render } from 'test/utils';
 import TextFieldForm from 'Form/TextFieldForm';
 
-jest.mock('formik', () => {
+jest.mock('react-final-form', () => {
   return {
     Field: ({ children }) => {
       return children({
-        field: {},
+        input: {},
         meta: { error: 'Cool beans', touched: true },
       });
     },
