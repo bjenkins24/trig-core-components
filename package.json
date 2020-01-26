@@ -76,7 +76,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.2",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "formik": "^2.1.2",
+    "final-form": "^4.18.7",
     "husky": "^3.0.0",
     "image-webpack-loader": "^5.0.0",
     "is-ci-cli": "^2.0.0",
@@ -94,6 +94,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-final-form": "^6.3.5",
     "react-test-renderer": "^16.12.0",
     "rimraf": "^3.0.0",
     "styled-components": "^4.4.1",
@@ -109,7 +110,7 @@
     "styled-components": "^4.4.1",
     "react-dom": "16.x",
     "react": "16.x",
-    "formik": "2.x"
+    "react-final-form": "6.x"
   },
   "files": [
     "README.md",

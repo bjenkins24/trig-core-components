@@ -3,10 +3,11 @@ import { ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
-import { Formik, Form } from 'formik';
-import StringFieldFormik from '../src/Form/StringFieldFormik';
+import { Form } from 'react-final-form';
+import StringField from '../src/Form/StringField';
+import StringFieldForm from '../src/Form/StringFieldForm';
 import TextField from '../src/Form/TextField';
-import TextFieldFormik from '../src/Form/TextFieldFormik';
+import TextFieldForm from '../src/Form/TextFieldForm';
 import Fieldset from '../src/Form/Fieldset';
 import Legend from '../src/Form/Legend';
 import StringFieldWithButton from '../src/Form/StringFieldWithButton';
@@ -72,8 +73,9 @@ storiesOf('Form', module)
   ))
   .addDecorator(withKnobs)
   .add('Form', () => (
-    <Formik
+    <Form
       initialValues={{ sup: '', joe: '' }}
+      onSubmit={action('submitted')}
       validate={(values) => {
         const errors = {};
         if (!values.sup) {
@@ -85,47 +87,31 @@ storiesOf('Form', module)
         return errors;
       }}
     >
-      {() => (
-        <Form>
+      {({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
           <Fieldset>
             <Legend>Stuff</Legend>
-            <StringFieldFormik
+            <StringFieldForm
               name="sup"
               label={text('label', 'My Cool Label')}
               placeholder={text('placeholder', 'Placeholder')}
             />
-            <TextFieldFormik
+            <TextFieldForm
               name="joe"
               label={text('label', 'My Cool Label')}
               placeholder={text('placeholder', 'Placeholder')}
             />
           </Fieldset>
-        </Form>
+        </form>
       )}
-    </Formik>
+    </Form>
   ))
   .add('StringField', () => (
-    <Formik
-      initialValues={{ sup: '' }}
-      validate={(values) => {
-        const errors = {};
-        if (!values.sup) {
-          errors.sup = 'just die';
-        }
-        return errors;
-      }}
-    >
-      {() => (
-        <Form>
-          <StringFieldFormik
-            name="sup"
-            label={text('label', 'My Cool Label')}
-            placeholder={text('placeholder', 'Placeholder')}
-            width={text('width', '20')}
-          />
-        </Form>
-      )}
-    </Formik>
+    <StringField
+      label={text('label', 'My Cool Label')}
+      placeholder={text('placeholder', 'Placeholder')}
+      width={text('width', '20')}
+    />
   ))
   .add('TextField', () => (
     <TextField

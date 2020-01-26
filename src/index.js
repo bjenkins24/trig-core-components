@@ -20,11 +20,11 @@ export const {
   SelectField,
   SelectTagField,
   StringField,
-  StringFieldFormik,
+  StringFieldForm,
   StringFieldWithButton,
   Tag,
   TextField,
-  TextFieldFormik,
+  TextFieldForm,
 } = Form;
 
 export const {

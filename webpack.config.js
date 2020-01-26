@@ -26,7 +26,7 @@ module.exports = {
     'react',
     'react-dom',
     'prop-types',
-    'formik',
+    'react-final-form',
   ],
   module: {
     rules: [

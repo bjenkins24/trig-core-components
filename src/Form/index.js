@@ -8,11 +8,11 @@ import Legend from './Legend';
 import SelectField from './SelectField';
 import SelectTagField from './SelectTagField';
 import StringField from './StringField';
-import StringFieldFormik from './StringFieldFormik';
+import StringFieldForm from './StringFieldForm';
 import StringFieldWithButton from './StringFieldWithButton';
 import Tag from './Tag';
 import TextField from './TextField';
-import TextFieldFormik from './TextFieldFormik';
+import TextFieldForm from './TextFieldForm';
 
 export {
   Checkbox,
@@ -25,9 +25,9 @@ export {
   SelectField,
   SelectTagField,
   StringField,
-  StringFieldFormik,
+  StringFieldForm,
   StringFieldWithButton,
   Tag,
   TextField,
-  TextFieldFormik,
+  TextFieldForm,
 };
