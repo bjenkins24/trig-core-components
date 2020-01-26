@@ -42,13 +42,13 @@ const getVariantStyles = ({ variant }) => {
       return css`
         background: none;
         border: 0;
-        span {
+        div {
           color: ${({ theme }) => theme.p};
           font-weight: 400;
           transition: all 0.2s;
         }
         &:hover {
-          span {
+          div {
             color: ${({ theme }) => theme.ps[200]};
           }
         }
@@ -57,13 +57,13 @@ const getVariantStyles = ({ variant }) => {
       return css`
         background: none;
         border: 0;
-        span {
+        div {
           color: ${({ theme }) => theme.ps[100]};
           font-weight: 400;
           transition: all 0.2s;
         }
         &:hover {
-          span {
+          div {
             color: ${({ theme }) => theme.ps[200]};
           }
         }
@@ -72,7 +72,7 @@ const getVariantStyles = ({ variant }) => {
       return css`
         background: none;
         border: 0.1rem solid ${({ theme }) => theme.ps[100]};
-        span {
+        div {
           color: ${({ theme }) => theme.ps[100]};
           font-weight: 400;
         }
@@ -80,7 +80,7 @@ const getVariantStyles = ({ variant }) => {
         &:focus {
           background: ${({ theme }) => theme.s};
           border: 0.1rem solid ${({ theme }) => theme.s};
-          span {
+          div {
             color: ${({ theme }) => theme.sc};
           }
         }
@@ -89,12 +89,12 @@ const getVariantStyles = ({ variant }) => {
       return css`
         background: none;
         border: 0.1rem solid ${({ theme }) => theme.pc};
-        span {
+        div {
           color: ${({ theme }) => theme.pc};
         }
         &:hover {
           background: ${({ theme }) => theme.pc};
-          span {
+          div {
             color: ${({ theme }) => theme.p};
           }
         }
@@ -103,12 +103,12 @@ const getVariantStyles = ({ variant }) => {
       return css`
         background: none;
         border: 0.1rem solid ${({ theme }) => theme.s};
-        span {
+        div {
           color: ${({ theme }) => theme.s};
         }
         &:hover {
           background: ${({ theme }) => theme.s};
-          span {
+          div {
             color: ${({ theme }) => theme.sc};
           }
         }
