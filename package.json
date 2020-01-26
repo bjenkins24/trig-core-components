@@ -41,7 +41,6 @@
     "polished": "^3.4.1",
     "react-calendar": "^2.19.2",
     "react-dropzone-uploader": "^2.10.2",
-    "react-modal": "^3.10.1",
     "react-select": "^3.0.5",
     "react-spring": "^8.0.27",
     "react-truncate": "^2.4.0"
@@ -95,6 +94,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-final-form": "^6.3.5",
+    "react-modal": "^3.11.1",
     "react-test-renderer": "^16.12.0",
     "rimraf": "^3.0.0",
     "styled-components": "^4.4.1",
@@ -110,7 +110,8 @@
     "styled-components": "^4.4.1",
     "react-dom": "16.x",
     "react": "16.x",
-    "react-final-form": "6.x"
+    "react-final-form": "6.x",
+    "react-modal": "3.x"
   },
   "files": [
     "README.md",

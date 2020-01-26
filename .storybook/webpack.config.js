@@ -12,6 +12,11 @@ module.exports = async ({ config, mode }) => {
     loader: 'svg-sprite-loader',
   });
 
+  config.module.rules.unshift({
+    test: /\.(png|jpe?g|gif)$/i,
+    loader: 'file-loader',
+  });
+
   // Remove the file loader (is there a better way?) - so the svg sprite loader works
   config.module.rules = config.module.rules.filter((rule, index) => {
     if (index === 4) return false;
@@ -23,6 +28,6 @@ module.exports = async ({ config, mode }) => {
     path.resolve(__dirname, '../src'),
   ];
 
-  // Return the altered configg
+  // Return the altered config
   return config;
 };

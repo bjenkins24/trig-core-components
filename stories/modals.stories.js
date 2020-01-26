@@ -11,11 +11,20 @@ const ModalStory = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <button type="button" onClick={() => setIsOpen(true)}>
-        Trigger Modal
-      </button>
+      <div className="modal-container">
+        <p>
+          Lorem ipsum dolor teit. Lorem ipsum dolor teit. Lorem ipsum dolor
+          teit. Lorem ipsum dolor teit. Lorem ipsum dolor teit. Lorem ipsum
+          dolor teit. Lorem ipsum dolor teit. Lorem ipsum dolor teit. Lorem
+          ipsum dolor teit. Lorem ipsum dolor teit. Lorem ipsum dolor teit.{' '}
+          Lorem ipsum dolor teit. Lorem ipsum dolor teit.{' '}
+        </p>
+        <button type="button" onClick={() => setIsOpen(true)}>
+          Trigger Modal
+        </button>
+      </div>
       <Modal
-        mainSelector="#root"
+        appSelector=".modal-container"
         isOpen={isOpen}
         onRequestClose={() => setIsOpen(false)}
       >

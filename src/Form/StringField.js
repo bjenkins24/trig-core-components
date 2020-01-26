@@ -46,7 +46,11 @@ export const stringFieldTypes = {
   label: PropTypes.string,
   className: PropTypes.string,
   width: widthType,
-  error: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  error: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
 };
 
 export const defaultProps = {

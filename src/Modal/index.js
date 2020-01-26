@@ -12,12 +12,6 @@ const GlobalStyle = createGlobalStyle`
 .ReactModal {
   &__Body--open, &__Html--open {
     overflow: hidden;
-    ${({ mainSelector }) => {
-      if (!mainSelector) return false;
-      return `& ${mainSelector}:after {
-        filter: blur(1px);
-      }`;
-    }}
   }
   &__Overlay {
     display: flex;
@@ -59,23 +53,12 @@ const modalTypes = {
   children: PropTypes.node.isRequired,
   onRequestClose: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  mainSelector: PropTypes.string,
 };
 
-const defaultProps = {
-  mainSelector: '',
-};
-
-const Modal = ({
-  children,
-  onRequestClose,
-  isOpen,
-  mainSelector,
-  ...restProps
-}) => {
+const Modal = ({ children, onRequestClose, isOpen, ...restProps }) => {
   return (
     <>
-      <GlobalStyle mainSelector={mainSelector} />
+      <GlobalStyle />
       <ReactModal
         contentLabel="Modal"
         closeTimeoutMS={transitionTimeMS}
@@ -95,6 +78,5 @@ const Modal = ({
 };
 
 Modal.propTypes = modalTypes;
-Modal.defaultProps = defaultProps;
 
 export default Modal;

@@ -35,7 +35,11 @@ export const textFieldTypes = {
   height: PropTypes.number,
   label: PropTypes.string,
   className: PropTypes.string,
-  error: PropTypes.string,
+  error: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
 };
 
 export const defaultProps = {
