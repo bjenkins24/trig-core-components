@@ -3,7 +3,8 @@ import { ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
-import { Form } from 'react-final-form';
+import * as yup from 'yup';
+import Form from '../src/Form/Form';
 import StringField from '../src/Form/StringField';
 import StringFieldForm from '../src/Form/StringFieldForm';
 import TextField from '../src/Form/TextField';
@@ -76,16 +77,10 @@ storiesOf('Form', module)
     <Form
       initialValues={{ sup: '', joe: '' }}
       onSubmit={action('submitted')}
-      validate={(values) => {
-        const errors = {};
-        if (!values.sup) {
-          errors.sup = 'just die';
-        }
-        if (!values.joe) {
-          errors.joe = 'just die';
-        }
-        return errors;
-      }}
+      validationSchema={yup.object().shape({
+        sup: yup.string().required('Add one please'),
+        joe: yup.string().required('add another one!'),
+      })}
     >
       {({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
@@ -102,6 +97,7 @@ storiesOf('Form', module)
               placeholder={text('placeholder', 'Placeholder')}
             />
           </Fieldset>
+          <button type="submit">Submit</button>
         </form>
       )}
     </Form>

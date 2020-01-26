@@ -2,6 +2,7 @@ import Checkbox from './Checkbox';
 import DatePicker from './DatePicker';
 import DateRangeField from './DateRangeField';
 import Fieldset from './Fieldset';
+import Form from './Form';
 import Label from './Label';
 import LabelContainer from './LabelContainer';
 import Legend from './Legend';
@@ -22,6 +23,7 @@ export {
   LabelContainer,
   Legend,
   Fieldset,
+  Form,
   SelectField,
   SelectTagField,
   StringField,
