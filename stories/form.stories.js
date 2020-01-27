@@ -4,21 +4,23 @@ import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
 import * as yup from 'yup';
-import Form from '../src/Form/Form';
-import StringField from '../src/Form/StringField';
-import StringFieldForm from '../src/Form/StringFieldForm';
-import TextField from '../src/Form/TextField';
-import TextFieldForm from '../src/Form/TextFieldForm';
-import Fieldset from '../src/Form/Fieldset';
-import Legend from '../src/Form/Legend';
-import StringFieldWithButton from '../src/Form/StringFieldWithButton';
-import SelectField from '../src/Form/SelectField';
-import SelectTagField from '../src/Form/SelectTagField';
-import Checkbox from '../src/Form/Checkbox';
-import Tag from '../src/Form/Tag';
-import { Body1 } from '../src/Typography';
-import Label from '../src/Form/Label';
-import DateRangeField from '../src/Form/DateRangeField';
+import {
+  Form,
+  StringField,
+  StringFieldForm,
+  TextField,
+  TextFieldForm,
+  Fieldset,
+  Legend,
+  StringFieldWithButton,
+  SelectField,
+  SelectTagField,
+  Checkbox,
+  Tag,
+  Body1,
+  Label,
+  DateRangeField,
+} from '../src';
 import './consoleOverrides';
 import themeForProvider from './theme';
 

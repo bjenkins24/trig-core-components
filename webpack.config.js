@@ -26,8 +26,6 @@ module.exports = {
     'react',
     'react-dom',
     'prop-types',
-    'react-final-form',
-    'react-modal',
   ],
   module: {
     rules: [

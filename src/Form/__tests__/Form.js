@@ -1,11 +1,8 @@
 import React from 'react';
 // eslint-disable-next-line import/named
 import { render, wait } from 'test/utils';
-import Form from 'Form/Form';
-import StringFieldForm from 'Form/StringFieldForm';
 import user from '@testing-library/user-event';
-import Fieldset from 'Form/Fieldset';
-import Legend from 'Form/Legend';
+import { Form, StringFieldForm, Fieldset, Legend } from '../../index';
 
 describe('<Form />, <Fieldset />, <Legend />', () => {
   it('renders and takes basic props', async () => {
