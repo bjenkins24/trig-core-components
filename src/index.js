@@ -3,7 +3,7 @@ import * as Typography from './Typography';
 import * as Groups from './Groups';
 import * as AllTabs from './Tabs';
 import * as Lists from './Lists';
-import * as Form from './Form';
+import * as FormComponents from './Form';
 
 export const { Button, ButtonSelect, ButtonToggle, Fab } = Buttons;
 export const { HorizontalGroup, VerticalGroup } = Groups;
@@ -14,6 +14,7 @@ export const {
   DatePicker,
   DateRangeField,
   Fieldset,
+  Form,
   Label,
   LabelContainer,
   Legend,
@@ -25,7 +26,7 @@ export const {
   Tag,
   TextField,
   TextFieldForm,
-} = Form;
+} = FormComponents;
 
 export const {
   HugeStyles,
