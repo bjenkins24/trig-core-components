@@ -6,6 +6,7 @@ import { get, set } from 'lodash';
 
 const convertYupErrorsToFieldErrors = (yupErrors) => {
   return yupErrors.inner.reduce((errors, { path, message }) => {
+    /* istanbul ignore next */
     if (get(errors, path)) {
       set(errors, path, `${get(errors, path)} ${message}`);
     } else {

@@ -1,28 +1,83 @@
 import React from 'react';
-import { render } from 'test/utils';
+// eslint-disable-next-line import/named
+import { render, wait } from 'test/utils';
 import Form from 'Form/Form';
+import StringFieldForm from 'Form/StringFieldForm';
+import user from '@testing-library/user-event';
 import Fieldset from 'Form/Fieldset';
 import Legend from 'Form/Legend';
 
-describe('<Fieldset />, <Legend />', () => {
+describe('<Form />, <Fieldset />, <Legend />', () => {
   it('renders and takes basic props', async () => {
     const text = 'text';
-    const { getByText, rerender } = render(
+    const errorMessage = 'error';
+    const errorMessage2 = 'error-2';
+    const initialValue = 'first value';
+    const initialValue2 = 'second value';
+    const inputId = 'input-id';
+    const inputId2 = 'input-id-2';
+    const { getByText, getByTestId, queryByText, rerender } = render(
       <Form
+        initialValues={{ test: initialValue, testMe: initialValue2 }}
         onSubmit={() => {
           console.log('hello');
         }}
+        validate={(values) => {
+          const errors = {};
+          if (values.testMe !== initialValue2) {
+            errors.testMe = errorMessage2;
+          }
+          return errors;
+        }}
+        validationSchema={{
+          validate: (values) => {
+            if (values.test !== initialValue) {
+              /* eslint-disable no-throw-literal */
+              throw {
+                inner: [
+                  {
+                    name: 'ValidationError',
+                    value: '',
+                    path: 'test',
+                    type: 'required',
+                    errors: [errorMessage],
+                    inner: [],
+                    message: errorMessage,
+                  },
+                ],
+              };
+              /* eslint-enable */
+            }
+          },
+        }}
       >
-        {({ validationSchema }) => {
+        {({ handleSubmit }) => {
           return (
-            <Fieldset>
-              <Legend>{text}</Legend>
-              <p>{validationSchema}</p>
-            </Fieldset>
+            <form onSubmit={handleSubmit}>
+              <Fieldset>
+                <Legend>{text}</Legend>
+                <StringFieldForm name="test" data-testid={inputId} />
+                <StringFieldForm name="testMe" data-testid={inputId2} />
+                <button type="submit">Submit</button>
+              </Fieldset>
+            </form>
           );
         }}
       </Form>
     );
+    const submitButton = getByText('Submit');
+    user.type(getByTestId(inputId2), 'Change the value');
+    user.click(submitButton);
+    await wait(() => {
+      expect(getByText(errorMessage2)).toBeInTheDocument();
+    });
+    expect(queryByText(errorMessage)).toBeNull();
+    user.type(getByTestId(inputId), 'Change the value');
+
+    user.click(submitButton);
+    await wait(() => {
+      expect(getByText(errorMessage)).toBeInTheDocument();
+    });
 
     expect(getByText(text)).toBeInTheDocument();
     rerender(
