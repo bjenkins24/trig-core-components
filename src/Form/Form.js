@@ -25,6 +25,7 @@ const formTypes = {
 
 const defaultProps = {
   validationSchema: null,
+  /* istanbul ignore next */
   validate: () => null,
 };
 
