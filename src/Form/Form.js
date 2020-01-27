@@ -35,6 +35,7 @@ const Form = ({ validationSchema, validate, ...restProps }) => {
       decorators={[focusOnError]}
       {...restProps}
       validate={async (values) => {
+        /* istanbul ignore else */
         if (validationSchema) {
           try {
             await validationSchema.validate(values, {
