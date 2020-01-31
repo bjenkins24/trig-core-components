@@ -84,7 +84,7 @@ const StyledToastContainer = styled(ToastContainer)`
       min-height: auto;
       padding: 0;
       border-radius: ${({ theme }) => theme.br};
-      background: transparent;
+      background: ${({ theme }) => theme.bs[200]};
     }
   }
 `;
