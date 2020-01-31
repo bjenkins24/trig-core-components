@@ -17,16 +17,30 @@ module.exports = async ({ config, mode }) => {
     loader: 'file-loader',
   });
 
+  config.module.rules.unshift({
+    test: /\.css$/,
+    use: ['style-loader', 'css-loader'],
+  });
+
   // Remove the file loader (is there a better way?) - so the svg sprite loader works
   config.module.rules = config.module.rules.filter((rule, index) => {
-    if (index === 4) return false;
-    return true;
-  });
+                                                                      // Index 4 is file loader and index 5 is a second css loader? I don't get why there
+                                                                      // are two. If I take out the one above I have 0. Whatever this works
+                                                                      if (
+                                                                        index ===
+                                                                          4 ||
+                                                                        index ===
+                                                                          5
+                                                                      )
+                                                                        return false;
+                                                                      return true;
+                                                                    });
 
   config.resolve.modules = [
     ...(config.resolve.modules || []),
     path.resolve(__dirname, '../src'),
   ];
+  console.log(config.module.rules);
 
   // Return the altered config
   return config;

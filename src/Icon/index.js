@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import FileIcon from './FileIcon';
 import Aggregate from './icons/Aggregate';
+import Alert from './icons/Alert';
 import ArrowDown from './icons/ArrowDown';
 import ArrowLeft from './icons/ArrowLeft';
 import ArrowRight from './icons/ArrowRight';
@@ -50,6 +51,7 @@ export { FileIcon };
 
 export const iconComponents = {
   aggregate: Aggregate,
+  alert: Alert,
   'arrow-down': ArrowDown,
   'arrow-left': ArrowLeft,
   'arrow-right': ArrowRight,

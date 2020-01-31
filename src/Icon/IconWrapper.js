@@ -1,11 +1,22 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { getColor } from '../utils';
+
+const buttonStyles = ({ as, forwardedAs }) => {
+  if (as !== 'button' && forwardedAs !== 'button') return null;
+  return css`
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  `;
+};
 
 const Container = styled.div`
   display: flex;
   position: relative;
+  ${buttonStyles}
 `;
 
 const StyledSvg = styled.svg`

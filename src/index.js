@@ -4,8 +4,10 @@ import * as Groups from './Groups';
 import * as AllTabs from './Tabs';
 import * as Lists from './Lists';
 import * as FormComponents from './Form';
+import * as Toast from './Toast';
 
 export const { Button, ButtonSelect, ButtonToggle, Fab } = Buttons;
+export const { Notification, toast, ToastContainer } = Toast;
 export const { HorizontalGroup, VerticalGroup } = Groups;
 export const { Tabs, TabList, Tab, TabPanel } = AllTabs;
 export const { List, ListItem, ListItemContent } = Lists;
