@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'test/utils';
 import user from '@testing-library/user-event';
-import Toast from '../index';
+import Toast from '../ToastContainer';
 import Notification from '../Notification';
 
 describe('<Notification />', () => {
