@@ -49,7 +49,7 @@ describe('<Button />', () => {
   });
 
   it('renders transparent button transparent', () => {
-    const transparents = ['transparent', 'transparent-dark'];
+    const transparents = ['transparent', 'transparent-dark', 'inline'];
 
     const { rerender, getByRole } = render(<Button>Button</Button>);
 
