@@ -147,6 +147,7 @@ const StyledButton = styled.button`
   font-family: inherit;
   height: ${getHeight};
   border: 0;
+  padding: 0 1.6rem;
   ${getVariantStyles};
   & .button__text {
     margin: 0 auto;
@@ -162,7 +163,6 @@ const StyledButton = styled.button`
   position: relative;
   overflow: hidden;
   border-radius: ${({ theme }) => theme.br};
-  padding: 0 1.6rem;
   cursor: pointer;
   transition: all 150ms ease-in;
   outline: none;
