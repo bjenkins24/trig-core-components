@@ -2,8 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
-import toast from '../src/Toast/toast';
-import Toast from '../src/Toast';
+import { toast, ToastContainer } from '../src/Toast';
 import './consoleOverrides';
 import themeForProvider from './theme';
 
@@ -18,7 +17,7 @@ storiesOf('Toast', module)
         width: 70rem;
       `}
     >
-      <Toast />
+      <ToastContainer />
       <button
         type="button"
         onClick={() =>

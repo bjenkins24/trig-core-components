@@ -68,6 +68,24 @@ const getVariantStyles = ({ variant }) => {
           }
         }
       `;
+    case 'inline':
+      return css`
+        background: none;
+        border: 0;
+        padding: 0;
+        height: auto;
+        div {
+          color: ${({ theme }) => theme.ps[100]};
+          font-weight: 400;
+          transition: all 0.2s;
+          font-size: inherit;
+        }
+        &:hover {
+          div {
+            color: ${({ theme }) => theme.ps[200]};
+          }
+        }
+      `;
     case 'inverse-pl':
       return css`
         background: none;
@@ -194,6 +212,7 @@ export const buttonTypes = {
     'inverse-pl',
     'transparent',
     'transparent-dark',
+    'inline',
   ]),
   iconProps: PropTypes.object,
   size: sizeProp,

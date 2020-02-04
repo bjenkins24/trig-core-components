@@ -24,17 +24,11 @@ module.exports = async ({ config, mode }) => {
 
   // Remove the file loader (is there a better way?) - so the svg sprite loader works
   config.module.rules = config.module.rules.filter((rule, index) => {
-                                                                      // Index 4 is file loader and index 5 is a second css loader? I don't get why there
-                                                                      // are two. If I take out the one above I have 0. Whatever this works
-                                                                      if (
-                                                                        index ===
-                                                                          4 ||
-                                                                        index ===
-                                                                          5
-                                                                      )
-                                                                        return false;
-                                                                      return true;
-                                                                    });
+    // Index 4 is file loader and index 5 is a second css loader? I don't get why there
+    // are two. If I take out the one above I have 0. Whatever this works
+    if (index === 4 || index === 5) return false;
+    return true;
+  });
 
   config.resolve.modules = [
     ...(config.resolve.modules || []),
