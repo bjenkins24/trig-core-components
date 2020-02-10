@@ -1,71 +1,7 @@
 import React from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-const GlobalStyle = createGlobalStyle`
-    @-webkit-keyframes fadeInDown {
-        from {
-            opacity: 0;
-            -webkit-transform: translate3d(0, -100%, 0);
-            transform: translate3d(0, -100%, 0);
-        }
-
-        to {
-            opacity: 1;
-            -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-        }
-    }
-
-    @keyframes fadeInDown {
-        from {
-            opacity: 0;
-            -webkit-transform: translate3d(0, -100%, 0);
-            transform: translate3d(0, -100%, 0);
-        }
-
-        to {
-            opacity: 1;
-            -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-        }
-    }
-
-    .fadeInDown {
-        -webkit-animation-name: fadeInDown;
-        animation-name: fadeInDown;
-    }
-
-    @-webkit-keyframes fadeOutUp {
-        from {
-            opacity: 1;
-        }
-
-        to {
-            opacity: 0;
-            -webkit-transform: translate3d(0, -100%, 0);
-            transform: translate3d(0, -100%, 0);
-        }
-    }
-
-    @keyframes fadeOutUp {
-        from {
-            opacity: 1;
-        }
-
-        to {
-            opacity: 0;
-            -webkit-transform: translate3d(0, -100%, 0);
-            transform: translate3d(0, -100%, 0);
-        }
-    }
-
-    .fadeOutUp {
-        -webkit-animation-name: fadeOutUp;
-        animation-name: fadeOutUp;
-    }
-`;
+import ToastStyles from './ToastStyles';
 
 const StyledToastContainer = styled(ToastContainer)`
   && {
@@ -92,7 +28,7 @@ const StyledToastContainer = styled(ToastContainer)`
 const Toast = (props) => {
   return (
     <>
-      <GlobalStyle />
+      <ToastStyles />
       <StyledToastContainer {...props} />
     </>
   );
