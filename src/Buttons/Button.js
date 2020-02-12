@@ -145,6 +145,7 @@ const getVariantStyles = ({ variant }) => {
 
 const StyledButton = styled.button`
   font-family: inherit;
+  box-sizing: border-box;
   height: ${getHeight};
   border: 0;
   padding: 0 1.6rem;
@@ -250,7 +251,12 @@ const Button = ({
       }}
       {...restProps}
     >
-      <HorizontalGroup margin={0.8}>
+      <HorizontalGroup
+        margin={0.8}
+        css={`
+          height: 100%;
+        `}
+      >
         {iconProps && (
           <Icon color={iconVariantColor[variant]} size={1.6} {...iconProps} />
         )}
