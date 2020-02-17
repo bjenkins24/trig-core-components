@@ -276,6 +276,7 @@ const Button = ({
       <div
         css={`
           display: flex;
+          height: 100%;
         `}
       >
         <HorizontalGroup
