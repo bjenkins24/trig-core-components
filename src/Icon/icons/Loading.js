@@ -19,7 +19,7 @@ const Loading = ({ title, ...restProps }) => {
         cy="50"
         r="47"
         fill="none"
-        stroke="#009e8f"
+        stroke="currentColor"
         strokeDasharray="221.482 75.827"
         strokeWidth="4.5"
         transform="rotate(106.1 50 50)"

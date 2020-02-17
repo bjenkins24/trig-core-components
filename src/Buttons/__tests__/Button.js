@@ -71,4 +71,10 @@ describe('<Button />', () => {
       expect(getByRole('button')).toHaveStyleRule('background', 'none');
     });
   });
+
+  it('renders disabled when loading', () => {
+    const { getByRole, getByTitle } = render(<Button loading>Button</Button>);
+    expect(getByRole('button')).toHaveAttribute('disabled');
+    expect(getByTitle(/loading icon/i)).toBeInTheDocument();
+  });
 });

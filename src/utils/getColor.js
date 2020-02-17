@@ -1,6 +1,9 @@
 import { get } from 'lodash';
 
 const getColor = (defaultColor = 'p') => ({ theme, color }) => {
+  if (color && (color.includes('#') || color.includes('rgb'))) {
+    return color;
+  }
   return get(theme, color, get(theme, defaultColor));
 };
 

@@ -15,6 +15,16 @@ describe('getColor()', () => {
     const color = getColor('pc')({ theme, color: 'not_existing' });
     expect(color).toEqual(theme.pc);
   });
+  it('takes a hex', () => {
+    const hex = '#FFFFFF';
+    const color = getColor(hex)({ theme, color: hex });
+    expect(color).toEqual(hex);
+  });
+  it('takes an rgb', () => {
+    const rgb = 'rgb(0,0,0)';
+    const color = getColor(rgb)({ theme, color: rgb });
+    expect(color).toEqual(rgb);
+  });
 });
 
 describe('getColorContrast()', () => {

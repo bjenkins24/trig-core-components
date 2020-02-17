@@ -36,6 +36,13 @@ const iconVariantColor = {
   'transparent-dark': 'p',
 };
 
+const iconSize = {
+  sm: 1.2,
+  md: 1.6,
+  lg: 1.6,
+  hg: 2.4,
+};
+
 const getVariantStyles = ({ variant }) => {
   switch (variant) {
     case 'transparent-dark':
@@ -219,6 +226,7 @@ export const buttonTypes = {
   size: sizeProp,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -227,6 +235,7 @@ const defaultProps = {
   iconProps: null,
   disabled: false,
   onClick: () => null,
+  loading: false,
 };
 
 const Button = ({
@@ -235,20 +244,26 @@ const Button = ({
   iconProps,
   disabled,
   onClick,
+  loading,
+  size,
   ...restProps
 }) => {
-  const Text = getTypography(restProps.size);
+  const Text = getTypography(size);
+
+  const disabledButton = loading || disabled;
+  const iconColor = disabledButton ? '#b2b2b2' : iconVariantColor[variant];
 
   return (
     <StyledButton
       type="button"
       variant={variant}
-      disabled={disabled}
+      disabled={disabledButton}
       onClick={(event) => {
         rippleEffect(event);
         // Make sure onclick still works
         onClick(event);
       }}
+      size={size}
       {...restProps}
     >
       <HorizontalGroup
@@ -257,18 +272,26 @@ const Button = ({
           height: 100%;
         `}
       >
-        {iconProps && (
-          <Icon color={iconVariantColor[variant]} size={1.6} {...iconProps} />
+        {iconProps && !loading && (
+          <Icon color={iconColor} size={iconSize[size]} {...iconProps} />
         )}
         <Text
           className="button__text"
-          disabled={disabled}
+          disabled={disabledButton}
           color="sc"
           weight="bold"
           as="div"
         >
           {children}
         </Text>
+        {loading && (
+          <Icon
+            type="loading"
+            color={iconColor}
+            size={iconSize[size]}
+            {...iconProps}
+          />
+        )}
       </HorizontalGroup>
     </StyledButton>
   );
