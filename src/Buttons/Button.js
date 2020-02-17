@@ -43,6 +43,13 @@ const iconSize = {
   hg: 2.4,
 };
 
+const iconMargin = {
+  sm: 0.8,
+  md: 0.8,
+  lg: 0.8,
+  hg: 1.6,
+};
+
 const getVariantStyles = ({ variant }) => {
   switch (variant) {
     case 'transparent-dark':
@@ -266,33 +273,40 @@ const Button = ({
       size={size}
       {...restProps}
     >
-      <HorizontalGroup
-        margin={0.8}
+      <div
         css={`
-          height: 100%;
+          display: flex;
         `}
       >
-        {iconProps && !loading && (
-          <Icon color={iconColor} size={iconSize[size]} {...iconProps} />
-        )}
-        <Text
-          className="button__text"
-          disabled={disabledButton}
-          color="sc"
-          weight="bold"
-          as="div"
+        <HorizontalGroup
+          margin={iconMargin[size]}
+          css={`
+            height: 100%;
+            margin: 0 auto;
+          `}
         >
-          {children}
-        </Text>
-        {loading && (
-          <Icon
-            type="loading"
-            color={iconColor}
-            size={iconSize[size]}
-            {...iconProps}
-          />
-        )}
-      </HorizontalGroup>
+          {iconProps && !loading && (
+            <Icon color={iconColor} size={iconSize[size]} {...iconProps} />
+          )}
+          <Text
+            className="button__text"
+            disabled={disabledButton}
+            color="sc"
+            weight="bold"
+            as="div"
+          >
+            {children}
+          </Text>
+          {loading && (
+            <Icon
+              type="loading"
+              color={iconColor}
+              size={iconSize[size]}
+              {...iconProps}
+            />
+          )}
+        </HorizontalGroup>
+      </div>
     </StyledButton>
   );
 };
