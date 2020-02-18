@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { createGlobalStyle } from 'styled-components';
+import { device } from '@trig-app/constants';
 import ReactModal from 'react-modal';
 import Icon from '../Icon';
 
@@ -33,7 +34,17 @@ const GlobalStyle = createGlobalStyle`
     left: 50% !important;
     padding: ${padding}rem !important;
     transform: translateX(-50%);
-    max-height: calc(100% - ${padding * 4}rem);
+    height: calc(100vh - 8rem);
+    width: calc(100% - 8rem);
+    border-radius: 0 !important;
+    border: 0 !important;
+    @media ${device.tabletPortraitUp} {
+      width: auto;
+      height: auto;
+      max-height: calc(100% - ${padding * 4}rem);
+      border-radius: 0.4rem !important;
+      box-shadow: ${({ theme }) => theme.sh};
+    }
   }
 }
 `;
