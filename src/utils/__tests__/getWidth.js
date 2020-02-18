@@ -15,4 +15,6 @@ test('prints width correctly', () => {
   expect(getByTestId(testId)).toHaveStyleRule('width', '100%');
   rerender(<TestComponent width={1.2} data-testid={testId} />);
   expect(getByTestId(testId)).toHaveStyleRule('width', '1.2rem');
+  rerender(<TestComponent width="auto" data-testid={testId} />);
+  expect(getByTestId(testId)).toHaveStyleRule('width', 'auto');
 });
