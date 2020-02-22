@@ -263,8 +263,8 @@ const Button = ({
 
   let typeProp = {};
   if (
-    typeof restProps.as !== 'undefined' &&
-    typeof restProps.forwardedAs !== 'undefined'
+    typeof restProps.as === 'undefined' &&
+    typeof restProps.forwardedAs === 'undefined'
   ) {
     typeProp = { type: 'button' };
   }
