@@ -48,6 +48,7 @@ storiesOf('Button', module)
   .add('default', () => {
     return (
       <Button
+        as="a"
         size={select(
           'Size',
           { huge: 'hg', small: 'sm', medium: 'md', large: 'lg' },

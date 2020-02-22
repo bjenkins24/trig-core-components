@@ -162,6 +162,7 @@ const StyledButton = styled.button`
   box-sizing: border-box;
   height: ${getHeight};
   border: 0;
+  display: inline-block;
   padding: 0 1.6rem;
   ${getVariantStyles};
   & .button__text {
@@ -260,9 +261,16 @@ const Button = ({
   const disabledButton = loading || disabled;
   const iconColor = disabledButton ? '#b2b2b2' : iconVariantColor[variant];
 
+  let typeProp = {};
+  if (
+    typeof restProps.as !== 'undefined' &&
+    typeof restProps.forwardedAs !== 'undefined'
+  ) {
+    typeProp = { type: 'button' };
+  }
+
   return (
     <StyledButton
-      type="button"
       variant={variant}
       disabled={disabledButton}
       onClick={(event) => {
@@ -271,6 +279,7 @@ const Button = ({
         onClick(event);
       }}
       size={size}
+      {...typeProp}
       {...restProps}
     >
       <div
