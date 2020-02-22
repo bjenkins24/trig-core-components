@@ -29,7 +29,9 @@ describe('<Button />', () => {
     const title = 'Deck';
 
     const { queryByTitle, rerender, container } = render(
-      <Button iconProps={{ type: 'deck', title }}>Button</Button>
+      <Button as="a" iconProps={{ type: 'deck', title }}>
+        Button
+      </Button>
     );
     user.click(container.firstChild);
     expect(queryByTitle(title)).toBeInTheDocument();
