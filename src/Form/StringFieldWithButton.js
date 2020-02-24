@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import StringField from './StringField';
 import { HorizontalGroup } from '../Groups';
 import { Button } from '../Buttons';
 import getWidth from '../utils/getWidth';
 import { widthType } from '../utils/propTypes';
+
+const focusedButtonStyles = ({ isFocused, theme }) => {
+  if (!isFocused) return null;
+  return css`
+    border: 0.1rem solid ${theme.ps[200]};
+    color: ${theme.ps[200]} !important;
+  `;
+};
 
 const StyledButton = styled(Button)`
   border-top-left-radius: 0;
@@ -14,6 +22,7 @@ const StyledButton = styled(Button)`
   &:hover span {
     color: ${({ theme }) => theme.sc} !important;
   }
+  ${focusedButtonStyles}
 `;
 
 const StyledStringField = styled(StringField)`
@@ -23,16 +32,11 @@ const StyledStringField = styled(StringField)`
   &:focus {
     border-right: 0;
   }
+  width: calc(100% - 3.2rem - 0.1rem);
 `;
 
 const Container = styled(HorizontalGroup)`
   ${getWidth}
-  & ${StyledStringField}:focus ~ ${StyledButton} {
-    border: 0.1rem solid ${({ theme }) => theme.ps[200]};
-    span {
-      color: ${({ theme }) => theme.ps[200]};
-    }
-  }
 `;
 
 const stringFieldWithButtonTypes = {
@@ -57,6 +61,7 @@ const StringFieldWithButton = ({
   className,
   ...restProps
 }) => {
+  const [isFocused, setIsFocused] = useState(false);
   return (
     <Container className={className} width={width}>
       <StyledStringField
@@ -65,6 +70,8 @@ const StringFieldWithButton = ({
             onSubmit();
           }
         }}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
         width="100%"
         {...restProps}
       />
@@ -72,6 +79,7 @@ const StringFieldWithButton = ({
         variant="inverse-pl"
         size="lg"
         onClick={onSubmit}
+        isFocused={isFocused}
         {...buttonProps}
       >
         {buttonContent}
