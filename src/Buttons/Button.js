@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { sizeProp } from 'utils/propTypes';
@@ -184,10 +184,15 @@ const StyledButton = styled.button`
   outline: none;
 `;
 
-const rippleEffect = (event) => {
+const rippleEffect = ({ event, fromCenter }) => {
   const btn = event.currentTarget;
-  const x = event.pageX - btn.offsetLeft;
-  const y = event.pageY - btn.offsetTop;
+  let x = btn.offsetWidth / 2;
+  let y = btn.offsetHeight / 2;
+  /* istanbul ignore else */
+  if (!fromCenter) {
+    x = event.pageX - btn.offsetLeft;
+    y = event.pageY - btn.offsetTop;
+  }
 
   const duration = 500;
   let animationFrame;
@@ -246,80 +251,86 @@ const defaultProps = {
   loading: false,
 };
 
-const Button = ({
-  children,
-  variant,
-  iconProps,
-  disabled,
-  onClick,
-  loading,
-  size,
-  ...restProps
-}) => {
-  const Text = getTypography(size);
+const Button = forwardRef(
+  (
+    {
+      children,
+      variant,
+      iconProps,
+      disabled,
+      onClick,
+      loading,
+      size,
+      ...restProps
+    },
+    ref
+  ) => {
+    const Text = getTypography(size);
 
-  const disabledButton = loading || disabled;
-  const iconColor = disabledButton ? '#b2b2b2' : iconVariantColor[variant];
+    const disabledButton = loading || disabled;
+    const iconColor = disabledButton ? '#b2b2b2' : iconVariantColor[variant];
 
-  let typeProp = {};
-  if (
-    typeof restProps.as === 'undefined' &&
-    typeof restProps.forwardedAs === 'undefined'
-  ) {
-    typeProp = { type: 'button' };
-  }
+    let typeProp = {};
+    if (
+      typeof restProps.as === 'undefined' &&
+      typeof restProps.forwardedAs === 'undefined'
+    ) {
+      typeProp = { type: 'button' };
+    }
 
-  return (
-    <StyledButton
-      variant={variant}
-      disabled={disabledButton}
-      onClick={(event) => {
-        rippleEffect(event);
-        // Make sure onclick still works
-        onClick(event);
-      }}
-      size={size}
-      {...typeProp}
-      {...restProps}
-    >
-      <div
-        css={`
-          display: flex;
-          height: 100%;
-        `}
+    return (
+      <StyledButton
+        variant={variant}
+        disabled={disabledButton}
+        ref={ref}
+        size={size}
+        onClick={(event) => {
+          rippleEffect({ event, fromCenter: event.pageX === 0 });
+          // Make sure onclick still works
+          onClick(event);
+        }}
+        {...typeProp}
+        {...restProps}
       >
-        <HorizontalGroup
-          margin={iconMargin[size]}
+        <div
           css={`
+            display: flex;
             height: 100%;
-            margin: 0 auto;
           `}
         >
-          {iconProps && !loading && (
-            <Icon color={iconColor} size={iconSize[size]} {...iconProps} />
-          )}
-          <Text
-            className="button__text"
-            disabled={disabledButton}
-            color="sc"
-            weight="bold"
-            as="div"
+          <HorizontalGroup
+            margin={iconMargin[size]}
+            css={`
+              height: 100%;
+              margin: 0 auto;
+            `}
           >
-            {children}
-          </Text>
-          {loading && (
-            <Icon
-              type="loading"
-              color={iconColor}
-              size={iconSize[size]}
-              {...iconProps}
-            />
-          )}
-        </HorizontalGroup>
-      </div>
-    </StyledButton>
-  );
-};
+            {iconProps && !loading && (
+              <Icon color={iconColor} size={iconSize[size]} {...iconProps} />
+            )}
+            <Text
+              className="button__text"
+              disabled={disabledButton}
+              color="sc"
+              weight="bold"
+              as="div"
+            >
+              {children}
+            </Text>
+            {loading && (
+              <Icon
+                type="loading"
+                color={iconColor}
+                size={iconSize[size]}
+                {...iconProps}
+              />
+            )}
+          </HorizontalGroup>
+        </div>
+      </StyledButton>
+    );
+  }
+);
 
 Button.propTypes = buttonTypes;
 Button.defaultProps = defaultProps;

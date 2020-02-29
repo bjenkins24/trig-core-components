@@ -68,6 +68,7 @@ const StringFieldWithButton = ({
   const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = useState('');
   const StringFieldRef = useRef(null);
+  const ButtonRef = useRef(null);
 
   useEffect(() => {
     if (isFocused) {
@@ -95,10 +96,12 @@ const StringFieldWithButton = ({
           {...restProps}
         />
         <StyledButton
+          ref={ButtonRef}
           variant="inverse-pl"
           size="lg"
           onClick={() => onSubmit(value)}
           isFocused={isFocused}
+          onFocus={() => setTimeout(() => ButtonRef.current.focus(), 20)}
           {...buttonProps}
         >
           {buttonContent}
