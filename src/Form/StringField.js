@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { VerticalGroup } from '../Groups';
@@ -60,26 +60,34 @@ export const defaultProps = {
   error: null,
 };
 
-const StringField = ({ label, width, className, error, ...restProps }) => {
-  if (!label) {
+const StringField = forwardRef(
+  ({ label, width, className, error, ...restProps }, ref) => {
+    if (!label) {
+      return (
+        <Container width={width} className={className}>
+          <Input
+            type="text"
+            error={error}
+            className={className}
+            ref={ref}
+            {...restProps}
+          />
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+        </Container>
+      );
+    }
+
     return (
       <Container width={width} className={className}>
-        <Input type="text" error={error} className={className} {...restProps} />
+        <Label>
+          <LabelContainer error={error}>{label}</LabelContainer>
+          <Input error={error} type="text" ref={ref} {...restProps} />
+        </Label>
         {error && <ErrorMessage>{error}</ErrorMessage>}
       </Container>
     );
   }
-
-  return (
-    <Container width={width} className={className}>
-      <Label>
-        <LabelContainer error={error}>{label}</LabelContainer>
-        <Input error={error} type="text" {...restProps} />
-      </Label>
-      {error && <ErrorMessage>{error}</ErrorMessage>}
-    </Container>
-  );
-};
+);
 
 StringField.propTypes = stringFieldTypes;
 StringField.defaultProps = defaultProps;

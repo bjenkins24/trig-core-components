@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import StringField from './StringField';
+import Label from './Label';
 import { HorizontalGroup } from '../Groups';
 import { Button } from '../Buttons';
 import getWidth from '../utils/getWidth';
@@ -45,12 +46,14 @@ const stringFieldWithButtonTypes = {
   buttonProps: PropTypes.object,
   buttonContent: PropTypes.node.isRequired,
   className: PropTypes.string,
+  label: PropTypes.string,
 };
 
 const defaultProps = {
   width: 20,
   className: '',
   buttonProps: {},
+  label: '',
 };
 
 const StringFieldWithButton = ({
@@ -59,33 +62,61 @@ const StringFieldWithButton = ({
   buttonContent,
   buttonProps,
   className,
+  label,
   ...restProps
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  return (
-    <Container className={className} width={width}>
-      <StyledStringField
-        onKeyDown={(event) => {
-          if (event.key === 'Enter') {
-            onSubmit();
-          }
-        }}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        width="100%"
-        {...restProps}
-      />
-      <StyledButton
-        variant="inverse-pl"
-        size="lg"
-        onClick={onSubmit}
-        isFocused={isFocused}
-        {...buttonProps}
-      >
-        {buttonContent}
-      </StyledButton>
-    </Container>
-  );
+  const [value, setValue] = useState('');
+  const StringFieldRef = useRef(null);
+
+  useEffect(() => {
+    if (isFocused) {
+      StringFieldRef.current.focus();
+    }
+  });
+
+  const Component = () => {
+    return (
+      <Container className={className} width={width}>
+        <StyledStringField
+          ref={StringFieldRef}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              onSubmit(value);
+            }
+          }}
+          onFocus={() => {
+            setIsFocused(true);
+          }}
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
+          onBlur={() => setTimeout(() => setIsFocused(false), 10)}
+          width="100%"
+          {...restProps}
+        />
+        <StyledButton
+          variant="inverse-pl"
+          size="lg"
+          onClick={() => onSubmit(value)}
+          isFocused={isFocused}
+          {...buttonProps}
+        >
+          {buttonContent}
+        </StyledButton>
+      </Container>
+    );
+  };
+
+  if (label) {
+    return (
+      <Label>
+        {label}
+        <Component />
+      </Label>
+    );
+  }
+
+  return <Component />;
 };
 
 StringFieldWithButton.propTypes = stringFieldWithButtonTypes;

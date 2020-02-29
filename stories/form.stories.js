@@ -166,6 +166,7 @@ storiesOf('Form', module)
       onSubmit={action('submitted')}
       width="100%"
       placeholder={text('placeholder', 'Enter your url...')}
+      label="Hello Friends!"
     />
   ))
   .add('Tag', () => (
