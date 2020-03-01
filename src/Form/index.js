@@ -1,3 +1,4 @@
+import Field from 'react-final-form';
 import Checkbox from './Checkbox';
 import DatePicker from './DatePicker';
 import DateRangeField from './DateRangeField';
@@ -22,6 +23,7 @@ export {
   Label,
   LabelContainer,
   Legend,
+  Field,
   Fieldset,
   Form,
   SelectField,

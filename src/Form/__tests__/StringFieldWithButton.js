@@ -25,11 +25,7 @@ describe('<StringFieldWithButton />', () => {
     expect(mockCallBack.mock.calls.length).toEqual(2);
     fireEvent.keyDown(getByRole('textbox'), { key: 't' });
     rerender(
-      <StringFieldWithButton
-        buttonContent={buttonContent}
-        onSubmit={mockCallBack}
-        label={label}
-      />
+      <StringFieldWithButton buttonContent={buttonContent} label={label} />
     );
     fireEvent.focus(getByRole('textbox'));
     expect(getByRole('button')).toHaveStyleRule(
