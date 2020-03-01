@@ -20,6 +20,7 @@ const StyledButton = styled(Button)`
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   flex-shrink: 0;
+  align-self: flex-start;
   &:hover span {
     color: ${({ theme }) => theme.sc} !important;
   }
