@@ -1,4 +1,4 @@
-import Field from 'react-final-form';
+import { Field } from 'react-final-form';
 import Checkbox from './Checkbox';
 import DatePicker from './DatePicker';
 import DateRangeField from './DateRangeField';
@@ -12,6 +12,7 @@ import SelectTagField from './SelectTagField';
 import StringField from './StringField';
 import StringFieldForm from './StringFieldForm';
 import StringFieldWithButton from './StringFieldWithButton';
+import StringFieldWithButtonForm from './StringFieldWithButtonForm';
 import Tag from './Tag';
 import TextField from './TextField';
 import TextFieldForm from './TextFieldForm';
@@ -31,6 +32,7 @@ export {
   StringField,
   StringFieldForm,
   StringFieldWithButton,
+  StringFieldWithButtonForm,
   Tag,
   TextField,
   TextFieldForm,

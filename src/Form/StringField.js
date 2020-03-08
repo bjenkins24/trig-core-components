@@ -1,6 +1,7 @@
-import React, { forwardRef } from 'react';
+import React, { useState, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { uniqueId } from 'lodash';
 import { VerticalGroup } from '../Groups';
 import Label from './Label';
 import ErrorMessage from './ErrorMessage';
@@ -38,7 +39,7 @@ const Container = styled(VerticalGroup)`
 
 const LabelContainer = styled.span`
   display: block;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.4rem;
   ${({ error, theme }) => error && `color: ${theme.e}`}
 `;
 
@@ -62,6 +63,8 @@ export const defaultProps = {
 
 const StringField = forwardRef(
   ({ label, width, className, error, ...restProps }, ref) => {
+    const [id] = useState(() => uniqueId('string-field-'));
+
     if (!label) {
       return (
         <Container width={width} className={className}>
@@ -79,10 +82,10 @@ const StringField = forwardRef(
 
     return (
       <Container width={width} className={className}>
-        <Label>
+        <Label htmlFor={id}>
           <LabelContainer error={error}>{label}</LabelContainer>
-          <Input error={error} type="text" ref={ref} {...restProps} />
         </Label>
+        <Input id={id} error={error} type="text" ref={ref} {...restProps} />
         {error && <ErrorMessage>{error}</ErrorMessage>}
       </Container>
     );

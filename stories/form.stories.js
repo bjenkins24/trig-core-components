@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
-import * as yup from 'yup';
+import { object, string } from 'yup';
 import {
   Form,
   StringField,
@@ -12,7 +12,7 @@ import {
   TextFieldForm,
   Fieldset,
   Legend,
-  StringFieldWithButton,
+  StringFieldWithButtonForm,
   SelectField,
   SelectTagField,
   Checkbox,
@@ -79,9 +79,9 @@ storiesOf('Form', module)
     <Form
       initialValues={{ sup: '', joe: '' }}
       onSubmit={action('submitted')}
-      validationSchema={yup.object().shape({
-        sup: yup.string().required('Add one please'),
-        joe: yup.string().required('add another one!'),
+      validationSchema={object().shape({
+        sup: string().required('Add one please'),
+        joe: string().required('add another one!'),
       })}
     >
       {({ handleSubmit }) => (
@@ -160,15 +160,19 @@ storiesOf('Form', module)
     </Checkbox>
   ))
   .add('DateRangeField', () => <DateRangeFieldWrapper />)
-  .add('StringField with Button', () => (
-    <StringFieldWithButton
-      buttonContent="Add"
-      onSubmit={action('submitted')}
-      width="100%"
-      placeholder={text('placeholder', 'Enter your url...')}
-      label="Hello Friends!"
-    />
-  ))
+  .add('StringField with Button', () => {
+    return (
+      <StringFieldWithButtonForm
+        buttonContent="Add"
+        width="100%"
+        placeholder={text('placeholder', 'Enter your url...')}
+        label="Hello Friends!"
+        validate={string()
+          .required('Has to be there')
+          .email('has to be email')}
+      />
+    );
+  })
   .add('Tag', () => (
     <Tag onRequestRemove={action('hello')}>
       {text('content', 'Development')}

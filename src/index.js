@@ -26,6 +26,7 @@ export const {
   StringField,
   StringFieldForm,
   StringFieldWithButton,
+  StringFieldWithButtonForm,
   Tag,
   TextField,
   TextFieldForm,

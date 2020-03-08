@@ -43,11 +43,14 @@ const Container = styled(HorizontalGroup)`
 
 const stringFieldWithButtonTypes = {
   width: widthType,
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
   buttonProps: PropTypes.object,
   buttonContent: PropTypes.node.isRequired,
   className: PropTypes.string,
   label: PropTypes.string,
+  onFocus: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  onBlur: PropTypes.func,
 };
 
 const defaultProps = {
@@ -55,6 +58,10 @@ const defaultProps = {
   className: '',
   buttonProps: {},
   label: '',
+  onSubmit: () => null,
+  onFocus: () => null,
+  onKeyDown: () => null,
+  onBlur: () => null,
 };
 
 const StringFieldWithButton = ({
@@ -64,6 +71,9 @@ const StringFieldWithButton = ({
   buttonProps,
   className,
   label,
+  onFocus,
+  onKeyDown,
+  onBlur,
   ...restProps
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -86,13 +96,18 @@ const StringFieldWithButton = ({
             if (event.key === 'Enter') {
               onSubmit(value);
             }
+            onKeyDown(event);
           }}
-          onFocus={() => {
+          onFocus={(event) => {
             setIsFocused(true);
+            onFocus(event);
           }}
           value={value}
           onChange={(event) => setValue(event.target.value)}
-          onBlur={() => setTimeout(() => setIsFocused(false), 10)}
+          onBlur={(event) => {
+            onBlur(event);
+            setTimeout(() => setIsFocused(false), 10);
+          }}
           width="100%"
           {...restProps}
         />
@@ -102,8 +117,13 @@ const StringFieldWithButton = ({
           size="lg"
           onClick={() => onSubmit(value)}
           isFocused={isFocused}
-          onFocus={() => setTimeout(() => ButtonRef.current.focus(), 20)}
           {...buttonProps}
+          onFocus={(event) => {
+            if (typeof buttonProps.onFocus !== 'undefined') {
+              buttonProps.onFocus(event);
+            }
+            setTimeout(() => ButtonRef.current.focus(), 20);
+          }}
         >
           {buttonContent}
         </StyledButton>
