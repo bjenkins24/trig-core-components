@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Select from 'react-select';
-import LabelContainer from './LabelContainer';
+import FieldContainer from './FieldContainer';
 import useTheme from '../utils/useTheme';
 import { widthType, sizeProp } from '../utils/propTypes';
 import { Body1Styles, Body2Styles } from '../Typography';
@@ -75,43 +75,58 @@ const selectFieldTypes = {
   width: widthType,
   size: sizeProp,
   label: PropTypes.string,
+  className: PropTypes.string,
 };
 
 const defaultProps = {
   width: 20,
   size: 'md',
   label: '',
+  className: '',
 };
 
-const SelectField = ({ options, label, size, ...restProps }) => {
+const SelectField = ({
+  options,
+  label,
+  size,
+  width,
+  className,
+  ...restProps
+}) => {
   const scTheme = useTheme();
 
   return (
-    <LabelContainer
+    <FieldContainer
+      width={width}
+      className={className}
       label={label}
-      Component={(props) => (
-        <StyledSelect
-          size={size}
-          className="react-select-container"
-          classNamePrefix="react-select"
-          scTheme={scTheme}
-          theme={
-            /* istanbul ignore next */
-            (theme) => ({
-              ...theme,
-              colors: {
-                ...theme.colors,
-                primary25: scTheme.ss[200],
-                primary: scTheme.s,
-              },
-            })
-          }
-          options={options}
-          {...props}
-        />
-      )}
-      {...restProps}
-    />
+      id="select"
+    >
+      {({ id }) => {
+        return (
+          <StyledSelect
+            size={size}
+            className="react-select-container"
+            classNamePrefix="react-select"
+            scTheme={scTheme}
+            theme={
+              /* istanbul ignore next */
+              (theme) => ({
+                ...theme,
+                colors: {
+                  ...theme.colors,
+                  primary25: scTheme.ss[200],
+                  primary: scTheme.s,
+                },
+              })
+            }
+            options={options}
+            {...restProps}
+            id={id}
+          />
+        );
+      }}
+    </FieldContainer>
   );
 };
 

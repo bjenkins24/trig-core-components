@@ -17,12 +17,13 @@ import {
   SelectTagField,
   Checkbox,
   Tag,
-  Body1,
   Label,
   DateRangeField,
 } from '../src';
 import './consoleOverrides';
 import themeForProvider from './theme';
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const DateRangeFieldWrapper = () => {
   const [startDate, setStartDate] = useState(null);
@@ -134,31 +135,7 @@ storiesOf('Form', module)
     );
   })
   .add('Label', () => <Label>My awesome field</Label>)
-  .add('Checkbox', () => <Checkbox checked label="React (4)" />)
-  .add('Checkbox Custom Label', () => (
-    <Checkbox>
-      {({ renderCheckbox }) => {
-        return (
-          <div
-            css={`
-              display: flex;
-              width: 200px;
-            `}
-          >
-            <Body1 color="ps.200">Hello</Body1>{' '}
-            <div
-              css={`
-                margin-left: auto;
-                align-self: center;
-              `}
-            >
-              {renderCheckbox()}
-            </div>
-          </div>
-        );
-      }}
-    </Checkbox>
-  ))
+  .add('Checkbox', () => <Checkbox width={20} checked label="React (4)" />)
   .add('DateRangeField', () => <DateRangeFieldWrapper />)
   .add('StringField with Button', () => {
     return (
@@ -170,6 +147,11 @@ storiesOf('Form', module)
         validate={string()
           .required('Has to be there')
           .email('has to be email')}
+        onSubmit={async ({ value, resetForm }) => {
+          await sleep(300);
+          console.log(value);
+          resetForm();
+        }}
       />
     );
   })

@@ -10,11 +10,15 @@ const stringFieldWithButtonTypes = {
   validate: PropTypes.object.isRequired,
   initialValue: PropTypes.string,
   buttonProps: PropTypes.object,
+  loading: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 const defaultProps = {
   initialValue: '',
   buttonProps: {},
+  loading: false,
+  disabled: false,
 };
 
 const StringFieldWithButtonForm = ({
@@ -22,6 +26,8 @@ const StringFieldWithButtonForm = ({
   validate,
   initialValue,
   buttonProps,
+  loading,
+  disabled,
   ...restProps
 }) => {
   let handleResetForm = null;
@@ -29,12 +35,14 @@ const StringFieldWithButtonForm = ({
   const handleSubmitForm = ({ input }) => {
     onSubmit({
       value: input,
-      resetForm: () => setTimeout(handleResetForm),
+      resetForm: handleResetForm,
     });
   };
 
   const buttonPropsMerged = {
     type: 'submit',
+    loading,
+    disabled,
     ...buttonProps,
   };
 
@@ -48,20 +56,19 @@ const StringFieldWithButtonForm = ({
     >
       {({ handleSubmit, form }) => {
         if (!handleResetForm && form && form.reset) {
-          handleResetForm = form.reset;
+          handleResetForm = () => {
+            form.reset();
+            form.resetFieldState('input');
+          };
         }
         return (
-          <form
-            onSubmit={(e) => {
-              handleSubmit(e);
-              form.reset();
-            }}
-          >
+          <form onSubmit={handleSubmit}>
             <Field name="input">
               {({ input, meta }) => {
                 return (
                   <StringFieldWithButton
                     {...restProps}
+                    disabled={disabled || loading}
                     buttonProps={buttonPropsMerged}
                     name={input.name}
                     value={input.value}

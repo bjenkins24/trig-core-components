@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { uniqueId } from 'lodash';
+import getWidth from '../utils/getWidth';
+import { widthType } from '../utils/propTypes';
 import { HorizontalGroup } from '../Groups';
 import { Body1 } from '../Typography';
 import Icon from '../Icon';
@@ -11,6 +14,7 @@ const LabelContainer = styled.label.attrs({
   display: inline-block;
   cursor: pointer;
   position: relative;
+  ${getWidth}
 `;
 
 const checkedStyles = css`
@@ -48,7 +52,6 @@ const StyledCheckbox = styled.div`
   height: 1.6rem;
   cursor: pointer;
   color: ${({ theme }) => theme.bs[200]};
-  margin: 0 auto;
   border-radius: 0.2rem;
   ${uncheckedStyles}
   &:hover {
@@ -67,6 +70,7 @@ const checkboxTypes = {
   className: PropTypes.string,
   checked: PropTypes.bool,
   onChange: PropTypes.func,
+  width: widthType,
 };
 
 const defaultProps = {
@@ -75,6 +79,7 @@ const defaultProps = {
   className: '',
   checked: false,
   onChange: () => null,
+  width: null,
 };
 
 const Checkbox = ({
@@ -83,42 +88,38 @@ const Checkbox = ({
   className,
   checked,
   onChange,
+  width,
   ...restProps
 }) => {
+  const [forId] = useState(() => uniqueId('checkbox-'));
+  const inputRef = useRef(null);
   const [isChecked, setIsChecked] = useState(checked);
-  const CheckboxComponent = () => {
-    return (
-      <>
-        <HiddenInput
-          checked={isChecked}
-          onChange={(e) => {
-            setIsChecked(!isChecked);
-            onChange(e);
-          }}
-          {...restProps}
-        />
-        <StyledCheckbox>
-          {isChecked && <StyledIcon type="check" size={1.2} />}
-        </StyledCheckbox>
-      </>
-    );
-  };
-
-  if (children) {
-    return (
-      <LabelContainer className={className}>
-        {children({ renderCheckbox: () => <CheckboxComponent /> })}
-      </LabelContainer>
-    );
-  }
 
   return (
-    <LabelContainer className={className}>
-      <HorizontalGroup margin={0.8}>
-        <CheckboxComponent />
-        {label && <Body1 color="ps.200">{label}</Body1>}
-      </HorizontalGroup>
-    </LabelContainer>
+    <HorizontalGroup className={className} padding={width ? 0 : 0.8}>
+      {label && (
+        <LabelContainer width={width} htmlFor={forId}>
+          <Body1 color="ps.200">{label}</Body1>
+        </LabelContainer>
+      )}
+      <HiddenInput
+        ref={inputRef}
+        id={forId}
+        checked={isChecked}
+        onChange={(e) => {
+          setIsChecked(!isChecked);
+          onChange(e);
+        }}
+        {...restProps}
+      />
+      <StyledCheckbox
+        onClick={() => {
+          inputRef.current.click();
+        }}
+      >
+        {isChecked && <StyledIcon type="check" size={1.2} />}
+      </StyledCheckbox>
+    </HorizontalGroup>
   );
 };
 

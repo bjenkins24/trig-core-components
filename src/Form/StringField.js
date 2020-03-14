@@ -1,11 +1,7 @@
-import React, { useState, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { uniqueId } from 'lodash';
-import { VerticalGroup } from '../Groups';
-import Label from './Label';
-import ErrorMessage from './ErrorMessage';
-import getWidth from '../utils/getWidth';
+import FieldContainer from './FieldContainer';
 import { widthType } from '../utils/propTypes';
 
 export const inputStyles = css`
@@ -20,7 +16,7 @@ export const inputStyles = css`
   }
   &[disabled] {
     background: ${({ theme }) => theme.ps[50]};
-    border: 0.1rem solid ${({ theme }) => theme.ps[50]};
+    border: solid 1px #d2d2d2;
   }
   &:focus {
     outline: none;
@@ -31,16 +27,6 @@ export const inputStyles = css`
 
 const Input = styled.input`
   ${inputStyles}
-`;
-
-const Container = styled(VerticalGroup)`
-  ${getWidth}
-`;
-
-const LabelContainer = styled.span`
-  display: block;
-  margin-bottom: 0.4rem;
-  ${({ error, theme }) => error && `color: ${theme.e}`}
 `;
 
 export const stringFieldTypes = {
@@ -63,31 +49,27 @@ export const defaultProps = {
 
 const StringField = forwardRef(
   ({ label, width, className, error, ...restProps }, ref) => {
-    const [id] = useState(() => uniqueId('string-field-'));
-
-    if (!label) {
-      return (
-        <Container width={width} className={className}>
-          <Input
-            type="text"
-            error={error}
-            className={className}
-            ref={ref}
-            {...restProps}
-          />
-          {error && <ErrorMessage>{error}</ErrorMessage>}
-        </Container>
-      );
-    }
-
     return (
-      <Container width={width} className={className}>
-        <Label htmlFor={id}>
-          <LabelContainer error={error}>{label}</LabelContainer>
-        </Label>
-        <Input id={id} error={error} type="text" ref={ref} {...restProps} />
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-      </Container>
+      <FieldContainer
+        width={width}
+        className={className}
+        error={error}
+        id="string-field"
+        label={label}
+      >
+        {({ id }) => {
+          return (
+            <Input
+              ref={ref}
+              id={id}
+              type="text"
+              error={error}
+              className={className}
+              {...restProps}
+            />
+          );
+        }}
+      </FieldContainer>
     );
   }
 );

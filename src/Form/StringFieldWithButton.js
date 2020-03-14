@@ -2,10 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import StringField from './StringField';
-import Label from './Label';
+import FieldContainer from './FieldContainer';
 import { HorizontalGroup } from '../Groups';
 import { Button } from '../Buttons';
-import getWidth from '../utils/getWidth';
 import { widthType } from '../utils/propTypes';
 
 const focusedButtonStyles = ({ isFocused, theme }) => {
@@ -37,10 +36,6 @@ const StyledStringField = styled(StringField)`
   width: calc(100% - 3.2rem - 0.1rem);
 `;
 
-const Container = styled(HorizontalGroup)`
-  ${getWidth}
-`;
-
 const stringFieldWithButtonTypes = {
   width: widthType,
   onSubmit: PropTypes.func,
@@ -51,6 +46,7 @@ const stringFieldWithButtonTypes = {
   onFocus: PropTypes.func,
   onKeyDown: PropTypes.func,
   onBlur: PropTypes.func,
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 const defaultProps = {
@@ -62,10 +58,12 @@ const defaultProps = {
   onFocus: () => null,
   onKeyDown: () => null,
   onBlur: () => null,
+  error: '',
 };
 
 const StringFieldWithButton = ({
   width,
+  error,
   onSubmit,
   buttonContent,
   buttonProps,
@@ -78,6 +76,7 @@ const StringFieldWithButton = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = useState('');
+
   const StringFieldRef = useRef(null);
   const ButtonRef = useRef(null);
 
@@ -87,60 +86,60 @@ const StringFieldWithButton = ({
     }
   });
 
-  const Component = () => {
-    return (
-      <Container className={className} width={width}>
-        <StyledStringField
-          ref={StringFieldRef}
-          onKeyDown={(event) => {
-            if (event.key === 'Enter') {
-              onSubmit(value);
-            }
-            onKeyDown(event);
-          }}
-          onFocus={(event) => {
-            setIsFocused(true);
-            onFocus(event);
-          }}
-          value={value}
-          onChange={(event) => setValue(event.target.value)}
-          onBlur={(event) => {
-            onBlur(event);
-            setTimeout(() => setIsFocused(false), 10);
-          }}
-          width="100%"
-          {...restProps}
-        />
-        <StyledButton
-          ref={ButtonRef}
-          variant="inverse-pl"
-          size="lg"
-          onClick={() => onSubmit(value)}
-          isFocused={isFocused}
-          {...buttonProps}
-          onFocus={(event) => {
-            if (typeof buttonProps.onFocus !== 'undefined') {
-              buttonProps.onFocus(event);
-            }
-            setTimeout(() => ButtonRef.current.focus(), 20);
-          }}
-        >
-          {buttonContent}
-        </StyledButton>
-      </Container>
-    );
-  };
-
-  if (label) {
-    return (
-      <Label>
-        {label}
-        <Component />
-      </Label>
-    );
-  }
-
-  return <Component />;
+  return (
+    <FieldContainer
+      id="string-field-button"
+      className={className}
+      label={label}
+      width={width}
+      error={error}
+    >
+      {({ id }) => {
+        return (
+          <HorizontalGroup>
+            <StyledStringField
+              ref={StringFieldRef}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  onSubmit(value);
+                }
+                onKeyDown(event);
+              }}
+              onFocus={(event) => {
+                setIsFocused(true);
+                onFocus(event);
+              }}
+              value={value}
+              onChange={(event) => setValue(event.target.value)}
+              onBlur={(event) => {
+                onBlur(event);
+                setTimeout(() => setIsFocused(false), 10);
+              }}
+              width="100%"
+              id={id}
+              {...restProps}
+            />
+            <StyledButton
+              ref={ButtonRef}
+              variant="inverse-pl"
+              size="lg"
+              onClick={() => onSubmit(value)}
+              isFocused={isFocused}
+              {...buttonProps}
+              onFocus={(event) => {
+                if (typeof buttonProps.onFocus !== 'undefined') {
+                  buttonProps.onFocus(event);
+                }
+                setTimeout(() => ButtonRef.current.focus(), 20);
+              }}
+            >
+              {buttonContent}
+            </StyledButton>
+          </HorizontalGroup>
+        );
+      }}
+    </FieldContainer>
+  );
 };
 
 StringFieldWithButton.propTypes = stringFieldWithButtonTypes;

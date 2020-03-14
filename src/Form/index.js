@@ -5,7 +5,6 @@ import DateRangeField from './DateRangeField';
 import Fieldset from './Fieldset';
 import Form from './Form';
 import Label from './Label';
-import LabelContainer from './LabelContainer';
 import Legend from './Legend';
 import SelectField from './SelectField';
 import SelectTagField from './SelectTagField';
@@ -22,7 +21,6 @@ export {
   DatePicker,
   DateRangeField,
   Label,
-  LabelContainer,
   Legend,
   Field,
   Fieldset,

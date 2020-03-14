@@ -19,7 +19,6 @@ export const {
   Fieldset,
   Form,
   Label,
-  LabelContainer,
   Legend,
   SelectField,
   SelectTagField,
