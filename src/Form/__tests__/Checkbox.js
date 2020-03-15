@@ -7,41 +7,30 @@ const labelText = 'My Checkbox';
 
 describe('<Checkbox />', () => {
   it('renders and takes basic props', () => {
-    const { getByText, getByRole, getByTestId, rerender } = render(
-      <Checkbox />
-    );
+    const {
+      getByText,
+      getByRole,
+      getByTestId,
+      getByTitle,
+      queryByTitle,
+      rerender,
+    } = render(<Checkbox />);
 
-    expect(getByTestId('labelContainer')).toBeInTheDocument();
     expect(getByRole('checkbox')).toBeInTheDocument();
+    expect(queryByTitle(/check icon/i)).toBeNull();
+    user.click(getByTestId('checkbox-icon'));
+    expect(getByTitle(/check icon/i)).toBeInTheDocument();
 
     rerender(<Checkbox label={labelText} />);
     expect(getByText(labelText)).toBeInTheDocument();
   });
 
-  it('renders custom with render props', () => {
-    const randomText = 'Custom Label';
-    const { getByRole, getByText, getByTestId } = render(
-      <Checkbox>
-        {({ renderCheckbox }) => {
-          return (
-            <div>
-              {randomText} {renderCheckbox()}
-            </div>
-          );
-        }}
-      </Checkbox>
-    );
-
-    // It needs to be in a label container
-    expect(getByTestId('labelContainer')).toBeInTheDocument();
-    expect(getByRole('checkbox')).toBeInTheDocument();
-    expect(getByText(randomText)).toBeInTheDocument();
-  });
-
   it('shows and hides check', () => {
-    const { getByTitle, getByRole, queryByTitle } = render(
-      <Checkbox checked />
+    const { getByTitle, getByRole, queryByTitle, container } = render(
+      <Checkbox checked width={20} />
     );
+    expect(container.firstChild).toMatchSnapshot();
+
     expect(getByTitle(/check icon/i)).toBeInTheDocument();
     user.click(getByRole('checkbox'));
     expect(queryByTitle(/check icon/i)).toBeNull();

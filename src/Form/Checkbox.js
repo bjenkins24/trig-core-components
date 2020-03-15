@@ -113,6 +113,7 @@ const Checkbox = ({
         {...restProps}
       />
       <StyledCheckbox
+        data-testid="checkbox-icon"
         onClick={() => {
           inputRef.current.click();
         }}

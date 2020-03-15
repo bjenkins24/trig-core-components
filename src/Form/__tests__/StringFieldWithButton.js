@@ -10,12 +10,14 @@ describe('<StringFieldWithButton />', () => {
     const buttonContent = 'Button Content';
     const exampleClass = 'example class';
     const mockCallBack = jest.fn();
+    const mockFocusCallBack = jest.fn();
     const label = 'My label';
     const { getByText, getByRole, container, rerender } = render(
       <StringFieldWithButton
         className={exampleClass}
         onSubmit={mockCallBack}
         buttonContent={buttonContent}
+        buttonProps={{ onFocus: mockFocusCallBack }}
       />
     );
     expect(container.firstChild).toHaveClass(exampleClass);
@@ -38,6 +40,8 @@ describe('<StringFieldWithButton />', () => {
       `border: 0.1rem solid ${theme.ps[200]}`
     );
     expect(getByText(label)).toBeInTheDocument();
+    getByRole('button').focus();
+    expect(mockFocusCallBack.mock.calls.length).toEqual(1);
     wait();
   });
 });

@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Checkbox /> shows and hides check 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.c5 {
+  color: inherit;
+  margin: 0 auto;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
+}
+
+.c1 {
+  border: 0;
+  height: 1px;
+  margin: -1px;
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.c1:checked + div {
+  border: 0.1rem solid #009E8F;
+  background: #009E8F;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 1.6rem;
+  height: 1.6rem;
+  cursor: pointer;
+  color: #FFFFFF;
+  border-radius: 0.2rem;
+  border: 0.1rem solid #C0BFBF;
+  background: none;
+}
+
+.c2:hover {
+  border: 0.1rem solid #009E8F;
+}
+
+.c4 {
+  margin: 0 auto;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+<div
+  class="c0"
+>
+  
+  <input
+    checked=""
+    class="c1"
+    id="checkbox-2"
+    type="checkbox"
+  />
+  <div
+    class="c2"
+    data-testid="checkbox-icon"
+  >
+    <div
+      class="c3 c4"
+    >
+      <svg
+        class="c5"
+        height="1.2rem"
+        role="img"
+        viewBox="0 0 32 32"
+        width="1.2rem"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M29.543 4L9.918 23.193l-7.461-7.296L0 18.3 9.918 28 32 6.403z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+        <title>
+          Check Icon
+        </title>
+        <desc />
+      </svg>
+    </div>
+  </div>
+</div>
+`;

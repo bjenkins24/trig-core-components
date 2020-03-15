@@ -54,11 +54,11 @@ const defaultProps = {
   className: '',
   buttonProps: {},
   label: '',
-  onSubmit: () => null,
   onFocus: () => null,
   onKeyDown: () => null,
   onBlur: () => null,
   error: '',
+  onSubmit: () => null,
 };
 
 const StringFieldWithButton = ({

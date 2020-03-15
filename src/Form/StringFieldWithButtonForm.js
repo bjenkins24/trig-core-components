@@ -57,8 +57,10 @@ const StringFieldWithButtonForm = ({
       {({ handleSubmit, form }) => {
         if (!handleResetForm && form && form.reset) {
           handleResetForm = () => {
-            form.reset();
-            form.resetFieldState('input');
+            setTimeout(() => {
+              form.reset();
+              form.resetFieldState('input');
+            });
           };
         }
         return (
