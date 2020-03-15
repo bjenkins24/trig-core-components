@@ -32,6 +32,7 @@ describe('<StringFieldWithButtonForm />', () => {
     await wait(() => user.type(getByRole('textbox'), 'hello'));
     await wait(() => user.click(submitButton));
     expect(mockCallBack.mock.calls.length).toEqual(1);
+    await wait();
     expect(getByRole('textbox').value).toEqual('');
   });
 });
