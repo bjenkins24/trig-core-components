@@ -105,7 +105,7 @@ const getVariantStyles = ({ variant }) => {
         background: none;
         border: 0.1rem solid ${({ theme }) => theme.ps[100]};
         div {
-          color: ${({ theme }) => theme.ps[100]};
+          color: ${({ theme }) => theme.ps[200]};
           font-weight: 400;
         }
         &:hover,
