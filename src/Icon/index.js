@@ -23,6 +23,7 @@ import Document from './icons/Document';
 import Facebook from './icons/Facebook';
 import File from './icons/File';
 import Followers from './icons/Followers';
+import Google from './icons/Google';
 import Hamburger from './icons/Hamburger';
 import Heart from './icons/Heart';
 import HeartFilled from './icons/HeartFilled';
@@ -71,6 +72,7 @@ export const iconComponents = {
   facebook: Facebook,
   file: File,
   followers: Followers,
+  google: Google,
   hamburger: Hamburger,
   heart: Heart,
   'heart-filled': HeartFilled,

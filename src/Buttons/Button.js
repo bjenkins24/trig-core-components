@@ -1,8 +1,9 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { sizeProp } from 'utils/propTypes';
+import { sizeProp, widthType } from 'utils/propTypes';
 import { HorizontalGroup } from 'Groups';
+import { getWidth } from 'utils';
 import Icon from 'Icon';
 import { BodyBiggest, Body1, Body2, Body3 } from 'Typography';
 
@@ -182,6 +183,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   transition: all 150ms ease-in;
   outline: none;
+  ${getWidth}
 `;
 
 const rippleEffect = ({ event, fromCenter }) => {
@@ -240,6 +242,7 @@ export const buttonTypes = {
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   loading: PropTypes.bool,
+  width: widthType,
 };
 
 const defaultProps = {
@@ -249,6 +252,7 @@ const defaultProps = {
   disabled: false,
   onClick: () => null,
   loading: false,
+  width: 'auto',
 };
 
 const Button = forwardRef(
@@ -261,6 +265,7 @@ const Button = forwardRef(
       onClick,
       loading,
       size,
+      width,
       ...restProps
     },
     ref
@@ -280,6 +285,7 @@ const Button = forwardRef(
 
     return (
       <StyledButton
+        width={width}
         variant={variant}
         disabled={disabledButton}
         ref={ref}

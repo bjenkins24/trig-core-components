@@ -10,7 +10,8 @@ const TextArea = styled.textarea`
   height: ${({ height }) => `${height}rem`};
   padding: 1.6rem;
   resize: none;
-  width: calc(100% - 3.2rem - 0.2rem);
+  width: 100%;
+  box-sizing: border-box;
 `;
 
 export const textFieldTypes = {

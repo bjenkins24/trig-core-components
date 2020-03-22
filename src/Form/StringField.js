@@ -10,7 +10,8 @@ export const inputStyles = css`
   font-size: 1.6rem;
   line-height: 1.7;
   padding: 0.95rem 1.6rem;
-  width: calc(100% - 3.2rem - 0.2rem);
+  width: 100%;
+  box-sizing: border-box;
   &::placeholder {
     color: ${({ theme }) => theme.ps[100]};
   }
@@ -31,6 +32,7 @@ const Input = styled.input`
 
 export const stringFieldTypes = {
   label: PropTypes.string,
+  labelProps: PropTypes.object,
   className: PropTypes.string,
   width: widthType,
   error: PropTypes.oneOfType([
@@ -42,13 +44,14 @@ export const stringFieldTypes = {
 
 export const defaultProps = {
   label: '',
+  labelProps: {},
   className: '',
   width: 20,
   error: null,
 };
 
 const StringField = forwardRef(
-  ({ label, width, className, error, ...restProps }, ref) => {
+  ({ label, width, className, error, labelProps, ...restProps }, ref) => {
     return (
       <FieldContainer
         width={width}
@@ -56,6 +59,7 @@ const StringField = forwardRef(
         error={error}
         id="string-field"
         label={label}
+        labelProps={labelProps}
       >
         {({ id }) => {
           return (

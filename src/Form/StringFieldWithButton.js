@@ -33,7 +33,7 @@ const StyledStringField = styled(StringField)`
   &:focus {
     border-right: 0;
   }
-  width: calc(100% - 3.2rem - 0.1rem);
+  width: 100%;
 `;
 
 const stringFieldWithButtonTypes = {

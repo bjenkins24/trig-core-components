@@ -109,7 +109,6 @@ storiesOf('Form', module)
     <StringField
       label={text('label', 'My Cool Label')}
       placeholder={text('placeholder', 'Placeholder')}
-      width={text('width', '20')}
     />
   ))
   .add('TextField', () => (
