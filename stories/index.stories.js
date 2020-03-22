@@ -49,6 +49,8 @@ storiesOf('Button', module)
     return (
       <Button
         as="a"
+        width={40}
+        iconProps={{ type: 'google' }}
         size={select(
           'Size',
           { huge: 'hg', small: 'sm', medium: 'md', large: 'lg' },
