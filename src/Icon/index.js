@@ -34,6 +34,7 @@ import LinkedIn from './icons/LinkedIn';
 import ListOrdered from './icons/ListOrdered';
 import ListUnordered from './icons/ListUnordered';
 import Loading from './icons/Loading';
+import Lock from './icons/Lock';
 import NumberOne from './icons/NumberOne';
 import NumberTwo from './icons/NumberTwo';
 import Organize from './icons/Organize';
@@ -83,6 +84,7 @@ export const iconComponents = {
   'list-ordered': ListOrdered,
   'list-unordered': ListUnordered,
   loading: Loading,
+  lock: Lock,
   'number-one': NumberOne,
   'number-two': NumberTwo,
   organize: Organize,
