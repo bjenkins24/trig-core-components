@@ -14,6 +14,9 @@ const LabelContainer = styled.label.attrs({
   display: inline-block;
   cursor: pointer;
   position: relative;
+  box-sizing: border-box;
+  padding-left: ${({ labelPosition }) =>
+    labelPosition === 'right' ? '0.8rem' : 0};
   ${getWidth}
 `;
 
@@ -48,6 +51,8 @@ const HiddenInput = styled.input.attrs({
 
 const StyledCheckbox = styled.div`
   display: flex;
+  align-self: flex-start;
+  margin-top: 0.4rem;
   width: 1.6rem;
   height: 1.6rem;
   cursor: pointer;
@@ -71,6 +76,7 @@ const checkboxTypes = {
   checked: PropTypes.bool,
   onChange: PropTypes.func,
   width: widthType,
+  labelPosition: PropTypes.oneOf(['left', 'right']),
 };
 
 const defaultProps = {
@@ -80,10 +86,12 @@ const defaultProps = {
   checked: false,
   onChange: () => null,
   width: null,
+  labelPosition: 'left',
 };
 
 const Checkbox = ({
   label,
+  labelPosition,
   children,
   className,
   checked,
@@ -95,13 +103,26 @@ const Checkbox = ({
   const inputRef = useRef(null);
   const [isChecked, setIsChecked] = useState(checked);
 
+  const renderLabel = () => {
+    return (
+      <LabelContainer
+        width={width}
+        htmlFor={forId}
+        labelPosition={labelPosition}
+      >
+        <Body1 color="ps.200">{label}</Body1>
+      </LabelContainer>
+    );
+  };
+
   return (
-    <HorizontalGroup className={className} padding={width ? 0 : 0.8}>
-      {label && (
-        <LabelContainer width={width} htmlFor={forId}>
-          <Body1 color="ps.200">{label}</Body1>
-        </LabelContainer>
-      )}
+    <HorizontalGroup
+      className={className}
+      padding={labelPosition === 'right' ? 0 : 0.8}
+    >
+      {label &&
+        labelPosition === 'left' &&
+        renderLabel({ width, forId, label })}
       <HiddenInput
         ref={inputRef}
         id={forId}
@@ -120,6 +141,9 @@ const Checkbox = ({
       >
         {isChecked && <StyledIcon type="check" size={1.2} />}
       </StyledCheckbox>
+      {label &&
+        labelPosition === 'right' &&
+        renderLabel({ width, forId, label })}
     </HorizontalGroup>
   );
 };

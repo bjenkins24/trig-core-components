@@ -134,7 +134,13 @@ storiesOf('Form', module)
     );
   })
   .add('Label', () => <Label>My awesome field</Label>)
-  .add('Checkbox', () => <Checkbox width={20} checked label="React (4)" />)
+  .add('Checkbox', () => (
+    <Checkbox
+      checked
+      label="React my firends is cool asdjklas jdkl"
+      width={20}
+    />
+  ))
   .add('DateRangeField', () => <DateRangeFieldWrapper />)
   .add('StringField with Button', () => {
     return (
