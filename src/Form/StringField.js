@@ -13,7 +13,7 @@ export const inputStyles = css`
   width: 100%;
   box-sizing: border-box;
   &::placeholder {
-    color: ${({ theme }) => theme.ps[100]};
+    color: ${({ theme }) => theme.ps[200]};
   }
   &[disabled] {
     background: ${({ theme }) => theme.ps[50]};
