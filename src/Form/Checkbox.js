@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components';
 import { uniqueId } from 'lodash';
 import ErrorMessage from './ErrorMessage';
 import Label from './Label';
-
 import { widthType } from '../utils/propTypes';
 import { HorizontalGroup } from '../Groups';
 import Icon from '../Icon';
@@ -26,6 +25,21 @@ const uncheckedStyles = css`
   background: none;
 `;
 
+const StyledCheckbox = styled.div`
+  display: flex;
+  align-self: flex-start;
+  margin-top: 0.4rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  cursor: pointer;
+  color: ${({ theme }) => theme.bs[200]};
+  border-radius: 0.2rem;
+  ${uncheckedStyles}
+  &:hover {
+    border: 0.1rem solid ${({ theme }) => theme.s};
+  }
+`;
+
 const HiddenInput = styled.input.attrs({
   type: 'checkbox',
 })`
@@ -43,20 +57,11 @@ const HiddenInput = styled.input.attrs({
   :checked + div {
     ${checkedStyles}
   }
-`;
-
-const StyledCheckbox = styled.div`
-  display: flex;
-  align-self: flex-start;
-  margin-top: 0.4rem;
-  width: 1.6rem;
-  height: 1.6rem;
-  cursor: pointer;
-  color: ${({ theme }) => theme.bs[200]};
-  border-radius: 0.2rem;
-  ${uncheckedStyles}
-  &:hover {
-    border: 0.1rem solid ${({ theme }) => theme.s};
+  &:not(:checked):focus ~ ${StyledCheckbox} {
+    border: 0.1rem dashed ${({ theme }) => theme.ss[900]};
+  }
+  &:checked:focus ~ ${StyledCheckbox} {
+    border: 0.1rem dashed ${({ theme }) => theme.p};
   }
 `;
 
