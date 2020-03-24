@@ -3,22 +3,17 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { uniqueId } from 'lodash';
 import ErrorMessage from './ErrorMessage';
-import getWidth from '../utils/getWidth';
+import Label from './Label';
+
 import { widthType } from '../utils/propTypes';
 import { HorizontalGroup } from '../Groups';
-import { Body1 } from '../Typography';
 import Icon from '../Icon';
 
-const LabelContainer = styled.label.attrs({
+const LabelContainer = styled(Label).attrs({
   'data-testid': 'labelContainer',
 })`
-  display: inline-block;
-  cursor: pointer;
-  position: relative;
-  box-sizing: border-box;
   padding-left: ${({ labelPosition }) =>
     labelPosition === 'right' ? '0.8rem' : 0};
-  ${getWidth}
 `;
 
 const checkedStyles = css`
@@ -78,6 +73,7 @@ export const checkboxTypes = {
   onChange: PropTypes.func,
   width: widthType,
   labelPosition: PropTypes.oneOf(['left', 'right']),
+  labelProps: PropTypes.object,
   error: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string,
@@ -87,6 +83,7 @@ export const checkboxTypes = {
 
 const defaultProps = {
   label: '',
+  labelProps: {},
   children: null,
   className: '',
   checked: false,
@@ -98,6 +95,7 @@ const defaultProps = {
 
 const Checkbox = ({
   label,
+  labelProps,
   labelPosition,
   children,
   className,
@@ -115,10 +113,12 @@ const Checkbox = ({
     return (
       <LabelContainer
         width={width}
-        htmlFor={forId}
         labelPosition={labelPosition}
+        color="ps.200"
+        {...labelProps}
+        htmlFor={forId}
       >
-        <Body1 color="ps.200">{label}</Body1>
+        {label}
       </LabelContainer>
     );
   };
@@ -126,9 +126,7 @@ const Checkbox = ({
   return (
     <div className={className}>
       <HorizontalGroup padding={labelPosition === 'right' ? 0 : 0.8}>
-        {label &&
-          labelPosition === 'left' &&
-          renderLabel({ width, forId, label })}
+        {label && labelPosition === 'left' && renderLabel()}
         <HiddenInput
           ref={inputRef}
           id={forId}
@@ -147,9 +145,7 @@ const Checkbox = ({
         >
           {isChecked && <StyledIcon type="check" size={1.2} />}
         </StyledCheckbox>
-        {label &&
-          labelPosition === 'right' &&
-          renderLabel({ width, forId, label })}
+        {label && labelPosition === 'right' && renderLabel()}
       </HorizontalGroup>
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </div>
