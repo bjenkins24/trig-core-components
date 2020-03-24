@@ -8,6 +8,11 @@ exports[`<Checkbox /> shows and hides check 1`] = `
   color: #8A8787;
 }
 
+.c8 {
+  cursor: pointer;
+  width: 20rem;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -19,7 +24,7 @@ exports[`<Checkbox /> shows and hides check 1`] = `
   align-items: center;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -27,20 +32,37 @@ exports[`<Checkbox /> shows and hides check 1`] = `
   position: relative;
 }
 
-.c5 {
+.c6 {
   color: inherit;
   margin: 0 auto;
   -webkit-transition: all 0.15s;
   transition: all 0.15s;
 }
 
-.c6 {
-  display: inline-block;
-  cursor: pointer;
-  position: relative;
-  box-sizing: border-box;
+.c9 {
   padding-left: 0.8rem;
-  width: 20rem;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  margin-top: 0.4rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  cursor: pointer;
+  color: #FFFFFF;
+  border-radius: 0.2rem;
+  border: 0.1rem solid #C0BFBF;
+  background: none;
+}
+
+.c3:hover {
+  border: 0.1rem solid #009E8F;
 }
 
 .c1 {
@@ -62,29 +84,15 @@ exports[`<Checkbox /> shows and hides check 1`] = `
   background: #009E8F;
 }
 
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-self: flex-start;
-  -ms-flex-item-align: start;
-  align-self: flex-start;
-  margin-top: 0.4rem;
-  width: 1.6rem;
-  height: 1.6rem;
-  cursor: pointer;
-  color: #FFFFFF;
-  border-radius: 0.2rem;
-  border: 0.1rem solid #C0BFBF;
-  background: none;
+.c1:not(:checked):focus ~ .c2 {
+  border: 0.1rem dashed #007060;
 }
 
-.c2:hover {
-  border: 0.1rem solid #009E8F;
+.c1:checked:focus ~ .c2 {
+  border: 0.1rem dashed #2C2929;
 }
 
-.c4 {
+.c5 {
   margin: 0 auto;
   -webkit-align-self: center;
   -ms-flex-item-align: center;
@@ -104,14 +112,14 @@ exports[`<Checkbox /> shows and hides check 1`] = `
       type="checkbox"
     />
     <div
-      class="c2"
+      class="c2 c3"
       data-testid="checkbox-icon"
     >
       <div
-        class="c3 c4"
+        class="c4 c5"
       >
         <svg
-          class="c5"
+          class="c6"
           height="1.2rem"
           role="img"
           viewBox="0 0 32 32"
@@ -131,17 +139,13 @@ exports[`<Checkbox /> shows and hides check 1`] = `
       </div>
     </div>
     <label
-      class="c6"
+      class="c7 c8 c9"
+      color="ps.200"
       data-testid="labelContainer"
       for="checkbox-2"
       width="20"
     >
-      <span
-        class="c7"
-        color="ps.200"
-      >
-        hello
-      </span>
+      hello
     </label>
   </div>
 </div>
