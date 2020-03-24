@@ -1,5 +1,6 @@
 import { Field } from 'react-final-form';
 import Checkbox from './Checkbox';
+import CheckboxForm from './CheckboxForm';
 import DatePicker from './DatePicker';
 import DateRangeField from './DateRangeField';
 import Fieldset from './Fieldset';
@@ -18,6 +19,7 @@ import TextFieldForm from './TextFieldForm';
 
 export {
   Checkbox,
+  CheckboxForm,
   DatePicker,
   DateRangeField,
   Label,

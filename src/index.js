@@ -13,6 +13,7 @@ export const { Tabs, TabList, Tab, TabPanel } = AllTabs;
 export const { List, ListItem, ListItemContent } = Lists;
 export const {
   Checkbox,
+  CheckboxForm,
   DatePicker,
   DateRangeField,
   Field,

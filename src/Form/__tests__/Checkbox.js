@@ -27,7 +27,7 @@ describe('<Checkbox />', () => {
 
   it('shows and hides check', () => {
     const { getByTitle, getByRole, queryByTitle, container } = render(
-      <Checkbox checked width={20} />
+      <Checkbox label="hello" labelPosition="right" checked width={20} />
     );
     expect(container.firstChild).toMatchSnapshot();
 

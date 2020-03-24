@@ -1,6 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Checkbox /> shows and hides check 1`] = `
+.c7 {
+  font-size: 1.6rem;
+  line-height: 1.7;
+  font-weight: 400;
+  color: #8A8787;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -27,6 +34,15 @@ exports[`<Checkbox /> shows and hides check 1`] = `
   transition: all 0.15s;
 }
 
+.c6 {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  padding-left: 0.8rem;
+  width: 20rem;
+}
+
 .c1 {
   border: 0;
   height: 1px;
@@ -51,6 +67,10 @@ exports[`<Checkbox /> shows and hides check 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+  margin-top: 0.4rem;
   width: 1.6rem;
   height: 1.6rem;
   cursor: pointer;
@@ -72,41 +92,57 @@ exports[`<Checkbox /> shows and hides check 1`] = `
 }
 
 <div
-  class="c0"
+  class=""
 >
-  
-  <input
-    checked=""
-    class="c1"
-    id="checkbox-2"
-    type="checkbox"
-  />
   <div
-    class="c2"
-    data-testid="checkbox-icon"
+    class="c0"
   >
+    <input
+      checked=""
+      class="c1"
+      id="checkbox-2"
+      type="checkbox"
+    />
     <div
-      class="c3 c4"
+      class="c2"
+      data-testid="checkbox-icon"
     >
-      <svg
-        class="c5"
-        height="1.2rem"
-        role="img"
-        viewBox="0 0 32 32"
-        width="1.2rem"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        class="c3 c4"
       >
-        <path
-          d="M29.543 4L9.918 23.193l-7.461-7.296L0 18.3 9.918 28 32 6.403z"
-          fill="currentColor"
-          fill-rule="evenodd"
-        />
-        <title>
-          Check Icon
-        </title>
-        <desc />
-      </svg>
+        <svg
+          class="c5"
+          height="1.2rem"
+          role="img"
+          viewBox="0 0 32 32"
+          width="1.2rem"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M29.543 4L9.918 23.193l-7.461-7.296L0 18.3 9.918 28 32 6.403z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+          <title>
+            Check Icon
+          </title>
+          <desc />
+        </svg>
+      </div>
     </div>
+    <label
+      class="c6"
+      data-testid="labelContainer"
+      for="checkbox-2"
+      width="20"
+    >
+      <span
+        class="c7"
+        color="ps.200"
+      >
+        hello
+      </span>
+    </label>
   </div>
 </div>
 `;

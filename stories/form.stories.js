@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
-import { object, string } from 'yup';
+import { object, bool, string } from 'yup';
 import {
   Form,
   StringField,
@@ -15,10 +15,11 @@ import {
   StringFieldWithButtonForm,
   SelectField,
   SelectTagField,
-  Checkbox,
+  CheckboxForm,
   Tag,
   Label,
   DateRangeField,
+  Button,
 } from '../src';
 import './consoleOverrides';
 import themeForProvider from './theme';
@@ -135,11 +136,22 @@ storiesOf('Form', module)
   })
   .add('Label', () => <Label>My awesome field</Label>)
   .add('Checkbox', () => (
-    <Checkbox
-      checked
-      label="React my firends is cool asdjklas jdkl"
-      width={20}
-    />
+    <Form
+      initialValues={{ test: false }}
+      onSubmit={action('submitted')}
+      validationSchema={object().shape({
+        test: bool().oneOf([true], 'You have to set this'),
+      })}
+    >
+      {({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <Fieldset>
+            <CheckboxForm name="test" label="React (4)" />
+            <Button type="submit">Hello</Button>
+          </Fieldset>
+        </form>
+      )}
+    </Form>
   ))
   .add('DateRangeField', () => <DateRangeFieldWrapper />)
   .add('StringField with Button', () => {

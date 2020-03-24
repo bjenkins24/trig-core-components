@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { uniqueId } from 'lodash';
+import ErrorMessage from './ErrorMessage';
 import getWidth from '../utils/getWidth';
 import { widthType } from '../utils/propTypes';
 import { HorizontalGroup } from '../Groups';
@@ -69,7 +70,7 @@ const StyledIcon = styled(Icon)`
   align-self: center;
 `;
 
-const checkboxTypes = {
+export const checkboxTypes = {
   label: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   children: PropTypes.func,
   className: PropTypes.string,
@@ -77,6 +78,11 @@ const checkboxTypes = {
   onChange: PropTypes.func,
   width: widthType,
   labelPosition: PropTypes.oneOf(['left', 'right']),
+  error: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
 };
 
 const defaultProps = {
@@ -87,6 +93,7 @@ const defaultProps = {
   onChange: () => null,
   width: null,
   labelPosition: 'left',
+  error: null,
 };
 
 const Checkbox = ({
@@ -97,6 +104,7 @@ const Checkbox = ({
   checked,
   onChange,
   width,
+  error,
   ...restProps
 }) => {
   const [forId] = useState(() => uniqueId('checkbox-'));
@@ -116,35 +124,35 @@ const Checkbox = ({
   };
 
   return (
-    <HorizontalGroup
-      className={className}
-      padding={labelPosition === 'right' ? 0 : 0.8}
-    >
-      {label &&
-        labelPosition === 'left' &&
-        renderLabel({ width, forId, label })}
-      <HiddenInput
-        ref={inputRef}
-        id={forId}
-        checked={isChecked}
-        onChange={(e) => {
-          setIsChecked(!isChecked);
-          onChange(e);
-        }}
-        {...restProps}
-      />
-      <StyledCheckbox
-        data-testid="checkbox-icon"
-        onClick={() => {
-          inputRef.current.click();
-        }}
-      >
-        {isChecked && <StyledIcon type="check" size={1.2} />}
-      </StyledCheckbox>
-      {label &&
-        labelPosition === 'right' &&
-        renderLabel({ width, forId, label })}
-    </HorizontalGroup>
+    <div className={className}>
+      <HorizontalGroup padding={labelPosition === 'right' ? 0 : 0.8}>
+        {label &&
+          labelPosition === 'left' &&
+          renderLabel({ width, forId, label })}
+        <HiddenInput
+          ref={inputRef}
+          id={forId}
+          checked={isChecked}
+          onChange={(e) => {
+            setIsChecked(!isChecked);
+            onChange(e);
+          }}
+          {...restProps}
+        />
+        <StyledCheckbox
+          data-testid="checkbox-icon"
+          onClick={() => {
+            inputRef.current.click();
+          }}
+        >
+          {isChecked && <StyledIcon type="check" size={1.2} />}
+        </StyledCheckbox>
+        {label &&
+          labelPosition === 'right' &&
+          renderLabel({ width, forId, label })}
+      </HorizontalGroup>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
+    </div>
   );
 };
 
