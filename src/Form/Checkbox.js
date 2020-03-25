@@ -12,7 +12,7 @@ const LabelContainer = styled(Label).attrs({
   'data-testid': 'labelContainer',
 })`
   padding-left: ${({ labelPosition }) =>
-    labelPosition === 'right' ? '0.8rem' : 0};
+    labelPosition === 'right' ? '1.6rem' : 0};
 `;
 
 const checkedStyles = css`
@@ -130,7 +130,7 @@ const Checkbox = ({
 
   return (
     <div className={className}>
-      <HorizontalGroup padding={labelPosition === 'right' ? 0 : 0.8}>
+      <HorizontalGroup padding={labelPosition === 'right' ? 0 : 1.6}>
         {label && labelPosition === 'left' && renderLabel()}
         <HiddenInput
           ref={inputRef}

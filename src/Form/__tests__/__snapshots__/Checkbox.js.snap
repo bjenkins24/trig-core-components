@@ -85,11 +85,11 @@ exports[`<Checkbox /> shows and hides check 1`] = `
 }
 
 .c1:not(:checked):focus ~ .c2 {
-  border: 0.1rem dashed #007060;
+  border: 0.1rem solid #009E8F;
 }
 
 .c1:checked:focus ~ .c2 {
-  border: 0.1rem dashed #2C2929;
+  border: 0.1rem solid #098072;
 }
 
 .c5 {
