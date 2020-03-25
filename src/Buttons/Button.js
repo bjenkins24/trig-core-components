@@ -150,10 +150,8 @@ const getVariantStyles = ({ variant }) => {
       return css`
         background: ${({ theme }) => theme.s};
         border: 0.1rem solid ${({ theme }) => theme.s};
+        &:hover,
         &:focus {
-          border: 0.1rem dashed ${({ theme }) => theme.p};
-        }
-        &:hover {
           background: ${({ theme }) => theme.ss[800]};
           border: 0.1rem solid ${({ theme }) => theme.ss[800]};
         }

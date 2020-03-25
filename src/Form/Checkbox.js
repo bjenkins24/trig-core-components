@@ -58,10 +58,10 @@ const HiddenInput = styled.input.attrs({
     ${checkedStyles}
   }
   &:not(:checked):focus ~ ${StyledCheckbox} {
-    border: 0.1rem dashed ${({ theme }) => theme.ss[900]};
+    border: 0.1rem solid ${({ theme }) => theme.s};
   }
   &:checked:focus ~ ${StyledCheckbox} {
-    border: 0.1rem dashed ${({ theme }) => theme.p};
+    border: 0.1rem solid ${({ theme }) => theme.ss[800]};
   }
 `;
 
