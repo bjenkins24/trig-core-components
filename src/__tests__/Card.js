@@ -29,6 +29,7 @@ const buildCard = (props) => {
       isFavorited
       dateTime={new Date()}
       title={title}
+      navigationList={[{ onClick: () => null, item: 'first item' }]}
       {...props}
     />
   );

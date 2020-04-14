@@ -76,7 +76,6 @@ describe('<Popover />', () => {
     fireEvent.keyDown(document.body, {
       key: 'Escape',
       keyCode: 27,
-      which: 27,
     });
 
     expect(queryByText(popoverText)).toBeNull();

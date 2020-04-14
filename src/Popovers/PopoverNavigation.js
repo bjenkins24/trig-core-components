@@ -48,31 +48,27 @@ const PopoverNavigation = ({ children, navigationList, ...restProps }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const refs = useRef(navigationList.map(React.createRef));
-  const closePopoverRef = useRef(() => null);
+  const closePopoverRef = useRef();
 
   const navigateWithKeyboard = (event) => {
-    const upKey = 38;
-    const downKey = 40;
-    const enterKey = 13;
-    const tabKey = 9;
     const totalItems = navigationList.length;
-    const { keyCode, shiftKey } = event;
+    const { key } = event;
 
-    if (keyCode === upKey || (shiftKey && keyCode === tabKey)) {
+    if (key === 'ArrowUp' || (key === 'Shift' && key === 'Tab')) {
       if (selectedItem === null || selectedItem === 0) {
         return setSelectedItem(totalItems - 1);
       }
       return setSelectedItem(selectedItem - 1);
     }
 
-    if (keyCode === downKey || keyCode === tabKey) {
+    if (key === 'ArrowDown' || key === 'Tab') {
       if (selectedItem === null || selectedItem === totalItems - 1) {
         return setSelectedItem(0);
       }
       return setSelectedItem(selectedItem + 1);
     }
 
-    if (keyCode === enterKey) {
+    if (key === 'Enter') {
       navigationList[selectedItem].onClick();
       return closePopoverRef.current();
     }
