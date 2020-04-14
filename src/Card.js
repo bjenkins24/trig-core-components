@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { rgba } from 'polished';
 import styled from 'styled-components';
 import Truncate from 'react-truncate';
 import Popover from 'Popover';
@@ -17,9 +18,23 @@ const Container = styled.div`
   box-shadow: ${({ theme }) => theme.sh};
 `;
 
+const Hover = styled.div`
+  /* For some reason there is an extra three pixels we need to get rid of */
+  height: calc(100% - 0.3rem);
+  width: 100%;
+  background: ${({ theme }) => rgba(theme.s, 0.85)};
+  opacity: 0;
+  transition: opacity 0.15s;
+  position: absolute;
+  z-index: 1;
+`;
+
 const ClickableArea = styled.div`
   cursor: pointer;
   position: relative;
+  &:hover ${Hover} {
+    opacity: 1;
+  }
 `;
 
 const Title = styled(Heading3)`
@@ -40,6 +55,7 @@ const ThumbnailContainer = styled.div`
   position: relative;
   max-height: 40rem;
   overflow: hidden;
+  position: relative;
 `;
 
 const Thumbnail = styled(Image)`
@@ -57,7 +73,7 @@ const Type = styled.div`
   background: ${({ theme }) => theme.bs[200]};
   display: flex;
   align-items: center;
-  z-index: 1;
+  z-index: 2;
 `;
 
 const PlaceholderThumbnail = styled.div`
@@ -80,6 +96,31 @@ const HorizontalDots = styled(StyledIcon)`
   margin: 0 0.4rem 0 auto;
   cursor: pointer;
 `;
+
+const Open = styled(HorizontalGroup)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const HoverOpen = () => {
+  return (
+    <Hover>
+      <Open margin={0.8}>
+        <Heading1
+          color="sc"
+          css={`
+            margin: 0;
+          `}
+        >
+          Open
+        </Heading1>
+        <Icon type="open" color="sc" />
+      </Open>
+    </Hover>
+  );
+};
 
 const cardTypes = {
   title: PropTypes.string.isRequired,
@@ -141,7 +182,10 @@ const Card = ({
         </Type>
         <ThumbnailContainer>
           {image ? (
-            <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
+            <>
+              <HoverOpen />
+              <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
+            </>
           ) : (
             <PlaceholderThumbnail>
               <Heading1

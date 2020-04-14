@@ -37,6 +37,7 @@ import Loading from './icons/Loading';
 import Lock from './icons/Lock';
 import NumberOne from './icons/NumberOne';
 import NumberTwo from './icons/NumberTwo';
+import Open from './icons/Open';
 import Organize from './icons/Organize';
 import Quote from './icons/Quote';
 import RowView from './icons/RowView';
@@ -87,6 +88,7 @@ export const iconComponents = {
   lock: Lock,
   'number-one': NumberOne,
   'number-two': NumberTwo,
+  open: Open,
   organize: Organize,
   quote: Quote,
   'row-view': RowView,
