@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { render } from 'test/utils';
 import user from '@testing-library/user-event';
-import Popover from 'Popover';
+import Popover from '../Popover';
 
 const triggerText = 'My Trigger';
 const popoverText = 'My popover';

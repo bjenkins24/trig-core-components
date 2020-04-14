@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { rgba } from 'polished';
 import styled from 'styled-components';
 import Truncate from 'react-truncate';
-import Popover from 'Popover';
+import { Popover } from 'Popovers';
 import { Heading1, Heading3, Heading4, TinyText } from 'Typography';
 import { HorizontalGroup } from 'Groups';
 import Image from 'Image';
@@ -86,15 +86,22 @@ const TypeIcon = styled(FileIcon)`
   margin: 0 auto;
 `;
 
+const StyledIcon = styled(Icon).attrs({ size: 1.6, color: 's' })``;
+
 const IconGroup = styled(HorizontalGroup).attrs({ margin: 0.4 })`
   cursor: pointer;
+  &:hover ${StyledIcon} svg,
+  &:hover .card__meta-text {
+    color: ${({ theme }) => theme.p};
+  }
 `;
-
-const StyledIcon = styled(Icon).attrs({ size: 1.6, color: 's' })``;
 
 const HorizontalDots = styled(StyledIcon)`
   margin: 0 0.4rem 0 auto;
   cursor: pointer;
+  &:hover svg {
+    color: ${({ theme }) => theme.p};
+  }
 `;
 
 const Open = styled(HorizontalGroup)`
@@ -205,23 +212,31 @@ const Card = ({
               onClick={() => onClickFavorite(id)}
             >
               {!isFavorited ? (
-                <StyledIcon type="heart" />
+                <StyledIcon type="heart" title="Favorite" />
               ) : (
-                <StyledIcon type="heart-filled" />
+                <StyledIcon type="heart-filled" title="Favorited" />
               )}
-              <TinyText color="s">{totalFavorites}</TinyText>
+              <TinyText color="s" className="card__meta-text">
+                {totalFavorites}
+              </TinyText>
             </IconGroup>
             <IconGroup
               data-testid="card__comment"
               onClick={() => onClickComment(id)}
             >
-              <StyledIcon type="comment" />
-              <TinyText color="s">{totalComments}</TinyText>
+              <StyledIcon type="comment" title="Comments" />
+              <TinyText color="s" className="card__meta-text">
+                {totalComments}
+              </TinyText>
             </IconGroup>
           </HorizontalGroup>
         </div>
         <Popover renderPopover={() => <div>Hello</div>}>
-          <HorizontalDots data-testid="card__more" type="horizontal-dots" />
+          <HorizontalDots
+            title="More Options"
+            data-testid="card__more"
+            type="horizontal-dots"
+          />
         </Popover>
       </HorizontalGroup>
     </Container>

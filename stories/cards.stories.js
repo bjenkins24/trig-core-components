@@ -1,30 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
-import {
-  withKnobs,
-  select,
-  number,
-  text,
-  boolean,
-  date,
-} from '@storybook/addon-knobs';
+import { withKnobs, select, number, text, date } from '@storybook/addon-knobs';
 import Card from '../src/Card';
 import Avatar from '../src/Avatar';
 import './consoleOverrides';
 import themeForProvider from './theme';
 
-storiesOf('Cards', module)
-  .addDecorator((story) => (
-    <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
-  ))
-  .addDecorator(withKnobs)
-  .add('Thumbnail', () => (
+const CreateCard = () => {
+  const [isFavorited, setIsFavorited] = useState(false);
+  return (
     <Card
       id={1}
       onClick={action('clicked')}
-      onClickFavorite={action('favorited')}
+      onClickFavorite={() => setIsFavorited(!isFavorited)}
       onClickComment={action('comments')}
       onClickMore={action('more')}
       title={text('title', 'Why AI is Going to Take Your Job')}
@@ -43,7 +33,15 @@ storiesOf('Cards', module)
         'youtube'
       )}
       totalFavorites={number('totalFavorites', 10)}
-      isFavorited={boolean('isFavorited', false)}
+      isFavorited={isFavorited}
       totalComments={number('totalComments', 45)}
     />
-  ));
+  );
+};
+
+storiesOf('Cards', module)
+  .addDecorator((story) => (
+    <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
+  ))
+  .addDecorator(withKnobs)
+  .add('Thumbnail', () => <CreateCard />);
