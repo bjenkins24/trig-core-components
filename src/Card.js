@@ -89,6 +89,11 @@ const cardTypes = {
   totalFavorites: PropTypes.number.isRequired,
   isFavorited: PropTypes.bool.isRequired,
   totalComments: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onClickFavorite: PropTypes.func.isRequired,
+  onClickComment: PropTypes.func.isRequired,
+  onClickMore: PropTypes.func.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 const defaultProps = {
@@ -99,16 +104,25 @@ const defaultProps = {
 const Card = ({
   title,
   dateTime,
+  id,
   renderAvatar,
   image,
   type,
   totalFavorites,
   isFavorited,
   totalComments,
+  onClick,
+  onClickFavorite,
+  onClickComment,
+  onClickMore,
+  ...restProps
 }) => {
   return (
-    <Container>
-      <ClickableArea>
+    <Container {...restProps}>
+      <ClickableArea
+        data-testid="card__clickable-area"
+        onClick={() => onClick(id)}
+      >
         <Title>
           <Truncate lines={4}>{title}</Truncate>
         </Title>
@@ -143,7 +157,10 @@ const Card = ({
       <HorizontalGroup>
         <div>
           <HorizontalGroup margin={1.6}>
-            <IconGroup>
+            <IconGroup
+              data-testid="card__favorite"
+              onClick={() => onClickFavorite(id)}
+            >
               {!isFavorited ? (
                 <StyledIcon type="heart" />
               ) : (
@@ -151,13 +168,20 @@ const Card = ({
               )}
               <TinyText color="s">{totalFavorites}</TinyText>
             </IconGroup>
-            <IconGroup>
+            <IconGroup
+              data-testid="card__comment"
+              onClick={() => onClickComment(id)}
+            >
               <StyledIcon type="comment" />
               <TinyText color="s">{totalComments}</TinyText>
             </IconGroup>
           </HorizontalGroup>
         </div>
-        <HorizontalDots type="horizontal-dots" />
+        <HorizontalDots
+          data-testid="card__more"
+          type="horizontal-dots"
+          onClick={() => onClickMore(id)}
+        />
       </HorizontalGroup>
     </Container>
   );

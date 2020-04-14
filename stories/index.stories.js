@@ -30,7 +30,7 @@ import theme from './theme';
 const icons = {
   deck: 'deck',
   cards: 'cards',
-  comments: 'comments',
+  comment: 'comment',
   avatar: 'avatar',
   followers: 'followers',
   document: 'document',
@@ -137,7 +137,7 @@ storiesOf('Icons', module)
     >
       <Icon
         size={number('size', 1.6)}
-        type={select('Icon', icons, 'comments')}
+        type={select('Icon', icons, 'comment')}
         color={text('color', 's')}
         count={number('count', 5)}
       />

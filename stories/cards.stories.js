@@ -1,5 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
+import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import {
   withKnobs,
@@ -21,6 +22,11 @@ storiesOf('Cards', module)
   .addDecorator(withKnobs)
   .add('Thumbnail', () => (
     <Card
+      id={1}
+      onClick={action('clicked')}
+      onClickFavorite={action('favorited')}
+      onClickComment={action('comments')}
+      onClickMore={action('more')}
       title={text('title', 'Why AI is Going to Take Your Job')}
       dateTime={date('dateTime', new Date())}
       renderAvatar={() => (

@@ -70,6 +70,7 @@ export { default as Image } from './Image';
 export { default as Logo } from './Logo';
 export { default as Avatar } from './Avatar';
 export { default as Carousel } from './Carousel';
+export { default as Card } from './Card';
 export { default as Deck } from './Deck';
 export { default as Icon } from './Icon';
 export { default as Loading } from './Loading';
