@@ -24,14 +24,24 @@ const popoverTypes = {
   placement: placementType,
   children: PropTypes.node.isRequired,
   renderPopover: PropTypes.func.isRequired,
+  onRequestOpen: PropTypes.func,
+  onRequestClose: PropTypes.func,
 };
 
 const defaultProps = {
   placement: 'bottom',
   preventClickRef: null,
+  onRequestOpen: () => null,
+  onRequestClose: () => null,
 };
 
-const Popover = ({ children, renderPopover, preventClickRef }) => {
+const Popover = ({
+  children,
+  renderPopover,
+  preventClickRef,
+  onRequestOpen,
+  onRequestClose,
+}) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const open = Boolean(anchorEl);
@@ -40,6 +50,7 @@ const Popover = ({ children, renderPopover, preventClickRef }) => {
 
   const onClose = () => {
     setAnchorEl(null);
+    onRequestClose();
   };
 
   const closeOnEscape = (event) => {
@@ -84,6 +95,7 @@ const Popover = ({ children, renderPopover, preventClickRef }) => {
 
         if (shouldPreventClick(event)) return true;
 
+        onRequestOpen();
         return setAnchorEl(event.currentTarget);
       },
     });

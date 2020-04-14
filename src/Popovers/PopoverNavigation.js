@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Popover, { popoverPadding } from './Popover';
@@ -16,9 +16,12 @@ const ListItem = styled.li`
   width: 100%;
   cursor: pointer;
   transition: background 0.15s;
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active {
     background: ${({ theme }) => theme.s};
     color: ${({ theme }) => theme.sc};
+    outline: none;
   }
   &:first-child {
     border-top-right-radius: ${({ theme }) => theme.br};
@@ -42,23 +45,84 @@ const popoverNavigationTypes = {
 };
 
 const PopoverNavigation = ({ children, navigationList, ...restProps }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const refs = useRef(navigationList.map(React.createRef));
+  const closePopoverRef = useRef(() => null);
+
+  const navigateWithKeyboard = (event) => {
+    const upKey = 38;
+    const downKey = 40;
+    const enterKey = 13;
+    const tabKey = 9;
+    const totalItems = navigationList.length;
+    const { keyCode, shiftKey } = event;
+
+    if (keyCode === upKey || (shiftKey && keyCode === tabKey)) {
+      if (selectedItem === null || selectedItem === 0) {
+        return setSelectedItem(totalItems - 1);
+      }
+      return setSelectedItem(selectedItem - 1);
+    }
+
+    if (keyCode === downKey || keyCode === tabKey) {
+      if (selectedItem === null || selectedItem === totalItems - 1) {
+        return setSelectedItem(0);
+      }
+      return setSelectedItem(selectedItem + 1);
+    }
+
+    if (keyCode === enterKey) {
+      navigationList[selectedItem].onClick();
+      return closePopoverRef.current();
+    }
+
+    return false;
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('keydown', navigateWithKeyboard, false);
+      return () =>
+        document.removeEventListener('keydown', navigateWithKeyboard, false);
+    }
+    return () => {};
+  }, [isOpen, selectedItem]);
+
+  useEffect(() => {
+    if (selectedItem !== null) {
+      refs.current[selectedItem].current.focus();
+    }
+  }, [selectedItem]);
+
   return (
     <Popover
       {...restProps}
+      onRequestOpen={() => setIsOpen(true)}
+      onRequestClose={() => {
+        setSelectedItem(null);
+        setIsOpen(false);
+      }}
       renderPopover={({ closePopover }) => {
+        closePopoverRef.current = closePopover;
         return (
           <List>
-            {navigationList.map(({ onClick, item }) => {
+            {navigationList.map(({ onClick, item }, index) => {
+              /* eslint-disable react/no-array-index-key */
               return (
                 <ListItem
+                  tabIndex={0}
+                  key={index}
                   onClick={() => {
                     onClick();
                     closePopover();
                   }}
+                  ref={refs.current[index]}
                 >
                   {item}
                 </ListItem>
               );
+              /* eslint-enable react/no-array-index-key */
             })}
           </List>
         );
