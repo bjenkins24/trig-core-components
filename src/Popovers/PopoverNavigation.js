@@ -111,8 +111,10 @@ const PopoverNavigation = ({ children, navigationList, ...restProps }) => {
               /* eslint-disable react/no-array-index-key */
               return (
                 <ListItem
+                  data-testid={`popover-navigation__item-${index}`}
                   tabIndex={0}
                   key={index}
+                  role="button"
                   onClick={() => {
                     onClick();
                     closePopover();

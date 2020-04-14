@@ -15,7 +15,6 @@ const alt = `Thumbnail for the card: ${title}`;
 const onClickMock = jest.fn();
 const onClickFavoriteMock = jest.fn();
 const onClickCommentMock = jest.fn();
-const onClickMoreMock = jest.fn();
 
 const buildCard = (props) => {
   return (
@@ -24,7 +23,6 @@ const buildCard = (props) => {
       onClick={onClickMock}
       onClickFavorite={onClickFavoriteMock}
       onClickComment={onClickCommentMock}
-      onClickMore={onClickMoreMock}
       totalFavorites={totalFavorites}
       totalComments={totalComments}
       type="link"
@@ -50,7 +48,7 @@ describe('<Card />', () => {
     expect(getByText(totalFavorites.toString())).toBeInTheDocument();
     expect(getByText(totalComments.toString())).toBeInTheDocument();
     expect(getAllByText(title)).toBeTruthy();
-    expect(getByTitle(/heart filled icon/i)).toBeInTheDocument();
+    expect(getByTitle(/Favorited/i)).toBeInTheDocument();
     expect(getByTestId(/card__avatar-null/i)).toBeInTheDocument();
     expect(queryByAltText(alt)).toBeNull();
 
@@ -63,11 +61,8 @@ describe('<Card />', () => {
     user.click(getByTestId(/card__comment/i));
     expect(onClickCommentMock.mock.calls.length).toEqual(1);
 
-    user.click(getByTestId(/card__more/i));
-    expect(onClickMoreMock.mock.calls.length).toEqual(1);
-
     rerender(buildCard({ isFavorited: false }));
-    expect(getByTitle(/heart icon/i)).toBeInTheDocument();
+    expect(getByTitle(/Favorite/i)).toBeInTheDocument();
   });
 
   it('renders thumbnail', () => {

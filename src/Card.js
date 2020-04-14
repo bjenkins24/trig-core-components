@@ -141,7 +141,6 @@ const cardTypes = {
   onClick: PropTypes.func.isRequired,
   onClickFavorite: PropTypes.func.isRequired,
   onClickComment: PropTypes.func.isRequired,
-  onClickMore: PropTypes.func.isRequired,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
@@ -163,7 +162,6 @@ const Card = ({
   onClick,
   onClickFavorite,
   onClickComment,
-  onClickMore,
   ...restProps
 }) => {
   return (
