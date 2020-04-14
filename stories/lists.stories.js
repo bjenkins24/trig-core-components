@@ -5,7 +5,7 @@ import { withKnobs, text } from '@storybook/addon-knobs';
 import ListItemContent from '../src/Lists/ListItemContent';
 import ListItem from '../src/Lists/ListItem';
 import List from '../src/Lists/List';
-import Icon from '../src/Icon';
+import Icon, { FileIcon } from '../src/Icon';
 import Avatar from '../src/Avatar';
 import './consoleOverrides';
 import themeForProvider from './theme';
@@ -13,7 +13,7 @@ import themeForProvider from './theme';
 const StoryListItem = () => {
   return (
     <ListItem
-      renderItem={() => <Icon type="doc" size={2.4} />}
+      renderItem={() => <FileIcon type="doc" size={2.4} />}
       renderContent={() => (
         <ListItemContent
           renderItem={() => (
@@ -25,7 +25,7 @@ const StoryListItem = () => {
       )}
       actions={[
         <Icon type="heart" color="s" size={1.6} />,
-        <Icon type="comments" color="s" size={1.6} count={16} />,
+        <Icon type="comment" color="s" size={1.6} count={16} />,
         <Icon type="horizontal-dots" color="s" size={1.6} />,
       ]}
     />
@@ -43,10 +43,10 @@ storiesOf('Lists', module)
         width: 62rem;
       `}
     >
-      <StoryListItem />
-      <StoryListItem />
-      <StoryListItem />
-      <StoryListItem />
+      <StoryListItem key={1} />
+      <StoryListItem key={2} />
+      <StoryListItem key={3} />
+      <StoryListItem key={4} />
     </List>
   ))
   .add('List Item', () => (

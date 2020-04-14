@@ -74,7 +74,7 @@ export { default as Avatar } from './Avatar';
 export { default as Carousel } from './Carousel';
 export { default as Card } from './Card';
 export { default as Deck } from './Deck';
-export { default as Icon } from './Icon';
+export { default as Icon, FileIcon } from './Icon';
 export { default as Loading } from './Loading';
 export { default as Modal } from './Modal';
 export { default as ModalHeader } from './Modal/ModalHeader';

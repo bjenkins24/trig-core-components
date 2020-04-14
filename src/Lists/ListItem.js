@@ -3,15 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { HorizontalGroup } from '../Groups';
 
-const Container = styled.li`
-  min-height: 7.2rem;
-  border: 0.1rem solid ${({ theme }) => theme.ps[100]};
-  display: flex;
-  padding-right: 1.6rem;
-  cursor: pointer;
-  background: ${({ theme }) => theme.b};
-`;
-
 const Item = styled.div`
   width: 7.2rem;
   min-height: 7.2rem;
@@ -19,6 +10,24 @@ const Item = styled.div`
   margin-right: 2.4rem;
   display: flex;
   flex-shrink: 0;
+`;
+
+const Container = styled.li`
+  min-height: 7.2rem;
+  border: 0.1rem solid ${({ theme }) => theme.ps[100]};
+  display: flex;
+  padding-right: 1.6rem;
+  cursor: pointer;
+  background: ${({ theme }) => theme.b};
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none;
+    background: ${({ theme }) => theme.bs[300]};
+  }
+  &:hover ${Item}, &:active ${Item}, &:focus ${Item} {
+    background: ${({ theme }) => theme.ps[400]};
+  }
 `;
 
 export const ItemContent = styled.div`
@@ -49,7 +58,7 @@ const defaultProps = {
 
 const ListItem = ({ renderItem, renderContent, actions, ...restProps }) => {
   return (
-    <Container {...restProps}>
+    <Container role="button" tabIndex={0} {...restProps}>
       <Item>
         <ItemContent data-testid="listItem__itemContent">
           {renderItem()}
