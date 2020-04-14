@@ -181,11 +181,9 @@ const Card = ({
           <TypeIcon type={type} size={1.6} />
         </Type>
         <ThumbnailContainer>
+          <HoverOpen />
           {image ? (
-            <>
-              <HoverOpen />
-              <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
-            </>
+            <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
           ) : (
             <PlaceholderThumbnail>
               <Heading1
