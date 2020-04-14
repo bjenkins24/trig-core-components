@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import { render } from 'test/utils';
+// eslint-disable-next-line import/named
+import { render, fireEvent } from 'test/utils';
 import user from '@testing-library/user-event';
 import Popover from '../Popover';
 
@@ -62,5 +63,22 @@ describe('<Popover />', () => {
 
     user.click(trigger);
     expect(getByText(popoverText)).toBeInTheDocument();
+  });
+
+  it('closes on escape', () => {
+    const { getByRole, getByText, queryByText } = render(<PopoverWrapper />);
+
+    const trigger = getByRole('button');
+
+    user.click(trigger);
+    expect(getByText(popoverText)).toBeInTheDocument();
+
+    fireEvent.keyDown(document.body, {
+      key: 'Escape',
+      keyCode: 27,
+      which: 27,
+    });
+
+    expect(queryByText(popoverText)).toBeNull();
   });
 });
