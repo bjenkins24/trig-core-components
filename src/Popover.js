@@ -75,7 +75,13 @@ const Popover = ({ children, renderPopover, preventClickRef }) => {
   return (
     <>
       {trigger}
-      <Popper id={id} open={open} anchorEl={anchorEl} transition>
+      <Popper
+        style={{ zIndex: 1001 }}
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        transition
+      >
         {({ TransitionProps }) => (
           <ClickAwayListener
             data-testid="popover__clickAwayListener"

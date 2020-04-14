@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Truncate from 'react-truncate';
+import Popover from 'Popover';
 import { Heading1, Heading3, Heading4, TinyText } from 'Typography';
 import { HorizontalGroup } from 'Groups';
 import Image from 'Image';
@@ -177,11 +178,9 @@ const Card = ({
             </IconGroup>
           </HorizontalGroup>
         </div>
-        <HorizontalDots
-          data-testid="card__more"
-          type="horizontal-dots"
-          onClick={() => onClickMore(id)}
-        />
+        <Popover renderPopover={() => <div>Hello</div>}>
+          <HorizontalDots data-testid="card__more" type="horizontal-dots" />
+        </Popover>
       </HorizontalGroup>
     </Container>
   );
