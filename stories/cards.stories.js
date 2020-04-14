@@ -36,7 +36,7 @@ const CreateCard = () => {
       totalFavorites={number('totalFavorites', 10)}
       isFavorited={isFavorited}
       totalComments={number('totalComments', 45)}
-      popoverNavigationProps={[
+      navigationList={[
         {
           onClick: () => null,
           item: (
