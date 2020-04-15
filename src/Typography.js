@@ -39,6 +39,7 @@ const HugeStyles = css`
   font-weight: 500;
   margin-top: 0;
   margin-bottom: 2.4rem;
+  transition: all 0.15s;
   ${buttonStyles};
 `;
 
@@ -55,6 +56,7 @@ const Heading1Styles = css`
   font-weight: 500;
   margin-top: 0;
   margin-bottom: 1.6rem;
+  transition: all 0.15s;
   ${buttonStyles};
 `;
 
@@ -73,6 +75,7 @@ const Heading2Styles = css`
   color: ${getColor('s')};
   margin-top: 0;
   margin-bottom: 1.6rem;
+  transition: all 0.15s;
   ${buttonStyles};
 `;
 
@@ -91,6 +94,7 @@ const Heading3Styles = css`
   color: ${getColor()};
   margin-top: 0;
   margin-bottom: 1.6rem;
+  transition: all 0.15s;
   ${buttonStyles};
 `;
 
@@ -108,6 +112,7 @@ const Heading4Styles = css`
   color: ${getColor('bcs.200')};
   margin-top: 0;
   margin-bottom: 1.6rem;
+  transition: all 0.15s;
   ${buttonStyles};
 `;
 
@@ -124,6 +129,7 @@ const BodyBiggestStyles = css`
   line-height: 1.5;
   font-weight: ${getWeight};
   color: ${getColor()};
+  transition: all 0.15s;
   ${buttonStyles};
 `;
 
@@ -136,6 +142,7 @@ const BodyBigStyles = css`
   line-height: 1.5;
   font-weight: ${getWeight};
   color: ${getColor()};
+  transition: all 0.15s;
   ${buttonStyles};
 `;
 
@@ -148,6 +155,7 @@ const Body1Styles = css`
   line-height: 1.7;
   font-weight: ${getWeight};
   color: ${getColor()};
+  transition: all 0.15s;
   ${buttonStyles};
 `;
 
@@ -164,6 +172,7 @@ const Body2Styles = css`
   line-height: 1.7;
   font-weight: ${getWeight};
   color: ${getColor()};
+  transition: all 0.15s;
   ${buttonStyles};
 `;
 
@@ -178,6 +187,7 @@ const Body3Styles = css`
   line-height: 1.7;
   font-weight: ${getWeight};
   color: ${getColor()};
+  transition: all 0.15s;
   ${buttonStyles};
 `;
 
@@ -195,6 +205,7 @@ const TinyTextStyles = css`
   line-height: 1.3;
   text-transform: uppercase;
   color: ${getColor()};
+  transition: all 0.15s;
   ${buttonStyles};
 `;
 

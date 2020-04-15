@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'test/utils';
+import user from '@testing-library/user-event';
 import Card from 'Card';
 
 jest.mock('react-truncate', () => {
@@ -11,15 +12,24 @@ const totalComments = 10;
 const title = 'My cool card';
 const alt = `Thumbnail for the card: ${title}`;
 
+const onClickMock = jest.fn();
+const onClickFavoriteMock = jest.fn();
+const onClickCommentMock = jest.fn();
+
 const buildCard = (props) => {
   return (
     <Card
+      id={1}
+      onClick={onClickMock}
+      onClickFavorite={onClickFavoriteMock}
+      onClickComment={onClickCommentMock}
       totalFavorites={totalFavorites}
       totalComments={totalComments}
       type="link"
       isFavorited
       dateTime={new Date()}
       title={title}
+      navigationList={[{ onClick: () => null, item: 'first item' }]}
       {...props}
     />
   );
@@ -39,12 +49,21 @@ describe('<Card />', () => {
     expect(getByText(totalFavorites.toString())).toBeInTheDocument();
     expect(getByText(totalComments.toString())).toBeInTheDocument();
     expect(getAllByText(title)).toBeTruthy();
-    expect(getByTitle(/heart filled icon/i)).toBeInTheDocument();
+    expect(getByTitle(/Favorited/i)).toBeInTheDocument();
     expect(getByTestId(/card__avatar-null/i)).toBeInTheDocument();
     expect(queryByAltText(alt)).toBeNull();
 
+    user.click(getByTestId(/card__clickable-area/i));
+    expect(onClickMock.mock.calls.length).toEqual(1);
+
+    user.click(getByTestId(/card__favorite/i));
+    expect(onClickFavoriteMock.mock.calls.length).toEqual(1);
+
+    user.click(getByTestId(/card__comment/i));
+    expect(onClickCommentMock.mock.calls.length).toEqual(1);
+
     rerender(buildCard({ isFavorited: false }));
-    expect(getByTitle(/heart icon/i)).toBeInTheDocument();
+    expect(getByTitle(/Favorite/i)).toBeInTheDocument();
   });
 
   it('renders thumbnail', () => {

@@ -20,9 +20,11 @@ import Code from './icons/Code';
 import Comment from './icons/Comment';
 import Deck from './icons/Deck';
 import Document from './icons/Document';
+import Edit from './icons/Edit';
 import Facebook from './icons/Facebook';
 import File from './icons/File';
 import Followers from './icons/Followers';
+import FullScreen from './icons/FullScreen';
 import Google from './icons/Google';
 import Hamburger from './icons/Hamburger';
 import Heart from './icons/Heart';
@@ -35,12 +37,15 @@ import ListOrdered from './icons/ListOrdered';
 import ListUnordered from './icons/ListUnordered';
 import Loading from './icons/Loading';
 import Lock from './icons/Lock';
+import NewWindow from './icons/NewWindow';
 import NumberOne from './icons/NumberOne';
 import NumberTwo from './icons/NumberTwo';
+import Open from './icons/Open';
 import Organize from './icons/Organize';
 import Quote from './icons/Quote';
 import RowView from './icons/RowView';
 import ThumbnailView from './icons/ThumbnailView';
+import Trash from './icons/Trash';
 import Twitter from './icons/Twitter';
 import TypeCode from './icons/TypeCode';
 import TypeDoc from './icons/TypeDoc';
@@ -70,9 +75,11 @@ export const iconComponents = {
   comment: Comment,
   deck: Deck,
   document: Document,
+  edit: Edit,
   facebook: Facebook,
   file: File,
   followers: Followers,
+  'full-screen': FullScreen,
   google: Google,
   hamburger: Hamburger,
   heart: Heart,
@@ -87,11 +94,14 @@ export const iconComponents = {
   lock: Lock,
   'number-one': NumberOne,
   'number-two': NumberTwo,
+  'new-window': NewWindow,
+  open: Open,
   organize: Organize,
   quote: Quote,
   'row-view': RowView,
   twitter: Twitter,
   'thumbnail-view': ThumbnailView,
+  trash: Trash,
   'type-code': TypeCode,
   'type-doc': TypeDoc,
   'type-ppt': TypePpt,

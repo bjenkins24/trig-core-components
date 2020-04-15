@@ -1,19 +1,22 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import { withKnobs, text } from '@storybook/addon-knobs';
 import ListItemContent from '../src/Lists/ListItemContent';
 import ListItem from '../src/Lists/ListItem';
 import List from '../src/Lists/List';
-import Icon from '../src/Icon';
+import Icon, { FileIcon } from '../src/Icon';
 import Avatar from '../src/Avatar';
 import './consoleOverrides';
 import themeForProvider from './theme';
 
-const StoryListItem = () => {
+// eslint-disable-next-line react/prop-types
+const StoryListItem = ({ onClick }) => {
   return (
     <ListItem
-      renderItem={() => <Icon type="doc" size={2.4} />}
+      onClick={onClick}
+      renderItem={() => <FileIcon type="doc" size={2.4} />}
       renderContent={() => (
         <ListItemContent
           renderItem={() => (
@@ -24,9 +27,25 @@ const StoryListItem = () => {
         />
       )}
       actions={[
-        <Icon type="heart" color="s" size={1.6} />,
-        <Icon type="comments" color="s" size={1.6} count={16} />,
-        <Icon type="horizontal-dots" color="s" size={1.6} />,
+        <Icon
+          onClick={() => console.log('heart')}
+          type="heart"
+          color="s"
+          size={1.6}
+        />,
+        <Icon
+          type="comment"
+          color="s"
+          size={1.6}
+          count={16}
+          onClick={() => console.log('comment')}
+        />,
+        <Icon
+          type="horizontal-dots"
+          color="s"
+          size={1.6}
+          onClick={() => console.log('more')}
+        />,
       ]}
     />
   );
@@ -43,10 +62,10 @@ storiesOf('Lists', module)
         width: 62rem;
       `}
     >
-      <StoryListItem />
-      <StoryListItem />
-      <StoryListItem />
-      <StoryListItem />
+      <StoryListItem onClick={action('clicked first story')} key={1} />
+      <StoryListItem onClick={action('clicked second story')} key={2} />
+      <StoryListItem onClick={action('clicked third story')} key={3} />
+      <StoryListItem onClick={action('clicked fourth story')} key={4} />
     </List>
   ))
   .add('List Item', () => (

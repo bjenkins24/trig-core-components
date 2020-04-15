@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { rgba } from 'polished';
 import styled from 'styled-components';
 import Truncate from 'react-truncate';
 import { Heading1, Heading3, Heading4, TinyText } from 'Typography';
@@ -7,6 +8,7 @@ import { HorizontalGroup } from 'Groups';
 import Image from 'Image';
 import Icon, { FileIcon } from 'Icon';
 import { format } from 'utils/dateFns';
+import PopoverNavigation from './Popovers/PopoverNavigation';
 
 const Container = styled.div`
   background: ${({ theme }) => theme.bs[200]};
@@ -16,9 +18,23 @@ const Container = styled.div`
   box-shadow: ${({ theme }) => theme.sh};
 `;
 
+const Hover = styled.div`
+  /* For some reason there is an extra three pixels we need to get rid of */
+  height: calc(100% - 0.3rem);
+  width: 100%;
+  background: ${({ theme }) => rgba(theme.s, 0.85)};
+  opacity: 0;
+  transition: opacity 0.15s;
+  position: absolute;
+  z-index: 1;
+`;
+
 const ClickableArea = styled.div`
   cursor: pointer;
   position: relative;
+  &:hover ${Hover} {
+    opacity: 1;
+  }
 `;
 
 const Title = styled(Heading3)`
@@ -39,6 +55,7 @@ const ThumbnailContainer = styled.div`
   position: relative;
   max-height: 40rem;
   overflow: hidden;
+  position: relative;
 `;
 
 const Thumbnail = styled(Image)`
@@ -56,7 +73,7 @@ const Type = styled.div`
   background: ${({ theme }) => theme.bs[200]};
   display: flex;
   align-items: center;
-  z-index: 1;
+  z-index: 2;
 `;
 
 const PlaceholderThumbnail = styled.div`
@@ -69,16 +86,48 @@ const TypeIcon = styled(FileIcon)`
   margin: 0 auto;
 `;
 
+const StyledIcon = styled(Icon).attrs({ size: 1.6, color: 's' })``;
+
 const IconGroup = styled(HorizontalGroup).attrs({ margin: 0.4 })`
   cursor: pointer;
+  &:hover ${StyledIcon} svg,
+  &:hover .card__meta-text {
+    color: ${({ theme }) => theme.p};
+  }
 `;
-
-const StyledIcon = styled(Icon).attrs({ size: 1.6, color: 's' })``;
 
 const HorizontalDots = styled(StyledIcon)`
   margin: 0 0.4rem 0 auto;
   cursor: pointer;
+  &:hover svg {
+    color: ${({ theme }) => theme.p};
+  }
 `;
+
+const Open = styled(HorizontalGroup)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const HoverOpen = () => {
+  return (
+    <Hover>
+      <Open margin={0.8}>
+        <Heading1
+          color="sc"
+          css={`
+            margin: 0;
+          `}
+        >
+          Open
+        </Heading1>
+        <Icon type="open" color="sc" />
+      </Open>
+    </Hover>
+  );
+};
 
 const cardTypes = {
   title: PropTypes.string.isRequired,
@@ -89,6 +138,11 @@ const cardTypes = {
   totalFavorites: PropTypes.number.isRequired,
   isFavorited: PropTypes.bool.isRequired,
   totalComments: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onClickFavorite: PropTypes.func.isRequired,
+  onClickComment: PropTypes.func.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  navigationList: PropTypes.array.isRequired,
 };
 
 const defaultProps = {
@@ -99,16 +153,25 @@ const defaultProps = {
 const Card = ({
   title,
   dateTime,
+  id,
   renderAvatar,
   image,
   type,
   totalFavorites,
   isFavorited,
   totalComments,
+  navigationList,
+  onClick,
+  onClickFavorite,
+  onClickComment,
+  ...restProps
 }) => {
   return (
-    <Container>
-      <ClickableArea>
+    <Container {...restProps}>
+      <ClickableArea
+        data-testid="card__clickable-area"
+        onClick={() => onClick(id)}
+      >
         <Title>
           <Truncate lines={4}>{title}</Truncate>
         </Title>
@@ -125,6 +188,7 @@ const Card = ({
           <TypeIcon type={type} size={1.6} />
         </Type>
         <ThumbnailContainer>
+          <HoverOpen />
           {image ? (
             <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
           ) : (
@@ -143,21 +207,37 @@ const Card = ({
       <HorizontalGroup>
         <div>
           <HorizontalGroup margin={1.6}>
-            <IconGroup>
+            <IconGroup
+              data-testid="card__favorite"
+              onClick={() => onClickFavorite(id)}
+            >
               {!isFavorited ? (
-                <StyledIcon type="heart" />
+                <StyledIcon type="heart" title="Favorite" />
               ) : (
-                <StyledIcon type="heart-filled" />
+                <StyledIcon type="heart-filled" title="Favorited" />
               )}
-              <TinyText color="s">{totalFavorites}</TinyText>
+              <TinyText color="s" className="card__meta-text">
+                {totalFavorites}
+              </TinyText>
             </IconGroup>
-            <IconGroup>
-              <StyledIcon type="comment" />
-              <TinyText color="s">{totalComments}</TinyText>
+            <IconGroup
+              data-testid="card__comment"
+              onClick={() => onClickComment(id)}
+            >
+              <StyledIcon type="comment" title="Comments" />
+              <TinyText color="s" className="card__meta-text">
+                {totalComments}
+              </TinyText>
             </IconGroup>
           </HorizontalGroup>
         </div>
-        <HorizontalDots type="horizontal-dots" />
+        <PopoverNavigation placement="top" navigationList={navigationList}>
+          <HorizontalDots
+            title="More Options"
+            data-testid="card__more"
+            type="horizontal-dots"
+          />
+        </PopoverNavigation>
       </HorizontalGroup>
     </Container>
   );

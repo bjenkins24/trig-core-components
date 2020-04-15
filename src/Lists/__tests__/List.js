@@ -8,7 +8,10 @@ describe('<List />', () => {
     const testContent = 'test-content';
     const { getByText } = render(
       <List>
-        <ListItem renderContent={() => <div>{testContent}</div>} />
+        <ListItem
+          onClick={() => null}
+          renderContent={() => <div>{testContent}</div>}
+        />
       </List>
     );
     expect(getByText(testContent)).toBeTruthy();

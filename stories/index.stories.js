@@ -10,7 +10,7 @@ import { Button, ButtonToggle, Fab, ButtonSelect } from '../src/Buttons';
 import Icon from '../src/Icon';
 import Logo from '../src/Logo';
 import Avatar from '../src/Avatar';
-import Popover from '../src/Popover';
+import { Popover, PopoverNavigation } from '../src/Popovers';
 import Deck from '../src/Deck';
 import {
   Huge,
@@ -30,7 +30,7 @@ import theme from './theme';
 const icons = {
   deck: 'deck',
   cards: 'cards',
-  comments: 'comments',
+  comment: 'comment',
   avatar: 'avatar',
   followers: 'followers',
   document: 'document',
@@ -120,6 +120,23 @@ storiesOf('Popover', module)
     <Popover renderPopover={() => <span>Hello</span>}>
       <button type="button">Trigger</button>
     </Popover>
+  ))
+  .add('navigation', () => (
+    <PopoverNavigation
+      navigationList={[
+        { onClick: action('clicked first one'), item: 'My cool friend' },
+        {
+          onClick: action('clicked second one'),
+          item: 'My second cool friend',
+        },
+        {
+          onClick: action('clicked third one'),
+          item: 'My third cool friend',
+        },
+      ]}
+    >
+      <button type="button">Trigger</button>
+    </PopoverNavigation>
   ));
 
 storiesOf('Icons', module)
@@ -137,7 +154,7 @@ storiesOf('Icons', module)
     >
       <Icon
         size={number('size', 1.6)}
-        type={select('Icon', icons, 'comments')}
+        type={select('Icon', icons, 'comment')}
         color={text('color', 's')}
         count={number('count', 5)}
       />

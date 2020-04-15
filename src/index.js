@@ -5,12 +5,14 @@ import * as AllTabs from './Tabs';
 import * as Lists from './Lists';
 import * as FormComponents from './Form';
 import * as Toast from './Toast';
+import * as Popovers from './Popovers';
 
 export const { Button, ButtonSelect, ButtonToggle, Fab } = Buttons;
 export const { Notification, toast, ToastContainer } = Toast;
 export const { HorizontalGroup, VerticalGroup } = Groups;
 export const { Tabs, TabList, Tab, TabPanel } = AllTabs;
 export const { List, ListItem, ListItemContent } = Lists;
+export const { Popover, PopoverNavigation } = Popovers;
 export const {
   Checkbox,
   CheckboxForm,
@@ -70,11 +72,11 @@ export { default as Image } from './Image';
 export { default as Logo } from './Logo';
 export { default as Avatar } from './Avatar';
 export { default as Carousel } from './Carousel';
+export { default as Card } from './Card';
 export { default as Deck } from './Deck';
-export { default as Icon } from './Icon';
+export { default as Icon, FileIcon } from './Icon';
 export { default as Loading } from './Loading';
 export { default as Modal } from './Modal';
 export { default as ModalHeader } from './Modal/ModalHeader';
-export { default as Popover } from './Popover';
 export { default as Separator } from './Separator';
 export { default as Uploader } from './Uploader';

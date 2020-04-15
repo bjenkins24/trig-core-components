@@ -1,19 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Grow from '@material-ui/core/Grow';
 import { uniqueId } from 'lodash';
 import Popper from '@material-ui/core/Popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { Body1Styles } from './Typography';
-import { placementType, refType } from './utils/propTypes';
+import { Body1Styles } from '../Typography';
+import { placementType, refType } from '../utils/propTypes';
+
+export const popoverPadding = 1.6;
 
 const PopoverContainer = styled.div`
   ${Body1Styles}
   border-radius: ${({ theme }) => theme.br};
   background: ${({ theme }) => theme.p};
   box-shadow: ${({ theme }) => theme.sh};
-  padding: 1.6rem;
+  padding: ${popoverPadding}rem;
   color: ${({ theme }) => theme.pc};
 `;
 
@@ -22,22 +24,49 @@ const popoverTypes = {
   placement: placementType,
   children: PropTypes.node.isRequired,
   renderPopover: PropTypes.func.isRequired,
+  onRequestOpen: PropTypes.func,
+  onRequestClose: PropTypes.func,
 };
 
 const defaultProps = {
   placement: 'bottom',
   preventClickRef: null,
+  onRequestOpen: () => null,
+  onRequestClose: () => null,
 };
 
-const Popover = ({ children, renderPopover, preventClickRef }) => {
+const Popover = ({
+  children,
+  renderPopover,
+  preventClickRef,
+  onRequestOpen,
+  onRequestClose,
+  placement,
+}) => {
   const [anchorEl, setAnchorEl] = useState(null);
+
   const open = Boolean(anchorEl);
   let id = useRef(uniqueId('popover')).current;
   id = open ? id : undefined;
 
   const onClose = () => {
     setAnchorEl(null);
+    onRequestClose();
   };
+
+  const closeOnEscape = (event) => {
+    if (event.keyCode !== 27) return;
+    onClose();
+  };
+
+  useEffect(() => {
+    if (open) {
+      document.addEventListener('keydown', closeOnEscape, false);
+      return () =>
+        document.removeEventListener('keydown', closeOnEscape, false);
+    }
+    return () => {};
+  });
 
   const shouldPreventClick = (event) => {
     if (!preventClickRef) {
@@ -67,6 +96,7 @@ const Popover = ({ children, renderPopover, preventClickRef }) => {
 
         if (shouldPreventClick(event)) return true;
 
+        onRequestOpen();
         return setAnchorEl(event.currentTarget);
       },
     });
@@ -75,7 +105,14 @@ const Popover = ({ children, renderPopover, preventClickRef }) => {
   return (
     <>
       {trigger}
-      <Popper id={id} open={open} anchorEl={anchorEl} transition>
+      <Popper
+        style={{ zIndex: 1001 }}
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        transition
+        placement={placement}
+      >
         {({ TransitionProps }) => (
           <ClickAwayListener
             data-testid="popover__clickAwayListener"

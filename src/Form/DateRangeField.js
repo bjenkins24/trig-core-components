@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { VerticalGroup, HorizontalGroup } from '../Groups';
 import { Body2 } from '../Typography';
 import Icon from '../Icon';
-import Popover from '../Popover';
+import { Popover } from '../Popovers';
 import DatePicker from './DatePicker';
 import { format, addDays, differenceInDays, isBefore } from '../utils/dateFns';
 

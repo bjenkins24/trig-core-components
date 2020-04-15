@@ -185,16 +185,10 @@ const Uploader = ({
                 status !== 'done' ? (
                   <Loading key={uniqueId('actions')} size={1.6} />
                 ) : (
-                  <Icon
-                    key={uniqueId('actions')}
-                    type="check-circle"
-                    size={1.6}
-                    color="s"
-                  />
+                  <Icon type="check-circle" size={1.6} color="s" />
                 ),
                 <Remove
                   role="button"
-                  key={uniqueId('actions')}
                   type="close"
                   color="s"
                   size={1.6}
