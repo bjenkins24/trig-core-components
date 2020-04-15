@@ -31,6 +31,7 @@ const avatarTypes = {
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   size: PropTypes.number,
+  email: PropTypes.string,
 };
 
 const defaultProps = {
@@ -38,9 +39,10 @@ const defaultProps = {
   firstName: '',
   lastName: '',
   size: 3.2,
+  email: '',
 };
 
-const Avatar = ({ image, size, firstName, lastName, ...restProps }) => {
+const Avatar = ({ image, size, firstName, lastName, email, ...restProps }) => {
   const getAlt = () => {
     if (firstName && lastName) {
       return `${firstName} ${lastName}`;
@@ -50,6 +52,9 @@ const Avatar = ({ image, size, firstName, lastName, ...restProps }) => {
     }
     if (lastName) {
       return lastName;
+    }
+    if (email) {
+      return email;
     }
     return 'A user';
   };

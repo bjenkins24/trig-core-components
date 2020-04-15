@@ -4,6 +4,7 @@ import Avatar from 'Avatar';
 
 const firstName = 'brian';
 const lastName = 'jenkins';
+const email = 'sam_sung@example.com';
 const fullName = `${firstName} ${lastName}`;
 const firstInitial = firstName.charAt(0);
 const lastInitial = lastName.charAt(0);
@@ -46,5 +47,8 @@ describe('<Avatar />', () => {
 
     rerender(<Avatar image={testImage} lastName={lastName} />);
     expect(getByAltText(lastName)).toBeInTheDocument();
+
+    rerender(<Avatar image={testImage} email={email} />);
+    expect(getByAltText(email)).toBeInTheDocument();
   });
 });
