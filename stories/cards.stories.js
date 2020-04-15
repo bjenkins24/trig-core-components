@@ -15,6 +15,7 @@ const CreateCard = () => {
   return (
     <Card
       id={1}
+      href="https://google.com"
       onClick={action('clicked')}
       onClickFavorite={() => setIsFavorited(!isFavorited)}
       onClickComment={action('comments')}

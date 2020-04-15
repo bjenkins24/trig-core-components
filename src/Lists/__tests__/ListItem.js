@@ -41,6 +41,7 @@ describe('<ListItem />', () => {
   it('renderItem defaults to null', () => {
     const { getByTestId } = render(
       <ListItem
+        href="https://google.com"
         data-testid={testId}
         renderContent={() => null}
         onClick={() => null}

@@ -20,6 +20,7 @@ const buildCard = (props) => {
   return (
     <Card
       id={1}
+      href="https://example.com"
       onClick={onClickMock}
       onClickFavorite={onClickFavoriteMock}
       onClickComment={onClickCommentMock}

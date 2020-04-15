@@ -12,8 +12,7 @@ import PopoverNavigation from './Popovers/PopoverNavigation';
 
 const Container = styled.div`
   background: ${({ theme }) => theme.bs[200]};
-  width: 21.9rem;
-  padding: 1.6rem 1.6rem 1.6rem 1.6rem;
+  width: 25.1rem;
   border-radius: ${({ theme }) => theme.br};
   box-shadow: ${({ theme }) => theme.sh};
 `;
@@ -29,9 +28,12 @@ const Hover = styled.div`
   z-index: 1;
 `;
 
-const ClickableArea = styled.div`
+const ClickableArea = styled.a`
   cursor: pointer;
+  display: block;
+  padding: 1.6rem 1.6rem 0 1.6rem;
   position: relative;
+  text-decoration: none;
   &:hover ${Hover} {
     opacity: 1;
   }
@@ -51,7 +53,7 @@ const DateCreated = styled(Heading4)`
 
 const ThumbnailContainer = styled.div`
   width: calc(3.2rem + 100%);
-  margin: 0 0 3.2rem -1.6rem;
+  margin-left: -1.6rem;
   position: relative;
   max-height: 40rem;
   overflow: hidden;
@@ -69,7 +71,7 @@ const Type = styled.div`
   box-shadow: ${({ theme }) => theme.sh};
   position: absolute;
   bottom: -1.2rem;
-  right: -0.4rem;
+  right: 1.6rem;
   background: ${({ theme }) => theme.bs[200]};
   display: flex;
   align-items: center;
@@ -80,6 +82,10 @@ const PlaceholderThumbnail = styled.div`
   background: ${({ theme }) => theme.s};
   color: ${({ theme }) => theme.sc};
   padding: 3.2rem 1.6rem 1.6rem;
+`;
+
+const Footer = styled(HorizontalGroup)`
+  padding: 2.9rem 1.6rem 1.6rem 1.6rem;
 `;
 
 const TypeIcon = styled(FileIcon)`
@@ -97,7 +103,7 @@ const IconGroup = styled(HorizontalGroup).attrs({ margin: 0.4 })`
 `;
 
 const HorizontalDots = styled(StyledIcon)`
-  margin: 0 0.4rem 0 auto;
+  margin: 0 0.8rem 0 auto;
   cursor: pointer;
   &:hover svg {
     color: ${({ theme }) => theme.p};
@@ -110,24 +116,6 @@ const Open = styled(HorizontalGroup)`
   left: 50%;
   transform: translate(-50%, -50%);
 `;
-
-const HoverOpen = () => {
-  return (
-    <Hover>
-      <Open margin={0.8}>
-        <Heading1
-          color="sc"
-          css={`
-            margin: 0;
-          `}
-        >
-          Open
-        </Heading1>
-        <Icon type="open" color="sc" />
-      </Open>
-    </Hover>
-  );
-};
 
 const cardTypes = {
   title: PropTypes.string.isRequired,
@@ -143,6 +131,7 @@ const cardTypes = {
   onClickComment: PropTypes.func.isRequired,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   navigationList: PropTypes.array.isRequired,
+  href: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
@@ -161,6 +150,7 @@ const Card = ({
   isFavorited,
   totalComments,
   navigationList,
+  href,
   onClick,
   onClickFavorite,
   onClickComment,
@@ -170,7 +160,11 @@ const Card = ({
     <Container {...restProps}>
       <ClickableArea
         data-testid="card__clickable-area"
-        onClick={() => onClick(id)}
+        onClick={(e) => {
+          e.preventDefault();
+          onClick(id);
+        }}
+        href={href}
       >
         <Title>
           <Truncate lines={4}>{title}</Truncate>
@@ -188,7 +182,19 @@ const Card = ({
           <TypeIcon type={type} size={1.6} />
         </Type>
         <ThumbnailContainer>
-          <HoverOpen />
+          <Hover>
+            <Open margin={0.8}>
+              <Heading1
+                color="sc"
+                css={`
+                  margin: 0;
+                `}
+              >
+                Open
+              </Heading1>
+              <Icon type="open" color="sc" />
+            </Open>
+          </Hover>
           {image ? (
             <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
           ) : (
@@ -204,7 +210,7 @@ const Card = ({
           )}
         </ThumbnailContainer>
       </ClickableArea>
-      <HorizontalGroup>
+      <Footer>
         <div>
           <HorizontalGroup margin={1.6}>
             <IconGroup
@@ -238,7 +244,7 @@ const Card = ({
             type="horizontal-dots"
           />
         </PopoverNavigation>
-      </HorizontalGroup>
+      </Footer>
     </Container>
   );
 };

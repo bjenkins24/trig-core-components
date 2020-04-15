@@ -19,14 +19,12 @@ const Container = styled.li`
   display: flex;
   padding-right: 1.6rem;
   cursor: pointer;
+  text-decoration: none;
   background: ${({ theme }) => theme.b};
-  &:hover,
-  &:active,
-  &:focus {
-    outline: none;
+  &:hover {
     background: ${({ theme }) => theme.bs[300]};
   }
-  &:hover ${Item}, &:active ${Item}, &:focus ${Item} {
+  &:hover ${Item} {
     background: ${({ theme }) => theme.ps[400]};
   }
 `;
@@ -56,50 +54,15 @@ const Action = styled.div`
   }
 `;
 
-const listItemTypes = {
-  renderItem: PropTypes.func,
-  renderContent: PropTypes.func.isRequired,
-  actions: PropTypes.arrayOf(PropTypes.node),
-  onClick: PropTypes.func.isRequired,
-};
-
-const defaultProps = {
-  renderItem: () => null,
-  actions: [],
-};
-
-const ListItem = ({
+/* eslint-disable react/prop-types */
+const ListItemContent = ({
+  actions,
   renderItem,
   renderContent,
-  actions,
-  onClick,
-  ...restProps
+  actionClass,
 }) => {
-  const actionClass = 'listItem__action';
-
-  /**
-   * We want to stop the onClick function for the list item when
-   * a user clicks on an action. We'll check the target and then
-   * go up a few parents to find it.
-   *
-   * @param {*} e
-   */
-  const clickListItem = (e) => {
-    let node = e.target;
-    for (let i = 0; i < 5; i += 1) {
-      if (node.classList && node.classList.contains(actionClass)) return;
-      node = node.parentNode;
-    }
-    onClick(e);
-  };
-
   return (
-    <Container
-      role="button"
-      tabIndex={0}
-      onClick={clickListItem}
-      {...restProps}
-    >
+    <>
       <Item>
         <ItemContent data-testid="listItem__itemContent">
           {renderItem()}
@@ -113,6 +76,75 @@ const ListItem = ({
           </Action>
         ))}
       </Actions>
+    </>
+  );
+};
+/* eslint-enable react/prop-types */
+
+const listItemTypes = {
+  renderItem: PropTypes.func,
+  renderContent: PropTypes.func.isRequired,
+  actions: PropTypes.arrayOf(PropTypes.node),
+  onClick: PropTypes.func.isRequired,
+  href: PropTypes.string,
+};
+
+const defaultProps = {
+  renderItem: () => null,
+  actions: [],
+  href: '',
+};
+
+const ListItem = ({
+  renderItem,
+  renderContent,
+  actions,
+  onClick,
+  href,
+  ...restProps
+}) => {
+  const actionClass = 'listItem__action';
+
+  /**
+   * We want to stop the onClick function for the list item when
+   * a user clicks on an action. We'll check the target and then
+   * go up a few parents to find it.
+   *
+   * @param {*} e
+   */
+  const clickListItem = (e) => {
+    e.preventDefault();
+    let node = e.target;
+    for (let i = 0; i < 5; i += 1) {
+      if (node.classList && node.classList.contains(actionClass)) return;
+      node = node.parentNode;
+    }
+    onClick(e);
+  };
+
+  if (href) {
+    return (
+      <li {...restProps}>
+        <Container as="a" onClick={clickListItem} href={href}>
+          <ListItemContent
+            actions={actions}
+            renderItem={renderItem}
+            renderContent={renderContent}
+            actionClass={actionClass}
+          />
+        </Container>
+      </li>
+    );
+  }
+
+  return (
+    <Container onClick={clickListItem} {...restProps}>
+      <ListItemContent
+        actions={actions}
+        renderItem={renderItem}
+        renderContent={renderContent}
+        actionClass={actionClass}
+      />
     </Container>
   );
 };

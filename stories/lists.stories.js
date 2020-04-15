@@ -15,6 +15,7 @@ import themeForProvider from './theme';
 const StoryListItem = ({ onClick }) => {
   return (
     <ListItem
+      href="https://google.com"
       onClick={onClick}
       renderItem={() => <FileIcon type="doc" size={2.4} />}
       renderContent={() => (
@@ -28,7 +29,7 @@ const StoryListItem = ({ onClick }) => {
       )}
       actions={[
         <Icon
-          onClick={() => console.log('heart')}
+          onClick={action('clicked heart')}
           type="heart"
           color="s"
           size={1.6}
@@ -38,13 +39,13 @@ const StoryListItem = ({ onClick }) => {
           color="s"
           size={1.6}
           count={16}
-          onClick={() => console.log('comment')}
+          onClick={action('clicked comment')}
         />,
         <Icon
           type="horizontal-dots"
           color="s"
           size={1.6}
-          onClick={() => console.log('more')}
+          onClick={action('clicked more')}
         />,
       ]}
     />

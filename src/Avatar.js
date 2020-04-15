@@ -23,6 +23,7 @@ const Initials = styled.div`
   display: flex;
   flex-shrink: 0;
   align-items: center;
+  color: #2c2929;
   ${getSize};
 `;
 

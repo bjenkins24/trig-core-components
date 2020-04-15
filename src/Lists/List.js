@@ -5,21 +5,21 @@ const Container = styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
-  & > li:not(:last-child) {
+  & > li:not(:last-child) a {
     border-bottom: 0;
   }
-  & > li:first-child {
+  & > li:first-child a {
     border-top-left-radius: ${({ theme }) => theme.br};
     border-top-right-radius: ${({ theme }) => theme.br};
   }
-  & > li:first-child > div:first-child {
+  & > li:first-child > div:first-child a {
     border-top-left-radius: ${({ theme }) => theme.br};
   }
-  & > li:last-child {
+  & > li:last-child a {
     border-bottom-left-radius: ${({ theme }) => theme.br};
     border-bottom-right-radius: ${({ theme }) => theme.br};
   }
-  & > li:last-child > div:first-child {
+  & > li:last-child > div:first-child a {
     border-bottom-left-radius: ${({ theme }) => theme.br};
   }
 `;
