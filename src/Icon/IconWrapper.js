@@ -35,6 +35,7 @@ const CountContainer = styled.div`
   position: absolute;
   right: -0.6rem;
   top: -0.6rem;
+  transition: all 0.15s;
 `;
 
 const Count = styled.span`
@@ -83,6 +84,7 @@ const IconWrapper = forwardRef(
           <CountContainer
             count={count}
             data-testid="iconWrapper__countContainer"
+            className="icon__count"
           >
             <Count color="sc">{count}</Count>
           </CountContainer>

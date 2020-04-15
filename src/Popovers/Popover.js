@@ -41,6 +41,7 @@ const Popover = ({
   preventClickRef,
   onRequestOpen,
   onRequestClose,
+  placement,
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -110,6 +111,7 @@ const Popover = ({
         open={open}
         anchorEl={anchorEl}
         transition
+        placement={placement}
       >
         {({ TransitionProps }) => (
           <ClickAwayListener
