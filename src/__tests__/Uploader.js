@@ -124,7 +124,7 @@ describe('<Uploader />', () => {
     user.click(getByTitle(/close icon/i));
     expect(mockRemove.mock.calls.length).toEqual(1);
     user.click(getByTestId('uploader__listItem'));
-    expect(mockFileClick.mock.calls.length).toEqual(2);
+    expect(mockFileClick.mock.calls.length).toEqual(1);
 
     rerender(
       <Uploader

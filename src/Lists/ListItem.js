@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { uniqueId } from 'lodash';
 import { HorizontalGroup } from '../Groups';
 
 const Item = styled.div`
@@ -86,7 +87,7 @@ const ListItem = ({
   const clickListItem = (e) => {
     let node = e.target;
     for (let i = 0; i < 5; i += 1) {
-      if (node.className === actionClass) return;
+      if (node.classList && node.classList.contains(actionClass)) return;
       node = node.parentNode;
     }
     onClick(e);
@@ -107,7 +108,9 @@ const ListItem = ({
       <Content>{renderContent()}</Content>
       <Actions margin={1.6}>
         {actions.map((action) => (
-          <Action className={actionClass}>{action}</Action>
+          <Action className={actionClass} key={uniqueId('actions')}>
+            {action}
+          </Action>
         ))}
       </Actions>
     </Container>

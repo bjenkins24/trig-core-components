@@ -6,6 +6,8 @@ exports[`<Checkbox /> shows and hides check 1`] = `
   line-height: 1.7;
   font-weight: 400;
   color: #8A8787;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
 }
 
 .c8 {

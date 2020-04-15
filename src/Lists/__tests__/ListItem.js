@@ -1,13 +1,14 @@
 import React from 'react';
 import { render } from 'test/utils';
 import user from '@testing-library/user-event';
+import Icon from '../../Icon';
 import ListItem from '../ListItem';
 
 const testId = 'test-id';
 
 describe('<ListItem />', () => {
   it('list item loads and renders basic props', () => {
-    const mockCallBack = jest.fn();
+    const mockCallback = jest.fn();
     const exampleClass = 'example-class';
     const firstAction = 'first-action';
     const secondAction = 'second-action';
@@ -16,7 +17,7 @@ describe('<ListItem />', () => {
     const { getByText, getByTestId } = render(
       <ListItem
         data-testid={testId}
-        onClick={mockCallBack}
+        onClick={mockCallback}
         className={exampleClass}
         renderContent={() => <div>{content}</div>}
         renderItem={() => <div>{item}</div>}
@@ -28,7 +29,7 @@ describe('<ListItem />', () => {
     );
     const listItem = getByTestId(testId);
     user.click(listItem);
-    expect(mockCallBack.mock.calls.length).toEqual(1);
+    expect(mockCallback.mock.calls.length).toEqual(1);
 
     expect(listItem).toHaveClass(exampleClass);
     expect(getByText(content)).toBeTruthy();
@@ -39,8 +40,34 @@ describe('<ListItem />', () => {
 
   it('renderItem defaults to null', () => {
     const { getByTestId } = render(
-      <ListItem data-testid={testId} renderContent={() => null} />
+      <ListItem
+        data-testid={testId}
+        renderContent={() => null}
+        onClick={() => null}
+      />
     );
     expect(getByTestId('listItem__itemContent').firstChild).toBeNull();
+  });
+
+  it('only clicks action when clicked', () => {
+    const mockCallback = jest.fn();
+    const mockCallbackHeart = jest.fn();
+    const { getByTestId } = render(
+      <ListItem
+        renderContent={() => null}
+        onClick={mockCallback}
+        actions={[
+          <Icon
+            type="heart"
+            data-testid="listItem__heart"
+            onClick={mockCallbackHeart}
+          />,
+          <Icon type="comment" />,
+        ]}
+      />
+    );
+    user.click(getByTestId('listItem__heart'));
+    expect(mockCallback.mock.calls.length).toEqual(0);
+    expect(mockCallbackHeart.mock.calls.length).toEqual(1);
   });
 });
