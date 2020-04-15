@@ -24,6 +24,7 @@ import Edit from './icons/Edit';
 import Facebook from './icons/Facebook';
 import File from './icons/File';
 import Followers from './icons/Followers';
+import FullScreen from './icons/FullScreen';
 import Google from './icons/Google';
 import Hamburger from './icons/Hamburger';
 import Heart from './icons/Heart';
@@ -78,6 +79,7 @@ export const iconComponents = {
   facebook: Facebook,
   file: File,
   followers: Followers,
+  'full-screen': FullScreen,
   google: Google,
   hamburger: Hamburger,
   heart: Heart,
