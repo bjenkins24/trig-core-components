@@ -46,10 +46,15 @@ const Button = styled(animated.div)`
 
 const buttonToggleTypes = {
   children: PropTypes.node.isRequired,
+  defaultSelectedIndex: PropTypes.number,
 };
 
-const ButtonToggle = ({ children }) => {
-  const [selectedButton, setSelectedButton] = useState(0);
+const defaultProps = {
+  defaultSelectedIndex: 0,
+};
+
+const ButtonToggle = ({ children, defaultSelectedIndex }) => {
+  const [selectedButton, setSelectedButton] = useState(defaultSelectedIndex);
   const totalChildren = React.Children.count(children);
   const theme = useTheme();
 
@@ -102,5 +107,6 @@ const ButtonToggle = ({ children }) => {
 };
 
 ButtonToggle.propTypes = buttonToggleTypes;
+ButtonToggle.defaultProps = defaultProps;
 
 export default ButtonToggle;
