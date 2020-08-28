@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
   }
   &__Overlay {
     display: flex;
-    background-color: rgba(0, 0, 0, 0.07) !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
     align-items: center;
     opacity: 0;
     transition: opacity ${transitionTimeMS}ms ease-in-out;
