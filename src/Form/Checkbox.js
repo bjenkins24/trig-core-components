@@ -29,6 +29,7 @@ const StyledCheckbox = styled.div`
   display: flex;
   align-self: flex-start;
   margin-top: 0.4rem;
+  flex-shrink: 0;
   width: 1.6rem;
   height: 1.6rem;
   cursor: pointer;

@@ -9,6 +9,7 @@ import {
   Body3Component,
   TinyText,
 } from './Typography';
+import Box from './Box';
 import Icon from './Icon';
 import Avatar from './Avatar';
 import { HorizontalGroup, VerticalGroup } from './Groups';
@@ -55,26 +56,6 @@ const getBackground = (isHovered) => ({ theme, image }) => {
   `;
 };
 
-const Wrapper = styled.div`
-  position: relative;
-  border-radius: ${({ theme }) => theme.br};
-  ${getBackground(false)}
-  transition: all 200ms;
-  width: 100%;
-  height: 100%;
-  color: ${({ theme }) => theme.sc};
-  cursor: pointer;
-  &:hover {
-    ${getBackground(true)}
-    .deck__thumbnail {
-      opacity: 0;
-    }
-    .deck__hover {
-      opacity: 1;
-    }
-  }
-`;
-
 const defaultProps = {
   image: '',
 };
@@ -118,43 +99,58 @@ const Deck = ({
   };
 
   return (
-    <Wrapper role="link" tabIndex="0" image={image} {...restProps}>
+    <Box
+      color="sc"
+      width="100%"
+      height="100%"
+      position="relative"
+      borderRadius={1}
+      role="link"
+      tabIndex="0"
+      image={image}
+      css={`
+        ${getBackground(true)}
+        transition: all 200ms;
+        cursor: pointer;
+        &:hover {
+          ${getBackground(true)}
+          .deck__thumbnail {
+            opacity: 0;
+          }
+          .deck__hover {
+            opacity: 1;
+          }
+        }
+      `}
+      {...restProps}
+    >
       <DeckThumbnail className="deck__thumbnail">
         <Heading2
           color="sc"
+          mt="auto"
           css={`
             overflow-wrap: break-word;
-            margin-top: auto;
           `}
         >
           <Truncate lines={4}>{title}</Truncate>
         </Heading2>
-        <div
-          css={`
-            display: flex;
-          `}
-        >
+        <Box display="flex">
           <AvatarWrapper user={user} />
-          <HorizontalGroup
-            margin={1.6}
-            css={`
-              margin-left: auto;
-            `}
-          >
-            <HorizontalGroup margin={0.8}>
+          <HorizontalGroup spacer={3} ml="auto">
+            <HorizontalGroup spacer={2}>
               <Icon type="cards" size={2.2} />
               <Body3Component weight="bold" color="sc">
                 {totalCards}
               </Body3Component>
             </HorizontalGroup>
-            <HorizontalGroup margin={0.8}>
+            <HorizontalGroup spacer={2}>
               <Icon type="followers" size={1.6} />
               <Body3Component weight="bold" color="sc">
                 {totalFollowers}
               </Body3Component>
             </HorizontalGroup>
           </HorizontalGroup>
-        </div>
+        </Box>
       </DeckThumbnail>
       <DeckHover className="deck__hover">
         <Heading2
@@ -166,21 +162,12 @@ const Deck = ({
         >
           <Truncate lines={2}>{title}</Truncate>
         </Heading2>
-        <Body2Component
-          color="sc"
-          css={`
-            margin: 0 0 0.8rem 0;
-          `}
-        >
-          <Truncate lines={3}>{description}</Truncate>
+        <Body2Component color="sc" mb={3}>
+          <Truncate lines={4}>{description}</Truncate>
         </Body2Component>
-        <HorizontalGroup margin={0.8}>
+        <HorizontalGroup spacer={1}>
           <AvatarWrapper user={user} />
-          <VerticalGroup
-            css={`
-              margin-top: 0.1rem;
-            `}
-          >
+          <VerticalGroup mt="0.1rem">
             <TinyText color="sc">
               {user.firstName} {user.lastName}
             </TinyText>
@@ -188,7 +175,7 @@ const Deck = ({
           </VerticalGroup>
         </HorizontalGroup>
       </DeckHover>
-    </Wrapper>
+    </Box>
   );
 };
 

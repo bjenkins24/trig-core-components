@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode, useContext } from 'react';
 import { TabContext } from './Tabs';
 
-const tabPanelTypes = {
-  tabIndex: PropTypes.number.isRequired,
-};
+interface TabPanelProps {
+  tabIndex?: number;
+  children: ReactNode;
+}
 
-const TabPanel = ({ tabIndex, ...restProps }) => {
+const TabPanel = ({ tabIndex, children, ...restProps }: TabPanelProps) => {
   const { selectedTab } = useContext(TabContext);
   return (
     <div
@@ -14,10 +14,10 @@ const TabPanel = ({ tabIndex, ...restProps }) => {
       role="tabpanel"
       hidden={selectedTab !== tabIndex}
       id={`panel-${tabIndex}`}
-    />
+    >
+      {children}
+    </div>
   );
 };
-
-TabPanel.propTypes = tabPanelTypes;
 
 export default TabPanel;

@@ -1,13 +1,46 @@
 {
   "extends": ["@trig-app"],
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser"
+  },
   "overrides": [
     {
       "files": ["**/src/**"],
-      "settings": { "import/resolver": "webpack" }
+      "rules": {
+        "import/extensions": [
+          "error",
+          "ignorePackages",
+          {
+            "js": "never",
+            "jsx": "never",
+            "ts": "never",
+            "tsx": "never"
+          }
+        ]
+      },
+      "settings": {
+        "import/resolver": {
+          "node": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          }
+        }
+      }
     },
     {
       "files": ["**/__tests__/**", "**/src/test/**", "jest.setup.js"],
       "rules": {
+        "rules": {
+          "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+              "js": "never",
+              "jsx": "never",
+              "ts": "never",
+              "tsx": "never"
+            }
+          ]
+        },
         "react/prop-types": 0,
         "jsx-a11y/click-events-have-key-events": 0,
         "jsx-a11y/no-static-element-interactions": 0,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { createGlobalStyle } from 'styled-components';
 import { device } from '@trig-app/constants';
 import ReactModal from 'react-modal';
-import { widthType } from 'utils/propTypes';
+import { widthType } from '../utils/propTypes';
 import Icon from '../Icon';
 import { getWidth } from '../utils';
 
@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
   }
   &__Overlay {
     display: flex;
+    background-color: rgba(0, 0, 0, 0.07) !important;
     align-items: center;
     opacity: 0;
     transition: opacity ${transitionTimeMS}ms ease-in-out;
@@ -45,7 +46,6 @@ const GlobalStyle = createGlobalStyle`
       height: auto;
       max-height: calc(100% - ${padding * 4}rem);
       border-radius: 0.4rem !important;
-      box-shadow: ${({ theme }) => theme.sh};
     }
   }
 }

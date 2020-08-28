@@ -1,11 +1,19 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 
 import { css } from 'styled-components';
 import { Body1Component } from '../Typography';
+import { Theme } from '../utils/theme';
 import { TabContext } from './Tabs';
 
-const getColor = ({ theme, isSelected, dark }) => {
+const getColor = ({
+  theme,
+  isSelected,
+  dark,
+}: {
+  theme: Theme;
+  isSelected: boolean;
+  dark: boolean;
+}) => {
   if (dark && isSelected) {
     return theme.pc;
   }
@@ -18,44 +26,48 @@ const getColor = ({ theme, isSelected, dark }) => {
   return theme.p;
 };
 
-const getActiveColor = ({ dark, theme }) => {
+const getActiveColor = ({ dark, theme }: { dark: boolean; theme: Theme }) => {
   if (dark) {
     return theme.pc;
   }
   return theme.s;
 };
 
-const getPadding = ({ tabIndex }) => {
+const getPadding = ({
+  tabIndex,
+  theme,
+}: {
+  tabIndex: number;
+  theme: Theme;
+}) => {
   if (tabIndex === 0) {
     return css`
-      padding-right: 1.2rem;
+      padding-right: ${theme.space[2]}px;
     `;
   }
   return css`
-    padding: 0 1.2rem;
+    padding: 0 ${theme.space[2]}px;
   `;
 };
 
-const tabTypes = {
-  tabIndex: PropTypes.number.isRequired,
-  dark: PropTypes.bool,
-};
+interface TabProps {
+  tabIndex?: number;
+  dark?: boolean;
+  children: string;
+}
 
-const defaultProps = {
-  dark: false,
-};
-
-const Tab = ({ tabIndex, dark, ...restProps }) => {
+const Tab = ({ tabIndex, dark = false, children, ...restProps }: TabProps) => {
   const { selectedTab, setSelectedTab, tabRefs } = useContext(TabContext);
   const isSelected = selectedTab === tabIndex;
 
   return (
     <Body1Component
       ref={tabRefs[tabIndex]}
+      mb={2}
       css={`
-        margin-bottom: 0.8rem;
         ${getPadding};
         color: ${getColor};
+        background: none;
         transition: 250ms;
         &:hover {
           color: ${getActiveColor};
@@ -73,11 +85,10 @@ const Tab = ({ tabIndex, dark, ...restProps }) => {
       tabIndex={tabIndex}
       isSelected={isSelected}
       {...restProps}
-    />
+    >
+      {children}
+    </Body1Component>
   );
 };
-
-Tab.defaultProps = defaultProps;
-Tab.propTypes = tabTypes;
 
 export default Tab;

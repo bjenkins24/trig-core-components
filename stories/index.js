@@ -39,35 +39,41 @@ const shadow =
   '0px 1px 8px rgba(0, 0, 0, 0.08), 0px 4px 5px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.08)';
 
 const theme = {
-  // Primary Colors
-  p: primary,
-  pc: primaryContrast,
-  pcs: backgroundShades,
-  ps: primaryShades,
+  space: [0, 4, 8, 16, 32, 64, 128],
+  fontSizes: [9, 11, 14, 16, 26, 34, 64],
+  colors: {
+    // Primary Colors
+    p: primary,
+    pc: primaryContrast,
+    pcs: backgroundShades,
+    ps: primaryShades,
+    // Secondary Colors
+    s: '#000',
+    sc: secondaryContrast,
+    scs: backgroundShades,
+    ss: secondaryShades,
 
-  // Secondary Colors
-  s: secondary,
-  sc: secondaryContrast,
-  scs: backgroundShades,
-  ss: secondaryShades,
+    // Background Colors
+    b: background,
+    bc: backgroundContrast,
+    bcs: primaryShades,
+    bs: backgroundShades,
 
-  // Background Colors
-  b: background,
-  bc: backgroundContrast,
-  bcs: primaryShades,
-  bs: backgroundShades,
+    // Accent Color
+    a1: '#E6544C',
+    a1c: background,
+    a2: '#7594BD',
+    a2c: background,
+    a3: '#8D85E1',
+    a3c: background,
+    a4: '#2D81EF',
+    a4c: background,
+    a5: '#FCCC79',
+    a5c: primary,
 
-  // Accent Color
-  a1: '#E6544C',
-  a1c: background,
-  a2: '#7594BD',
-  a2c: background,
-  a3: '#8D85E1',
-  a3c: background,
-  a4: '#2D81EF',
-  a4c: background,
-  a5: '#FCCC79',
-  a5c: primary,
+    // Error color
+    e: '#f16969',
+  },
 
   // OTHER
   // Box-shadow

@@ -1,3 +1,5 @@
+import baseStyled, { ThemedStyledInterface } from 'styled-components';
+
 const primary = '#2C2929';
 const primaryShades = {
   50: '#E6E5E5',
@@ -41,7 +43,6 @@ const shadow =
 const theme = {
   space: [0, 4, 8, 16, 32, 64, 128],
   fontSizes: [9, 11, 14, 16, 26, 34, 64],
-  radii: [0, 4],
   colors: {
     // Primary Colors
     p: primary,
@@ -49,7 +50,7 @@ const theme = {
     pcs: backgroundShades,
     ps: primaryShades,
     // Secondary Colors
-    s: secondary,
+    s: '#000',
     sc: secondaryContrast,
     scs: backgroundShades,
     ss: secondaryShades,
@@ -82,7 +83,7 @@ const theme = {
   pcs: backgroundShades,
   ps: primaryShades,
   // Secondary Colors
-  s: secondary,
+  s: '#000',
   sc: secondaryContrast,
   scs: backgroundShades,
   ss: secondaryShades,
@@ -115,3 +116,5 @@ const theme = {
 };
 
 export default theme;
+export type Theme = typeof theme;
+export const styled = baseStyled as ThemedStyledInterface<Theme>;

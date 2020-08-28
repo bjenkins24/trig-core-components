@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { get } from 'lodash';
 import { device } from '@trig-app/constants';
+import { position, shadow, space, color, typography } from 'styled-system';
 import Separator from './Separator';
 import { getColor } from './utils';
 
@@ -29,6 +30,16 @@ const buttonStyles = ({ as }) => {
   `;
 };
 
+const styledSystem = () => {
+  return css`
+    ${position} 
+    ${shadow}
+    ${space}
+    ${color}
+    ${typography}
+  `;
+};
+
 const HugeStyles = css`
   font-size: 4.8rem;
   @media ${device.tabletPortraitUp} {
@@ -41,6 +52,7 @@ const HugeStyles = css`
   margin-bottom: 2.4rem;
   transition: all 0.15s;
   ${buttonStyles};
+  ${styledSystem}
 `;
 
 const HugeComponent = styled.h1`
@@ -58,6 +70,7 @@ const Heading1Styles = css`
   margin-bottom: 1.6rem;
   transition: all 0.15s;
   ${buttonStyles};
+  ${styledSystem}
 `;
 
 const Heading1Component = styled.h1`
@@ -74,9 +87,9 @@ const Heading2Styles = css`
   font-weight: 600;
   color: ${getColor('s')};
   margin-top: 0;
-  margin-bottom: 1.6rem;
   transition: all 0.15s;
   ${buttonStyles};
+  ${styledSystem}
 `;
 
 const Heading2Component = styled.h2`
@@ -96,6 +109,7 @@ const Heading3Styles = css`
   margin-bottom: 1.6rem;
   transition: all 0.15s;
   ${buttonStyles};
+  ${styledSystem}
 `;
 
 const Heading3Component = styled.h3`
@@ -114,6 +128,7 @@ const Heading4Styles = css`
   margin-bottom: 1.6rem;
   transition: all 0.15s;
   ${buttonStyles};
+  ${styledSystem}
 `;
 
 const Heading4Component = styled.h4`
@@ -131,6 +146,7 @@ const BodyBiggestStyles = css`
   color: ${getColor()};
   transition: all 0.15s;
   ${buttonStyles};
+  ${styledSystem}
 `;
 
 const BodyBiggest = styled.span`
@@ -144,6 +160,7 @@ const BodyBigStyles = css`
   color: ${getColor()};
   transition: all 0.15s;
   ${buttonStyles};
+  ${styledSystem}
 `;
 
 const BodyBig = styled.span`
@@ -157,6 +174,7 @@ const Body1Styles = css`
   color: ${getColor()};
   transition: all 0.15s;
   ${buttonStyles};
+  ${styledSystem}
 `;
 
 const Body1Component = styled.span`
@@ -174,6 +192,7 @@ const Body2Styles = css`
   color: ${getColor()};
   transition: all 0.15s;
   ${buttonStyles};
+  ${styledSystem}
 `;
 
 const Body2Component = styled.span`
@@ -189,6 +208,7 @@ const Body3Styles = css`
   color: ${getColor()};
   transition: all 0.15s;
   ${buttonStyles};
+  ${styledSystem}
 `;
 
 const Body3Component = styled.span.attrs({
@@ -207,6 +227,7 @@ const TinyTextStyles = css`
   color: ${getColor()};
   transition: all 0.15s;
   ${buttonStyles};
+  ${styledSystem}
 `;
 
 const TinyTextComponent = styled.span`

@@ -6,6 +6,7 @@ module.exports = {
   target: 'node',
   resolve: {
     modules: ['node_modules', path.resolve(__dirname, 'src')],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   entry: {
     './index': './src/index.js',
@@ -29,6 +30,11 @@ module.exports = {
   ],
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
