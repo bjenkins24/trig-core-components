@@ -10,6 +10,7 @@ module.exports = {
   },
   entry: {
     './index': './src/index.js',
+    './compositions': './src/compositions.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

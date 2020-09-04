@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { rgba } from 'polished';
 import styled from 'styled-components';
 import Truncate from 'react-truncate';
-import { Heading1, Heading3, Heading4, TinyText } from 'Typography';
-import { HorizontalGroup } from 'Groups';
-import Image from 'Image';
-import Icon, { FileIcon } from 'Icon';
-import { format } from 'utils/dateFns';
+import { Heading1, Heading3, Heading4, TinyText } from './Typography';
+import { HorizontalGroup } from './Groups';
+import Image from './Image';
+import Icon, { FileIcon } from './Icon';
+import { format } from './utils/dateFns';
 import PopoverNavigation from './Popovers/PopoverNavigation';
 
 const Container = styled.div`

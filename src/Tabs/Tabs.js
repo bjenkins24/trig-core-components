@@ -33,7 +33,7 @@ const Tabs = ({ children, ...restProps }) => {
           if (i === 0) return child;
           // TabPanel
           return React.cloneElement(child, {
-            tabIndex: i - 1,
+            tabIndex: i - 2,
           });
         })}
       </div>

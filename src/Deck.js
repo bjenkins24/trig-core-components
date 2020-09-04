@@ -3,16 +3,11 @@ import PropTypes from 'prop-types';
 import { rgba } from 'polished';
 import styled, { css } from 'styled-components';
 import Truncate from 'react-truncate';
-import {
-  Heading2,
-  Body2Component,
-  Body3Component,
-  TinyText,
-} from './Typography';
+import { Heading2, Body2Component, Body3Component, TinyText } from 'Typography';
+import { HorizontalGroup, VerticalGroup } from 'Groups';
 import Box from './Box';
 import Icon from './Icon';
 import Avatar from './Avatar';
-import { HorizontalGroup, VerticalGroup } from './Groups';
 
 const DeckThumbnail = styled.div`
   display: flex;

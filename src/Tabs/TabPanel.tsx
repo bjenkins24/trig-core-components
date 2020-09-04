@@ -1,5 +1,6 @@
 import React, { ReactNode, useContext } from 'react';
 import { TabContext } from './Tabs';
+import { Theme } from '../utils/theme';
 
 interface TabPanelProps {
   tabIndex?: number;
@@ -10,10 +11,10 @@ const TabPanel = ({ tabIndex, children, ...restProps }: TabPanelProps) => {
   const { selectedTab } = useContext(TabContext);
   return (
     <div
-      {...restProps}
       role="tabpanel"
       hidden={selectedTab !== tabIndex}
       id={`panel-${tabIndex}`}
+      {...restProps}
     >
       {children}
     </div>

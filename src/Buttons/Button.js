@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { sizeProp, widthType } from 'utils/propTypes';
-import { HorizontalGroup } from 'Groups';
-import { getWidth } from 'utils';
-import Icon from 'Icon';
-import { BodyBiggest, Body1, Body2, Body3 } from 'Typography';
+import { sizeProp, widthType } from '../utils/propTypes';
+import { HorizontalGroup } from '../Groups';
+import { getWidth } from '../utils';
+import Icon from '../Icon';
+import { BodyBiggest, Body1, Body2, Body3 } from '../Typography';
 
 export const textMap = {
   sm: Body3,

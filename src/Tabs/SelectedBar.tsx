@@ -1,24 +1,29 @@
-import React, { useReducer, useContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useEffect, useReducer } from 'react';
 import styled from 'styled-components';
-import { useSpring, animated } from 'react-spring';
-import { HorizontalGroup } from '../Groups';
+import { animated, useSpring } from 'react-spring';
+import { separatorHeight } from './constants';
 import { TabContext } from './Tabs';
 
-const separatorHeight = '0.2rem';
+interface SelectedBarContainerProps {
+  dark: boolean;
+  width: number;
+}
 
-const Separator = styled.div`
-  height: ${separatorHeight};
-  background: ${({ theme, dark }) => (dark ? theme.ps[200] : theme.p)};
-  overflow: hidden;
-`;
-
-const SelectedBar = styled(animated.div)`
-  height: ${separatorHeight};
+const SelectedBarContainer = styled(animated.div)<SelectedBarContainerProps>`
+  height: ${separatorHeight}px;
   width: ${({ width }) => width / 10}rem;
   background: ${({ theme, dark }) => (dark ? theme.pc : theme.s)};
   position: relative;
 `;
+
+interface ReducerActionTypes {
+  type:
+    | 'setSelectedWidth'
+    | 'setLastWidth'
+    | 'setSelectedPosition'
+    | 'setLastPosition';
+  payload: number;
+}
 
 const initialState = {
   selectedWidth: 0,
@@ -27,7 +32,14 @@ const initialState = {
   lastPosition: 0,
 };
 
-const reducer = (state, action) => {
+interface StateProps {
+  selectedWidth: number;
+  lastWidth: number;
+  selectedPosition: number;
+  lastPosition: number;
+}
+
+const reducer = (state: StateProps, action: ReducerActionTypes) => {
   switch (action.type) {
     case 'setSelectedWidth':
       return { ...state, selectedWidth: action.payload };
@@ -43,16 +55,11 @@ const reducer = (state, action) => {
   }
 };
 
-const tabListTypes = {
-  children: PropTypes.node.isRequired,
-  dark: PropTypes.bool,
-};
+interface SelectedBarProps {
+  variant?: 'dark' | 'light';
+}
 
-const defaultProps = {
-  dark: false,
-};
-
-const TabList = ({ children, dark, ...restProps }) => {
+export const SelectedBar = ({ variant = 'dark' }: SelectedBarProps) => {
   const { selectedTab, tabRefs } = useContext(TabContext);
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -71,40 +78,22 @@ const TabList = ({ children, dark, ...restProps }) => {
         type: 'setSelectedWidth',
         payload: tabRefs[selectedTab].current.offsetWidth,
       });
-      const position = tabRefs.reduce((accumulator, tabRef, i) => {
-        if (i > selectedTab - 1) return accumulator;
-        return accumulator + tabRef.current.offsetWidth;
-      }, 0);
+      const position = tabRefs.reduce(
+        (accumulator: number, tabRef, i: number) => {
+          if (i > selectedTab - 1) return accumulator;
+          return accumulator + tabRef.current.offsetWidth;
+        },
+        0
+      );
       dispatch({ type: 'setSelectedPosition', payload: position });
     }
   }, [selectedTab, tabRefs]);
 
   return (
-    <div
-      css={`
-        margin-bottom: 2.4rem;
-      `}
-    >
-      <HorizontalGroup role="tablist" {...restProps}>
-        {React.Children.map(children, (child, i) => {
-          return React.cloneElement(child, {
-            tabIndex: i,
-            dark,
-          });
-        })}
-      </HorizontalGroup>
-      <Separator dark={dark}>
-        <SelectedBar
-          dark={dark}
-          width={state.selectedWidth}
-          style={animateProps}
-        />
-      </Separator>
-    </div>
+    <SelectedBarContainer
+      dark={variant === 'dark'}
+      width={state.selectedWidth}
+      style={animateProps}
+    />
   );
 };
-
-TabList.propTypes = tabListTypes;
-TabList.defaultProps = defaultProps;
-
-export default TabList;

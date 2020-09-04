@@ -1,21 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { get } from 'lodash';
+// @ts-ignore
 import { device } from '@trig-app/constants';
-import { position, shadow, space, color, typography } from 'styled-system';
+import {
+  position,
+  shadow,
+  space,
+  color,
+  typography,
+  PositionProps,
+  ColorProps,
+  SpaceProps,
+  TypographyProps,
+  ShadowProps,
+} from 'styled-system';
 import Separator from './Separator';
-import { getColor } from './utils';
+import { AsType } from './utils/types';
+import { Theme } from './utils/theme';
 
-const getWeight = ({ weight }) => {
-  const weightMap = {
-    normal: 400,
-    bold: 600,
-  };
-  return get(weightMap, weight, 400);
-};
-
-const buttonStyles = ({ as }) => {
+const buttonStyles = ({ as }: { as?: AsType }) => {
   if (as !== 'button') return false;
   return css`
     margin-top: 0;
@@ -25,10 +28,20 @@ const buttonStyles = ({ as }) => {
     font-family: hero-new, sans-serif;
     &:focus {
       outline: 0;
-      color: ${({ theme }) => theme.s};
+      color: ${({ theme }: { theme: Theme }) => theme.s};
     }
   `;
 };
+
+type StyleProps = SpaceProps &
+  PositionProps &
+  ColorProps &
+  TypographyProps &
+  ShadowProps & {
+    dark: boolean;
+    theme: Theme;
+    as?: AsType;
+  };
 
 const styledSystem = () => {
   return css`
@@ -40,13 +53,12 @@ const styledSystem = () => {
   `;
 };
 
-const HugeStyles = css`
+const HugeStyles = css<StyleProps>`
   font-size: 4.8rem;
   @media ${device.tabletPortraitUp} {
     font-size: 6.4rem;
   }
   line-height: 1.3;
-  color: ${getColor()};
   font-weight: 500;
   margin-top: 0;
   margin-bottom: 2.4rem;
@@ -59,12 +71,14 @@ const HugeComponent = styled.h1`
   ${HugeStyles}
 `;
 
-const Huge = (props) => <Typography Component={HugeComponent} {...props} />;
+const Huge = (props: any) => (
+  <Typography Component={HugeComponent} {...props} />
+);
 
-const Heading1Styles = css`
+const Heading1Styles = css<StyleProps>`
   font-size: 3.4rem;
   line-height: 1.3;
-  color: ${getColor()};
+  color: ${({ theme }) => theme.p};
   font-weight: 500;
   margin-top: 0;
   margin-bottom: 1.6rem;
@@ -77,34 +91,34 @@ const Heading1Component = styled.h1`
   ${Heading1Styles};
 `;
 
-const Heading1 = (props) => (
-  <Typography Component={Heading1Component} marginBottom {...props} />
+const Heading1 = (props: any) => (
+  <Typography Component={Heading1Component} {...props} />
 );
 
-const Heading2Styles = css`
+const Heading2Styles = css<StyleProps>`
   font-size: 2.6rem;
   line-height: 1.3;
   font-weight: 600;
-  color: ${getColor('s')};
+  color: ${({ theme }) => theme.s}
   margin-top: 0;
   transition: all 0.15s;
   ${buttonStyles};
   ${styledSystem}
 `;
 
-const Heading2Component = styled.h2`
+const Heading2Component = styled.h2.attrs({ color: 's' })`
   ${Heading2Styles}
 `;
 
-const Heading2 = (props) => (
-  <Typography Component={Heading2Component} marginBottom {...props} />
+const Heading2 = (props: any) => (
+  <Typography Component={Heading2Component} {...props} />
 );
 
-const Heading3Styles = css`
+const Heading3Styles = css<StyleProps>`
   font-size: 1.5rem;
   line-height: 1.5;
   font-weight: 600;
-  color: ${getColor()};
+  color: ${({ theme }) => theme.p};
   margin-top: 0;
   margin-bottom: 1.6rem;
   transition: all 0.15s;
@@ -116,14 +130,14 @@ const Heading3Component = styled.h3`
   ${Heading3Styles};
 `;
 
-const Heading3 = (props) => (
-  <Typography Component={Heading3Component} marginBottom {...props} />
+const Heading3 = (props: any) => (
+  <Typography Component={Heading3Component} {...props} />
 );
 
-const Heading4Styles = css`
+const Heading4Styles = css<StyleProps>`
   font-size: 1.3rem;
   line-height: 1.7;
-  color: ${getColor('bcs.200')};
+  color: ${({ theme }) => theme.bcs[200]};
   margin-top: 0;
   margin-bottom: 1.6rem;
   transition: all 0.15s;
@@ -135,15 +149,13 @@ const Heading4Component = styled.h4`
   ${Heading4Styles};
 `;
 
-const Heading4 = (props) => (
-  <Typography Component={Heading4Component} marginBottom {...props} />
+const Heading4 = (props: any) => (
+  <Typography Component={Heading4Component} {...props} />
 );
 
-const BodyBiggestStyles = css`
+const BodyBiggestStyles = css<StyleProps>`
   font-size: 2.1rem;
   line-height: 1.5;
-  font-weight: ${getWeight};
-  color: ${getColor()};
   transition: all 0.15s;
   ${buttonStyles};
   ${styledSystem}
@@ -153,11 +165,9 @@ const BodyBiggest = styled.span`
   ${BodyBiggestStyles}
 `;
 
-const BodyBigStyles = css`
+const BodyBigStyles = css<StyleProps>`
   font-size: 1.8rem;
   line-height: 1.5;
-  font-weight: ${getWeight};
-  color: ${getColor()};
   transition: all 0.15s;
   ${buttonStyles};
   ${styledSystem}
@@ -167,45 +177,41 @@ const BodyBig = styled.span`
   ${BodyBigStyles}
 `;
 
-const Body1Styles = css`
+const Body1Styles = css<StyleProps>`
   font-size: 1.6rem;
   line-height: 1.7;
-  font-weight: ${getWeight};
-  color: ${getColor()};
   transition: all 0.15s;
   ${buttonStyles};
   ${styledSystem}
 `;
 
-const Body1Component = styled.span`
+const Body1Component = styled.span<StyleProps>`
   ${Body1Styles}
 `;
 
-const Body1 = (props) => {
+const Body1 = (props: any) => {
   return <Typography Component={Body1Component} {...props} />;
 };
 
-const Body2Styles = css`
+const Body2Styles = css<StyleProps>`
   font-size: 1.4rem;
   line-height: 1.7;
-  font-weight: ${getWeight};
-  color: ${getColor()};
   transition: all 0.15s;
   ${buttonStyles};
   ${styledSystem}
 `;
 
-const Body2Component = styled.span`
+const Body2Component = styled.span<StyleProps>`
   ${Body2Styles}
 `;
 
-const Body2 = (props) => <Typography Component={Body2Component} {...props} />;
+const Body2 = (props: any) => (
+  <Typography Component={Body2Component} {...props} />
+);
 
-const Body3Styles = css`
+const Body3Styles = css<StyleProps>`
   font-size: 1.1rem;
   line-height: 1.7;
-  font-weight: ${getWeight};
-  color: ${getColor()};
   transition: all 0.15s;
   ${buttonStyles};
   ${styledSystem}
@@ -217,14 +223,15 @@ const Body3Component = styled.span.attrs({
   ${Body3Styles}
 `;
 
-const Body3 = (props) => <Typography Component={Body3Component} {...props} />;
+const Body3 = (props: any) => (
+  <Typography Component={Body3Component} {...props} />
+);
 
-const TinyTextStyles = css`
+const TinyTextStyles = css<StyleProps>`
   font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.3;
   text-transform: uppercase;
-  color: ${getColor()};
   transition: all 0.15s;
   ${buttonStyles};
   ${styledSystem}
@@ -234,7 +241,7 @@ const TinyTextComponent = styled.span`
   ${TinyTextStyles};
 `;
 
-const TinyText = (props) => (
+const TinyText = (props: any) => (
   <Typography
     data-testid="typography"
     Component={TinyTextComponent}
@@ -247,18 +254,18 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const typographyTypes = {
-  Component: PropTypes.oneOfType([PropTypes.node, PropTypes.object]).isRequired,
-  separator: PropTypes.bool,
-  className: PropTypes.string,
-};
+interface NewTypographyProps {
+  Component: any;
+  separator: boolean;
+  className?: string;
+}
 
-const defaultProps = {
-  separator: false,
-  className: '',
-};
-
-const Typography = ({ Component, separator, className, ...restProps }) => {
+const Typography = ({
+  Component,
+  separator = false,
+  className = '',
+  ...restProps
+}: NewTypographyProps) => {
   if (!separator) return <Component className={className} {...restProps} />;
 
   return (
@@ -271,9 +278,6 @@ const Typography = ({ Component, separator, className, ...restProps }) => {
     </Container>
   );
 };
-
-Typography.propTypes = typographyTypes;
-Typography.defaultProps = defaultProps;
 
 export {
   HugeStyles,

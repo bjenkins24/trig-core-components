@@ -1,37 +1,16 @@
 import React, { useContext } from 'react';
 
 import { css } from 'styled-components';
+import {
+  ColorProps,
+  PositionProps,
+  ShadowProps,
+  SpaceProps,
+  TypographyProps,
+} from 'styled-system';
 import { Body1Component } from '../Typography';
 import { Theme } from '../utils/theme';
 import { TabContext } from './Tabs';
-
-const getColor = ({
-  theme,
-  isSelected,
-  dark,
-}: {
-  theme: Theme;
-  isSelected: boolean;
-  dark: boolean;
-}) => {
-  if (dark && isSelected) {
-    return theme.pc;
-  }
-  if (dark && !isSelected) {
-    return theme.ps[200];
-  }
-  if (isSelected) {
-    return theme.s;
-  }
-  return theme.p;
-};
-
-const getActiveColor = ({ dark, theme }: { dark: boolean; theme: Theme }) => {
-  if (dark) {
-    return theme.pc;
-  }
-  return theme.s;
-};
 
 const getPadding = ({
   tabIndex,
@@ -50,23 +29,50 @@ const getPadding = ({
   `;
 };
 
-interface TabProps {
-  tabIndex?: number;
-  dark?: boolean;
-  children: string;
-}
+type TabProps = SpaceProps &
+  PositionProps &
+  ColorProps &
+  TypographyProps &
+  ShadowProps & {
+    tabIndex?: number;
+    dark?: boolean;
+    children: string;
+  };
 
 const Tab = ({ tabIndex, dark = false, children, ...restProps }: TabProps) => {
   const { selectedTab, setSelectedTab, tabRefs } = useContext(TabContext);
   const isSelected = selectedTab === tabIndex;
 
+  const getColor = () => {
+    if (dark && isSelected) {
+      return 'pc';
+    }
+    if (dark && !isSelected) {
+      return 'ps.200';
+    }
+    if (isSelected) {
+      return 's';
+    }
+    return 'p';
+  };
+
+  const getActiveColor = ({ theme }: { theme: Theme }) => {
+    if (dark) {
+      return theme.pc;
+    }
+    return theme.s;
+  };
+
   return (
     <Body1Component
       ref={tabRefs[tabIndex]}
       mb={2}
+      color={getColor()}
+      bg="none"
       css={`
         ${getPadding};
-        color: ${getColor};
+        outline: none;
+        cursor: pointer;
         background: none;
         transition: 250ms;
         &:hover {
@@ -76,14 +82,12 @@ const Tab = ({ tabIndex, dark = false, children, ...restProps }: TabProps) => {
           color: ${getActiveColor};
         }
       `}
-      as="button"
       dark={dark}
       id={`tab-${tabIndex}`}
       role="tab"
-      aria-controls={`panel-${tabIndex}`}
       onClick={() => setSelectedTab(tabIndex)}
       tabIndex={tabIndex}
-      isSelected={isSelected}
+      aria-controls={`panel-${tabIndex}`}
       {...restProps}
     >
       {children}

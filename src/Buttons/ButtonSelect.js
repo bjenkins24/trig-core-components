@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Icon, { iconComponents } from 'Icon';
-import { Heading3, Heading4 } from 'Typography';
-import { getColor } from 'utils';
+import Icon, { iconComponents } from '../Icon';
+import { Heading3, Heading4 } from '../Typography';
+import { getColor } from '../utils';
 
 const Container = styled.div`
   width: 14.8rem;

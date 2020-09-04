@@ -1,6 +1,6 @@
 import React from 'react';
-import { render } from 'test/utils';
-import { Huge } from 'Typography';
+import { render } from '../test/utils';
+import { Huge } from '../Typography';
 
 describe('<Typography />', () => {
   it('renders and takes basic props', () => {

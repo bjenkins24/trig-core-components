@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone-uploader';
 import { uniqueId } from 'lodash';
+import { Body2 } from './Typography';
 import { HorizontalGroup } from './Groups';
 import { List, ListItem, ListItemContent } from './Lists';
 import { Button } from './Buttons';
 import Image from './Image';
 import Icon, { FileIcon } from './Icon';
 import Loading from './Loading';
-import { Body2 } from './Typography';
 
 const toTitleCase = (str) => {
   const newString = str.toLowerCase().split(' ');
