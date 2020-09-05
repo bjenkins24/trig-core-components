@@ -1,6 +1,6 @@
 import React from 'react';
-import { render } from '../test/utils';
-import { Huge } from '../Typography';
+import { render } from 'test/utils';
+import { Huge, Heading2 } from 'Typography';
 
 describe('<Typography />', () => {
   it('renders and takes basic props', () => {
@@ -9,5 +9,10 @@ describe('<Typography />', () => {
     expect(container.firstChild).toHaveStyleRule('font-size', '4.8rem');
     rerender(<Huge separator>{text}</Huge>);
     expect(getByTestId('typography__separator')).toBeInTheDocument();
+  });
+
+  it('takes a color prop', () => {
+    const { container } = render(<Heading2 color="blue">Hello</Heading2>);
+    expect(container.firstChild).toHaveStyleRule('color', 'blue');
   });
 });

@@ -99,14 +99,14 @@ const Heading2Styles = css<StyleProps>`
   font-size: 2.6rem;
   line-height: 1.3;
   font-weight: 600;
-  color: ${({ theme }) => theme.s}
+  color: ${({ theme }) => theme.s};
   margin-top: 0;
   transition: all 0.15s;
   ${buttonStyles};
   ${styledSystem}
 `;
 
-const Heading2Component = styled.h2.attrs({ color: 's' })`
+const Heading2Component = styled.h2`
   ${Heading2Styles}
 `;
 
