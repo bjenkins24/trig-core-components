@@ -41,6 +41,10 @@ const shadow =
 const theme = {
   space: [0, 4, 8, 16, 32, 64, 128],
   fontSizes: [9, 11, 14, 16, 26, 34, 64],
+  fontWeights: {
+    bold: '600',
+    normal: '400',
+  },
   radii: [0, 4],
   colors: {
     // Primary Colors
