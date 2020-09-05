@@ -27,8 +27,7 @@ const DeckHover = styled.div`
   padding: 1.6rem;
 `;
 
-const getBackground = (isHovered) => ({ theme, image }) => {
-  const opacity = isHovered ? 0.6 : 0.25;
+const getBackground = ({ theme, image }) => {
   let backgroundCss = css`
     background: linear-gradient(
       0deg,
@@ -47,7 +46,7 @@ const getBackground = (isHovered) => ({ theme, image }) => {
   return css`
     ${backgroundCss}
     background-size: cover;
-    box-shadow: inset 0 0 0 1000px ${rgba(theme.s, opacity)};
+    box-shadow: inset 0 0 0 1000px ${rgba(theme.s, 0.6)};
   `;
 };
 
@@ -104,11 +103,11 @@ const Deck = ({
       tabIndex="0"
       image={image}
       css={`
-        ${getBackground(true)}
+        ${getBackground}
         transition: all 200ms;
         cursor: pointer;
         &:hover {
-          ${getBackground(true)}
+          ${getBackground}
           .deck__thumbnail {
             opacity: 0;
           }

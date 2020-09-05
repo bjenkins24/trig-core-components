@@ -15,6 +15,7 @@ describe('<HorizontalGroup />', () => {
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
+        padding: 8px;
       }
 
       .c0 > *:not(:last-child) {
@@ -39,6 +40,7 @@ describe('<HorizontalGroup />', () => {
         -webkit-box-align: center;
         -ms-flex-align: center;
         align-items: center;
+        margin: 8px;
       }
 
       .c0 > *:not(:last-child) {
@@ -64,6 +66,7 @@ describe('<VerticalGroup />', () => {
         -webkit-flex-direction: column;
         -ms-flex-direction: column;
         flex-direction: column;
+        padding: 8px;
       }
 
       .c0 > *:not(:last-child) {
@@ -87,6 +90,7 @@ describe('<VerticalGroup />', () => {
         -webkit-flex-direction: column;
         -ms-flex-direction: column;
         flex-direction: column;
+        margin: 8px;
       }
 
       .c0 > *:not(:last-child) {

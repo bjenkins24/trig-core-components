@@ -1,7 +1,30 @@
 import styled from 'styled-components';
-import { position, flexbox, layout, space, color, border } from 'styled-system';
+import {
+  position,
+  PositionProps,
+  flexbox,
+  FlexboxProps,
+  layout,
+  LayoutProps,
+  space,
+  SpaceProps,
+  color,
+  ColorProps,
+  border,
+  BorderProps,
+} from 'styled-system';
 
-const HorizontalGroup = styled.div`
+type GroupProps = PositionProps &
+  FlexboxProps &
+  LayoutProps &
+  SpaceProps &
+  ColorProps &
+  BorderProps & {
+    spacer: number;
+    spacerPadding: number;
+  };
+
+const HorizontalGroup = styled.div<GroupProps>`
   display: flex;
   align-items: center;
 
@@ -13,18 +36,19 @@ const HorizontalGroup = styled.div`
   ${position}
   
   > *:not(:last-child) {
-    ${({ margin }) => margin && `margin-right: ${margin}rem`};
-    ${({ padding }) => padding && `padding-right: ${padding}rem`};
+    ${({ margin }) => margin && `margin-right: ${String(margin)}rem`};
+    ${({ padding }) => padding && `padding-right: ${String(padding)}rem`};
   } 
   > *:not(:last-child) {
     ${({ spacer, theme }) =>
-      spacer && `margin-right: ${theme.space[spacer]}px`};
+      spacer && `margin-right: ${String(theme.space[spacer])}px`};
     ${({ spacerPadding, theme }) =>
-      spacerPadding && `padding-right: ${theme.space[spacerPadding]}px`};
+      spacerPadding &&
+      `padding-right: ${String(theme.space[spacerPadding])}px`};
   }
 `;
 
-const VerticalGroup = styled.div`
+const VerticalGroup = styled.div<GroupProps>`
   display: flex;
   flex-direction: column;
 
@@ -36,8 +60,15 @@ const VerticalGroup = styled.div`
   ${position}
 
   > *:not(:last-child) {
-    ${({ margin }) => margin && `margin-bottom: ${margin}rem`};
-    ${({ padding }) => padding && `padding-bottom: ${padding}rem`};
+    ${({ margin }) => margin && `margin-bottom: ${String(margin)}rem`};
+    ${({ padding }) => padding && `padding-bottom: ${String(padding)}rem`};
+  }
+  > *:not(:last-child) {
+    ${({ spacer, theme }) =>
+      spacer && `margin-bottom: ${String(theme.space[spacer])}px`};
+    ${({ spacerPadding, theme }) =>
+      spacerPadding &&
+      `padding-bottom: ${String(theme.space[spacerPadding])}px`};
   }
 `;
 

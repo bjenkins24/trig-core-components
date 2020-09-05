@@ -2,10 +2,11 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { uniqueId } from 'lodash';
+import { widthType } from 'utils/propTypes';
+import { HorizontalGroup } from 'Groups';
 import ErrorMessage from './ErrorMessage';
 import Label from './Label';
-import { widthType } from '../utils/propTypes';
-import { HorizontalGroup } from '../Groups';
+
 import Icon from '../Icon';
 
 const LabelContainer = styled(Label).attrs({
