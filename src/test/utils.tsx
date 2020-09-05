@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { ThemeProvider } from 'styled-components';
 import { render as rtlRender } from '@testing-library/react';
 import theme from '../../stories/theme';
+import { Theme } from '../utils/theme';
 
-const render = (ui, options) => {
-  const Wrapper = ({ children }) => {
+interface CustomOptions {
+  theme: Theme;
+}
+
+const render = (ui: ReactElement, options?: CustomOptions) => {
+  const Wrapper = ({ children }: { children: ReactElement }) => {
     const finalTheme = get(options, 'theme', theme);
     return <ThemeProvider theme={finalTheme}>{children}</ThemeProvider>;
   };

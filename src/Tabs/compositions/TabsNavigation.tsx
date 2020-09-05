@@ -18,9 +18,10 @@ const TabsNavigation = ({
   return (
     <Tabs>
       <TabList variant={variant}>
-        {tabs.map((tab: string) => {
+        {tabs.map((tab: string, index: number) => {
           return (
             <Tab
+              key={index}
               fontWeight="bold"
               mb={2}
               css={`
