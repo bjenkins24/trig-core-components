@@ -4,14 +4,14 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, select, number, text } from '@storybook/addon-knobs';
 
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'theme-ui';
 import './consoleOverrides';
 import { Button, ButtonToggle, Fab, ButtonSelect } from '../src/Buttons';
 import Icon from '../src/Icon';
 import Logo from '../src/Logo';
 import Avatar from '../src/Avatar';
 import { Popover, PopoverNavigation } from '../src/Popovers';
-import Deck from '../src/Deck';
+import { Deck } from '../src/Deck';
 import {
   Huge,
   Heading1,

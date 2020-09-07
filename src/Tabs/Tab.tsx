@@ -63,6 +63,10 @@ const Tab = ({ tabIndex, dark = false, children, ...restProps }: TabProps) => {
     return theme.s;
   };
 
+  if (typeof tabIndex === 'undefined') {
+    return false;
+  }
+
   return (
     <Body1Component
       ref={tabRefs[tabIndex]}

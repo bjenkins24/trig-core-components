@@ -1,9 +1,9 @@
 import React from 'react';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
-
+import styled, { createGlobalStyle } from 'styled-components';
+import { ThemeProvider } from 'theme-ui';
 import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
-import Deck from '../src/Deck';
+import { Deck } from '../src/Deck';
 import Carousel from '../src/Carousel';
 import './consoleOverrides';
 import themeForProvider from './theme';

@@ -1,8 +1,9 @@
-import React, { ReactNode } from 'react';
+/** @jsx jsx */
+import { jsx } from 'theme-ui';
+import { ReactNode } from 'react';
 import { Separator } from '../Separator';
 import { SelectedBar } from '../SelectedBar';
 import { VariantType } from '../types';
-import { Theme } from '../../utils/theme';
 import { Tab, TabList, TabPanel, Tabs } from '../index';
 
 interface CompositionProps {
@@ -29,10 +30,9 @@ const TabsDefault = ({
       {tabPanels.map((content: ReactNode) => {
         return (
           <TabPanel
-            css={`
-              margin-top: ${({ theme }: { theme: Theme }) =>
-                `${theme.space[3]}px`};
-            `}
+            sx={{
+              marginTop: 3,
+            }}
           >
             {content}
           </TabPanel>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { RefObject, useContext, useEffect, useReducer } from 'react';
 import styled from 'styled-components';
 import { animated, useSpring } from 'react-spring';
 import { separatorHeight } from './constants';
@@ -76,12 +76,12 @@ export const SelectedBar = ({ variant = 'dark' }: SelectedBarProps) => {
       dispatch({ type: 'setLastWidth', payload: state.selectedWidth });
       dispatch({
         type: 'setSelectedWidth',
-        payload: tabRefs[selectedTab].current.offsetWidth,
+        payload: tabRefs[selectedTab]?.current?.offsetWidth,
       });
       const position = tabRefs.reduce(
-        (accumulator: number, tabRef, i: number) => {
+        (accumulator: number, tabRef: RefObject<HTMLElement>, i: number) => {
           if (i > selectedTab - 1) return accumulator;
-          return accumulator + tabRef.current.offsetWidth;
+          return accumulator + tabRef?.current?.offsetWidth;
         },
         0
       );

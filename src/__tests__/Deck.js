@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'test/utils';
-import Deck from 'Deck';
+import { Deck } from 'Deck';
 
 jest.mock('react-truncate', () => {
   return (props) => <div {...props} />;
