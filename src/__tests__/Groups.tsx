@@ -4,7 +4,12 @@ import { HorizontalGroup, VerticalGroup } from 'Groups';
 
 describe('<HorizontalGroup />', () => {
   it('renders and matches padding snapshot', () => {
-    const { container } = render(<HorizontalGroup padding={2} />);
+    const { container } = render(
+      <HorizontalGroup padding={2}>
+        <div>hello</div>
+        <div>hello</div>
+      </HorizontalGroup>
+    );
     expect(container.firstChild).toMatchInlineSnapshot(`
       .c0 {
         display: -webkit-box;
@@ -29,7 +34,12 @@ describe('<HorizontalGroup />', () => {
   });
 
   it('renders and matches margin snapshot', () => {
-    const { container } = render(<HorizontalGroup margin={2} />);
+    const { container } = render(
+      <HorizontalGroup margin={2}>
+        <div>Hello</div>
+        <div>Hello</div>
+      </HorizontalGroup>
+    );
     expect(container.firstChild).toMatchInlineSnapshot(`
       .c0 {
         display: -webkit-box;
@@ -56,7 +66,12 @@ describe('<HorizontalGroup />', () => {
 
 describe('<VerticalGroup />', () => {
   it('matches padding snapshot', () => {
-    const { container } = render(<VerticalGroup padding={2} />);
+    const { container } = render(
+      <VerticalGroup padding={2}>
+        <div>hello</div>
+        <div>hello</div>
+      </VerticalGroup>
+    );
     expect(container.firstChild).toMatchInlineSnapshot(`
       .c0 {
         display: -webkit-box;
@@ -80,7 +95,12 @@ describe('<VerticalGroup />', () => {
   });
 
   it('matches margin snapshot', () => {
-    const { container } = render(<VerticalGroup margin={2} />);
+    const { container } = render(
+      <VerticalGroup margin={2}>
+        <div>Heloo</div>
+        <div>hello</div>
+      </VerticalGroup>
+    );
     expect(container.firstChild).toMatchInlineSnapshot(`
       .c0 {
         display: -webkit-box;

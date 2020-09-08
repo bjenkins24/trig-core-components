@@ -13,16 +13,18 @@ const TabList = ({
   ...restProps
 }: TabListProps) => {
   return (
-    <HorizontalGroup role="tablist" {...restProps}>
-      {React.Children.map(children, (child, i) => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child, {
-            tabIndex: i,
-            variant,
-          });
-        }
-      })}
-    </HorizontalGroup>
+    <div role="tablist">
+      <HorizontalGroup {...restProps}>
+        {React.Children.map(children, (child, i) => {
+          if (React.isValidElement(child)) {
+            return React.cloneElement(child, {
+              tabIndex: i,
+              variant,
+            });
+          }
+        })}
+      </HorizontalGroup>
+    </div>
   );
 };
 

@@ -130,14 +130,14 @@ const Deck = ({
         </Heading2>
         <Box display="flex">
           <AvatarWrapper user={user} />
-          <HorizontalGroup spacer={3} ml="auto">
-            <HorizontalGroup spacer={2}>
+          <HorizontalGroup margin={3} ml="auto">
+            <HorizontalGroup margin={2}>
               <Icon type="cards" size={2.2} />
               <Body3Component weight="bold" color="sc">
                 {totalCards}
               </Body3Component>
             </HorizontalGroup>
-            <HorizontalGroup spacer={2}>
+            <HorizontalGroup margin={2}>
               <Icon type="followers" size={1.6} />
               <Body3Component weight="bold" color="sc">
                 {totalFollowers}
@@ -159,7 +159,7 @@ const Deck = ({
         <Body2Component color="sc" mb={3}>
           <Truncate lines={4}>{description}</Truncate>
         </Body2Component>
-        <HorizontalGroup spacer={1}>
+        <HorizontalGroup margin={1}>
           <AvatarWrapper user={user} />
           <VerticalGroup mt="0.1rem">
             <TinyText color="sc">

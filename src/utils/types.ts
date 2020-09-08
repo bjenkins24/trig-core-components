@@ -12,6 +12,9 @@ declare module 'react' {
 
 declare namespace jest {
   interface Matchers<R> {
-    toHaveStyleRule: import("jest-styled-components").jest.Matchers<R>["toHaveStyleRule"]
+    // @ts-ignore
+    toHaveStyleRule: import('jest-styled-components').jest.Matchers<
+      R
+    >['toHaveStyleRule'];
   }
 }

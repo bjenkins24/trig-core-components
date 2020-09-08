@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer, RefObject } from 'react';
 import styled from 'styled-components';
 import { animated, useSpring } from 'react-spring';
 import { separatorHeight } from './constants';
 import { TabContext } from './Tabs';
+import { Theme } from '../utils/theme';
 
 interface SelectedBarContainerProps {
   dark: boolean;
@@ -11,8 +12,9 @@ interface SelectedBarContainerProps {
 
 const SelectedBarContainer = styled(animated.div)<SelectedBarContainerProps>`
   height: ${separatorHeight}px;
-  width: ${({ width }) => width / 10}rem;
-  background: ${({ theme, dark }) => (dark ? theme.pc : theme.s)};
+  width: ${({ width }: { width: number }) => width / 10}rem;
+  background: ${({ theme, dark }: { theme: Theme; dark: boolean }) =>
+    dark ? theme.pc : theme.s};
   position: relative;
 `;
 
@@ -79,7 +81,7 @@ export const SelectedBar = ({ variant = 'dark' }: SelectedBarProps) => {
         payload: tabRefs[selectedTab].current.offsetWidth,
       });
       const position = tabRefs.reduce(
-        (accumulator: number, tabRef, i: number) => {
+        (accumulator: number, tabRef: RefObject<HTMLElement>, i: number) => {
           if (i > selectedTab - 1) return accumulator;
           return accumulator + tabRef.current.offsetWidth;
         },

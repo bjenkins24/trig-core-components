@@ -78,7 +78,7 @@ const Huge = (props: any) => (
 const Heading1Styles = css<StyleProps>`
   font-size: 3.4rem;
   line-height: 1.3;
-  color: ${({ theme }) => theme.p};
+  color: ${({ theme }: { theme: Theme }) => theme.p};
   font-weight: 500;
   margin-top: 0;
   margin-bottom: 1.6rem;
@@ -99,7 +99,7 @@ const Heading2Styles = css<StyleProps>`
   font-size: 2.6rem;
   line-height: 1.3;
   font-weight: 600;
-  color: ${({ theme }) => theme.s};
+  color: ${({ theme }: { theme: Theme }) => theme.s};
   margin-top: 0;
   transition: all 0.15s;
   ${buttonStyles};
@@ -118,7 +118,7 @@ const Heading3Styles = css<StyleProps>`
   font-size: 1.5rem;
   line-height: 1.5;
   font-weight: 600;
-  color: ${({ theme }) => theme.p};
+  color: ${({ theme }: { theme: Theme }) => theme.p};
   margin-top: 0;
   margin-bottom: 1.6rem;
   transition: all 0.15s;
@@ -137,7 +137,7 @@ const Heading3 = (props: any) => (
 const Heading4Styles = css<StyleProps>`
   font-size: 1.3rem;
   line-height: 1.7;
-  color: ${({ theme }) => theme.bcs[200]};
+  color: ${({ theme }: { theme: Theme }) => theme.bcs[200]};
   margin-top: 0;
   margin-bottom: 1.6rem;
   transition: all 0.15s;
