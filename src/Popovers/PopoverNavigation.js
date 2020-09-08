@@ -11,7 +11,6 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  margin-left: -${popoverPadding}rem;
   padding: 0.8rem ${popoverPadding}rem;
   width: 100%;
   cursor: pointer;

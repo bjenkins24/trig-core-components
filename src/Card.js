@@ -1,4 +1,5 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx, Flex } from 'theme-ui';
 import PropTypes from 'prop-types';
 import { rgba } from 'polished';
 import styled from 'styled-components';
@@ -39,62 +40,15 @@ const ClickableArea = styled.a`
   }
 `;
 
-const Title = styled(Heading3)`
-  margin-bottom: 0.8rem;
-`;
-
-const Meta = styled(HorizontalGroup)`
-  margin-bottom: 1.6rem;
-`;
-
-const DateCreated = styled(Heading4)`
-  margin-bottom: 0;
-`;
-
-const ThumbnailContainer = styled.div`
-  width: calc(3.2rem + 100%);
-  margin-left: -1.6rem;
-  position: relative;
-  max-height: 40rem;
-  overflow: hidden;
-  position: relative;
-`;
-
-const Thumbnail = styled(Image)`
-  width: 100%;
-`;
-
-const Type = styled.div`
-  width: 3.2rem;
-  height: 3.2rem;
-  border-radius: 50%;
-  box-shadow: ${({ theme }) => theme.sh};
-  position: absolute;
-  bottom: -1.2rem;
-  right: 1.6rem;
-  background: ${({ theme }) => theme.bs[200]};
-  display: flex;
-  align-items: center;
-  z-index: 2;
-`;
-
 const PlaceholderThumbnail = styled.div`
   background: ${({ theme }) => theme.s};
   color: ${({ theme }) => theme.sc};
   padding: 3.2rem 1.6rem 1.6rem;
 `;
 
-const Footer = styled(HorizontalGroup)`
-  padding: 2.9rem 1.6rem 1.6rem 1.6rem;
-`;
-
-const TypeIcon = styled(FileIcon)`
-  margin: 0 auto;
-`;
-
 const StyledIcon = styled(Icon).attrs({ size: 1.6, color: 's' })``;
 
-const IconGroup = styled(HorizontalGroup).attrs({ margin: 0.4 })`
+const IconGroup = styled(HorizontalGroup)`
   cursor: pointer;
   &:hover ${StyledIcon} svg,
   &:hover .card__meta-text {
@@ -166,24 +120,46 @@ const Card = ({
         }}
         href={href}
       >
-        <Title>
+        <Heading3 sx={{ marginBottom: 2 }}>
           <Truncate lines={4}>{title}</Truncate>
-        </Title>
-        <Meta margin={0.8}>
+        </Heading3>
+        <HorizontalGroup margin={2} sx={{ marginBottom: 2 }}>
           {renderAvatar()}
-          <DateCreated>
+          <Heading4 sx={{ marginBottom: 0 }}>
             {`${format(dateTime, 'MMM d, yyyy')} at ${format(
               dateTime,
               'h:mm a'
             )}`}
-          </DateCreated>
-        </Meta>
-        <Type>
-          <TypeIcon type={type} size={1.6} />
-        </Type>
-        <ThumbnailContainer>
+          </Heading4>
+        </HorizontalGroup>
+
+        <Flex
+          sx={{
+            width: '3.2rem',
+            height: '3.2rem',
+            borderRadius: '50%',
+            boxShadow: (theme) => theme.sh,
+            position: 'absolute',
+            bottom: (theme) => `-${theme.space[3] - theme.space[1]}px`,
+            right: 3,
+            background: (theme) => theme.colors.bs[200],
+            alignItems: 'center',
+            zIndex: 2,
+          }}
+        >
+          <FileIcon sx={{ margin: '0 auto' }} type={type} size={1.6} />
+        </Flex>
+        <div
+          sx={{
+            width: 'calc(32px + 100%)',
+            marginLeft: -3,
+            maxHeight: '40rem',
+            overflow: 'hidden',
+            position: 'relative',
+          }}
+        >
           <Hover>
-            <Open margin={0.8}>
+            <Open margin={2}>
               <Heading1
                 color="sc"
                 css={`
@@ -196,7 +172,11 @@ const Card = ({
             </Open>
           </Hover>
           {image ? (
-            <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
+            <Image
+              sx={{ width: '100%' }}
+              src={image}
+              alt={`Thumbnail for the card: ${title}`}
+            />
           ) : (
             <PlaceholderThumbnail>
               <Heading1
@@ -208,12 +188,17 @@ const Card = ({
               </Heading1>
             </PlaceholderThumbnail>
           )}
-        </ThumbnailContainer>
+        </div>
       </ClickableArea>
-      <Footer>
+      <HorizontalGroup
+        sx={{
+          padding: '2.9rem 1.6rem 1.6rem 1.6rem',
+        }}
+      >
         <div>
-          <HorizontalGroup margin={1.6}>
+          <HorizontalGroup margin={3}>
             <IconGroup
+              margin={1}
               data-testid="card__favorite"
               onClick={() => onClickFavorite(id)}
             >
@@ -227,6 +212,7 @@ const Card = ({
               </TinyText>
             </IconGroup>
             <IconGroup
+              margin={1}
               data-testid="card__comment"
               onClick={() => onClickComment(id)}
             >
@@ -244,7 +230,7 @@ const Card = ({
             type="horizontal-dots"
           />
         </PopoverNavigation>
-      </Footer>
+      </HorizontalGroup>
     </Container>
   );
 };

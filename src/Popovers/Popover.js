@@ -15,7 +15,7 @@ const PopoverContainer = styled.div`
   border-radius: ${({ theme }) => theme.br};
   background: ${({ theme }) => theme.p};
   box-shadow: ${({ theme }) => theme.sh};
-  padding: ${popoverPadding}rem;
+  padding: ${popoverPadding}rem 0;
   color: ${({ theme }) => theme.pc};
 `;
 

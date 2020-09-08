@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { VerticalGroup, HorizontalGroup } from '../Groups';
-import { Body2 } from '../Typography';
+import { VerticalGroup, HorizontalGroup } from 'Groups';
+import { Body2 } from 'Typography';
 import Icon from '../Icon';
 import { Popover } from '../Popovers';
 import DatePicker from './DatePicker';
@@ -176,7 +176,7 @@ const DateRangeField = ({
     }
 
     return (
-      <HorizontalGroup margin={1.6}>
+      <HorizontalGroup margin={3}>
         <span>{format(date, 'MMMM d, yyyy')}</span>
         <IconButton type="button" onClick={clear} ref={calendarRef}>
           <Icon

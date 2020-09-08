@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { HorizontalGroup } from '../Groups';
-import { Body3 } from '../Typography';
+import { HorizontalGroup } from 'Groups';
+import { Body3 } from 'Typography';
 import Icon from '../Icon';
 
 const Container = styled(HorizontalGroup)`

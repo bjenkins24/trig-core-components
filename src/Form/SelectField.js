@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Select from 'react-select';
+import { widthType, sizeProp } from 'utils/propTypes';
+import { Body1Styles, Body2Styles } from 'Typography';
 import FieldContainer from './FieldContainer';
 import useTheme from '../utils/useTheme';
-import { widthType, sizeProp } from '../utils/propTypes';
-import { Body1Styles, Body2Styles } from '../Typography';
 
 const getSize = (type) => ({ size }) => {
   const sizeMap = {

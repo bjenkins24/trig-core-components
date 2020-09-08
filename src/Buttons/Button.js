@@ -1,4 +1,6 @@
-import React, { forwardRef } from 'react';
+/** @jsx jsx */
+import { jsx, Flex } from 'theme-ui';
+import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { sizeProp, widthType } from 'utils/propTypes';
@@ -45,10 +47,10 @@ const iconSize = {
 };
 
 const iconMargin = {
-  sm: 0.8,
-  md: 0.8,
-  lg: 0.8,
-  hg: 1.6,
+  sm: 2,
+  md: 2,
+  lg: 2,
+  hg: 3,
 };
 
 const getVariantStyles = ({ variant }) => {
@@ -299,18 +301,13 @@ const Button = forwardRef(
         {...typeProp}
         {...restProps}
       >
-        <div
-          css={`
-            display: flex;
-            height: 100%;
-          `}
-        >
+        <Flex sx={{ height: '100%' }}>
           <HorizontalGroup
             margin={iconMargin[size]}
-            css={`
-              height: 100%;
-              margin: 0 auto;
-            `}
+            sx={{
+              height: '100%',
+              margin: '0 auto',
+            }}
           >
             {iconProps && !loading && (
               <Icon color={iconColor} size={iconSize[size]} {...iconProps} />
@@ -333,7 +330,7 @@ const Button = forwardRef(
               />
             )}
           </HorizontalGroup>
-        </div>
+        </Flex>
       </StyledButton>
     );
   }

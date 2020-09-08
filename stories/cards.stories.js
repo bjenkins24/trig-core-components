@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'theme-ui';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, select, number, text, date } from '@storybook/addon-knobs';
@@ -41,7 +42,7 @@ const CreateCard = () => {
         {
           onClick: () => null,
           item: (
-            <HorizontalGroup margin={1.6}>
+            <HorizontalGroup margin={2}>
               <Icon type="new-window" size={1.6} />
               <span>Open in New Window</span>
             </HorizontalGroup>
@@ -50,7 +51,7 @@ const CreateCard = () => {
         {
           onClick: () => null,
           item: (
-            <HorizontalGroup margin={1.6}>
+            <HorizontalGroup margin={2}>
               <Icon type="edit" size={1.6} />
               <span>Edit Card</span>
             </HorizontalGroup>
@@ -59,7 +60,7 @@ const CreateCard = () => {
         {
           onClick: () => null,
           item: (
-            <HorizontalGroup margin={1.6}>
+            <HorizontalGroup margin={2}>
               <Icon type="lock" size={1.6} />
               <span>Share</span>
             </HorizontalGroup>
@@ -68,7 +69,7 @@ const CreateCard = () => {
         {
           onClick: () => null,
           item: (
-            <HorizontalGroup margin={1.6}>
+            <HorizontalGroup margin={2}>
               <Icon type="trash" size={1.6} />
               <span>Remove From Trig</span>
             </HorizontalGroup>
@@ -81,7 +82,11 @@ const CreateCard = () => {
 
 storiesOf('Cards', module)
   .addDecorator((story) => (
-    <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
+    <ThemeProvider theme={themeForProvider}>
+      <StyledThemeProvider theme={themeForProvider}>
+        {story()}
+      </StyledThemeProvider>
+    </ThemeProvider>
   ))
   .addDecorator(withKnobs)
   .add('Thumbnail', () => <CreateCard />);

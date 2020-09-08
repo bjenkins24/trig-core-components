@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx, Flex } from 'theme-ui';
-import { lightGreen } from '@material-ui/core/colors';
 
 interface GroupProps {
   margin?: number;
