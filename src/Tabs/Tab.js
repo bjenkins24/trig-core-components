@@ -25,8 +25,8 @@ const getActiveColor = ({ dark, theme }) => {
   return theme.s;
 };
 
-const getPadding = ({ tabIndex }) => {
-  if (tabIndex === 0) {
+const getPadding = ({ tabPosition }) => {
+  if (tabPosition === 0) {
     return css`
       padding-right: 1.2rem;
     `;
@@ -37,7 +37,7 @@ const getPadding = ({ tabIndex }) => {
 };
 
 const tabTypes = {
-  tabIndex: PropTypes.number.isRequired,
+  tabPosition: PropTypes.number.isRequired,
   dark: PropTypes.bool,
 };
 
@@ -45,16 +45,17 @@ const defaultProps = {
   dark: false,
 };
 
-const Tab = ({ tabIndex, dark, ...restProps }) => {
+const Tab = ({ tabPosition, dark, ...restProps }) => {
   const { selectedTab, setSelectedTab, tabRefs } = useContext(TabContext);
-  const isSelected = selectedTab === tabIndex;
+  const isSelected = selectedTab === tabPosition;
 
   return (
     <Body1Component
-      ref={tabRefs[tabIndex]}
+      ref={tabRefs[tabPosition]}
       css={`
         margin-bottom: 0.8rem;
         ${getPadding};
+        background: none;
         color: ${getColor};
         transition: 250ms;
         &:hover {
@@ -66,11 +67,11 @@ const Tab = ({ tabIndex, dark, ...restProps }) => {
       `}
       as="button"
       dark={dark}
-      id={`tab-${tabIndex}`}
+      id={`tab-${tabPosition}`}
       role="tab"
-      aria-controls={`panel-${tabIndex}`}
-      onClick={() => setSelectedTab(tabIndex)}
-      tabIndex={tabIndex}
+      aria-controls={`panel-${tabPosition}`}
+      onClick={() => setSelectedTab(tabPosition)}
+      tabPosition={tabPosition}
       isSelected={isSelected}
       {...restProps}
     />

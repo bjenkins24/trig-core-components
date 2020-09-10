@@ -7,10 +7,9 @@ const tabsTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const Tabs = ({ children, ...restProps }) => {
+const Tabs = ({ children }) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [tabRefs, setTabRefs] = useState([]);
-  const totalTabs = useRef(null);
   const tabRefsContainer = useRef([]);
 
   // Get the right amount of tab refs
@@ -26,17 +25,7 @@ const Tabs = ({ children, ...restProps }) => {
 
   return (
     <TabContext.Provider value={{ selectedTab, setSelectedTab, tabRefs }}>
-      <div {...restProps}>
-        {React.Children.map(children, (child, i) => {
-          totalTabs.current = i;
-          // TabList
-          if (i === 0) return child;
-          // TabPanel
-          return React.cloneElement(child, {
-            tabIndex: i - 1,
-          });
-        })}
-      </div>
+      {children}
     </TabContext.Provider>
   );
 };

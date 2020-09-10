@@ -3,7 +3,10 @@
   "overrides": [
     {
       "files": ["**/src/**"],
-      "settings": { "import/resolver": "webpack" }
+      "settings": { "import/resolver": "webpack" },
+      "rules": {
+        "react/no-array-index-key": 0
+      }
     },
     {
       "files": ["**/__tests__/**", "**/src/test/**", "jest.setup.js"],

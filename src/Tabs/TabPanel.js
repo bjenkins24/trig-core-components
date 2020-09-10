@@ -3,17 +3,18 @@ import PropTypes from 'prop-types';
 import { TabContext } from './Tabs';
 
 const tabPanelTypes = {
-  tabIndex: PropTypes.number.isRequired,
+  tabPosition: PropTypes.number.isRequired,
 };
 
-const TabPanel = ({ tabIndex, ...restProps }) => {
+const TabPanel = ({ tabPosition, ...restProps }) => {
   const { selectedTab } = useContext(TabContext);
+  console.log('selectedTab', selectedTab);
   return (
     <div
       {...restProps}
       role="tabpanel"
-      hidden={selectedTab !== tabIndex}
-      id={`panel-${tabIndex}`}
+      hidden={selectedTab !== tabPosition}
+      id={`panel-${tabPosition}`}
     />
   );
 };

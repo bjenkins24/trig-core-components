@@ -5,6 +5,8 @@ import { ThemeProvider } from 'styled-components';
 import './consoleOverrides';
 import { Tabs, TabList, Tab, TabPanel } from '../src/Tabs';
 import theme from './theme';
+import { TabsDefault } from '../src/Tabs/compositions/TabsDefault';
+import { TabsNavigation } from '../src/Tabs/compositions/TabsNavigation';
 
 storiesOf('Tabs', module)
   .addDecorator((story) => (
@@ -19,9 +21,20 @@ storiesOf('Tabs', module)
         <Tab>Most Viewed</Tab>
         <Tab>Favorites</Tab>
       </TabList>
-      <TabPanel>All Cards Stuff</TabPanel>
-      <TabPanel>Recently Viewed Stuff</TabPanel>
-      <TabPanel>Most Viewed Stuff</TabPanel>
-      <TabPanel>Favorite Stuff</TabPanel>
+      <TabPanel tabPosition={0}>All Cards Stuff</TabPanel>
+      <TabPanel tabPosition={1}>Recently Viewed Stuff</TabPanel>
+      <TabPanel tabPosition={2}>Most Viewed Stuff</TabPanel>
+      <TabPanel tabPosition={3}>Favorite Stuff</TabPanel>
     </Tabs>
-  ));
+  ))
+  .add('default 2', () => (
+    <TabsDefault tabs={['1', '2', '3']} tabPanels={['one', 'two', 'three']} />
+  ))
+  .add('navigation', () => {
+    return (
+      <TabsNavigation
+        tabs={['1', '2', '3']}
+        tabPanels={['one', 'two', 'three']}
+      />
+    );
+  });
