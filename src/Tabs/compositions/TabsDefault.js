@@ -7,16 +7,19 @@ import { Tab, TabList, TabPanel, Tabs } from '../index';
 const tabsTypes = {
   variant: PropTypes.oneOf(['dark', 'light']),
   tabs: PropTypes.arrayOf(PropTypes.string).isRequired,
-  tabPanels: PropTypes.arrayOf(PropTypes.node).isRequired,
+  tabPanels: PropTypes.arrayOf(PropTypes.node),
+  defaultTab: PropTypes.number,
 };
 
 const defaultProps = {
-  variant: 'dark',
+  variant: 'light',
+  defaultTab: 0,
+  tabPanels: [],
 };
 
-export const TabsDefault = ({ variant, tabs, tabPanels }) => {
+export const TabsDefault = ({ variant, defaultTab, tabs, tabPanels }) => {
   return (
-    <Tabs>
+    <Tabs defaultTab={defaultTab}>
       <TabList variant={variant}>
         {tabs.map((tab) => {
           return <Tab dark={variant === 'dark'}>{tab}</Tab>;

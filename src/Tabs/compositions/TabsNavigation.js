@@ -4,18 +4,21 @@ import { SelectedBar } from '../SelectedBar';
 import { Tab, TabList, TabPanel, Tabs } from '../index';
 
 const tabsNavigationTypes = {
-  variant: PropTypes.oneOf(['dark', 'light']),
   tabs: PropTypes.arrayOf(PropTypes.node).isRequired,
-  tabPanels: PropTypes.arrayOf(PropTypes.node).isRequired,
+  tabPanels: PropTypes.arrayOf(PropTypes.node),
+  defaultTab: PropTypes.number,
 };
 
 const defaultProps = {
-  variant: 'dark',
+  defaultTab: 0,
+  tabPanels: [],
 };
 
-export const TabsNavigation = ({ variant = 'dark', tabs, tabPanels }) => {
+export const TabsNavigation = ({ defaultTab, tabs, tabPanels }) => {
+  const variant = 'dark';
+
   return (
-    <Tabs>
+    <Tabs defaultTab={defaultTab}>
       <TabList variant={variant}>
         {tabs.map((tab, index) => {
           return (

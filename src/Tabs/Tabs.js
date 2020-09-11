@@ -5,10 +5,15 @@ export const TabContext = React.createContext();
 
 const tabsTypes = {
   children: PropTypes.node.isRequired,
+  defaultTab: PropTypes.number,
 };
 
-const Tabs = ({ children }) => {
-  const [selectedTab, setSelectedTab] = useState(0);
+const defaultProps = {
+  defaultTab: 0,
+};
+
+const Tabs = ({ children, defaultTab }) => {
+  const [selectedTab, setSelectedTab] = useState(defaultTab);
   const [tabRefs, setTabRefs] = useState([]);
   const tabRefsContainer = useRef([]);
 
@@ -31,5 +36,6 @@ const Tabs = ({ children }) => {
 };
 
 Tabs.propTypes = tabsTypes;
+Tabs.defaultProps = defaultProps;
 
 export default Tabs;

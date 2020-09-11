@@ -11,7 +11,7 @@ const defaultProps = {
   variant: 'dark',
 };
 
-const TabList = ({ variant = 'dark', children, ...restProps }) => {
+const TabList = ({ variant, children, ...restProps }) => {
   return (
     <HorizontalGroup role="tablist" {...restProps}>
       {React.Children.map(children, (child, i) => {

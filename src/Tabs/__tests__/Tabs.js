@@ -1,7 +1,8 @@
 import React from 'react';
 import { render } from 'test/utils';
-import { Tabs, TabList, TabPanel, Tab } from 'Tabs';
 import user from '@testing-library/user-event';
+import { TabsDefault } from 'Tabs/compositions/TabsDefault';
+import { TabsNavigation } from 'Tabs/compositions';
 import theme from '../../../stories/theme';
 
 beforeAll(() => {
@@ -15,14 +16,11 @@ const secondTabPanelContent = 'Second Tab';
 
 const TabComponent = ({ dark = false }) => {
   return (
-    <Tabs>
-      <TabList dark={dark}>
-        <Tab tabIndex={0}>{firstTabContent}</Tab>
-        <Tab tabIndex={-1}>{secondTabContent}</Tab>
-      </TabList>
-      <TabPanel tabIndex={0}>{firstTabPanelContent}</TabPanel>
-      <TabPanel tabIndex={-1}>{secondTabPanelContent}</TabPanel>
-    </Tabs>
+    <TabsDefault
+      variant={dark ? 'dark' : 'light'}
+      tabs={[firstTabContent, secondTabContent]}
+      tabPanels={[firstTabPanelContent, secondTabPanelContent]}
+    />
   );
 };
 
@@ -39,10 +37,6 @@ describe('<Tabs />', () => {
 
     expect(firstTab).toHaveStyleRule('color', theme.p);
     expect(secondTab).toHaveStyleRule('color', theme.s);
-    // For passing `dark` to dom node - we ignore this in the app
-    // So let's ignore it in the tests. If it get's called more than once,
-    // though, we should know
-    expect(console.error).toHaveBeenCalledTimes(1);
   });
 
   it('renders dark mode correctly', async () => {
@@ -57,9 +51,21 @@ describe('<Tabs />', () => {
 
     expect(firstTab).toHaveStyleRule('color', theme.ps[200]);
     expect(secondTab).toHaveStyleRule('color', theme.pc);
-    // For passing `dark` to dom node - we ignore this in the app
-    // So let's ignore it in the tests. If it get's called more than once,
-    // though, we should know
-    expect(console.error).toHaveBeenCalledTimes(1);
+  });
+
+  it('renders navigation', async () => {
+    const { getByText, getAllByRole } = render(
+      <TabsNavigation
+        tabs={[firstTabContent, secondTabContent]}
+        tabPanels={[firstTabPanelContent, secondTabPanelContent]}
+      />
+    );
+    const tabs = getAllByRole('tab');
+    // Navigation has some extra padding on the left
+    expect(tabs[0]).toHaveStyleRule('padding', '0 8px');
+    const firstTab = getByText(firstTabContent);
+    const firstTabPanel = getByText(firstTabPanelContent);
+    expect(firstTab).toBeInTheDocument();
+    expect(firstTabPanel).toBeInTheDocument();
   });
 });

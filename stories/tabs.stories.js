@@ -13,7 +13,7 @@ storiesOf('Tabs', module)
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
   .addDecorator(withKnobs)
-  .add('default', () => (
+  .add('Without select bar', () => (
     <Tabs>
       <TabList dark={boolean('Dark', false)}>
         <Tab>All Cards</Tab>
@@ -27,13 +27,13 @@ storiesOf('Tabs', module)
       <TabPanel tabPosition={3}>Favorite Stuff</TabPanel>
     </Tabs>
   ))
-  .add('default 2', () => (
+  .add('Composition - Default', () => (
     <TabsDefault
       tabs={['All Cards', 'Recently Viewed', 'Recently Edited']}
       tabPanels={['EVERYTHING', 'just viewed', 'just edited']}
     />
   ))
-  .add('navigation', () => {
+  .add('Composition - Navigation', () => {
     return (
       <TabsNavigation
         tabs={['All Cards', 'Recently Viewed', 'Recently Edited']}

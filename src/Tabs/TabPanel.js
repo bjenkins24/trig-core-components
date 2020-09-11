@@ -8,7 +8,7 @@ const tabPanelTypes = {
 
 const TabPanel = ({ tabPosition, ...restProps }) => {
   const { selectedTab } = useContext(TabContext);
-  console.log('selectedTab', selectedTab);
+
   return (
     <div
       {...restProps}
