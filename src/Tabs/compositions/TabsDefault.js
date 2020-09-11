@@ -22,20 +22,16 @@ export const TabsDefault = ({ variant, tabs, tabPanels }) => {
           return <Tab dark={variant === 'dark'}>{tab}</Tab>;
         })}
       </TabList>
-      <Separator variant={variant}>
+      <Separator
+        variant={variant}
+        css={`
+          margin-bottom: ${({ theme }) => `${theme.space[3]}px`};
+        `}
+      >
         <SelectedBar variant={variant} />
       </Separator>
       {tabPanels.map((content, key) => {
-        return (
-          <TabPanel
-            sx={{
-              marginTop: 3,
-            }}
-            tabPosition={key}
-          >
-            {content}
-          </TabPanel>
-        );
+        return <TabPanel tabPosition={key}>{content}</TabPanel>;
       })}
     </Tabs>
   );

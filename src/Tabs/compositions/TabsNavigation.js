@@ -21,9 +21,9 @@ export const TabsNavigation = ({ variant = 'dark', tabs, tabPanels }) => {
           return (
             <Tab
               key={index}
-              fontWeight="bold"
-              mb={2}
               css={`
+                margin-bottom: ${({ theme }) => `${theme.space[2]}px`};
+                font-weight: ${({ theme }) => theme.fontWeights.bold};
                 padding: ${({ theme }) => `0 ${theme.space[2]}px`};
                 color: ${({ theme }) => theme.colors.pc} !important;
                 &:focus,

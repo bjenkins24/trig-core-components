@@ -28,13 +28,16 @@ storiesOf('Tabs', module)
     </Tabs>
   ))
   .add('default 2', () => (
-    <TabsDefault tabs={['1', '2', '3']} tabPanels={['one', 'two', 'three']} />
+    <TabsDefault
+      tabs={['All Cards', 'Recently Viewed', 'Recently Edited']}
+      tabPanels={['EVERYTHING', 'just viewed', 'just edited']}
+    />
   ))
   .add('navigation', () => {
     return (
       <TabsNavigation
-        tabs={['1', '2', '3']}
-        tabPanels={['one', 'two', 'three']}
+        tabs={['All Cards', 'Recently Viewed', 'Recently Edited']}
+        tabPanels={['EVERYTHING', 'just viewed', 'just edited']}
       />
     );
   });
