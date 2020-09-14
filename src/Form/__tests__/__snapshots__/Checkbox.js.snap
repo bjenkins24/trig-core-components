@@ -1,6 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Checkbox /> shows and hides check 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .c7 {
   font-size: 1.6rem;
   line-height: 1.7;
@@ -28,17 +39,6 @@ exports[`<Checkbox /> shows and hides check 1`] = `
   margin: 0 auto;
   -webkit-transition: all 0.15s;
   transition: all 0.15s;
-}
-
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c9 {
@@ -113,7 +113,7 @@ exports[`<Checkbox /> shows and hides check 1`] = `
     <input
       checked=""
       class="c1"
-      id="checkbox-1"
+      id="checkbox-2"
       type="checkbox"
     />
     <div
@@ -147,7 +147,7 @@ exports[`<Checkbox /> shows and hides check 1`] = `
       class="c7 c8 c9"
       color="ps.200"
       data-testid="labelContainer"
-      for="checkbox-1"
+      for="checkbox-2"
       width="20"
     >
       hello
