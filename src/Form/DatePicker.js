@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Calendar from 'react-calendar/dist/entry.nostyle';
+import { Body2Styles } from 'Typography';
 import Icon from '../Icon';
-import { Body2Styles } from '../Typography';
 import { format } from '../utils/dateFns';
 
 const calendarTheme = () => {

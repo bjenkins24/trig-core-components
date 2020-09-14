@@ -15,17 +15,6 @@ exports[`<Checkbox /> shows and hides check 1`] = `
   width: 20rem;
 }
 
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
 .c4 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -41,6 +30,17 @@ exports[`<Checkbox /> shows and hides check 1`] = `
   transition: all 0.15s;
 }
 
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .c9 {
   padding-left: 1.6rem;
 }
@@ -50,6 +50,9 @@ exports[`<Checkbox /> shows and hides check 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
   -webkit-align-self: flex-start;
   -ms-flex-item-align: start;
   align-self: flex-start;
@@ -110,7 +113,7 @@ exports[`<Checkbox /> shows and hides check 1`] = `
     <input
       checked=""
       class="c1"
-      id="checkbox-2"
+      id="checkbox-1"
       type="checkbox"
     />
     <div
@@ -144,7 +147,7 @@ exports[`<Checkbox /> shows and hides check 1`] = `
       class="c7 c8 c9"
       color="ps.200"
       data-testid="labelContainer"
-      for="checkbox-2"
+      for="checkbox-1"
       width="20"
     >
       hello

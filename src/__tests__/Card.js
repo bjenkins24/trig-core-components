@@ -45,7 +45,7 @@ describe('<Card />', () => {
       getByTestId,
       queryByAltText,
       rerender,
-    } = render(buildCard());
+    } = render(buildCard({ includeComments: true }));
 
     expect(getByText(totalFavorites.toString())).toBeInTheDocument();
     expect(getByText(totalComments.toString())).toBeInTheDocument();
@@ -78,5 +78,11 @@ describe('<Card />', () => {
       buildCard({ renderAvatar: () => <div>{avatarText}</div> })
     );
     expect(getByText(avatarText)).toBeInTheDocument();
+  });
+
+  it("doesn't render comments", () => {
+    const { queryByTestId } = render(buildCard());
+
+    expect(queryByTestId(/card_comment/i)).not.toEqual(1);
   });
 });

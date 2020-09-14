@@ -132,11 +132,13 @@ const cardTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   navigationList: PropTypes.array.isRequired,
   href: PropTypes.string.isRequired,
+  includeComments: PropTypes.bool,
 };
 
 const defaultProps = {
   renderAvatar: () => <span data-testid="card__avatar-null" />,
   image: null,
+  includeComments: false,
 };
 
 const Card = ({
@@ -147,6 +149,7 @@ const Card = ({
   image,
   type,
   totalFavorites,
+  includeComments,
   isFavorited,
   totalComments,
   navigationList,
@@ -226,15 +229,17 @@ const Card = ({
                 {totalFavorites}
               </TinyText>
             </IconGroup>
-            <IconGroup
-              data-testid="card__comment"
-              onClick={() => onClickComment(id)}
-            >
-              <StyledIcon type="comment" title="Comments" />
-              <TinyText color="s" className="card__meta-text">
-                {totalComments}
-              </TinyText>
-            </IconGroup>
+            {includeComments && (
+              <IconGroup
+                data-testid="card__comment"
+                onClick={() => onClickComment(id)}
+              >
+                <StyledIcon type="comment" title="Comments" />
+                <TinyText color="s" className="card__meta-text">
+                  {totalComments}
+                </TinyText>
+              </IconGroup>
+            )}
           </HorizontalGroup>
         </div>
         <PopoverNavigation placement="top" navigationList={navigationList}>

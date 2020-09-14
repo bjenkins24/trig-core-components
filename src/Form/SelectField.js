@@ -30,12 +30,8 @@ const StyledSelect = styled(Select)`
     &__multi-value {
       display: none;
     }
-    &__single-value {
-      margin-top: -0.1rem;
-    }
     &__placeholder {
       color: ${({ scTheme }) => scTheme.ps[100]};
-      margin-top: -0.1rem;
     }
     &__control {
       cursor: pointer;
@@ -46,6 +42,7 @@ const StyledSelect = styled(Select)`
       }
     }
     &__value-container {
+      margin-top: 1px;
       ${getSize('padding')}
     }
     &__option {

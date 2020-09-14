@@ -3,15 +3,10 @@ import PropTypes from 'prop-types';
 import { rgba } from 'polished';
 import styled, { css } from 'styled-components';
 import Truncate from 'react-truncate';
-import {
-  Heading2,
-  Body2Component,
-  Body3Component,
-  TinyText,
-} from './Typography';
+import { Heading2, Body2Component, Body3Component, TinyText } from 'Typography';
+import { HorizontalGroup, VerticalGroup } from 'Groups';
 import Icon from './Icon';
 import Avatar from './Avatar';
-import { HorizontalGroup, VerticalGroup } from './Groups';
 
 const DeckThumbnail = styled.div`
   display: flex;
@@ -75,6 +70,35 @@ const Wrapper = styled.div`
   }
 `;
 
+const userType = PropTypes.shape({
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  position: PropTypes.string,
+  email: PropTypes.string,
+  image: PropTypes.string,
+});
+
+const AvatarWrapperProps = {
+  user: userType.isRequired,
+};
+
+const AvatarWrapper = ({ user, ...restProps }) => {
+  return (
+    <Avatar
+      firstName={user.firstName}
+      lastName={user.lastName}
+      email={user.email}
+      size={2.4}
+      css={`
+        color: ${({ theme }) => theme.p};
+      `}
+      {...restProps}
+    />
+  );
+};
+
+AvatarWrapper.propTypes = AvatarWrapperProps;
+
 const defaultProps = {
   image: '',
 };
@@ -103,20 +127,6 @@ const Deck = ({
   description,
   ...restProps
 }) => {
-  const AvatarWrapper = () => {
-    return (
-      <Avatar
-        firstName={user.firstName}
-        lastName={user.lastName}
-        email={user.email}
-        size={2.4}
-        css={`
-          color: ${({ theme }) => theme.p};
-        `}
-      />
-    );
-  };
-
   return (
     <Wrapper role="link" tabIndex="0" image={image} {...restProps}>
       <DeckThumbnail className="deck__thumbnail">
@@ -127,14 +137,22 @@ const Deck = ({
             margin-top: auto;
           `}
         >
-          <Truncate lines={4}>{title}</Truncate>
+          <Truncate trimWhitespace lines={4}>
+            {title}
+          </Truncate>
         </Heading2>
         <div
           css={`
             display: flex;
           `}
         >
-          <AvatarWrapper user={user} />
+          <AvatarWrapper
+            user={user}
+            css={`
+              position: relative;
+              top: 2px;
+            `}
+          />
           <HorizontalGroup
             margin={1.6}
             css={`
@@ -164,7 +182,9 @@ const Deck = ({
             margin-bottom: 0.3rem;
           `}
         >
-          <Truncate lines={2}>{title}</Truncate>
+          <Truncate trimWhitespace lines={2}>
+            {title}
+          </Truncate>
         </Heading2>
         <Body2Component
           color="sc"
@@ -172,7 +192,9 @@ const Deck = ({
             margin: 0 0 0.8rem 0;
           `}
         >
-          <Truncate lines={3}>{description}</Truncate>
+          <Truncate trimWhitespace lines={3}>
+            {description}
+          </Truncate>
         </Body2Component>
         <HorizontalGroup margin={0.8}>
           <AvatarWrapper user={user} />

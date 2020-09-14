@@ -12,6 +12,7 @@ const TextArea = styled.textarea`
   resize: none;
   width: 100%;
   box-sizing: border-box;
+  font-family: ${({ theme }) => theme.fonts.default};
 `;
 
 export const textFieldTypes = {

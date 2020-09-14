@@ -15,6 +15,10 @@ const Slider = styled.div`
 const getTransition = () => {
   return css`
     transition: all 200ms;
+    & .Carousel__Arrow {
+      flex-direction: row;
+      align-self: center;
+    }
     & .Carousel__Arrow svg {
       transition: all 200ms;
     }
