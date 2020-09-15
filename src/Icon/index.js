@@ -44,6 +44,7 @@ import Open from './icons/Open';
 import Organize from './icons/Organize';
 import Quote from './icons/Quote';
 import RowView from './icons/RowView';
+import Search from './icons/Search';
 import ThumbnailView from './icons/ThumbnailView';
 import Trash from './icons/Trash';
 import Twitter from './icons/Twitter';
@@ -99,6 +100,7 @@ export const iconComponents = {
   organize: Organize,
   quote: Quote,
   'row-view': RowView,
+  search: Search,
   twitter: Twitter,
   'thumbnail-view': ThumbnailView,
   trash: Trash,
