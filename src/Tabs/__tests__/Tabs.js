@@ -18,7 +18,7 @@ const TabComponent = ({ dark = false }) => {
   return (
     <TabsDefault
       variant={dark ? 'dark' : 'light'}
-      tabs={[firstTabContent, secondTabContent]}
+      tabs={[{ text: firstTabContent }, { text: secondTabContent }]}
       tabPanels={[firstTabPanelContent, secondTabPanelContent]}
     />
   );
@@ -56,7 +56,7 @@ describe('<Tabs />', () => {
   it('renders navigation', async () => {
     const { getByText, getAllByRole } = render(
       <TabsNavigation
-        tabs={[firstTabContent, secondTabContent]}
+        tabs={[{ text: firstTabContent }, { text: secondTabContent }]}
         tabPanels={[firstTabPanelContent, secondTabPanelContent]}
       />
     );
