@@ -39,13 +39,15 @@ const getPadding = ({ tabPosition }) => {
 const tabTypes = {
   tabPosition: PropTypes.number.isRequired,
   dark: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {
   dark: false,
+  onClick: () => null,
 };
 
-const Tab = ({ tabPosition, dark, ...restProps }) => {
+const Tab = ({ tabPosition, dark, onClick, ...restProps }) => {
   const { selectedTab, setSelectedTab, tabRefs } = useContext(TabContext);
   const isSelected = selectedTab === tabPosition;
 
@@ -70,7 +72,10 @@ const Tab = ({ tabPosition, dark, ...restProps }) => {
       id={`tab-${tabPosition}`}
       role="tab"
       aria-controls={`panel-${tabPosition}`}
-      onClick={() => setSelectedTab(tabPosition)}
+      onClick={(e) => {
+        onClick(e);
+        setSelectedTab(tabPosition);
+      }}
       tabPosition={tabPosition}
       isSelected={isSelected}
       {...restProps}

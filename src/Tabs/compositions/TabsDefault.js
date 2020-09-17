@@ -6,7 +6,9 @@ import { Tab, TabList, TabPanel, Tabs } from '../index';
 
 const tabsTypes = {
   variant: PropTypes.oneOf(['dark', 'light']),
-  tabs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  tabs: PropTypes.arrayOf(
+    PropTypes.shape({ text: PropTypes.string, onClick: PropTypes.func })
+  ).isRequired,
   tabPanels: PropTypes.arrayOf(PropTypes.node),
   defaultTab: PropTypes.number,
 };
@@ -21,8 +23,12 @@ export const TabsDefault = ({ variant, defaultTab, tabs, tabPanels }) => {
   return (
     <Tabs defaultTab={defaultTab}>
       <TabList variant={variant}>
-        {tabs.map((tab) => {
-          return <Tab dark={variant === 'dark'}>{tab}</Tab>;
+        {tabs.map((tab, index) => {
+          return (
+            <Tab dark={variant === 'dark'} key={index} onClick={tab.onClick}>
+              {tab.text}
+            </Tab>
+          );
         })}
       </TabList>
       <Separator
@@ -34,7 +40,11 @@ export const TabsDefault = ({ variant, defaultTab, tabs, tabPanels }) => {
         <SelectedBar variant={variant} />
       </Separator>
       {tabPanels.map((content, key) => {
-        return <TabPanel tabPosition={key}>{content}</TabPanel>;
+        return (
+          <TabPanel tabPosition={key} key={key}>
+            {content}
+          </TabPanel>
+        );
       })}
     </Tabs>
   );

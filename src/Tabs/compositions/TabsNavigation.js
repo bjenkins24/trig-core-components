@@ -4,7 +4,9 @@ import { SelectedBar } from '../SelectedBar';
 import { Tab, TabList, TabPanel, Tabs } from '../index';
 
 const tabsNavigationTypes = {
-  tabs: PropTypes.arrayOf(PropTypes.node).isRequired,
+  tabs: PropTypes.arrayOf(
+    PropTypes.shape({ text: PropTypes.string, onClick: PropTypes.func })
+  ).isRequired,
   tabPanels: PropTypes.arrayOf(PropTypes.node),
   defaultTab: PropTypes.number,
 };
@@ -34,8 +36,9 @@ export const TabsNavigation = ({ defaultTab, tabs, tabPanels }) => {
                   color: ${({ theme }) => theme.colors.s} !important;
                 }
               `}
+              onClick={tab.onClick}
             >
-              {tab}
+              {tab.text}
             </Tab>
           );
         })}
