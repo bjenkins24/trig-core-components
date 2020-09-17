@@ -62,7 +62,7 @@ describe('<Tabs />', () => {
     );
     const tabs = getAllByRole('tab');
     // Navigation has some extra padding on the left
-    expect(tabs[0]).toHaveStyleRule('padding', '0 8px');
+    expect(tabs[0]).toHaveStyleRule('padding', '0 16px');
     const firstTab = getByText(firstTabContent);
     const firstTabPanel = getByText(firstTabPanelContent);
     expect(firstTab).toBeInTheDocument();
