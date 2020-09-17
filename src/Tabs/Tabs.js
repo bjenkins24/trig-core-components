@@ -12,7 +12,7 @@ const defaultProps = {
   defaultTab: 0,
 };
 
-const Tabs = ({ children, defaultTab }) => {
+const Tabs = ({ children, defaultTab, ...restProps }) => {
   const [selectedTab, setSelectedTab] = useState(defaultTab);
   const [tabRefs, setTabRefs] = useState([]);
   const tabRefsContainer = useRef([]);
@@ -29,9 +29,11 @@ const Tabs = ({ children, defaultTab }) => {
   }, []);
 
   return (
-    <TabContext.Provider value={{ selectedTab, setSelectedTab, tabRefs }}>
-      {children}
-    </TabContext.Provider>
+    <div {...restProps}>
+      <TabContext.Provider value={{ selectedTab, setSelectedTab, tabRefs }}>
+        {children}
+      </TabContext.Provider>
+    </div>
   );
 };
 
