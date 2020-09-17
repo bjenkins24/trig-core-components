@@ -21,7 +21,6 @@ const buttonStyles = ({ as }) => {
     border: 0;
     padding: 0;
     cursor: pointer;
-    font-family: hero-new, sans-serif;
     &:focus {
       outline: 0;
       color: ${({ theme }) => theme.s};
