@@ -27,7 +27,6 @@ export const TabsNavigation = ({ defaultTab, tabs, tabPanels }) => {
             <Tab
               key={index}
               css={`
-                margin-bottom: 11px;
                 font-weight: ${({ theme }) => theme.fontWeights.bold};
                 padding: ${({ theme }) => `0 ${theme.space[3]}px`};
                 color: ${({ theme }) => theme.colors.pc} !important;
@@ -43,7 +42,13 @@ export const TabsNavigation = ({ defaultTab, tabs, tabPanels }) => {
           );
         })}
       </TabList>
-      {defaultTab >= 0 && <SelectedBar variant={variant} />}
+      <SelectedBar
+        variant={variant}
+        css={`
+          opacity: ${defaultTab < 0 ? '0' : '1'};
+          top: 18px;
+        `}
+      />
       {tabPanels.map((content, index) => {
         return (
           <TabPanel

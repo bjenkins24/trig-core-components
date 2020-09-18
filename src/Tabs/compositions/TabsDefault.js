@@ -34,7 +34,9 @@ export const TabsDefault = ({ variant, defaultTab, tabs, tabPanels }) => {
       <Separator
         variant={variant}
         css={`
-          margin-bottom: ${({ theme }) => `${theme.space[3]}px`};
+          position: relative;
+          top: ${({ theme }) => theme.space[2]}px;
+          margin-bottom: ${({ theme }) => `${theme.space[4]}px`};
         `}
       >
         <SelectedBar variant={variant} />

@@ -55,7 +55,6 @@ const Tab = ({ tabPosition, dark, onClick, ...restProps }) => {
     <Body1Component
       ref={tabRefs[tabPosition]}
       css={`
-        margin-bottom: 0.8rem;
         ${getPadding};
         background: none;
         color: ${getColor};

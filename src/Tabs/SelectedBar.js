@@ -43,7 +43,7 @@ const defaultProps = {
   variant: 'dark',
 };
 
-export const SelectedBar = ({ variant }) => {
+export const SelectedBar = ({ variant, ...restProps }) => {
   const { selectedTab, tabRefs } = useContext(TabContext);
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -75,6 +75,7 @@ export const SelectedBar = ({ variant }) => {
       dark={variant === 'dark'}
       width={state.selectedWidth}
       style={animateProps}
+      {...restProps}
     />
   );
 };

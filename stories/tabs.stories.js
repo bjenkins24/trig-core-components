@@ -29,7 +29,11 @@ storiesOf('Tabs', module)
   ))
   .add('Composition - Default', () => (
     <TabsDefault
-      tabs={['All Cards', 'Recently Viewed', 'Recently Edited']}
+      tabs={[
+        { text: 'All Cards' },
+        { text: 'Recently Viewed' },
+        { text: 'Recently Edited' },
+      ]}
       tabPanels={['EVERYTHING', 'just viewed', 'just edited']}
     />
   ))
