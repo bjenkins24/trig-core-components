@@ -54,7 +54,7 @@ describe('<Tabs />', () => {
   });
 
   it('renders navigation', async () => {
-    const { getByText, getAllByRole } = render(
+    const { getByText, getAllByRole, getByTestId, rerender } = render(
       <TabsNavigation
         tabs={[{ text: firstTabContent }, { text: secondTabContent }]}
         tabPanels={[firstTabPanelContent, secondTabPanelContent]}
@@ -67,5 +67,15 @@ describe('<Tabs />', () => {
     const firstTabPanel = getByText(firstTabPanelContent);
     expect(firstTab).toBeInTheDocument();
     expect(firstTabPanel).toBeInTheDocument();
+
+    rerender(
+      <TabsNavigation
+        defaultTab={-1}
+        tabs={[{ text: firstTabContent }, { text: secondTabContent }]}
+        tabPanels={[firstTabPanelContent, secondTabPanelContent]}
+      />
+    );
+
+    expect(getByTestId(/select-bar/i)).toHaveStyleRule('opacity: 0');
   });
 });

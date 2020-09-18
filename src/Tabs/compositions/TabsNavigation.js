@@ -44,6 +44,7 @@ export const TabsNavigation = ({ defaultTab, tabs, tabPanels }) => {
       </TabList>
       <SelectedBar
         variant={variant}
+        data-testid="select-bar"
         css={`
           opacity: ${defaultTab < 0 ? '0' : '1'};
           top: 18px;
