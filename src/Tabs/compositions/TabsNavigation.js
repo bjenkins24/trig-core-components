@@ -27,7 +27,7 @@ export const TabsNavigation = ({ defaultTab, tabs, tabPanels }) => {
             <Tab
               key={index}
               css={`
-                margin-bottom: 18px;
+                margin-bottom: 15px;
                 font-weight: ${({ theme }) => theme.fontWeights.bold};
                 padding: ${({ theme }) => `0 ${theme.space[3]}px`};
                 color: ${({ theme }) => theme.colors.pc} !important;
