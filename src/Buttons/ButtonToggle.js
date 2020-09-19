@@ -53,7 +53,7 @@ const defaultProps = {
   defaultSelectedIndex: 0,
 };
 
-const ButtonToggle = ({ children, defaultSelectedIndex }) => {
+const ButtonToggle = ({ children, defaultSelectedIndex, ...restProps }) => {
   const [selectedButton, setSelectedButton] = useState(defaultSelectedIndex);
   const totalChildren = React.Children.count(children);
   const theme = useTheme();
@@ -65,7 +65,7 @@ const ButtonToggle = ({ children, defaultSelectedIndex }) => {
   });
 
   return (
-    <Container>
+    <Container {...restProps}>
       {React.Children.map(children, (child, i) => {
         set((index) => {
           return {
