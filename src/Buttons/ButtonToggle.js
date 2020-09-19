@@ -90,7 +90,7 @@ const ButtonToggle = ({ children, defaultSelectedIndex, ...restProps }) => {
             selected={selectedButton === i}
             onClick={() => {
               const onClick = get(child, 'props.onClick', () => false);
-              onClick();
+              onClick(i);
               setSelectedButton(i);
             }}
           >
