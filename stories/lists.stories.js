@@ -4,50 +4,24 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text } from '@storybook/addon-knobs';
 import ListItemContent from '../src/Lists/ListItemContent';
-import ListItem from '../src/Lists/ListItem';
 import List from '../src/Lists/List';
-import Icon, { FileIcon } from '../src/Icon';
 import Avatar from '../src/Avatar';
 import './consoleOverrides';
 import themeForProvider from './theme';
+import CardItem from '../src/Lists/compositions/CardItem';
 
 // eslint-disable-next-line react/prop-types
 const StoryListItem = ({ onClick }) => {
   return (
-    <ListItem
-      href="https://google.com"
+    <CardItem
       onClick={onClick}
-      renderItem={() => <FileIcon type="doc" size={2.4} />}
-      renderContent={() => (
-        <ListItemContent
-          renderItem={() => (
-            <Avatar firstName="Brian" lastName="Jenkins" size={4} />
-          )}
-          primary={text('primary', 'How To Memorize Music 5 Times Faster')}
-          secondary={text('secondary', 'Oct 27, 2018 at 5:35pm')}
-        />
-      )}
-      actions={[
-        <Icon
-          onClick={action('clicked heart')}
-          type="heart"
-          color="s"
-          size={1.6}
-        />,
-        <Icon
-          type="comment"
-          color="s"
-          size={1.6}
-          count={16}
-          onClick={action('clicked comment')}
-        />,
-        <Icon
-          type="horizontal-dots"
-          color="s"
-          size={1.6}
-          onClick={action('clicked more')}
-        />,
-      ]}
+      onClickFavorite={action('clicked heart')}
+      avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
+      cardType="doc"
+      title="How To Memorize Music 5 Times Faster"
+      onClickMore={action('Clicked more')}
+      dateTimeCreated="Oct 27, 2018 at 5:35pm"
+      href="https://google.com"
     />
   );
 };
@@ -90,6 +64,25 @@ storiesOf('Lists', module)
         )}
         primary={text('primary', 'How To Memorize Music 5 Times Faster')}
         secondary={text('secondary', 'Oct 27, 2018 at 5:35pm')}
+      />
+    </div>
+  ))
+  .add('Search Results', () => (
+    <div
+      css={`
+        width: 62rem;
+      `}
+    >
+      <CardItem
+        onClick={action('clicked!')}
+        content="This is a test a really really really long test This is a test a really really really long test This is a test a really really really long test This is a test a really really really long test "
+        onClickFavorite={action('clicked heart')}
+        avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
+        cardType="doc"
+        title="How To Memorize Music 5 Times Faster"
+        onClickMore={action('Clicked more')}
+        dateTimeCreated="Oct 27, 2018 at 5:35pm"
+        href="https://google.com"
       />
     </div>
   ));
