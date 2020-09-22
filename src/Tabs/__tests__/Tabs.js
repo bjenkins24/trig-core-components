@@ -77,5 +77,16 @@ describe('<Tabs />', () => {
     );
 
     expect(getByTestId(/select-bar/i)).toHaveStyleRule('opacity: 0');
+
+    rerender(
+      <TabsNavigation
+        variant="light"
+        tabs={[{ text: firstTabContent }, { text: secondTabContent }]}
+        tabPanels={[firstTabPanelContent, secondTabPanelContent]}
+      />
+    );
+    expect(getByTestId(/select-bar/i)).toHaveStyleRule(
+      `background: ${theme.colors.s}`
+    );
   });
 });
