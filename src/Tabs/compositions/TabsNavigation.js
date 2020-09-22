@@ -9,16 +9,16 @@ const tabsNavigationTypes = {
   ).isRequired,
   tabPanels: PropTypes.arrayOf(PropTypes.node),
   defaultTab: PropTypes.number,
+  variant: PropTypes.oneOf(['dark', 'light']),
 };
 
 const defaultProps = {
   defaultTab: 0,
   tabPanels: [],
+  variant: 'dark',
 };
 
-export const TabsNavigation = ({ defaultTab, tabs, tabPanels }) => {
-  const variant = 'dark';
-
+export const TabsNavigation = ({ defaultTab, tabs, tabPanels, variant }) => {
   return (
     <Tabs defaultTab={defaultTab}>
       <TabList variant={variant}>
@@ -26,10 +26,14 @@ export const TabsNavigation = ({ defaultTab, tabs, tabPanels }) => {
           return (
             <Tab
               key={index}
+              color={variant}
               css={`
                 font-weight: ${({ theme }) => theme.fontWeights.bold};
                 padding: ${({ theme }) => `0 ${theme.space[3]}px`};
-                color: ${({ theme }) => theme.colors.pc} !important;
+                color: ${({ theme, color }) =>
+                  color === 'dark'
+                    ? theme.colors.pc
+                    : theme.colors.p} !important;
                 &:focus,
                 &:hover {
                   color: ${({ theme }) => theme.colors.s} !important;

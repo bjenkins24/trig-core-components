@@ -46,6 +46,7 @@ storiesOf('Tabs', module)
           { text: 'Recently Edited' },
         ]}
         tabPanels={['EVERYTHING', 'just viewed', 'just edited']}
+        variant="light"
       />
     );
   });
