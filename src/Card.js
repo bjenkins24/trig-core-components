@@ -125,20 +125,16 @@ const cardTypes = {
   type: PropTypes.string.isRequired,
   totalFavorites: PropTypes.number.isRequired,
   isFavorited: PropTypes.bool.isRequired,
-  totalComments: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   onClickFavorite: PropTypes.func.isRequired,
-  onClickComment: PropTypes.func.isRequired,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   navigationList: PropTypes.array.isRequired,
   href: PropTypes.string.isRequired,
-  includeComments: PropTypes.bool,
 };
 
 const defaultProps = {
   renderAvatar: () => <span data-testid="card__avatar-null" />,
   image: null,
-  includeComments: false,
 };
 
 const Card = ({
@@ -149,14 +145,11 @@ const Card = ({
   image,
   type,
   totalFavorites,
-  includeComments,
   isFavorited,
-  totalComments,
   navigationList,
   href,
   onClick,
   onClickFavorite,
-  onClickComment,
   ...restProps
 }) => {
   return (
@@ -201,7 +194,7 @@ const Card = ({
           {image ? (
             <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
           ) : (
-            <PlaceholderThumbnail>
+            <PlaceholderThumbnail className="card__placeholder">
               <Heading1
                 css={`
                   color: ${({ theme }) => theme.sc};
@@ -229,17 +222,6 @@ const Card = ({
                 {totalFavorites}
               </TinyText>
             </IconGroup>
-            {includeComments && (
-              <IconGroup
-                data-testid="card__comment"
-                onClick={() => onClickComment(id)}
-              >
-                <StyledIcon type="comment" title="Comments" />
-                <TinyText color="s" className="card__meta-text">
-                  {totalComments}
-                </TinyText>
-              </IconGroup>
-            )}
           </HorizontalGroup>
         </div>
         <PopoverNavigation placement="top" navigationList={navigationList}>
