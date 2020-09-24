@@ -8,13 +8,11 @@ jest.mock('react-truncate', () => {
 });
 
 const totalFavorites = 12;
-const totalComments = 10;
 const title = 'My cool card';
 const alt = `Thumbnail for the card: ${title}`;
 
 const onClickMock = jest.fn();
 const onClickFavoriteMock = jest.fn();
-const onClickCommentMock = jest.fn();
 
 const buildCard = (props) => {
   return (
@@ -23,9 +21,7 @@ const buildCard = (props) => {
       href="https://example.com"
       onClick={onClickMock}
       onClickFavorite={onClickFavoriteMock}
-      onClickComment={onClickCommentMock}
       totalFavorites={totalFavorites}
-      totalComments={totalComments}
       type="link"
       isFavorited
       dateTime={new Date()}
@@ -45,10 +41,9 @@ describe('<Card />', () => {
       getByTestId,
       queryByAltText,
       rerender,
-    } = render(buildCard({ includeComments: true }));
+    } = render(buildCard());
 
     expect(getByText(totalFavorites.toString())).toBeInTheDocument();
-    expect(getByText(totalComments.toString())).toBeInTheDocument();
     expect(getAllByText(title)).toBeTruthy();
     expect(getByTitle(/Favorited/i)).toBeInTheDocument();
     expect(getByTestId(/card__avatar-null/i)).toBeInTheDocument();
@@ -59,9 +54,6 @@ describe('<Card />', () => {
 
     user.click(getByTestId(/card__favorite/i));
     expect(onClickFavoriteMock.mock.calls.length).toEqual(1);
-
-    user.click(getByTestId(/card__comment/i));
-    expect(onClickCommentMock.mock.calls.length).toEqual(1);
 
     rerender(buildCard({ isFavorited: false }));
     expect(getByTitle(/Favorite/i)).toBeInTheDocument();
@@ -78,11 +70,5 @@ describe('<Card />', () => {
       buildCard({ renderAvatar: () => <div>{avatarText}</div> })
     );
     expect(getByText(avatarText)).toBeInTheDocument();
-  });
-
-  it("doesn't render comments", () => {
-    const { queryByTestId } = render(buildCard());
-
-    expect(queryByTestId(/card_comment/i)).not.toEqual(1);
   });
 });
