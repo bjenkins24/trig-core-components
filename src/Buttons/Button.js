@@ -167,9 +167,6 @@ const StyledButton = styled.button`
   display: inline-block;
   padding: 0 1.6rem;
   ${getVariantStyles};
-  & .button__text {
-    margin: 0 auto;
-  }
   &[disabled] {
     cursor: not-allowed;
     background: #e6e5e5;
