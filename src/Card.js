@@ -18,8 +18,7 @@ const Container = styled.div`
 `;
 
 const Hover = styled.div`
-  /* For some reason there is an extra three pixels we need to get rid of */
-  height: calc(100% - 0.3rem);
+  height: 100%;
   width: 100%;
   background: ${({ theme }) => rgba(theme.s, 0.85)};
   opacity: 0;
@@ -194,7 +193,7 @@ const Card = ({
           {image ? (
             <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
           ) : (
-            <PlaceholderThumbnail className="card__placeholder">
+            <PlaceholderThumbnail>
               <Heading1
                 css={`
                   color: ${({ theme }) => theme.sc};

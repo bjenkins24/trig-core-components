@@ -59,6 +59,9 @@ const StyledSelect = styled(Select)`
     &__indicator-separator {
       display: none;
     }
+    &__menu {
+      z-index: 3;
+    }
   }
 `;
 
