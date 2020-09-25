@@ -69,7 +69,7 @@ const Type = styled.div`
   border-radius: 50%;
   box-shadow: ${({ theme }) => theme.sh};
   position: absolute;
-  bottom: -1.2rem;
+  bottom: -15px;
   right: 1.6rem;
   background: ${({ theme }) => theme.bs[200]};
   display: flex;
