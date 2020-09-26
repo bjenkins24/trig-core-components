@@ -11,11 +11,11 @@ import Avatar from './Avatar';
 const DeckThumbnail = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1.6rem;
+  padding: ${({ theme }) => theme.space[3]}px;
   position: absolute;
   transition: all 0.2s;
   bottom: 0;
-  width: calc(100% - 3.2rem);
+  width: calc(100% - ${({ theme }) => theme.space[4]}px);
 `;
 
 const DeckHover = styled.div`
@@ -23,7 +23,7 @@ const DeckHover = styled.div`
   transition: all 0.2s;
   opacity: 0;
   flex-direction: column;
-  padding: 1.6rem;
+  padding: ${({ theme }) => theme.space[3]}px;
 `;
 
 const getBackground = (isHovered) => ({ theme, image }) => {
@@ -54,11 +54,15 @@ const Wrapper = styled.div`
   position: relative;
   border-radius: ${({ theme }) => theme.br};
   ${getBackground(false)}
-  transition: all 200ms;
+  transition: opacity 200ms;
   width: 100%;
   height: 100%;
   color: ${({ theme }) => theme.sc};
   cursor: pointer;
+  outline: none;
+  &:focus {
+    box-shadow: inset 0px 0px 0px 0px;
+  }
   &:hover {
     ${getBackground(true)}
     .deck__thumbnail {
@@ -134,25 +138,22 @@ const Deck = ({
           color="sc"
           css={`
             overflow-wrap: break-word;
-            margin-top: auto;
+            margin-bottom: ${({ theme }) => theme.space[4]}px;
           `}
         >
-          <Truncate trimWhitespace lines={4}>
+          <Truncate trimWhitespace lines={3}>
             {title}
           </Truncate>
         </Heading2>
         <div
           css={`
             display: flex;
+            position: absolute;
+            bottom: ${({ theme }) => theme.space[3]}px;
+            width: calc(100% - ${({ theme }) => theme.space[4]}px);
           `}
         >
-          <AvatarWrapper
-            user={user}
-            css={`
-              position: relative;
-              top: 2px;
-            `}
-          />
+          <AvatarWrapper user={user} />
           <HorizontalGroup
             margin={1.6}
             css={`
@@ -175,28 +176,23 @@ const Deck = ({
         </div>
       </DeckThumbnail>
       <DeckHover className="deck__hover">
-        <Heading2
-          color="sc"
-          css={`
-            overflow-wrap: break-word;
-            margin-bottom: 0.3rem;
-          `}
-        >
-          <Truncate trimWhitespace lines={2}>
-            {title}
-          </Truncate>
-        </Heading2>
         <Body2Component
           color="sc"
           css={`
-            margin: 0 0 0.8rem 0;
+            margin: 0 0 ${({ theme }) => theme.space[3]}px 0;
           `}
         >
-          <Truncate trimWhitespace lines={3}>
+          <Truncate trimWhitespace lines={6}>
             {description}
           </Truncate>
         </Body2Component>
-        <HorizontalGroup margin={0.8}>
+        <HorizontalGroup
+          margin={0.8}
+          css={`
+            position: absolute;
+            bottom: 16px;
+          `}
+        >
           <AvatarWrapper user={user} />
           <VerticalGroup
             css={`
