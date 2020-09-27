@@ -42,6 +42,7 @@ import NumberOne from './icons/NumberOne';
 import NumberTwo from './icons/NumberTwo';
 import Open from './icons/Open';
 import Organize from './icons/Organize';
+import Plus from './icons/Plus';
 import Quote from './icons/Quote';
 import RowView from './icons/RowView';
 import Search from './icons/Search';
@@ -98,6 +99,7 @@ export const iconComponents = {
   'new-window': NewWindow,
   open: Open,
   organize: Organize,
+  plus: Plus,
   quote: Quote,
   'row-view': RowView,
   search: Search,
