@@ -50,8 +50,10 @@ const getBackground = (isHovered) => ({ theme, image }) => {
   `;
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.a`
   position: relative;
+  display: block;
+  text-decoration: none;
   border-radius: ${({ theme }) => theme.br};
   ${getBackground(false)}
   transition: opacity 200ms;
@@ -113,6 +115,8 @@ const deckTypes = {
   totalCards: PropTypes.number.isRequired,
   totalFollowers: PropTypes.number.isRequired,
   image: PropTypes.string,
+  href: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
   user: PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
@@ -129,10 +133,20 @@ const Deck = ({
   totalCards,
   totalFollowers,
   description,
+  href,
+  onClick,
   ...restProps
 }) => {
   return (
-    <Wrapper role="link" tabIndex="0" image={image} {...restProps}>
+    <Wrapper
+      href={href}
+      image={image}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+      {...restProps}
+    >
       <DeckThumbnail className="deck__thumbnail">
         <Heading2
           color="sc"
@@ -180,6 +194,7 @@ const Deck = ({
           color="sc"
           css={`
             margin: 0 0 ${({ theme }) => theme.space[3]}px 0;
+            text-decoration: none;
           `}
         >
           <Truncate trimWhitespace lines={6}>

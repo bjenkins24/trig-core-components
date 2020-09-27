@@ -186,6 +186,8 @@ storiesOf('Deck', module)
         css={`
           margin: 100px;
         `}
+        href="https://google.com"
+        onClick={action('clicked!')}
         user={{
           firstName: 'Brian',
           lastName: 'Jenkins',

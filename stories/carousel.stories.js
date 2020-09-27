@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
+import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import Deck from '../src/Deck';
@@ -25,6 +26,8 @@ const MyDeck = () => {
           position: 'President, CEO',
         }}
         image="https://code.org/images/fill-480x360/tutorials/hoc2018/danceparty-characters.jpg"
+        href="https://google.com"
+        onClick={action('Clicked')}
         totalFollowers={9}
         totalCards={22}
         title="Onboarding Support"
