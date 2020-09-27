@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'test/utils';
 import Deck from 'Deck';
+import userEvent from '@testing-library/user-event';
 
 jest.mock('react-truncate', () => {
   return (props) => <div {...props} />;
@@ -17,7 +18,7 @@ const user = {
   email: 'brian@example',
 };
 
-const buildDeck = (props) => {
+const buildDeck = ({ onClick, ...restProps }) => {
   return (
     <Deck
       totalCards={totalCards}
@@ -25,16 +26,19 @@ const buildDeck = (props) => {
       user={user}
       title={title}
       description={description}
+      href="https://google.com"
+      onClick={onClick}
       image="http://exampleimage.png"
-      {...props}
+      {...restProps}
     />
   );
 };
 
 describe('<Deck />', () => {
   it('renders and takes basic props', () => {
-    const { getByText, getAllByText, getByRole, rerender } = render(
-      buildDeck()
+    const mockCallback = jest.fn();
+    const { getByText, getAllByText, container, rerender } = render(
+      buildDeck({ onClick: mockCallback })
     );
 
     expect(getByText(`${totalCards}`)).toBeInTheDocument();
@@ -43,16 +47,19 @@ describe('<Deck />', () => {
     expect(getByText(`${user.position}`)).toBeInTheDocument();
     expect(getByText(`${user.firstName} ${user.lastName}`)).toBeInTheDocument();
     expect(getAllByText(`${title}`)).toBeTruthy();
+    expect(getAllByText(`${title}`)).toBeTruthy();
 
-    expect(getByRole('link')).toHaveStyleRule(
+    expect(container.firstChild).toHaveStyleRule(
       'background',
       expect.stringContaining('url')
     );
-    rerender(buildDeck({ image: '' }));
+    rerender(buildDeck({ image: '', onClick: mockCallback }));
 
-    expect(getByRole('link')).not.toHaveStyleRule(
+    expect(container.firstChild).not.toHaveStyleRule(
       'background',
       expect.stringContaining('url')
     );
+    userEvent.click(container.firstChild);
+    expect(mockCallback.mock.calls.length).toEqual(1);
   });
 });
