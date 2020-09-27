@@ -175,13 +175,13 @@ const Deck = ({
             `}
           >
             <HorizontalGroup margin={0.8}>
-              <Icon type="cards" size={2.2} />
+              <Icon type="cards" size={2.2} color="sc" />
               <Body3Component weight="bold" color="sc">
                 {totalCards}
               </Body3Component>
             </HorizontalGroup>
             <HorizontalGroup margin={0.8}>
-              <Icon type="followers" size={1.6} />
+              <Icon type="followers" size={1.6} color="sc" />
               <Body3Component weight="bold" color="sc">
                 {totalFollowers}
               </Body3Component>
