@@ -39,7 +39,7 @@ const buttonStyle = css`
   position: absolute;
   top: 0;
   bottom: 0;
-  z-index: 20;
+  z-index: 2;
   display: flex;
   justify-content: center;
   text-align: center;
