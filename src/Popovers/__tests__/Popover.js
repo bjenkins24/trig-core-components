@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { render, fireEvent } from 'test/utils';
 import user from '@testing-library/user-event';
 import Popover from '../Popover';
+import theme from '../../../stories/theme';
 
 const triggerText = 'My Trigger';
 const popoverText = 'My popover';
@@ -88,6 +89,8 @@ describe('<Popover />', () => {
     );
     const trigger = getByRole('button');
     user.click(trigger);
-    getByTestId('popover__container').toHaveStyleRule('background: ');
+    expect(getByTestId('popover__container')).toHaveStyleRule(
+      `background: ${theme.colors.p}`
+    );
   });
 });
