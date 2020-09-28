@@ -9,10 +9,11 @@ const popoverText = 'My popover';
 const mockCallback = jest.fn();
 const preventClickTestId = 'test';
 
-const PopoverWrapper = ({ hasPreventClickRef, hasTriggerOnClick }) => {
+const PopoverWrapper = ({ hasPreventClickRef, hasTriggerOnClick, variant }) => {
   const testRef = useRef(null);
   return (
     <Popover
+      variant={variant}
       preventClickRef={hasPreventClickRef && testRef}
       renderPopover={({ closePopover }) => (
         <div onClick={closePopover}>{popoverText}</div>
@@ -79,5 +80,14 @@ describe('<Popover />', () => {
     });
 
     expect(queryByText(popoverText)).toBeNull();
+  });
+
+  it('renders a light variant', () => {
+    const { getByTestId, getByRole } = render(
+      <PopoverWrapper variant="light" />
+    );
+    const trigger = getByRole('button');
+    user.click(trigger);
+    getByTestId('popover__container').toHaveStyleRule('background: ');
   });
 });

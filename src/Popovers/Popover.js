@@ -5,15 +5,16 @@ import Grow from '@material-ui/core/Grow';
 import { uniqueId } from 'lodash';
 import Popper from '@material-ui/core/Popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { Body1Styles } from '../Typography';
-import { placementType, refType } from '../utils/propTypes';
+import { Body1Styles } from 'Typography';
+import { placementType, refType } from 'utils/propTypes';
 
 export const popoverPadding = 1.6;
 
 const PopoverContainer = styled.div`
   ${Body1Styles}
   border-radius: ${({ theme }) => theme.br};
-  background: ${({ theme }) => theme.p};
+  background: ${({ theme, variant }) =>
+    variant === 'light' ? theme.b : theme.p};
   box-shadow: ${({ theme }) => theme.sh};
   padding: ${popoverPadding}rem;
   color: ${({ theme }) => theme.pc};
@@ -26,6 +27,7 @@ const popoverTypes = {
   renderPopover: PropTypes.func.isRequired,
   onRequestOpen: PropTypes.func,
   onRequestClose: PropTypes.func,
+  variant: PropTypes.oneOf(['light', 'dark']),
 };
 
 const defaultProps = {
@@ -33,6 +35,7 @@ const defaultProps = {
   preventClickRef: null,
   onRequestOpen: () => null,
   onRequestClose: () => null,
+  variant: 'dark',
 };
 
 const Popover = ({
@@ -42,6 +45,7 @@ const Popover = ({
   onRequestOpen,
   onRequestClose,
   placement,
+  variant,
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -119,8 +123,11 @@ const Popover = ({
             onClickAway={onClose}
           >
             <Grow {...TransitionProps}>
-              <PopoverContainer>
-                {renderPopover({ closePopover: onClose })}
+              <PopoverContainer
+                variant={variant}
+                data-testid="popover__container"
+              >
+                {renderPopover({ closePopover: onClose, isOpen: open })}
               </PopoverContainer>
             </Grow>
           </ClickAwayListener>
