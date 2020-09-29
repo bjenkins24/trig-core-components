@@ -12,6 +12,7 @@ export const inputStyles = css`
   padding: 0.95rem 1.6rem;
   width: 100%;
   box-sizing: border-box;
+  background: ${({ theme }) => theme.colors.b};
   &::placeholder {
     color: ${({ theme }) => theme.ps[100]};
   }

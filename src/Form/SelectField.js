@@ -34,6 +34,7 @@ const StyledSelect = styled(Select)`
       color: ${({ scTheme }) => scTheme.ps[100]};
     }
     &__control {
+      background: ${({ scTheme }) => scTheme.colors.b};
       cursor: pointer;
       border: solid 0.1rem ${({ scTheme }) => scTheme.ps[100]};
       &--is-focused {
@@ -46,10 +47,12 @@ const StyledSelect = styled(Select)`
       ${getSize('padding')}
     }
     &__option {
+      background: ${({ scTheme }) => scTheme.colors.b};
       cursor: pointer;
       color: ${({ scTheme }) => scTheme.p};
       &--is-focused,
       &--is-selected {
+        background: ${({ scTheme }) => scTheme.colors.s};
         color: ${({ scTheme }) => scTheme.bs[200]};
       }
     }

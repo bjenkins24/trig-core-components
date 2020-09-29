@@ -18,6 +18,7 @@ const focusedButtonStyles = ({ isFocused, theme }) => {
 const StyledButton = styled(Button)`
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  background: ${({ theme }) => theme.colors.b};
   flex-shrink: 0;
   align-self: flex-start;
   &:hover span {
