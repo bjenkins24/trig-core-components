@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
   }
   &__Overlay {
+    background: rgba(0, 0, 0, 0.4) !important;
     display: flex;
     align-items: center;
     opacity: 0;
@@ -45,7 +46,6 @@ const GlobalStyle = createGlobalStyle`
       height: auto;
       max-height: calc(100% - ${padding * 4}rem);
       border-radius: 0.4rem !important;
-      box-shadow: ${({ theme }) => theme.sh};
     }
   }
 }
@@ -53,8 +53,8 @@ const GlobalStyle = createGlobalStyle`
 
 const CloseButton = styled(Icon).attrs({ size: 1.6, type: 'close' })`
   position: absolute;
-  top: 2.4rem;
-  right: 2.4rem;
+  top: ${({ theme }) => theme.space[3]}px;
+  right: ${({ theme }) => theme.space[3]}px;
   cursor: pointer;
   color: ${({ theme }) => theme.bcs[200]} !important;
   &:hover {
