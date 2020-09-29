@@ -23,7 +23,7 @@ const Container = styled.li`
   padding-right: 1.6rem;
   cursor: pointer;
   text-decoration: none;
-  background: ${({ theme }) => theme.b};
+  background: ${({ theme }) => theme.bs[200]};
   border-radius: ${({ theme, variant }) =>
     variant === 'withContent' ? theme.br : 0};
   &:hover {
