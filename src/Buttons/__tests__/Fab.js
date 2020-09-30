@@ -14,6 +14,7 @@ describe('<Fab />', () => {
     user.click(container.firstChild);
     expect(mockCallback.mock.calls.length).toEqual(1);
     rerender(<Fab size={3}>Hello</Fab>);
+    user.click(container.firstChild);
     expect(container.firstChild).toHaveStyleRule('width', '3rem');
   });
 });
