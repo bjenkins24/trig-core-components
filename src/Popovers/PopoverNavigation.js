@@ -16,6 +16,8 @@ const ListItem = styled.li`
   width: 100%;
   cursor: pointer;
   transition: background 0.15s;
+  color: ${({ theme, variant }) =>
+    variant === 'dark' ? 'inherit' : theme.colors.p};
   &:hover,
   &:focus,
   &:active {
@@ -42,9 +44,19 @@ const popoverNavigationTypes = {
       item: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
     })
   ).isRequired,
+  variant: PropTypes.oneOf(['light', 'dark']),
 };
 
-const PopoverNavigation = ({ children, navigationList, ...restProps }) => {
+const defaultProps = {
+  variant: 'dark',
+};
+
+const PopoverNavigation = ({
+  children,
+  navigationList,
+  variant,
+  ...restProps
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const refs = useRef(navigationList.map(React.createRef));
@@ -76,6 +88,13 @@ const PopoverNavigation = ({ children, navigationList, ...restProps }) => {
     return false;
   };
 
+  const preventKeyboardScrolling = (event) => {
+    // space and arrow keys
+    if ([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) {
+      event.preventDefault();
+    }
+  };
+
   useEffect(() => {
     if (isOpen) {
       document.addEventListener('keydown', navigateWithKeyboard, false);
@@ -84,6 +103,16 @@ const PopoverNavigation = ({ children, navigationList, ...restProps }) => {
     }
     return () => {};
   }, [isOpen, selectedItem]);
+
+  useEffect(() => {
+    if (isOpen) {
+      window.addEventListener('keydown', preventKeyboardScrolling, false);
+      return () => {
+        window.removeEventListener('keydown', preventKeyboardScrolling);
+      };
+    }
+    return () => {};
+  }, [isOpen]);
 
   useEffect(() => {
     if (selectedItem !== null) {
@@ -99,6 +128,7 @@ const PopoverNavigation = ({ children, navigationList, ...restProps }) => {
         setSelectedItem(null);
         setIsOpen(false);
       }}
+      variant={variant}
       renderPopover={({ closePopover }) => {
         closePopoverRef.current = closePopover;
         return (
@@ -111,6 +141,7 @@ const PopoverNavigation = ({ children, navigationList, ...restProps }) => {
                   tabIndex={0}
                   key={index}
                   role="button"
+                  variant={variant}
                   onClick={() => {
                     onClick();
                     closePopover();
@@ -132,5 +163,6 @@ const PopoverNavigation = ({ children, navigationList, ...restProps }) => {
 };
 
 PopoverNavigation.propTypes = popoverNavigationTypes;
+PopoverNavigation.defaultProps = defaultProps;
 
 export default PopoverNavigation;

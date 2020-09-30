@@ -123,6 +123,7 @@ storiesOf('Popover', module)
   ))
   .add('navigation', () => (
     <PopoverNavigation
+      variant="light"
       navigationList={[
         { onClick: action('clicked first one'), item: 'My cool friend' },
         {

@@ -46,6 +46,7 @@ const Popover = ({
   onRequestClose,
   placement,
   variant,
+  ...restProps
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -126,6 +127,7 @@ const Popover = ({
               <PopoverContainer
                 variant={variant}
                 data-testid="popover__container"
+                {...restProps}
               >
                 {renderPopover({ closePopover: onClose, isOpen: open })}
               </PopoverContainer>
