@@ -9,9 +9,10 @@ const firstItem = 'first item';
 const mockCallback = jest.fn();
 const mockCallback2 = jest.fn();
 
-const PopoverWrapper = () => {
+const PopoverWrapper = ({ variant }) => {
   return (
     <PopoverNavigation
+      variant={variant}
       navigationList={[
         {
           onClick: mockCallback,
@@ -43,7 +44,9 @@ describe('<PopoverNavigation />', () => {
   });
 
   it('can navigate with keyboard', () => {
-    const { getByText, queryByText } = render(<PopoverWrapper />);
+    const { getByText, queryByText } = render(
+      <PopoverWrapper variant="light" />
+    );
 
     const trigger = getByText(triggerText);
     user.click(trigger);
