@@ -3,6 +3,8 @@ import { render } from 'test/utils';
 import user from '@testing-library/user-event';
 import Button, { textMap, heightMap } from 'Buttons/Button';
 
+jest.spyOn(console, 'error').mockImplementation(() => {});
+
 describe('<Button />', () => {
   it('renders and takes basic props', () => {
     const mockCallBack = jest.fn();
@@ -78,5 +80,23 @@ describe('<Button />', () => {
     const { getByRole, getByTitle } = render(<Button loading>Button</Button>);
     expect(getByRole('button')).toHaveAttribute('disabled');
     expect(getByTitle(/loading icon/i)).toBeInTheDocument();
+  });
+
+  it('renders additional content correctly', () => {
+    const additionalContent = 'Connected';
+
+    const { getByText, rerender } = render(
+      <Button
+        size="hg"
+        variant="inverse-s"
+        additionalContent={additionalContent}
+      >
+        Button
+      </Button>
+    );
+    expect(getByText(additionalContent)).toBeInTheDocument();
+
+    rerender(<Button additionalContent={additionalContent}>Button</Button>);
+    expect(console.error).toHaveBeenCalledTimes(1);
   });
 });

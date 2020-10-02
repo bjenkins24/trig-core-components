@@ -81,6 +81,13 @@ storiesOf('Button', module)
       </Fab>
     );
   })
+  .add('Additional', () => {
+    return (
+      <Button variant="inverse-s" additionalContent="Connected" size="hg">
+        Google!
+      </Button>
+    );
+  })
   .add('Select', () => {
     return (
       <ButtonSelect

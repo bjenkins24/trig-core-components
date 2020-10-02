@@ -202,6 +202,7 @@ export const buttonTypes = {
   onClick: PropTypes.func,
   loading: PropTypes.bool,
   width: widthType,
+  additionalContent: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
 const defaultProps = {
@@ -212,6 +213,7 @@ const defaultProps = {
   onClick: () => null,
   loading: false,
   width: 'auto',
+  additionalContent: '',
 };
 
 const Button = forwardRef(
@@ -225,6 +227,7 @@ const Button = forwardRef(
       loading,
       size,
       width,
+      additionalContent,
       ...restProps
     },
     ref
@@ -240,6 +243,12 @@ const Button = forwardRef(
       typeof restProps.forwardedAs === 'undefined'
     ) {
       typeProp = { type: 'button' };
+    }
+
+    if (additionalContent && size !== 'hg') {
+      console.error(
+        'Additional content for a <Button> component is only available when the size is "hg"'
+      );
     }
 
     return (
@@ -292,6 +301,31 @@ const Button = forwardRef(
             )}
           </HorizontalGroup>
         </div>
+        {additionalContent && size === 'hg' && (
+          <div
+            css={`
+              height: 13px;
+              background: ${({ theme }) => theme.colors.s};
+              position: absolute;
+              bottom: 0;
+              width: 100%;
+              margin-left: -1.6rem;
+            `}
+          >
+            <span
+              css={`
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                color: ${({ theme }) => theme.colors.sc};
+                text-align: center;
+                display: block;
+                margin-top: 1px;
+              `}
+            >
+              {additionalContent}
+            </span>
+          </div>
+        )}
       </StyledButton>
     );
   }
