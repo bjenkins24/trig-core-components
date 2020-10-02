@@ -10,15 +10,23 @@ const tabsNavigationTypes = {
   tabPanels: PropTypes.arrayOf(PropTypes.node),
   defaultTab: PropTypes.number,
   variant: PropTypes.oneOf(['dark', 'light']),
+  size: PropTypes.oneOf(['default', 'large']),
 };
 
 const defaultProps = {
   defaultTab: 0,
   tabPanels: [],
   variant: 'dark',
+  size: 'default',
 };
 
-export const TabsNavigation = ({ defaultTab, tabs, tabPanels, variant }) => {
+export const TabsNavigation = ({
+  defaultTab,
+  tabs,
+  tabPanels,
+  variant,
+  size,
+}) => {
   return (
     <Tabs defaultTab={defaultTab}>
       <TabList variant={variant}>
@@ -27,9 +35,13 @@ export const TabsNavigation = ({ defaultTab, tabs, tabPanels, variant }) => {
             <Tab
               key={index}
               color={variant}
+              sizeType={size}
               css={`
                 font-weight: ${({ theme }) => theme.fontWeights.bold};
-                padding: ${({ theme }) => `0 ${theme.space[3]}px`};
+                padding: ${({ theme, sizeType }) =>
+                  sizeType === 'default'
+                    ? `0 ${theme.space[3]}px`
+                    : `0 ${theme.space[4]}px`};
                 color: ${({ theme, color }) =>
                   color === 'dark'
                     ? theme.colors.pc
@@ -49,9 +61,11 @@ export const TabsNavigation = ({ defaultTab, tabs, tabPanels, variant }) => {
       <SelectedBar
         variant={variant}
         data-testid="select-bar"
+        sizeType={size}
         css={`
           opacity: ${defaultTab < 0 ? '0' : '1'};
-          top: 18px;
+          top: ${({ theme, sizeType }) =>
+            sizeType === 'default' ? '18' : theme.space[4]}px;
         `}
       />
       {tabPanels.map((content, index) => {
@@ -59,8 +73,10 @@ export const TabsNavigation = ({ defaultTab, tabs, tabPanels, variant }) => {
           <TabPanel
             key={index}
             tabPosition={index}
+            sizeType={size}
             css={`
-              margin-top: ${({ theme }) => `${theme.space[3]}px`};
+              margin-top: ${({ theme, sizeType }) =>
+                sizeType === 'default' ? theme.space[3] : theme.space[4]}px;
             `}
           >
             {content}

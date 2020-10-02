@@ -10,6 +10,7 @@ const SelectedBarContainer = styled(animated.div)`
   width: ${({ width }) => width / 10}rem;
   background: ${({ theme, dark }) => (dark ? theme.pc : theme.s)};
   position: relative;
+  z-index: 2;
 `;
 
 const initialState = {

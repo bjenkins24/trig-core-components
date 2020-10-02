@@ -83,10 +83,12 @@ describe('<Tabs />', () => {
         variant="light"
         tabs={[{ text: firstTabContent }, { text: secondTabContent }]}
         tabPanels={[firstTabPanelContent, secondTabPanelContent]}
+        size="lg"
       />
     );
     expect(getByTestId(/select-bar/i)).toHaveStyleRule(
       `background: ${theme.colors.s}`
     );
+    expect(tabs[0]).toHaveStyleRule('padding', '0 32px');
   });
 });

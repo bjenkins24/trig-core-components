@@ -45,6 +45,7 @@ storiesOf('Tabs', module)
           { text: 'Recently Viewed' },
           { text: 'Recently Edited' },
         ]}
+        size="lg"
         tabPanels={['EVERYTHING', 'just viewed', 'just edited']}
         variant="light"
       />
