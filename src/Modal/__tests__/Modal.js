@@ -9,7 +9,7 @@ describe('<Modal />', () => {
   it('renders and takes basic props', () => {
     const content = 'content';
     const { getByText, getByRole, getByLabelText, rerender } = render(
-      <Modal isOpen onRequestClose={() => null}>
+      <Modal isOpen onRequestClose={() => null} height={10}>
         {content}
       </Modal>
     );

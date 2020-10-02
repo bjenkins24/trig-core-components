@@ -5,7 +5,7 @@ import { device } from '@trig-app/constants';
 import ReactModal from 'react-modal';
 import { widthType } from 'utils/propTypes';
 import Icon from '../Icon';
-import { getWidth } from '../utils';
+import { getWidth, getHeight } from '../utils';
 
 const transitionTimeMS = 150;
 
@@ -43,7 +43,7 @@ const GlobalStyle = createGlobalStyle`
     border: 0 !important;
     @media ${device.tabletPortraitUp} {
       ${getWidth};
-      height: auto;
+      ${getHeight};
       max-height: calc(100% - ${padding * 4}rem);
       border-radius: 0.4rem !important;
     }
@@ -67,16 +67,25 @@ const modalTypes = {
   onRequestClose: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   width: widthType,
+  height: widthType,
 };
 
 const defaultProps = {
   width: 'auto',
+  height: 'auto',
 };
 
-const Modal = ({ children, onRequestClose, isOpen, width, ...restProps }) => {
+const Modal = ({
+  children,
+  onRequestClose,
+  isOpen,
+  width,
+  height,
+  ...restProps
+}) => {
   return (
     <>
-      <GlobalStyle width={width} />
+      <GlobalStyle width={width} height={height} />
       <ReactModal
         contentLabel="Modal"
         closeTimeoutMS={transitionTimeMS}

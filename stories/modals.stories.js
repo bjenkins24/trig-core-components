@@ -24,11 +24,19 @@ const ModalStory = () => {
         </button>
       </div>
       <Modal
+        width={80}
+        height={80}
         appSelector=".modal-container"
         isOpen={isOpen}
         onRequestClose={() => setIsOpen(false)}
       >
         <ModalHeader>Create a Card</ModalHeader>
+        <div
+          css={`
+            height: 2000px;
+            background: blue;
+          `}
+        />
       </Modal>
     </>
   );
