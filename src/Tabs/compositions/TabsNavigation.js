@@ -42,6 +42,10 @@ export const TabsNavigation = ({
                   sizeType === 'default'
                     ? `0 ${theme.space[3]}px`
                     : `0 ${theme.space[4]}px`};
+                padding-bottom: ${({ theme, sizeType }) =>
+                  sizeType === 'default' ? '18' : theme.space[4]}px;
+                padding-top: ${({ theme, sizeType }) =>
+                  sizeType === 'default' ? '18' : theme.space[4]}px;
                 color: ${({ theme, color }) =>
                   color === 'dark'
                     ? theme.colors.pc
@@ -64,8 +68,6 @@ export const TabsNavigation = ({
         sizeType={size}
         css={`
           opacity: ${defaultTab < 0 ? '0' : '1'};
-          top: ${({ theme, sizeType }) =>
-            sizeType === 'default' ? '18' : theme.space[4]}px;
         `}
       />
       {tabPanels.map((content, index) => {
