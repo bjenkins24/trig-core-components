@@ -10,7 +10,7 @@ const tabsNavigationTypes = {
   tabPanels: PropTypes.arrayOf(PropTypes.node),
   defaultTab: PropTypes.number,
   variant: PropTypes.oneOf(['dark', 'light']),
-  size: PropTypes.oneOf(['default', 'large']),
+  size: PropTypes.oneOf(['default', 'lg']),
 };
 
 const defaultProps = {

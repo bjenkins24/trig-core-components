@@ -26,7 +26,7 @@ const ModalStory = () => {
       <Modal
         width={80}
         height={80}
-        appSelector=".modal-container"
+        appElement="#root"
         isOpen={isOpen}
         onRequestClose={() => setIsOpen(false)}
       >

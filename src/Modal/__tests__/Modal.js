@@ -17,7 +17,7 @@ describe('<Modal />', () => {
     expect(getByRole('button', { hidden: true })).toBeInTheDocument();
     expect(getByLabelText(/close/i)).toBeInTheDocument();
     rerender(
-      <Modal isOpen onRequestClose={() => null} mainSelector="#test">
+      <Modal isOpen onRequestClose={() => null} appElement="*">
         {content}
       </Modal>
     );

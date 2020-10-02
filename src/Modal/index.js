@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { createGlobalStyle } from 'styled-components';
 import { device } from '@trig-app/constants';
@@ -30,7 +30,8 @@ const GlobalStyle = createGlobalStyle`
       opacity: 0;
     }
   }
-  &__Content {
+}
+.${({ contentClassName }) => contentClassName} .ReactModal__Content {
     top: auto !important;
     right: auto !important;
     bottom: auto !important;
@@ -48,7 +49,6 @@ const GlobalStyle = createGlobalStyle`
       border-radius: 0.4rem !important;
     }
   }
-}
 `;
 
 const CloseButton = styled(Icon).attrs({ size: 1.6, type: 'close' })`
@@ -68,11 +68,13 @@ const modalTypes = {
   isOpen: PropTypes.bool.isRequired,
   width: widthType,
   height: widthType,
+  appElement: PropTypes.string,
 };
 
 const defaultProps = {
   width: 'auto',
   height: 'auto',
+  appElement: '',
 };
 
 const Modal = ({
@@ -81,16 +83,34 @@ const Modal = ({
   isOpen,
   width,
   height,
+  appElement,
   ...restProps
 }) => {
+  const contentClassName = useRef(null);
+
+  useEffect(() => {
+    contentClassName.current = Math.random()
+      .toString(36)
+      .substring(7);
+  }, []);
+
+  if (appElement) {
+    ReactModal.setAppElement(appElement);
+  }
+
   return (
     <>
-      <GlobalStyle width={width} height={height} />
+      <GlobalStyle
+        width={width}
+        height={height}
+        contentClassName={contentClassName.current}
+      />
       <ReactModal
         contentLabel="Modal"
         closeTimeoutMS={transitionTimeMS}
         onRequestClose={onRequestClose}
         isOpen={isOpen}
+        portalClassName={contentClassName.current}
         {...restProps}
       >
         <CloseButton
