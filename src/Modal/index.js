@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { createGlobalStyle } from 'styled-components';
 import { device } from '@trig-app/constants';
@@ -62,6 +62,17 @@ const CloseButton = styled(Icon).attrs({ size: 1.6, type: 'close' })`
   }
 `;
 
+const makeRandomClass = () => {
+  const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  let result = '';
+  for (let i = 0; i < 8; i += 1) {
+    result += randomChars.charAt(
+      Math.floor(Math.random() * randomChars.length)
+    );
+  }
+  return result;
+};
+
 const modalTypes = {
   children: PropTypes.node.isRequired,
   onRequestClose: PropTypes.func.isRequired,
@@ -86,13 +97,7 @@ const Modal = ({
   appElement,
   ...restProps
 }) => {
-  const contentClassName = useRef(null);
-
-  useEffect(() => {
-    contentClassName.current = Math.random()
-      .toString(36)
-      .substring(7);
-  }, []);
+  const contentClassName = useRef(makeRandomClass());
 
   if (appElement) {
     ReactModal.setAppElement(appElement);
