@@ -19,7 +19,7 @@ const Item = styled.div`
 const Container = styled.li`
   min-height: 7.2rem;
   border: 0.1rem solid ${({ theme }) => theme.ps[100]};
-  display: block;
+  display: ${({ href }) => (href ? 'block' : 'flex')};
   padding-right: 1.6rem;
   cursor: pointer;
   text-decoration: none;

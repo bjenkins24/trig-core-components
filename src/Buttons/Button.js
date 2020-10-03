@@ -319,7 +319,7 @@ const Button = forwardRef(
                 color: ${({ theme }) => theme.colors.sc};
                 text-align: center;
                 display: block;
-                margin-top: 1px;
+                margin-top: 2px;
               `}
             >
               {additionalContent}
