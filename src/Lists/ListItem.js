@@ -21,17 +21,22 @@ const Container = styled.li`
   border: 0.1rem solid ${({ theme }) => theme.ps[100]};
   display: ${({ href }) => (href ? 'block' : 'flex')};
   padding-right: 1.6rem;
-  cursor: pointer;
+  cursor: ${({ isClickable }) => (isClickable ? 'pointer' : 'default')};
   text-decoration: none;
   background: ${({ theme }) => theme.bs[200]};
   border-radius: ${({ theme, variant }) =>
     variant === 'withContent' ? theme.br : 0};
   &:hover {
-    background: ${({ theme }) => theme.bs[300]};
+    background: ${({ isClickable, theme }) =>
+      isClickable ? theme.bs[300] : 'none'};
   }
   &:hover ${Item} {
-    background: ${({ theme, variant }) =>
-      variant === 'withContent' ? 'none' : theme.ps[400]};
+    background: ${({ theme, variant, isClickable }) => {
+      if (!isClickable) {
+        return theme.p;
+      }
+      return variant === 'withContent' ? 'none' : theme.ps[400];
+    }};
   }
 `;
 
@@ -54,6 +59,7 @@ const Actions = styled(HorizontalGroup)`
 `;
 
 const Action = styled.div`
+  cursor: pointer;
   &:hover svg {
     color: ${({ theme }) => theme.p};
   }
@@ -115,7 +121,7 @@ const listItemTypes = {
   renderItem: PropTypes.func,
   renderContent: PropTypes.func.isRequired,
   actions: PropTypes.arrayOf(PropTypes.node),
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   href: PropTypes.string,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
@@ -125,6 +131,7 @@ const defaultProps = {
   actions: [],
   href: '',
   description: '',
+  onClick: null,
 };
 
 const ListItem = ({
@@ -152,7 +159,9 @@ const ListItem = ({
       if (node.classList && node.classList.contains(actionClass)) return;
       node = node.parentNode;
     }
-    onClick(e);
+    if (onClick) {
+      onClick(e);
+    }
   };
 
   if (href) {
@@ -163,6 +172,7 @@ const ListItem = ({
           as="a"
           onClick={clickListItem}
           href={href}
+          isClickable={href || onClick}
         >
           <div
             css={`
@@ -187,6 +197,7 @@ const ListItem = ({
     <Container
       variant={description ? 'withContent' : 'default'}
       onClick={clickListItem}
+      isClickable={href || onClick}
       {...restProps}
     >
       <ListItemContent

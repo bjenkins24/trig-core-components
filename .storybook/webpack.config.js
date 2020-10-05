@@ -21,7 +21,7 @@ module.exports = async ({ config, mode }) => {
   config.module.rules = config.module.rules.filter((rule, index) => {
     // Index 4 is file loader and index 5 is a second css loader? I don't get why there
     // are two. If I take out the one above I have 0. Whatever this works
-    if (index === 4 || index === 5) return false;
+    if (index === 4) return false;
     return true;
   });
 

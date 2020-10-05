@@ -3,11 +3,11 @@ import { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import Modal from '../src/Modal';
-import ModalHeader from '../src/Modal/ModalHeader';
 import './consoleOverrides';
 import themeForProvider from './theme';
 
-const ModalStory = () => {
+// eslint-disable-next-line
+const ModalStory = ({ withActions }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
@@ -24,17 +24,15 @@ const ModalStory = () => {
         </button>
       </div>
       <Modal
-        width={80}
-        height={80}
         appElement="#root"
+        width={80}
         isOpen={isOpen}
         onRequestClose={() => setIsOpen(false)}
+        withActions={withActions}
       >
-        <ModalHeader>Create a Card</ModalHeader>
         <div
           css={`
             height: 2000px;
-            background: blue;
           `}
         />
       </Modal>
@@ -47,4 +45,5 @@ storiesOf('Modals', module)
     <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
   ))
   .addDecorator(withKnobs)
-  .add('default', () => <ModalStory />);
+  .add('default', () => <ModalStory />)
+  .add('With Action Buttons', () => <ModalStory withActions />);
