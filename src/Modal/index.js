@@ -6,8 +6,6 @@ import ReactModal from 'react-modal';
 import { widthType } from 'utils/propTypes';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import ModalHeader from 'Modal/ModalHeader';
-import { Button } from '../Buttons';
 import Icon from '../Icon';
 import { getWidth, getHeight } from '../utils';
 
@@ -84,22 +82,16 @@ const modalTypes = {
   width: widthType,
   height: widthType,
   appElement: PropTypes.string,
-  onSubmit: PropTypes.func,
-  onCancel: PropTypes.func,
-  cancelContent: PropTypes.string,
-  submitContent: PropTypes.string,
-  withActions: PropTypes.bool,
+  renderHeader: PropTypes.func,
+  renderFooter: PropTypes.func,
 };
 
 const defaultProps = {
   width: 'auto',
   height: 'auto',
   appElement: '',
-  onSubmit: () => null,
-  onCancel: () => null,
-  cancelContent: 'Cancel',
-  submitContent: 'Submit',
-  withActions: false,
+  renderHeader: () => null,
+  renderFooter: () => null,
 };
 
 const Modal = ({
@@ -109,11 +101,8 @@ const Modal = ({
   width,
   height,
   appElement,
-  onSubmit,
-  onCancel,
-  submitContent,
-  cancelContent,
-  withActions,
+  renderHeader,
+  renderFooter,
   ...restProps
 }) => {
   const contentClassName = useRef(makeRandomClass());
@@ -149,7 +138,7 @@ const Modal = ({
               margin-bottom: ${({ theme }) => theme.space[2]}px;
             `}
           >
-            <ModalHeader>Create a Card</ModalHeader>
+            {renderHeader()}
             <CloseButton
               role="button"
               aria-label="Close"
@@ -157,7 +146,6 @@ const Modal = ({
             />
           </header>
           <div
-            withActions={withActions}
             css={`
               flex: 1 1 auto;
               overflow: hidden auto;
@@ -180,52 +168,16 @@ const Modal = ({
               </div>
             </PerfectScrollbar>
           </div>
-          {withActions && (
-            <footer
-              css={`
-                margin-top: ${({ theme }) => theme.space[2]}px;
-                width: 100%;
-                margin-left: -${({ theme }) => theme.space[4]}px;
-                padding: 0 ${({ theme }) => theme.space[4]}px;
-              `}
-            >
-              <div
-                css={`
-                  margin-left: -${({ theme }) => theme.space[4]}px;
-                  width: calc(100% + ${({ theme }) => theme.space[4] * 2}px);
-                  height: 1px;
-                  background: ${({ theme }) => theme.colors.ps[50]};
-                `}
-              />
-              <div
-                css={`
-                  display: flex;
-                  align-items: center;
-                  margin-top: ${({ theme }) => theme.space[4]}px;
-                `}
-              >
-                <Button
-                  size="lg"
-                  variant="transparent"
-                  css={`
-                    padding-left: 0;
-                  `}
-                  onClick={onCancel}
-                >
-                  {cancelContent}
-                </Button>
-                <Button
-                  size="lg"
-                  css={`
-                    margin-left: auto;
-                  `}
-                  onClick={onSubmit}
-                >
-                  {submitContent}
-                </Button>
-              </div>
-            </footer>
-          )}
+          <footer
+            css={`
+              margin-top: ${({ theme }) => theme.space[2]}px;
+              width: 100%;
+              margin-left: -${({ theme }) => theme.space[4]}px;
+              padding: 0 ${({ theme }) => theme.space[4]}px;
+            `}
+          >
+            {renderFooter()}
+          </footer>
         </div>
       </ReactModal>
     </>

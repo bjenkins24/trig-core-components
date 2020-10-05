@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { SelectedBar } from '../SelectedBar';
 import { Tab, TabList, TabPanel, Tabs } from '../index';
 
-const tabsNavigationTypes = {
+export const tabsNavigationTypes = {
   tabs: PropTypes.arrayOf(
     PropTypes.shape({ text: PropTypes.string, onClick: PropTypes.func })
   ).isRequired,
