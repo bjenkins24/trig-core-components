@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled, { createGlobalStyle } from 'styled-components';
 import { device } from '@trig-app/constants';
 import ReactModal from 'react-modal';
+import disableScroll from 'disable-scroll';
 import { widthType } from 'utils/propTypes';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
@@ -13,9 +14,6 @@ const transitionTimeMS = 150;
 
 const GlobalStyle = createGlobalStyle`
 .ReactModal {
-  &__Body--open, &__Html--open {
-    overflow: hidden;
-  }
   &__Overlay {
     background: rgba(0, 0, 0, 0.4) !important;
     display: flex;
@@ -105,6 +103,14 @@ const Modal = ({
   ...restProps
 }) => {
   const contentClassName = useRef(makeRandomClass());
+
+  useEffect(() => {
+    if (isOpen) {
+      disableScroll.on(document.getElementsByTagName('body')[0]);
+    } else {
+      disableScroll.off(document.getElementsByTagName('body')[0]);
+    }
+  }, [isOpen]);
 
   if (appElement) {
     ReactModal.setAppElement(appElement);
