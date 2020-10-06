@@ -39,7 +39,6 @@ const GlobalStyle = createGlobalStyle`
     overflow: visible !important;
     padding: ${({ theme }) => theme.space[4]}px !important;
     transform: translateX(-50%);
-    height: calc(100vh - ${({ theme }) => theme.space[4] * 2}px);
     width: calc(100% - ${({ theme }) => theme.space[4] * 2}px);
     border-radius: 0 !important;
     border: 0 !important;
