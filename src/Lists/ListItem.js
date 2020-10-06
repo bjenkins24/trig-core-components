@@ -159,6 +159,7 @@ const ListItem = ({
       if (node.classList && node.classList.contains(actionClass)) return;
       node = node.parentNode;
     }
+    /* istanbul ignore next */
     if (onClick) {
       onClick(e);
     }
@@ -172,7 +173,8 @@ const ListItem = ({
           as="a"
           onClick={clickListItem}
           href={href}
-          isClickable={href || onClick}
+          isClickable
+          data-testid="list-item__container"
         >
           <div
             css={`
@@ -198,6 +200,7 @@ const ListItem = ({
       variant={description ? 'withContent' : 'default'}
       onClick={clickListItem}
       isClickable={href || onClick}
+      data-testid="list-item__container"
       {...restProps}
     >
       <ListItemContent

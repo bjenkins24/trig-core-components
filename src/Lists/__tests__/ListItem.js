@@ -53,7 +53,7 @@ describe('<ListItem />', () => {
   it('only clicks action when clicked', () => {
     const mockCallback = jest.fn();
     const mockCallbackHeart = jest.fn();
-    const { getByTestId } = render(
+    const { getByTestId, rerender } = render(
       <ListItem
         renderContent={() => null}
         onClick={mockCallback}
@@ -70,5 +70,14 @@ describe('<ListItem />', () => {
     user.click(getByTestId('listItem__heart'));
     expect(mockCallback.mock.calls.length).toEqual(0);
     expect(mockCallbackHeart.mock.calls.length).toEqual(1);
+    rerender(<ListItem renderContent={() => null} />);
+    expect(getByTestId('list-item__container')).toHaveStyleRule(
+      'cursor: default'
+    );
+
+    rerender(<ListItem renderContent={() => null} href="sup" />);
+    expect(getByTestId('list-item__container')).toHaveStyleRule(
+      'cursor: default'
+    );
   });
 });

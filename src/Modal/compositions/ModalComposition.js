@@ -10,7 +10,7 @@ import ModalHeader from 'Modal/ModalHeader';
 import { widthType } from 'utils/propTypes';
 
 const ModalCompositionProps = {
-  tabNavigationProps: tabsNavigationTypes,
+  tabNavigationProps: PropTypes.shape(tabsNavigationTypes),
   header: PropTypes.string,
   cancelContent: PropTypes.string,
   onCancel: PropTypes.func,
@@ -64,6 +64,7 @@ const ModalComposition = ({
         text: tab.text,
         onClick: () => {
           setOpenTabPanel(index);
+          /* istanbul ignore next */
           if (typeof tab.onClick !== 'undefined') {
             tab.onClick();
           }
@@ -89,7 +90,7 @@ const ModalComposition = ({
             >
               <TabsNavigation
                 variant="light"
-                size="large"
+                size="lg"
                 {...tabNavigationProps}
                 tabs={adjustedTabs}
                 tabPanels={[]}
@@ -138,6 +139,7 @@ const ModalComposition = ({
                   padding-left: 0;
                 `}
                 onClick={(event) => {
+                  /* istanbul ignore next */
                   if (onCancel) {
                     onCancel(event);
                   }
