@@ -41,6 +41,10 @@ module.exports = {
         },
       },
       { test: /\.svg$/, loader: 'svg-sprite-loader' },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
 };
