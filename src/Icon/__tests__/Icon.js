@@ -8,9 +8,9 @@ describe('<Icon />', () => {
   it('renders and takes basic props', () => {
     let totalCount = 10;
     const { getByText, getByTitle, rerender, getByTestId } = render(
-      <Icon type="deck" />
+      <Icon type="collection" />
     );
-    expect(getByTitle(/deck icon/i)).toBeInTheDocument();
+    expect(getByTitle(/collection icon/i)).toBeInTheDocument();
 
     totalCount = 7;
     rerender(<Icon type="comment" count={totalCount} />);

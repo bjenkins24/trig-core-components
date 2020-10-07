@@ -18,7 +18,7 @@ import CheckCircle from './icons/CheckCircle';
 import Close from './icons/Close';
 import Code from './icons/Code';
 import Comment from './icons/Comment';
-import Deck from './icons/Deck';
+import Collection from './icons/Collection';
 import Document from './icons/Document';
 import Edit from './icons/Edit';
 import Facebook from './icons/Facebook';
@@ -75,7 +75,7 @@ export const iconComponents = {
   close: Close,
   code: Code,
   comment: Comment,
-  deck: Deck,
+  collection: Collection,
   document: Document,
   edit: Edit,
   facebook: Facebook,

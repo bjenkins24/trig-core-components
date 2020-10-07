@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'test/utils';
-import Deck from 'Deck';
+import Collection from 'Collection';
 import userEvent from '@testing-library/user-event';
 
 jest.mock('react-truncate', () => {
@@ -18,9 +18,9 @@ const user = {
   email: 'brian@example',
 };
 
-const buildDeck = ({ onClick, ...restProps }) => {
+const buildCollection = ({ onClick, ...restProps }) => {
   return (
-    <Deck
+    <Collection
       totalCards={totalCards}
       totalFollowers={totalFollowers}
       user={user}
@@ -34,11 +34,11 @@ const buildDeck = ({ onClick, ...restProps }) => {
   );
 };
 
-describe('<Deck />', () => {
+describe('<Collection />', () => {
   it('renders and takes basic props', () => {
     const mockCallback = jest.fn();
     const { getByText, getAllByText, container, rerender } = render(
-      buildDeck({ onClick: mockCallback })
+      buildCollection({ onClick: mockCallback })
     );
 
     expect(getByText(`${totalCards}`)).toBeInTheDocument();
@@ -53,7 +53,7 @@ describe('<Deck />', () => {
       'background',
       expect.stringContaining('url')
     );
-    rerender(buildDeck({ image: '', onClick: mockCallback }));
+    rerender(buildCollection({ image: '', onClick: mockCallback }));
 
     expect(container.firstChild).not.toHaveStyleRule(
       'background',

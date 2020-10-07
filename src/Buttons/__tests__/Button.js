@@ -28,10 +28,10 @@ describe('<Button />', () => {
   });
 
   it('renders Icon with icon prop', () => {
-    const title = 'Deck';
+    const title = 'Collection';
 
     const { queryByTitle, rerender, container } = render(
-      <Button as="a" iconProps={{ type: 'deck', title }}>
+      <Button as="a" iconProps={{ type: 'collection', title }}>
         Button
       </Button>
     );
@@ -39,8 +39,8 @@ describe('<Button />', () => {
     expect(queryByTitle(title)).toBeInTheDocument();
 
     // Check default title
-    rerender(<Button iconProps={{ type: 'deck' }}>Button</Button>);
-    expect(queryByTitle(/deck icon/i)).toBeInTheDocument();
+    rerender(<Button iconProps={{ type: 'collection' }}>Button</Button>);
+    expect(queryByTitle(/collection icon/i)).toBeInTheDocument();
   });
 
   it('renders correct sizes', () => {

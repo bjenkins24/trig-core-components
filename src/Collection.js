@@ -8,7 +8,7 @@ import { HorizontalGroup, VerticalGroup } from 'Groups';
 import Icon from './Icon';
 import Avatar from './Avatar';
 
-const DeckThumbnail = styled.div`
+const CollectionThumbnail = styled.div`
   display: flex;
   flex-direction: column;
   padding: ${({ theme }) => theme.space[3]}px;
@@ -18,7 +18,7 @@ const DeckThumbnail = styled.div`
   width: calc(100% - ${({ theme }) => theme.space[4]}px);
 `;
 
-const DeckHover = styled.div`
+const CollectionHover = styled.div`
   display: flex;
   transition: all 0.2s;
   opacity: 0;
@@ -67,10 +67,10 @@ const Wrapper = styled.a`
   }
   &:hover {
     ${getBackground(true)}
-    .deck__thumbnail {
+    .collection__thumbnail {
       opacity: 0;
     }
-    .deck__hover {
+    .collection__hover {
       opacity: 1;
     }
   }
@@ -109,7 +109,7 @@ const defaultProps = {
   image: '',
 };
 
-const deckTypes = {
+const collectionTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   totalCards: PropTypes.number.isRequired,
@@ -126,7 +126,7 @@ const deckTypes = {
   }).isRequired,
 };
 
-const Deck = ({
+const Collection = ({
   title,
   image,
   user,
@@ -147,7 +147,7 @@ const Deck = ({
       }}
       {...restProps}
     >
-      <DeckThumbnail className="deck__thumbnail">
+      <CollectionThumbnail className="collection__thumbnail">
         <Heading2
           color="sc"
           css={`
@@ -188,8 +188,8 @@ const Deck = ({
             </HorizontalGroup>
           </HorizontalGroup>
         </div>
-      </DeckThumbnail>
-      <DeckHover className="deck__hover">
+      </CollectionThumbnail>
+      <CollectionHover className="collection__hover">
         <Body2Component
           color="sc"
           css={`
@@ -220,12 +220,12 @@ const Deck = ({
             <TinyText color="sc">{user.position}</TinyText>
           </VerticalGroup>
         </HorizontalGroup>
-      </DeckHover>
+      </CollectionHover>
     </Wrapper>
   );
 };
 
-Deck.defaultProps = defaultProps;
-Deck.propTypes = deckTypes;
+Collection.defaultProps = defaultProps;
+Collection.propTypes = collectionTypes;
 
-export default Deck;
+export default Collection;

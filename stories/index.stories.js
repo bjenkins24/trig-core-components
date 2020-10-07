@@ -11,7 +11,7 @@ import Icon from '../src/Icon';
 import Logo from '../src/Logo';
 import Avatar from '../src/Avatar';
 import { Popover, PopoverNavigation } from '../src/Popovers';
-import Deck from '../src/Deck';
+import Collection from '../src/Collection';
 import {
   Huge,
   Heading1,
@@ -28,7 +28,7 @@ import {
 import theme from './theme';
 
 const icons = {
-  deck: 'deck',
+  collection: 'collection',
   cards: 'cards',
   comment: 'comment',
   avatar: 'avatar',
@@ -152,7 +152,7 @@ storiesOf('Icons', module)
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
   .addDecorator(withKnobs)
-  .add('default', () => <Icon type="deck" size={number('size', 3.2)} />)
+  .add('default', () => <Icon type="collection" size={number('size', 3.2)} />)
   .add('hamburger', () => <Icon type="hamburger" size={number('size', 3.2)} />)
   .add('with count', () => (
     <div
@@ -178,7 +178,7 @@ storiesOf('Logo', module)
     <Logo type={select('type', ['dark', 'light'], 'dark')} />
   ));
 
-storiesOf('Deck', module)
+storiesOf('Collection', module)
   .addDecorator((story) => (
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
@@ -190,7 +190,7 @@ storiesOf('Deck', module)
         height: 200px;
       `}
     >
-      <Deck
+      <Collection
         css={`
           margin: 100px;
         `}

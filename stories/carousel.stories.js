@@ -4,7 +4,7 @@ import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
-import Deck from '../src/Deck';
+import Collection from '../src/Collection';
 import Carousel from '../src/Carousel';
 import './consoleOverrides';
 import themeForProvider from './theme';
@@ -16,10 +16,10 @@ const Item = styled.div`
   width: 100%;
 `;
 
-const MyDeck = () => {
+const MyCollection = () => {
   return (
     <Item>
-      <Deck
+      <Collection
         user={{
           firstName: 'Brian',
           lastName: 'Jenkins',
@@ -56,15 +56,15 @@ storiesOf('Carousel', module)
         height: ${height}rem;
       `}
     >
-      <MyDeck />
-      <MyDeck />
-      <MyDeck />
-      <MyDeck />
-      <MyDeck />
-      <MyDeck />
-      <MyDeck />
-      <MyDeck />
-      <MyDeck />
+      <MyCollection />
+      <MyCollection />
+      <MyCollection />
+      <MyCollection />
+      <MyCollection />
+      <MyCollection />
+      <MyCollection />
+      <MyCollection />
+      <MyCollection />
       <Item>
         <h1>Slide 2</h1>
       </Item>

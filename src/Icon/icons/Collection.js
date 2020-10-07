@@ -2,7 +2,7 @@ import React from 'react';
 import IconWrapper from '../IconWrapper';
 import propTypes from '../propTypes';
 
-const Deck = ({ title, ...restProps }) => {
+const Collection = ({ title, ...restProps }) => {
   return (
     <IconWrapper title={title} {...restProps}>
       <path
@@ -14,10 +14,10 @@ const Deck = ({ title, ...restProps }) => {
   );
 };
 
-Deck.defaultProps = {
-  title: 'Deck Icon',
+Collection.defaultProps = {
+  title: 'Collection Icon',
 };
 
-Deck.propTypes = propTypes;
+Collection.propTypes = propTypes;
 
-export default Deck;
+export default Collection;
