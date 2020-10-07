@@ -13,7 +13,7 @@ const ModalHeader = ({ children }) => {
       <Heading1>{children}</Heading1>
       <Separator
         css={`
-          margin-bottom: 3.2rem;
+          margin-bottom: ${({ theme }) => theme.space[3]}px;
         `}
       />
     </>
