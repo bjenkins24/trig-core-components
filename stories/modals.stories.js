@@ -84,6 +84,7 @@ storiesOf('Modals', module)
       submitContent="Create Card"
       height={60}
       tabNavigationProps={{
+        defaultTab: 1,
         tabs: [{ text: 'tab 1' }, { text: 'tab 2' }],
         tabPanels: [
           <div
