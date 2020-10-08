@@ -57,6 +57,13 @@ const ModalComposition = ({
 
   const [openTabPanel, setOpenTabPanel] = useState(defaultTab);
 
+  const onClose = () => {
+    onRequestClose();
+    setTimeout(() => {
+      setOpenTabPanel(defaultTab);
+    }, 300);
+  };
+
   let adjustedTabs = [];
   if (tabNavigationProps) {
     adjustedTabs = tabNavigationProps.tabs.map((tab, index) => {
@@ -75,7 +82,7 @@ const ModalComposition = ({
 
   return (
     <Modal
-      onRequestClose={onRequestClose}
+      onRequestClose={onClose}
       height={height}
       renderHeader={() => {
         if (tabNavigationProps) {
@@ -143,7 +150,7 @@ const ModalComposition = ({
                   if (onCancel) {
                     onCancel(event);
                   }
-                  return onRequestClose();
+                  return onClose();
                 }}
               >
                 {cancelContent}
