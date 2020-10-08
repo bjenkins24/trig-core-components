@@ -1,6 +1,6 @@
 import React from 'react';
 // eslint-disable-next-line
-import { render, fireEvent, wait } from 'test/utils';
+import { render, wait } from 'test/utils';
 import user from '@testing-library/user-event';
 import { string } from 'yup';
 import StringFieldWithButtonForm from 'Form/StringFieldWithButtonForm';

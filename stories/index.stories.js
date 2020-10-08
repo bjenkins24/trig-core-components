@@ -88,6 +88,13 @@ storiesOf('Button', module)
       </Button>
     );
   })
+  .add('With count', () => {
+    return (
+      <Button countTotal={149} countVariant="light">
+        Follow
+      </Button>
+    );
+  })
   .add('Select', () => {
     return (
       <ButtonSelect

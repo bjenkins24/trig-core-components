@@ -203,6 +203,8 @@ export const buttonTypes = {
   loading: PropTypes.bool,
   width: widthType,
   additionalContent: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  countTotal: PropTypes.number,
+  countVariant: PropTypes.oneOf(['light', 'dark']),
 };
 
 const defaultProps = {
@@ -214,6 +216,8 @@ const defaultProps = {
   loading: false,
   width: 'auto',
   additionalContent: '',
+  countTotal: null,
+  countVariant: 'dark',
 };
 
 const Button = forwardRef(
@@ -228,6 +232,8 @@ const Button = forwardRef(
       size,
       width,
       additionalContent,
+      countTotal,
+      countVariant,
       ...restProps
     },
     ref
@@ -251,82 +257,138 @@ const Button = forwardRef(
       );
     }
 
+    let shortenedTotal = countTotal;
+    if (countTotal > 999) {
+      shortenedTotal = `${Math.floor((countTotal / 1000) * 10) / 10}k`;
+    }
+    if (countTotal > 999999) {
+      shortenedTotal = `${Math.floor((countTotal / 1000000) * 10) / 10}m`;
+    }
+
     return (
-      <StyledButton
-        width={width}
-        variant={variant}
-        disabled={disabledButton}
-        ref={ref}
-        size={size}
-        onClick={(event) => {
-          rippleEffect({ event, fromCenter: event.pageX === 0 });
-          // Make sure onclick still works
-          onClick(event);
-        }}
-        {...typeProp}
-        {...restProps}
+      <div
+        css={`
+          display: flex;
+        `}
       >
-        <div
-          css={`
-            display: flex;
-            height: 100%;
-          `}
+        <StyledButton
+          width={width}
+          variant={variant}
+          disabled={disabledButton}
+          ref={ref}
+          size={size}
+          onClick={(event) => {
+            rippleEffect({ event, fromCenter: event.pageX === 0 });
+            // Make sure onclick still works
+            onClick(event);
+          }}
+          {...typeProp}
+          {...restProps}
         >
-          <HorizontalGroup
-            margin={iconMargin[size]}
-            css={`
-              height: 100%;
-              margin: 0 auto;
-            `}
-          >
-            {iconProps && !loading && (
-              <Icon color={iconColor} size={iconSize[size]} {...iconProps} />
-            )}
-            <Text
-              className="button__text"
-              disabled={disabledButton}
-              color="sc"
-              weight="bold"
-              as="div"
-            >
-              {children}
-            </Text>
-            {loading && (
-              <Icon
-                type="loading"
-                color={iconColor}
-                size={iconSize[size]}
-                {...iconProps}
-              />
-            )}
-          </HorizontalGroup>
-        </div>
-        {additionalContent && size === 'hg' && (
           <div
             css={`
-              height: 13px;
-              background: ${({ theme }) => theme.colors.s};
-              position: absolute;
-              bottom: 0;
-              width: 100%;
-              margin-left: -1.6rem;
+              display: flex;
+              height: 100%;
             `}
           >
-            <span
+            <HorizontalGroup
+              margin={iconMargin[size]}
               css={`
-                font-size: 0.9rem;
-                text-transform: uppercase;
-                color: ${({ theme }) => theme.colors.sc};
-                text-align: center;
-                display: block;
-                margin-top: 2px;
+                height: 100%;
+                margin: 0 auto;
               `}
             >
-              {additionalContent}
-            </span>
+              {iconProps && !loading && (
+                <Icon color={iconColor} size={iconSize[size]} {...iconProps} />
+              )}
+              <Text
+                className="button__text"
+                disabled={disabledButton}
+                color="sc"
+                weight="bold"
+                as="div"
+              >
+                {children}
+              </Text>
+              {loading && (
+                <Icon
+                  type="loading"
+                  color={iconColor}
+                  size={iconSize[size]}
+                  {...iconProps}
+                />
+              )}
+            </HorizontalGroup>
           </div>
+          {additionalContent && size === 'hg' && (
+            <div
+              css={`
+                height: 13px;
+                background: ${({ theme }) => theme.colors.s};
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                margin-left: -1.6rem;
+              `}
+            >
+              <span
+                css={`
+                  font-size: 0.9rem;
+                  text-transform: uppercase;
+                  color: ${({ theme }) => theme.colors.sc};
+                  text-align: center;
+                  display: block;
+                  margin-top: 2px;
+                `}
+              >
+                {additionalContent}
+              </span>
+            </div>
+          )}
+        </StyledButton>
+        {countTotal !== null && (
+          <>
+            <div
+              color={countVariant}
+              css={`
+                width: 0;
+                height: 0;
+                border-top: 7px solid transparent;
+                border-bottom: 7px solid transparent;
+                border-right: 7px solid
+                  ${({ theme, color }) =>
+                    color === 'light' ? theme.colors.p : theme.colors.pc};
+                align-self: center;
+              `}
+            />
+            <div
+              color={countVariant}
+              css={`
+                display: flex;
+                background: ${({ theme, color }) =>
+                  color === 'light' ? theme.colors.p : theme.colors.pc};
+                padding: 0 ${({ theme }) => theme.space[3]}px;
+                border-radius: ${({ theme }) => theme.br};
+              `}
+            >
+              <div
+                css={`
+                  margin: 0 auto;
+                  display: flex;
+                  align-self: center;
+                `}
+              >
+                <Body2
+                  color={countVariant === 'light' ? 'pc' : 'p'}
+                  weight="bold"
+                >
+                  {shortenedTotal}
+                </Body2>
+              </div>
+            </div>
+          </>
         )}
-      </StyledButton>
+      </div>
     );
   }
 );

@@ -99,4 +99,42 @@ describe('<Button />', () => {
     rerender(<Button additionalContent={additionalContent}>Button</Button>);
     expect(console.error).toHaveBeenCalledTimes(1);
   });
+
+  it('renders countTotal correctly', () => {
+    const { getByText, getByRole, rerender } = render(
+      <Button countTotal={0} countVariant="light">
+        Button
+      </Button>
+    );
+
+    expect(getByText('0')).toBeInTheDocument();
+
+    rerender(<Button countTotal={2}>Button</Button>);
+    user.click(getByRole('button'));
+    expect(getByText('2')).toBeInTheDocument();
+
+    rerender(<Button countTotal={200}>Button</Button>);
+    expect(getByText('200')).toBeInTheDocument();
+
+    rerender(<Button countTotal={2360}>Button</Button>);
+    expect(getByText('2.3k')).toBeInTheDocument();
+
+    rerender(<Button countTotal={23600}>Button</Button>);
+    expect(getByText('23.6k')).toBeInTheDocument();
+
+    rerender(<Button countTotal={236100}>Button</Button>);
+    expect(getByText('236.1k')).toBeInTheDocument();
+
+    rerender(<Button countTotal={2361000}>Button</Button>);
+    expect(getByText('2.3m')).toBeInTheDocument();
+
+    rerender(<Button countTotal={2361000}>Button</Button>);
+    expect(getByText('2.3m')).toBeInTheDocument();
+
+    rerender(<Button countTotal={23610000}>Button</Button>);
+    expect(getByText('23.6m')).toBeInTheDocument();
+
+    rerender(<Button countTotal={236100000}>Button</Button>);
+    expect(getByText('236.1m')).toBeInTheDocument();
+  });
 });

@@ -59,6 +59,7 @@ const ModalComposition = ({
 
   const onClose = () => {
     onRequestClose();
+    /* istanbul ignore next */
     setTimeout(() => {
       setOpenTabPanel(defaultTab);
     }, 300);
