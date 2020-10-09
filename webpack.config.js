@@ -4,6 +4,7 @@ const path = require('path');
 module.exports = {
   mode: 'production',
   target: 'node',
+  devtool: 'source-map',
   resolve: {
     modules: ['node_modules', path.resolve(__dirname, 'src')],
   },
