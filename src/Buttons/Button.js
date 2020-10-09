@@ -205,6 +205,7 @@ export const buttonTypes = {
   additionalContent: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   countTotal: PropTypes.number,
   countVariant: PropTypes.oneOf(['light', 'dark']),
+  className: PropTypes.string,
 };
 
 const defaultProps = {
@@ -218,6 +219,7 @@ const defaultProps = {
   additionalContent: '',
   countTotal: null,
   countVariant: 'dark',
+  className: '',
 };
 
 const Button = forwardRef(
@@ -234,6 +236,7 @@ const Button = forwardRef(
       additionalContent,
       countTotal,
       countVariant,
+      className,
       ...restProps
     },
     ref
@@ -270,6 +273,7 @@ const Button = forwardRef(
         css={`
           display: flex;
         `}
+        className={className}
       >
         <StyledButton
           width={width}
