@@ -88,6 +88,7 @@ const Avatar = ({
         css={`
           border-radius: 50%;
           flex-shrink: 0;
+          overflow: hidden;
           ${getSize}
         `}
         {...restProps}
