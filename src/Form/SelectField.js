@@ -63,6 +63,7 @@ const StyledSelect = styled(Select)`
       display: none;
     }
     &__menu {
+      background: ${({ scTheme }) => scTheme.colors.b};
       z-index: 3;
     }
   }
