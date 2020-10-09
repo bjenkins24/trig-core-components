@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'test/utils';
 import ListItemContent from '../ListItemContent';
+import theme from '../../../stories';
 
 describe('<ListItemContent />', () => {
   it('renders with basic props', () => {
@@ -34,5 +35,22 @@ describe('<ListItemContent />', () => {
     expect(
       getByTestId('listItemContent__renderItemNull').firstChild
     ).toBeNull();
+  });
+
+  it('renderItem with variant and size', () => {
+    const { getAllByRole } = render(
+      <ListItemContent
+        variant="dark"
+        size="sm"
+        primary="primary"
+        secondary="secondary"
+      />
+    );
+    expect(getAllByRole('heading')[0]).toHaveStyleRule(
+      `color: ${theme.colors.pc}`
+    );
+    expect(getAllByRole('heading')[1]).toHaveStyleRule(
+      `color: ${theme.colors.ps[100]}`
+    );
   });
 });
