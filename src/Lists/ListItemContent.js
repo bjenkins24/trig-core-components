@@ -1,17 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Heading3, Heading4 } from '../Typography';
-import { HorizontalGroup, VerticalGroup } from '../Groups';
+import { Heading3Styles, Heading4Styles, Body2Styles } from 'Typography';
+import { HorizontalGroup, VerticalGroup } from 'Groups';
 
-const Primary = styled(Heading3)`
-  margin-bottom: 0;
+const Primary = styled.span`
+  ${({ size }) => (size === 'md' ? Heading3Styles : Body2Styles)}
+  margin: 0;
   padding-top: 0.3rem;
+  color: ${({ variant, theme }) =>
+    variant === 'dark' ? theme.colors.pc : 'initial'};
 `;
 
-const Secondary = styled(Heading4)`
+const Secondary = styled.span`
+  ${({ size }) => (size === 'md' ? Heading4Styles : Body2Styles)}
   font-weight: 400;
-  margin-bottom: 0;
+  margin: 0;
+  color: ${({ variant, theme }) =>
+    variant === 'dark' ? theme.colors.ps[100] : 'initial'};
 `;
 
 const defaultProps = {
@@ -21,21 +27,36 @@ const defaultProps = {
       style={{ marginRight: 0 }}
     />
   ),
+  size: 'md',
+  variant: 'light',
 };
 
 const listItemContentTypes = {
   renderItem: PropTypes.func,
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string.isRequired,
+  size: PropTypes.oneOf(['sm', 'md']),
+  variant: PropTypes.oneOf(['light', 'dark']),
 };
 
-const ListItemContent = ({ renderItem, primary, secondary, ...restProps }) => {
+const ListItemContent = ({
+  renderItem,
+  primary,
+  secondary,
+  size,
+  variant,
+  ...restProps
+}) => {
   return (
     <HorizontalGroup margin={1.6} {...restProps}>
       {renderItem()}
       <VerticalGroup>
-        <Primary>{primary}</Primary>
-        <Secondary>{secondary}</Secondary>
+        <Primary as="h3" variant={variant} size={size}>
+          {primary}
+        </Primary>
+        <Secondary as="h4" variant={variant} size={size}>
+          {secondary}
+        </Secondary>
       </VerticalGroup>
     </HorizontalGroup>
   );
