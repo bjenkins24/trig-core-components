@@ -42,13 +42,34 @@ describe('<Avatar />', () => {
     expect(queryByText(initials)).toBeNull();
     expect(getByAltText(fullName)).toBeInTheDocument();
 
-    rerender(<Avatar image={testImage} firstName={firstName} />);
+    rerender(
+      <Avatar
+        image={testImage}
+        imageWidth={12.8}
+        imageHeight={12.8}
+        firstName={firstName}
+      />
+    );
     expect(getByAltText(firstName)).toBeInTheDocument();
 
-    rerender(<Avatar image={testImage} lastName={lastName} />);
+    rerender(
+      <Avatar
+        imageWidth={15}
+        imageHeight={12.8}
+        image={testImage}
+        lastName={lastName}
+      />
+    );
     expect(getByAltText(lastName)).toBeInTheDocument();
 
-    rerender(<Avatar image={testImage} email={email} />);
+    rerender(
+      <Avatar
+        imageWidth={12.8}
+        imageHeight={15}
+        image={testImage}
+        email={email}
+      />
+    );
     expect(getByAltText(email)).toBeInTheDocument();
   });
 });

@@ -12,9 +12,8 @@ const getSize = ({ size }) => {
 };
 
 const Image = styled.img`
-  border-radius: 50%;
-  flex-shrink: 0;
-  ${getSize};
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
 `;
 
 const Initials = styled.div`
@@ -29,6 +28,8 @@ const Initials = styled.div`
 
 const avatarTypes = {
   image: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  imageWidth: PropTypes.number,
+  imageHeight: PropTypes.number,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   size: PropTypes.number,
@@ -41,9 +42,20 @@ const defaultProps = {
   lastName: '',
   size: 3.2,
   email: '',
+  imageWidth: null,
+  imageHeight: null,
 };
 
-const Avatar = ({ image, size, firstName, lastName, email, ...restProps }) => {
+const Avatar = ({
+  image,
+  imageWidth,
+  imageHeight,
+  size,
+  firstName,
+  lastName,
+  email,
+  ...restProps
+}) => {
   const getAlt = () => {
     if (firstName && lastName) {
       return `${firstName} ${lastName}`;
@@ -61,7 +73,28 @@ const Avatar = ({ image, size, firstName, lastName, email, ...restProps }) => {
   };
 
   if (image) {
-    return <Image src={image} alt={getAlt()} {...restProps} />;
+    let width = '100%';
+    let height = '100%';
+    if (imageWidth > imageHeight) {
+      height = `${size}rem`;
+    }
+    if (imageHeight > imageWidth) {
+      width = `${size}rem`;
+    }
+
+    return (
+      <div
+        size={size}
+        css={`
+          border-radius: 50%;
+          flex-shrink: 0;
+          ${getSize}
+        `}
+        {...restProps}
+      >
+        <Image src={image} width={width} height={height} alt={getAlt()} />
+      </div>
+    );
   }
 
   if (firstName || lastName) {

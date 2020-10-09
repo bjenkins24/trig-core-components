@@ -232,7 +232,6 @@ storiesOf('Avatar', module)
     <Avatar
       firstName={text('first name', 'Brian')}
       lastName={text('last name', 'Jenkins')}
-      size={number('size', 3.2)}
     />
   ));
 
