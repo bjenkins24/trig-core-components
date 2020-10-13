@@ -129,11 +129,13 @@ const cardTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   navigationList: PropTypes.array.isRequired,
   href: PropTypes.string.isRequired,
+  openInNewTab: PropTypes.bool,
 };
 
 const defaultProps = {
   renderAvatar: () => <span data-testid="card__avatar-null" />,
   image: null,
+  openInNewTab: false,
 };
 
 const Card = ({
@@ -149,8 +151,15 @@ const Card = ({
   href,
   onClick,
   onClickFavorite,
+  openInNewTab,
   ...restProps
 }) => {
+  const clickableProps = {};
+  if (openInNewTab) {
+    clickableProps.target = '_blank';
+    clickableProps.onClick = () => onClick(id);
+  }
+
   return (
     <Container {...restProps}>
       <ClickableArea
@@ -160,6 +169,7 @@ const Card = ({
           onClick(id);
         }}
         href={href}
+        {...clickableProps}
       >
         <Title>
           <Truncate lines={4}>{title}</Truncate>
