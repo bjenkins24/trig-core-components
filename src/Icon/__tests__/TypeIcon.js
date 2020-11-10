@@ -1,12 +1,14 @@
 import React from 'react';
 import { render } from 'test/utils';
-import FileIcon from 'Icon/FileIcon';
+import TypeIcon from '../TypeIcon';
 
-describe('<FileIcon />', () => {
+describe('<TypeIcon />', () => {
   it('renders and takes basic props', () => {
-    const { getByTitle, rerender } = render(<FileIcon type="ppt" />);
+    const { getByTitle, rerender } = render(
+      <TypeIcon type="application/powerpoint" />
+    );
     expect(getByTitle(/microsoft powerpoint icon/i)).toBeInTheDocument();
-    rerender(<FileIcon type="notarealtype" />);
+    rerender(<TypeIcon type="notarealtype" />);
     expect(getByTitle(/file icon/i)).toBeInTheDocument();
   });
 });

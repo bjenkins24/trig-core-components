@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone-uploader';
 import { uniqueId } from 'lodash';
-import { HorizontalGroup } from './Groups';
+import { HorizontalGroup } from 'Groups';
+import TypeIcon from 'Icon/TypeIcon';
+import { Body2 } from 'Typography';
 import { List, ListItem, ListItemContent } from './Lists';
 import { Button } from './Buttons';
 import Image from './Image';
-import Icon, { FileIcon } from './Icon';
+import Icon from './Icon';
 import Loading from './Loading';
-import { Body2 } from './Typography';
 
 const toTitleCase = (str) => {
   const newString = str.toLowerCase().split(' ');
@@ -166,7 +167,7 @@ const Uploader = ({
           const renderItem = previewUrl ? (
             <PreviewImage src={previewUrl} alt={`${name} preview`} />
           ) : (
-            <FileIcon type={fileExtension} color="pc" size={2.4} />
+            <TypeIcon type={fileExtension} color="pc" size={2.4} />
           );
 
           return (

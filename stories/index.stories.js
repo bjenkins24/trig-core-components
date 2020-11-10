@@ -8,6 +8,7 @@ import { ThemeProvider } from 'styled-components';
 import './consoleOverrides';
 import { Button, ButtonToggle, Fab, ButtonSelect } from '../src/Buttons';
 import Icon from '../src/Icon';
+import TypeIcon from '../src/Icon/TypeIcon';
 import Logo from '../src/Logo';
 import Avatar from '../src/Avatar';
 import { Popover, PopoverNavigation } from '../src/Popovers';
@@ -160,6 +161,13 @@ storiesOf('Icons', module)
   ))
   .addDecorator(withKnobs)
   .add('default', () => <Icon type="collection" size={number('size', 3.2)} />)
+  .add('type icon', () => (
+    <TypeIcon
+      type={select('Icon', icons, 'application/vnd.google-apps.document')}
+      url={text('url', 'https://trello.com')}
+      size={number('size', 3.2)}
+    />
+  ))
   .add('hamburger', () => <Icon type="hamburger" size={number('size', 3.2)} />)
   .add('with count', () => (
     <div

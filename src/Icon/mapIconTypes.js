@@ -1,57 +1,68 @@
 import File from './icons/File';
 import TypeCode from './icons/TypeCode';
-import TypeDoc from './icons/TypeDoc';
-import TypeXls from './icons/TypeXls';
-import TypePpt from './icons/TypePpt';
-import TypeYoutube from './icons/TypeYoutube';
+import TypeWord from './icons/TypeWord';
+import TypeExcel from './icons/TypeExcel';
+import TypePowerpoint from './icons/TypePowerpoint';
+import Link from './icons/Link';
+import TypeGoogleDoc from './icons/TypeGoogleDoc';
+import TypeGoogleForm from './icons/TypeGoogleForm';
+import TypeGoogleSheet from './icons/TypeGoogleSheet';
+import TypeGoogleSlide from './icons/TypeGoogleSlide';
 
 const terminal = { type: TypeCode, title: 'Terminal Icon' };
 const js = { type: TypeCode, title: 'Javascript Icon' };
-const docx = { type: TypeDoc, title: 'Microsoft Word Document Icon' };
-const xls = { type: TypeXls, title: 'Microsoft Excel Icon' };
-const ppt = { type: TypePpt, title: 'Microsoft Powerpoint Icon' };
-const youtube = { type: TypeYoutube, title: 'Youtube Video' };
+const docx = { type: TypeWord, title: 'Microsoft Word Document Icon' };
+const xls = { type: TypeExcel, title: 'Microsoft Excel Icon' };
+const ppt = { type: TypePowerpoint, title: 'Microsoft Powerpoint Icon' };
 
 const types = {
+  // General Links
+  link: {
+    type: Link,
+    title: 'Link Icon',
+    string: 'link',
+  },
+  // Specific Links
+  'application/vnd.google-apps.document': {
+    type: TypeGoogleDoc,
+    title: 'Google Doc Icon',
+  },
+  'application/vnd.google-apps.form': {
+    type: TypeGoogleForm,
+    title: 'Google Form Icon',
+  },
+  'application/vnd.google-apps.presentation': {
+    type: TypeGoogleSlide,
+    title: 'Google Slide Icon',
+  },
+  'application/vnd.google-apps.spreadsheet': {
+    type: TypeGoogleSheet,
+    title: 'Google Sheet Icon',
+  },
   // Code
-  sh: terminal,
-  php: terminal,
-  tpl: terminal,
-  html: terminal,
-  css: terminal,
-  py: terminal,
-  R: terminal,
+  'application/x-bsh': terminal,
+  'application/x-sh': terminal,
+  'application/x-shar': terminal,
+  'text/x-script.sh': terminal,
   // Javascript
-  js,
-  jsx: js,
+  'application/x-javascript': js,
+  'application/javascript': js,
+  'application/ecmascript': js,
+  'text/javascript': js,
+  'text/ecmascript': js,
   // Microsoft word
-  docx,
-  docm: docx,
-  dot: docx,
-  dotx: docx,
-  dotm: docx,
-  doc: docx,
+  'application/msword': docx,
   // Microsoft Excel
-  xls,
-  xla: xls,
-  xlsb: xls,
-  xlsm: xls,
-  xlsx: xls,
-  xlt: xls,
-  xltm: xls,
-  xltx: xls,
-  xlw: xls,
-  csv: xls,
+  'application/excel': xls,
+  'application/vnd.ms-excel': xls,
+  'application/x-msexcel': xls,
+  'application/x-excel': xls,
+  'text/csv': xls,
   // Microsoft Powerpoint
-  ppt,
-  ppa: ppt,
-  ppam: ppt,
-  pps: ppt,
-  ppsm: ppt,
-  ppsx: ppt,
-  pptx: ppt,
-  // Youtube
-  youtube,
+  'application/mspowerpoint': ppt,
+  'application/powerpoint': ppt,
+  'application/vnd.ms-powerpoint': ppt,
+  'application/x-mspowerpoint': ppt,
 };
 
 export default (type) => {

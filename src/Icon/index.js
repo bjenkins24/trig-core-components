@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import FileIcon from './FileIcon';
 import Aggregate from './icons/Aggregate';
 import Alert from './icons/Alert';
 import ArrowDown from './icons/ArrowDown';
@@ -49,14 +48,27 @@ import Search from './icons/Search';
 import ThumbnailView from './icons/ThumbnailView';
 import Trash from './icons/Trash';
 import Twitter from './icons/Twitter';
+import TypeAirtable from './icons/TypeAirtable';
+import TypeAmplitude from './icons/TypeAmplitude';
+import TypeAsana from './icons/TypeAsana';
+import TypeBitbucket from './icons/TypeBitbucket';
 import TypeCode from './icons/TypeCode';
-import TypeDoc from './icons/TypeDoc';
-import TypePpt from './icons/TypePpt';
-import TypeXls from './icons/TypeXls';
+import TypeConfluence from './icons/TypeConfluence';
+import TypeExcel from './icons/TypeExcel';
+import TypeFigma from './icons/TypeFigma';
+import TypeGithub from './icons/TypeGithub';
+import TypeGoogleDoc from './icons/TypeGoogleDoc';
+import TypeGoogleForm from './icons/TypeGoogleForm';
+import TypeGoogleSheet from './icons/TypeGoogleSheet';
+import TypeGoogleSlide from './icons/TypeGoogleSlide';
+import TypeJira from './icons/TypeJira';
+import TypeNotion from './icons/TypeNotion';
+import TypePowerpoint from './icons/TypePowerpoint';
+import TypeTrello from './icons/TypeTrello';
+import TypeTypeform from './icons/TypeTypeform';
+import TypeWord from './icons/TypeWord';
 import TypeYoutube from './icons/TypeYoutube';
 import Underline from './icons/Underline';
-
-export { FileIcon };
 
 export const iconComponents = {
   aggregate: Aggregate,
@@ -94,9 +106,9 @@ export const iconComponents = {
   'list-unordered': ListUnordered,
   loading: Loading,
   lock: Lock,
+  'new-window': NewWindow,
   'number-one': NumberOne,
   'number-two': NumberTwo,
-  'new-window': NewWindow,
   open: Open,
   organize: Organize,
   plus: Plus,
@@ -104,13 +116,28 @@ export const iconComponents = {
   'row-view': RowView,
   search: Search,
   twitter: Twitter,
+  'type-airtable': TypeAirtable,
+  'type-amplitude': TypeAmplitude,
+  'type-asana': TypeAsana,
+  'type-bitbucket': TypeBitbucket,
+  'type-code': TypeCode,
+  'type-confluence': TypeConfluence,
+  'type-excel': TypeExcel,
+  'type-figma': TypeFigma,
+  'type-github': TypeGithub,
+  'type-google-doc': TypeGoogleDoc,
+  'type-google-form': TypeGoogleForm,
+  'type-google-sheet': TypeGoogleSheet,
+  'type-google-slide': TypeGoogleSlide,
+  'type-jira': TypeJira,
+  'type-notion': TypeNotion,
+  'type-powerpoint': TypePowerpoint,
+  'type-trello': TypeTrello,
+  'type-typeform': TypeTypeform,
+  'type-word': TypeWord,
+  'type-youtube': TypeYoutube,
   'thumbnail-view': ThumbnailView,
   trash: Trash,
-  'type-code': TypeCode,
-  'type-doc': TypeDoc,
-  'type-ppt': TypePpt,
-  'type-xls': TypeXls,
-  'type-youtube': TypeYoutube,
   underline: Underline,
 };
 

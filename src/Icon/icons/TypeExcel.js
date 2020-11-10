@@ -2,7 +2,7 @@ import React from 'react';
 import IconWrapper from '../IconWrapper';
 import propTypes from '../propTypes';
 
-const TypeXls = ({ title, ...restProps }) => {
+const TypeExcel = ({ title, ...restProps }) => {
   return (
     <IconWrapper title={title} {...restProps}>
       <g fill="none" fillRule="evenodd">
@@ -24,10 +24,10 @@ const TypeXls = ({ title, ...restProps }) => {
   );
 };
 
-TypeXls.defaultProps = {
-  title: 'Type XLS Icon',
+TypeExcel.defaultProps = {
+  title: 'Excel Icon',
 };
 
-TypeXls.propTypes = propTypes;
+TypeExcel.propTypes = propTypes;
 
-export default TypeXls;
+export default TypeExcel;

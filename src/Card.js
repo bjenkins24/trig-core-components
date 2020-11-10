@@ -6,7 +6,8 @@ import Truncate from 'react-truncate';
 import { Heading1, Heading3, Heading4, TinyText } from 'Typography';
 import { HorizontalGroup } from 'Groups';
 import Image from 'Image';
-import Icon, { FileIcon } from 'Icon';
+import Icon from 'Icon';
+import TypeIcon from 'Icon/TypeIcon';
 import { format } from 'utils/dateFns';
 import PopoverNavigation from './Popovers/PopoverNavigation';
 
@@ -87,7 +88,7 @@ const Footer = styled(HorizontalGroup)`
   padding: 2.9rem 1.6rem 1.6rem 1.6rem;
 `;
 
-const TypeIcon = styled(FileIcon)`
+const CardType = styled(TypeIcon)`
   margin: 0 auto;
 `;
 
@@ -155,6 +156,7 @@ const Card = ({
   ...restProps
 }) => {
   const clickableProps = {};
+  /* istanbul ignore next */
   if (openInNewTab) {
     clickableProps.target = '_blank';
     clickableProps.onClick = () => onClick(id);
@@ -184,7 +186,7 @@ const Card = ({
           </DateCreated>
         </Meta>
         <Type>
-          <TypeIcon type={type} size={1.6} />
+          <CardType url={href} type={type} size={1.6} />
         </Type>
         <ThumbnailContainer>
           <Hover>

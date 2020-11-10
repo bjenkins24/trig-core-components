@@ -2,7 +2,7 @@ import React from 'react';
 import IconWrapper from '../IconWrapper';
 import propTypes from '../propTypes';
 
-const TypeDoc = ({ title, ...restProps }) => {
+const TypeWord = ({ title, ...restProps }) => {
   return (
     <IconWrapper title={title} {...restProps}>
       <g fill="none" fillRule="evenodd">
@@ -24,10 +24,10 @@ const TypeDoc = ({ title, ...restProps }) => {
   );
 };
 
-TypeDoc.defaultProps = {
-  title: 'Doc Icon',
+TypeWord.defaultProps = {
+  title: 'Word Icon',
 };
 
-TypeDoc.propTypes = propTypes;
+TypeWord.propTypes = propTypes;
 
-export default TypeDoc;
+export default TypeWord;

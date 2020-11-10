@@ -118,7 +118,7 @@ describe('<Uploader />', () => {
       />
     );
 
-    expect(getByTitle(/javascript icon/i)).toBeInTheDocument();
+    expect(getByTitle(/file icon/i)).toBeInTheDocument();
     expect(getByTitle(/check circle icon/i)).toBeInTheDocument();
     expect(getByText(/click to edit details/i)).toBeInTheDocument();
     user.click(getByTitle(/close icon/i));

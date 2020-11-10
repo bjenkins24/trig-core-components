@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon, { FileIcon } from 'Icon';
+import Icon from 'Icon';
+import TypeIcon from 'Icon/TypeIcon';
 import ListItemContent from 'Lists/ListItemContent';
 import ListItem from 'Lists/ListItem';
 import Avatar from 'Avatar';
@@ -41,7 +42,7 @@ const CardItem = ({
       variant={content ? 'withContent' : 'default'}
       onClick={onClick}
       description={content}
-      renderItem={() => <FileIcon type={cardType} size={content ? 3.2 : 2.4} />}
+      renderItem={() => <TypeIcon type={cardType} size={content ? 3.2 : 2.4} />}
       renderContent={() => (
         <ListItemContent
           renderItem={() => <Avatar size={4} {...avatarProps} />}

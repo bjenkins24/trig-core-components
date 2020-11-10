@@ -2,7 +2,7 @@ import React from 'react';
 import IconWrapper from '../IconWrapper';
 import propTypes from '../propTypes';
 
-const TypePpt = ({ title, ...restProps }) => {
+const TypePowerpoint = ({ title, ...restProps }) => {
   return (
     <IconWrapper title={title} {...restProps}>
       <g fill="none" fillRule="evenodd">
@@ -25,10 +25,10 @@ const TypePpt = ({ title, ...restProps }) => {
   );
 };
 
-TypePpt.defaultProps = {
-  title: 'PPT Icon',
+TypePowerpoint.defaultProps = {
+  title: 'Powerpoint Icon',
 };
 
-TypePpt.propTypes = propTypes;
+TypePowerpoint.propTypes = propTypes;
 
-export default TypePpt;
+export default TypePowerpoint;

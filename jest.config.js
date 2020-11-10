@@ -25,6 +25,7 @@ module.exports = {
     '!**/src/Form/index.js',
     '!**/src/Buttons/index.js',
     '!**/src/Tabs/index.js',
+    '!**/src/utils/mapLinkToIcon.js',
   ],
   coverageThreshold: {
     global: {
