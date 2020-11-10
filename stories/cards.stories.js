@@ -15,7 +15,7 @@ const CreateCard = () => {
   return (
     <Card
       id={1}
-      href="https://google.com"
+      href={text('href', 'https://trello.com')}
       onClick={action('clicked')}
       onClickFavorite={() => setIsFavorited(!isFavorited)}
       onClickComment={action('comments')}
@@ -31,8 +31,12 @@ const CreateCard = () => {
       image={text('image', 'https://picsum.photos/300/300')}
       type={select(
         'type',
-        { youtube: 'youtube', doc: 'doc', xls: 'xls', ppt: 'ppt', code: 'sh' },
-        'youtube'
+        {
+          link: 'link',
+          googleDoc: 'application/vnd.google-apps.document',
+          word: 'application/msword',
+        },
+        'link'
       )}
       totalFavorites={number('totalFavorites', 10)}
       isFavorited={isFavorited}

@@ -5,6 +5,18 @@ const mapLinkToIcon = (url) => {
   } catch (error) {
     // If it's not a valid url it will fall through to 'link'
   }
+  if (url.includes('docs.google') && url.includes('document')) {
+    return 'type-google-doc';
+  }
+  if (url.includes('docs.google') && url.includes('spreadsheets')) {
+    return 'type-google-sheet';
+  }
+  if (url.includes('docs.google') && url.includes('presentation')) {
+    return 'type-google-slide';
+  }
+  if (url.includes('docs.google') && url.includes('forms')) {
+    return 'type-google-form';
+  }
   if (host.includes('amplitude')) {
     return 'type-amplitude';
   }
