@@ -28,6 +28,7 @@ const CreateCard = () => {
           lastName={text('lastName', 'Jenkins')}
         />
       )}
+      isLoading
       image={text('image', 'https://picsum.photos/300/300')}
       type={select(
         'type',

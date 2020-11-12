@@ -41,12 +41,14 @@ describe('<Card />', () => {
       getByTestId,
       queryByAltText,
       rerender,
+      queryByTitle,
     } = render(buildCard());
 
     expect(getByText(totalFavorites.toString())).toBeInTheDocument();
     expect(getAllByText(title)).toBeTruthy();
     expect(getByTitle(/Favorited/i)).toBeInTheDocument();
     expect(getByTestId(/card__avatar-null/i)).toBeInTheDocument();
+    expect(getByTitle(/more options/i)).toBeInTheDocument();
     expect(queryByAltText(alt)).toBeNull();
 
     user.click(getByTestId(/card__clickable-area/i));
@@ -57,6 +59,10 @@ describe('<Card />', () => {
 
     rerender(buildCard({ isFavorited: false }));
     expect(getByTitle(/Favorite/i)).toBeInTheDocument();
+
+    rerender(buildCard({ isLoading: true }));
+    expect(getByTitle(/syncing card.../i)).toBeInTheDocument();
+    expect(queryByTitle(/more options/i)).toBeNull();
   });
 
   it('renders thumbnail', () => {

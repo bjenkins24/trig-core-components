@@ -9,6 +9,7 @@ import Image from 'Image';
 import Icon from 'Icon';
 import TypeIcon from 'Icon/TypeIcon';
 import { format } from 'utils/dateFns';
+import Loading from './Loading';
 import PopoverNavigation from './Popovers/PopoverNavigation';
 
 const Container = styled.div`
@@ -125,6 +126,7 @@ const cardTypes = {
   type: PropTypes.string.isRequired,
   totalFavorites: PropTypes.number.isRequired,
   isFavorited: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
   onClickFavorite: PropTypes.func.isRequired,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -137,6 +139,7 @@ const defaultProps = {
   renderAvatar: () => <span data-testid="card__avatar-null" />,
   image: null,
   openInNewTab: false,
+  isLoading: false,
 };
 
 const Card = ({
@@ -148,6 +151,7 @@ const Card = ({
   type,
   totalFavorites,
   isFavorited,
+  isLoading,
   navigationList,
   href,
   onClick,
@@ -235,13 +239,26 @@ const Card = ({
             </IconGroup>
           </HorizontalGroup>
         </div>
-        <PopoverNavigation placement="top" navigationList={navigationList}>
-          <HorizontalDots
-            title="More Options"
-            data-testid="card__more"
-            type="horizontal-dots"
+        {isLoading && (
+          <Loading
+            size={1.6}
+            title="Syncing Card..."
+            color="ps.200"
+            css={`
+              margin-left: auto;
+              margin-right: ${({ theme }) => theme.space[2]}px;
+            `}
           />
-        </PopoverNavigation>
+        )}
+        {!isLoading && (
+          <PopoverNavigation placement="top" navigationList={navigationList}>
+            <HorizontalDots
+              title="More Options"
+              data-testid="card__more"
+              type="horizontal-dots"
+            />
+          </PopoverNavigation>
+        )}
       </Footer>
     </Container>
   );
