@@ -23,7 +23,7 @@ describe('toast', () => {
       message: 'hello',
       type: 'success',
     });
-    expect(result.options).toEqual(3500);
+    expect(result.options).toEqual(3000);
   });
   it('has the right timeout for an error', () => {
     const result = showToast({

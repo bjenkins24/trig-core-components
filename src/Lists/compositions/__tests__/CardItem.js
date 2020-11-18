@@ -1,13 +1,14 @@
 import React from 'react';
 import { render } from 'test/utils';
 import user from '@testing-library/user-event';
+import { format } from 'utils/dateFns';
 import CardItem from '../CardItem';
 
 describe('<CardItem />', () => {
   it('renders correctly', () => {
     const content = 'content';
     const title = 'My cool title';
-    const date = 'My cool date';
+    const date = new Date('2020-11-18T04:06:43+0000');
     const { getByText, queryByText, rerender, container } = render(
       <CardItem
         href="https://google.com"
@@ -15,7 +16,7 @@ describe('<CardItem />', () => {
         cardType="doc"
         avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
         title={title}
-        dateTimeCreated={date}
+        dateTime={date}
         moreProps={{ onClick: () => null }}
         favoriteProps={{ onClick: () => null }}
       />
@@ -23,14 +24,16 @@ describe('<CardItem />', () => {
     expect(getByText(content)).toBeInTheDocument();
     expect(getByText('BJ')).toBeInTheDocument();
     expect(getByText(title)).toBeInTheDocument();
-    expect(getByText(date)).toBeInTheDocument();
+    expect(
+      getByText(`${format(date, 'MMM d, yyyy')} at ${format(date, 'h:mm a')}`)
+    ).toBeInTheDocument();
 
     rerender(
       <CardItem
         cardType="doc"
         avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
         title={title}
-        dateTimeCreated={date}
+        dateTime={date}
         moreProps={{ onClick: () => null }}
         favoriteProps={{ onClick: () => null }}
       />
@@ -45,7 +48,7 @@ describe('<CardItem />', () => {
         cardType="doc"
         avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
         title={title}
-        dateTimeCreated={date}
+        dateTime={date}
         moreProps={{ onClick: () => null }}
         favoriteProps={{ onClick: () => null }}
       />

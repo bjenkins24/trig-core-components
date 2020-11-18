@@ -5,6 +5,7 @@ import TypeIcon from 'Icon/TypeIcon';
 import ListItemContent from 'Lists/ListItemContent';
 import ListItem from 'Lists/ListItem';
 import Avatar from 'Avatar';
+import { format } from 'utils/dateFns';
 
 const CardItemProps = {
   href: PropTypes.string,
@@ -13,7 +14,7 @@ const CardItemProps = {
   content: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   avatarProps: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
-  dateTimeCreated: PropTypes.string.isRequired,
+  dateTime: PropTypes.instanceOf(Date).isRequired,
   moreProps: PropTypes.object.isRequired,
   favoriteProps: PropTypes.object.isRequired,
 };
@@ -31,7 +32,7 @@ const CardItem = ({
   cardType,
   avatarProps,
   title,
-  dateTimeCreated,
+  dateTime,
   content,
   moreProps,
   favoriteProps,
@@ -47,7 +48,10 @@ const CardItem = ({
         <ListItemContent
           renderItem={() => <Avatar size={4} {...avatarProps} />}
           primary={title}
-          secondary={dateTimeCreated}
+          secondary={`${format(dateTime, 'MMM d, yyyy')} at ${format(
+            dateTime,
+            'h:mm a'
+          )}`}
         />
       )}
       actions={[

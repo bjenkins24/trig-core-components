@@ -15,7 +15,7 @@ const showToast = ({
   timeout = false,
   autoClose = true,
 }) => {
-  let toastTimeout = 3500;
+  let toastTimeout = 3000;
   if (type === 'error') {
     toastTimeout = 10000;
   }

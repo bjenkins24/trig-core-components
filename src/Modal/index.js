@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
     align-items: center;
     opacity: 0;
     transition: opacity ${transitionTimeMS}ms ease-in-out;
-    z-index: 1000;
+    z-index: 1200;
     &--after-open {
       opacity: 1;
     }

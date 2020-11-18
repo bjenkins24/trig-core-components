@@ -9,6 +9,7 @@ import Avatar from '../src/Avatar';
 import './consoleOverrides';
 import themeForProvider from './theme';
 import CardItem from '../src/Lists/compositions/CardItem';
+import Highlight from '../src/Highlight';
 
 // eslint-disable-next-line react/prop-types
 const StoryListItem = ({ onClick }) => {
@@ -75,13 +76,28 @@ storiesOf('Lists', module)
     >
       <CardItem
         onClick={action('clicked!')}
-        content="This is a test a really really really long test This is a test a really really really long test This is a test a really really really long test This is a test a really really really long test "
+        content={
+          <Highlight
+            style={{
+              background: 'yellow',
+              color: 'black',
+              display: 'inline-block',
+              padding: '0 4px',
+            }}
+            string="<em>Test</em> today <em>is</em> cool"
+          />
+        }
         onClickFavorite={action('clicked heart')}
         avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
         cardType="doc"
-        title="How To Memorize Music 5 Times Faster"
+        title={
+          <Highlight
+            string="How To Memorize Music 5 <em>Times</em> Faster"
+            style={{ color: 'blue' }}
+          />
+        }
         onClickMore={action('Clicked more')}
-        dateTimeCreated="Oct 27, 2018 at 5:35pm"
+        dateTime={new Date('2020-11-18T04:06:43+0000')}
         href="https://google.com"
       />
     </div>

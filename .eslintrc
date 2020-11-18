@@ -2,9 +2,10 @@
   "extends": ["@trig-app"],
   "overrides": [
     {
-      "files": ["**/src/**"],
+      "files": ["**/src/**", "**/stories/**"],
       "settings": { "import/resolver": "webpack" },
       "rules": {
+        "react/jsx-wrap-multilines": 0,
         "react/no-array-index-key": 0
       }
     },

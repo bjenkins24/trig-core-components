@@ -75,6 +75,7 @@ export { default as Carousel } from './Carousel';
 export { default as Card } from './Card';
 export { default as Collection } from 'Collection';
 export { default as Icon } from './Icon';
+export { default as Highlight } from './Highlight';
 export { default as TypeIcon } from './Icon/TypeIcon';
 export { default as Loading } from './Loading';
 export { default as Modal } from './Modal';
