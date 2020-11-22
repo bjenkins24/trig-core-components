@@ -26,7 +26,7 @@ const Highlight = ({ string, styles, tag }) => {
         }
       `}
     >
-      <ReactMarkdown allowDangerousHtml>{finalString}</ReactMarkdown>{' '}
+      <ReactMarkdown allowDangerousHtml>{finalString}</ReactMarkdown>
     </div>
   );
 };
