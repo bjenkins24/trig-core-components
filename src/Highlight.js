@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown/with-html';
-import { combineAdjacentTags } from 'utils/combineAdjacentTags';
+import { mungeHighlight } from 'utils/mungeHighlight';
 
 const HighlightTypes = {
   string: PropTypes.string.isRequired,
@@ -10,12 +10,12 @@ const HighlightTypes = {
 };
 
 const defaultProps = {
-  tag: 'span',
+  tag: 'mark',
 };
 
 const Highlight = ({ string, styles, tag }) => {
   const finalString = useMemo(() => {
-    return combineAdjacentTags({ string, tag });
+    return mungeHighlight({ string, tag });
   }, [string, tag]);
 
   return (

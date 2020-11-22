@@ -29,9 +29,9 @@ const StoryListItem = ({ onClick }) => {
 
 const string = `November 9, 2015\n
 \n
-<span>Product</span> managers must think beyond organizational silos if they want to be successful. After all, they are paid to deliver a complete customer experience. That means a big part of the job is managing cross-functional relationships with teams like Customer Success.\n
+<mark>Product</mark> managers must think beyond organizational silos if they want to be successful. After all, they are paid to deliver a complete customer experience. That means a big part of the job is managing cross-functional relationships with teams like Customer Success.\n
 \n
-In my consulting work, <span>I’ve</span> <span>helped</span> <span>SaaS</span> <span>clients</span> <span>generate</span> <span>millions</span> of dollars in revenue growth during short time periods using a few simple ideas. One of the major ways that I helped was getting product managers to be cross-functional leaders.\n
+In my consulting work, <mark>I’ve</mark> <mark>helped</mark> <mark>SaaS</mark> <mark>clients</mark> <mark>generate</mark> <mark>millions</mark> of dollars in revenue growth during short time periods using a few simple ideas. One of the major ways that I helped was getting product managers to be cross-functional leaders.\n
 \n
 I want to focus on the relationship between product management and Customer Success in this article because they have emerged as the new, new sales and support teams in many emerging technology companies.\n
 \n
@@ -45,7 +45,7 @@ Whether you are a product manager helping your Customer Success (CS) team or a C
 \n
 - Second Item
 \n
-<span>**1)</span> <span>Don't</span> <span>wait</span> <span>to</span> <span>engage**</span> \n
+<mark>**1)</mark> <mark>Don't</mark> <mark>wait</mark> <mark>to</mark> <mark>engage**</mark> \n
 The traditional approach to Customer Success in SaaS subscription businesses has largely been in the post-conversion phase, where CS teams onboard and service new customers. But engaging customers from the start — right when they enter your acquisition channel — is a much better idea.\n
 \n
 This entry point is when prospects are most likely to be transparent. You can ask them questions, understand their motivations, internalize their needs, and position your product to serve their long-term visions. The product manager must be heavily involved in these early conversations. This is where PMs can create feedback loops with CS to create successful conversions from trial to retained users.\n
