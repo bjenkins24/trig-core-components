@@ -17,6 +17,8 @@ const CardItemProps = {
   dateTime: PropTypes.instanceOf(Date).isRequired,
   moreProps: PropTypes.object.isRequired,
   favoriteProps: PropTypes.object.isRequired,
+  openInNewTab: PropTypes.bool,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 /* istanbul ignore next */
@@ -24,10 +26,13 @@ const defaultProps = {
   href: '',
   onClick: null,
   content: '',
+  openInNewTab: false,
 };
 
 const CardItem = ({
+  id,
   href,
+  openInNewTab,
   onClick,
   cardType,
   avatarProps,
@@ -37,11 +42,24 @@ const CardItem = ({
   moreProps,
   favoriteProps,
 }) => {
+  const clickableProps = {};
+  /* istanbul ignore next */
+  if (openInNewTab) {
+    clickableProps.target = '_blank';
+    clickableProps.onClick = () => onClick(id);
+  }
+
   return (
     <ListItem
       href={href}
       variant={content ? 'withContent' : 'default'}
-      onClick={onClick}
+      onClick={
+        /* istanbul ignore next */
+        (e) => {
+          e.preventDefault();
+          onClick(id);
+        }
+      }
       description={content}
       renderItem={() => <TypeIcon type={cardType} size={content ? 3.2 : 2.4} />}
       renderContent={() => (
@@ -65,6 +83,7 @@ const CardItem = ({
         // />,
         <Icon type="horizontal-dots" color="s" size={1.6} {...moreProps} />,
       ]}
+      {...clickableProps}
     />
   );
 };

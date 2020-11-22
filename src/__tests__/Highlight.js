@@ -3,15 +3,13 @@ import { render } from 'test/utils';
 import Highlight from '../Highlight';
 
 it('formats highlights correctly', () => {
-  const testString = '<em>Test</em> today <em>is</em> cool';
+  const testString =
+    '<highlight>Test</highlight> today <hightlight>is</hightlight> cool';
 
-  const { getByText, queryByText } = render(
-    <Highlight string={testString} style={{ fontWeight: 'bold' }} />
+  const { getByText } = render(
+    <Highlight string={testString} styles="font-weight: bold" />
   );
 
   expect(getByText('Test')).toBeInTheDocument();
-  expect(getByText('today')).toBeInTheDocument();
   expect(getByText('is')).toBeInTheDocument();
-  expect(getByText('cool')).toBeInTheDocument();
-  expect(queryByText('Test today')).toBeNull();
 });
