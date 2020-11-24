@@ -14,12 +14,13 @@ import CardItem from '../src/Lists/compositions/CardItem';
 const StoryListItem = ({ onClick }) => {
   return (
     <CardItem
+      openInNewTab
       onClick={onClick}
-      onClickFavorite={action('clicked heart')}
       avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
-      cardType="doc"
+      cardType="link"
+      favoriteProps={{}}
+      moreProps={{}}
       title="How To Memorize Music 5 Times Faster"
-      onClickMore={action('Clicked more')}
       dateTime={new Date('2020-11-18T04:06:43+0000')}
       href="https://google.com"
     />
@@ -105,6 +106,7 @@ storiesOf('Lists', module)
     <div
       css={`
         width: 62rem;
+        list-style-type: none;
       `}
     >
       <StoryListItem />

@@ -87,7 +87,7 @@ const CardItem = ({
           ''
         )
       }
-      renderItem={() => <TypeIcon type={cardType} size={content ? 3.2 : 2.4} />}
+      renderItem={() => <TypeIcon type={cardType} size={3.2} />}
       renderContent={() => (
         <ListItemContent
           renderItem={() => <Avatar size={4} {...avatarProps} />}
@@ -115,13 +115,6 @@ const CardItem = ({
       )}
       actions={[
         <Icon type="heart" color="s" size={1.6} {...favoriteProps} />,
-        // <Icon
-        //   type="comment"
-        //   color="s"
-        //   size={1.6}
-        //   count={}
-        //   onClick={action('clicked comment')}
-        // />,
         <Icon type="horizontal-dots" color="s" size={1.6} {...moreProps} />,
       ]}
       {...clickableProps}

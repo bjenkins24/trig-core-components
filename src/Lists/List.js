@@ -8,6 +8,13 @@ const Container = styled.ul`
   & > li:not(:last-child) a,
   & > li:not(:last-child) {
     border-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  & > li:not(:first-child) a,
+  & > li:not(:first-child) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
   & > li:first-child a,
   & > li:first-child {

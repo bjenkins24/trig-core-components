@@ -6,17 +6,14 @@ import { HorizontalGroup } from 'Groups';
 import { Body2 } from 'Typography';
 
 const Item = styled.div`
-  width: ${({ variant }) => (variant === 'withContent' ? '90px' : '72px')};
+  width: 72px;
   min-height: 7.2rem;
-  background: ${({ theme, variant }) =>
-    variant === 'withContent' ? 'none' : theme.p};
-  margin-right: ${({ variant, theme }) =>
-    variant === 'withContent' ? 0 : theme.space[4]}px;
   display: flex;
   flex-shrink: 0;
 `;
 
 const Container = styled.li`
+  color: ${({ theme }) => theme.colors.p};
   min-height: 7.2rem;
   border: 0.1rem solid ${({ theme }) => theme.ps[100]};
   display: ${({ href }) => (href ? 'block' : 'flex')};
@@ -24,19 +21,10 @@ const Container = styled.li`
   cursor: ${({ isClickable }) => (isClickable ? 'pointer' : 'default')};
   text-decoration: none;
   background: ${({ theme }) => theme.bs[200]};
-  border-radius: ${({ theme, variant }) =>
-    variant === 'withContent' ? theme.br : 0};
+  border-radius: ${({ theme }) => theme.br};
   &:hover {
     background: ${({ isClickable, theme }) =>
       isClickable ? theme.bs[300] : 'none'};
-  }
-  &:hover ${Item} {
-    background: ${({ theme, variant, isClickable }) => {
-      if (!isClickable) {
-        return theme.p;
-      }
-      return variant === 'withContent' ? 'none' : theme.ps[400];
-    }};
   }
 `;
 
@@ -75,17 +63,16 @@ const ListItemContent = ({
   renderItem,
   renderContent,
   actionClass,
-  variant,
 }) => {
   return (
     <>
-      <Item variant={variant}>
-        <ItemContent variant={variant} data-testid="listItem__itemContent">
+      <Item>
+        <ItemContent data-testid="listItem__itemContent">
           {renderItem()}
         </ItemContent>
       </Item>
       <Content>{renderContent()}</Content>
-      <Actions variant={variant} margin={1.6}>
+      <Actions margin={1.6}>
         {actions.map((action) => (
           <Action className={actionClass} key={uniqueId('actions')}>
             {action}
@@ -176,7 +163,6 @@ const ListItem = ({
     return (
       <li {...restProps}>
         <Container
-          variant={description ? 'withContent' : 'default'}
           as="a"
           onClick={clickListItem}
           href={href}
@@ -190,7 +176,6 @@ const ListItem = ({
             `}
           >
             <ListItemContent
-              variant={description ? 'withContent' : 'default'}
               actions={actions}
               renderItem={renderItem}
               renderContent={renderContent}
@@ -205,14 +190,12 @@ const ListItem = ({
 
   return (
     <Container
-      variant={description ? 'withContent' : 'default'}
       onClick={clickListItem}
       isClickable={href || onClick}
       data-testid="list-item__container"
       {...restProps}
     >
       <ListItemContent
-        variant={description ? 'withContent' : 'default'}
         actions={actions}
         renderItem={renderItem}
         renderContent={renderContent}
