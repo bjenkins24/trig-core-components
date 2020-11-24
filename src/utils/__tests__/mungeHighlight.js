@@ -18,4 +18,27 @@ describe('mungeHighlight()', () => {
       );
     });
   });
+
+  it('returns empty string if empty', () => {
+    const results = mungeHighlight({ string: '', tag: 'mark' });
+    expect(results).toEqual('');
+  });
+
+  it('works with multiple duplicate words', () => {
+    const string = `<mark>Data</mark>** Decision Area The goal of the <mark>Data</mark> Decision Area is to help you define your overall <mark>Data</mark> Strategy. In a nutshell, you need to decide how <mark>data</mark> should flow through the stack to fulfill the user’s needs.`;
+
+    const result = mungeHighlight({ string, tag: 'mark' });
+    const expected = `<mark>Data</mark>** Decision Area The goal of the <mark>Data</mark> Decision Area is to help you define your overall <mark>Data</mark> Strategy. In a nutshell, you need to decide how <mark>data</mark> should flow through the stack to fulfill the user’s needs.`;
+
+    expect(result).toEqual(expected);
+  });
+
+  it('works with double stop words', () => {
+    const string = `<mark>Hello</mark> <mark>there</mark> my name <mark>is</mark> <mark>a</mark> cool one <mark>is</mark> <mark>a</mark> <mark>cool</mark> one.`;
+
+    const result = mungeHighlight({ string, tag: 'mark' });
+    const expected = `<mark>Hello there</mark> my name is a cool one <mark>is a cool</mark> one.`;
+
+    expect(result).toEqual(expected);
+  });
 });

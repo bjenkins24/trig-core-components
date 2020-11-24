@@ -9,7 +9,6 @@ import Avatar from '../src/Avatar';
 import './consoleOverrides';
 import themeForProvider from './theme';
 import CardItem from '../src/Lists/compositions/CardItem';
-import Highlight from '../src/Highlight';
 
 // eslint-disable-next-line react/prop-types
 const StoryListItem = ({ onClick }) => {
@@ -133,28 +132,15 @@ storiesOf('Lists', module)
       `}
     >
       <CardItem
-        onClick={action('clicked!')}
-        content={
-          <Highlight
-            styles={`
-              background: yellow;
-              color: black,
-            `}
-            string={string}
-          />
-        }
+        openInNewTab
+        content={string}
         onClickFavorite={action('clicked heart')}
         avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
         cardType="doc"
-        title={
-          <Highlight
-            string="How To Memorize Music 5 <em>Times</em> Faster"
-            styles="color: blue;"
-          />
-        }
+        title="How To Memorize Music 5 <mark>Times</mark> Faster"
         onClickMore={action('Clicked more')}
         dateTime={new Date('2020-11-18T04:06:43+0000')}
-        href="https://google.com"
+        href="https://www.aha.io/blog/product-managers-customer-success-teams-happy"
       />
     </div>
   ));

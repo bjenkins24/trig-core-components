@@ -124,6 +124,8 @@ const listItemTypes = {
   onClick: PropTypes.func,
   href: PropTypes.string,
   description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  openInNewTab: PropTypes.bool,
+  target: PropTypes.string,
 };
 
 const defaultProps = {
@@ -132,6 +134,8 @@ const defaultProps = {
   href: '',
   description: '',
   onClick: null,
+  openInNewTab: false,
+  target: '_self',
 };
 
 const ListItem = ({
@@ -141,6 +145,8 @@ const ListItem = ({
   onClick,
   href,
   description,
+  openInNewTab,
+  target,
   ...restProps
 }) => {
   const actionClass = 'listItem__action';
@@ -153,11 +159,13 @@ const ListItem = ({
    * @param {*} e
    */
   const clickListItem = (e) => {
-    e.preventDefault();
-    let node = e.target;
-    for (let i = 0; i < 5; i += 1) {
-      if (node.classList && node.classList.contains(actionClass)) return;
-      node = node.parentNode;
+    if (!openInNewTab) {
+      e.preventDefault();
+      let node = e.target;
+      for (let i = 0; i < 5; i += 1) {
+        if (node.classList && node.classList.contains(actionClass)) return;
+        node = node.parentNode;
+      }
     }
     /* istanbul ignore next */
     if (onClick) {
@@ -175,6 +183,7 @@ const ListItem = ({
           href={href}
           isClickable
           data-testid="list-item__container"
+          target={target}
         >
           <div
             css={`
