@@ -135,7 +135,12 @@ storiesOf('Lists', module)
       <CardItem
         openInNewTab
         content={string}
-        onClickFavorite={action('clicked heart')}
+        favoriteProps={{
+          onClick: () => console.log('clicked favorite'),
+        }}
+        moreProps={{
+          onClick: () => console.log('clicked more'),
+        }}
         avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
         cardType="link"
         title="How To Memorize Music 5 <mark>Times</mark> Faster"

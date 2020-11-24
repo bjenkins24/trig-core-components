@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, select, number, text, date } from '@storybook/addon-knobs';
+import { withKnobs, select, number, text } from '@storybook/addon-knobs';
 import Card from '../src/Card';
 import Avatar from '../src/Avatar';
 import Icon from '../src/Icon';
@@ -18,9 +18,8 @@ const CreateCard = () => {
       href={text('href', 'https://trello.com')}
       onClick={action('clicked')}
       onClickFavorite={() => setIsFavorited(!isFavorited)}
-      onClickComment={action('comments')}
       title={text('title', 'Why AI is Going to Take Your Job')}
-      dateTime={date('dateTime', new Date())}
+      dateTime={new Date()}
       renderAvatar={() => (
         <Avatar
           size={1.6}
@@ -28,7 +27,6 @@ const CreateCard = () => {
           lastName={text('lastName', 'Jenkins')}
         />
       )}
-      isLoading
       image={text('image', 'https://picsum.photos/300/300')}
       type={select(
         'type',

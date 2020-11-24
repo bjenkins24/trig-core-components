@@ -159,13 +159,12 @@ const ListItem = ({
    * @param {*} e
    */
   const clickListItem = (e) => {
-    if (!openInNewTab) {
-      e.preventDefault();
-      let node = e.target;
-      for (let i = 0; i < 5; i += 1) {
-        if (node.classList && node.classList.contains(actionClass)) return;
-        node = node.parentNode;
+    let node = e.target;
+    for (let i = 0; i < 5; i += 1) {
+      if (node.classList && node.classList.contains(actionClass)) {
+        e.preventDefault();
       }
+      node = node.parentNode;
     }
     /* istanbul ignore next */
     if (onClick) {

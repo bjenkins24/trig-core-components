@@ -27,7 +27,7 @@ const CardItemProps = {
 /* istanbul ignore next */
 const defaultProps = {
   href: '',
-  onClick: null,
+  onClick: () => null,
   content: '',
   openInNewTab: false,
 };
