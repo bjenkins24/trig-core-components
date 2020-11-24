@@ -2,10 +2,10 @@ import { mungeHighlight, stopWords } from 'utils/mungeHighlight';
 
 describe('mungeHighlight()', () => {
   it('combines correctly', () => {
-    const string = `My Cool test <mark>Product</mark> middle words <mark>Managers</mark> <mark>are</mark> <mark>cool</mark>. But <mark>full</mark>-<mark>text</mark> a <mark>card</mark>_<mark>id</mark> do one by <mark>a</mark> itself <mark>a</mark> <mark>later</mark> like right <mark>here</mark>`;
+    const string = `My Cool test <mark>Product</mark> _middle words_ <mark>Managers</mark> <mark>are</mark> <mark>cool</mark>. But <mark>full</mark>-<mark>text</mark> a <mark>card</mark>_<mark>id</mark> do one by <mark>a</mark> itself <mark>a</mark> <mark>later</mark> like right <mark>here</mark>`;
 
     const result = mungeHighlight({ string, tag: 'mark' });
-    const expected = `My Cool test <mark>Product</mark> middle words <mark>Managers are cool</mark>. But <mark>full-text</mark> a <mark>card_id</mark> do one by a itself <mark>a later</mark> like right <mark>here</mark>`;
+    const expected = `My Cool test <mark>Product</mark> _middle words_ <mark>Managers are cool</mark>. But <mark>full-text</mark> a <mark>card_id</mark> do one by a itself <mark>a later</mark> like right <mark>here</mark>`;
 
     expect(result).toEqual(expected);
   });

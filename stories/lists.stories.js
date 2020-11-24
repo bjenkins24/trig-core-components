@@ -129,6 +129,7 @@ storiesOf('Lists', module)
     <div
       css={`
         width: 62rem;
+        list-style-type: none;
       `}
     >
       <CardItem
@@ -136,7 +137,7 @@ storiesOf('Lists', module)
         content={string}
         onClickFavorite={action('clicked heart')}
         avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
-        cardType="doc"
+        cardType="link"
         title="How To Memorize Music 5 <mark>Times</mark> Faster"
         onClickMore={action('Clicked more')}
         dateTime={new Date('2020-11-18T04:06:43+0000')}

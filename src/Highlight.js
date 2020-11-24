@@ -1,7 +1,6 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown/with-html';
-import { mungeHighlight } from 'utils/mungeHighlight';
 
 const HighlightTypes = {
   string: PropTypes.string.isRequired,
@@ -14,10 +13,6 @@ const defaultProps = {
 };
 
 const Highlight = ({ string, styles, tag }) => {
-  const finalString = useMemo(() => {
-    return mungeHighlight({ string, tag });
-  }, [string, tag]);
-
   return (
     <div
       css={`
@@ -26,7 +21,7 @@ const Highlight = ({ string, styles, tag }) => {
         }
       `}
     >
-      <ReactMarkdown allowDangerousHtml>{finalString}</ReactMarkdown>
+      <ReactMarkdown allowDangerousHtml>{string}</ReactMarkdown>
     </div>
   );
 };

@@ -76,18 +76,37 @@ const CardItem = ({
         }
       }
       description={
-        <Highlight
-          string={mungedContent}
-          styles={`
+        mungedContent ? (
+          <Highlight
+            string={mungedContent}
+            styles={`
             background: rgba(252, 219, 59, 0.32)
           `}
-        />
+          />
+        ) : (
+          ''
+        )
       }
       renderItem={() => <TypeIcon type={cardType} size={content ? 3.2 : 2.4} />}
       renderContent={() => (
         <ListItemContent
           renderItem={() => <Avatar size={4} {...avatarProps} />}
-          primary={mungedTitle}
+          primary={
+            <div
+              css={`
+                p {
+                  margin: 0;
+                }
+              `}
+            >
+              <Highlight
+                string={mungedTitle}
+                styles={`
+                background: rgba(252, 219, 59, 0.32)
+              `}
+              />
+            </div>
+          }
           secondary={`${format(dateTime, 'MMM d, yyyy')} at ${format(
             dateTime,
             'h:mm a'
