@@ -23,6 +23,7 @@ const truncateOnWords = ({ string, totalWords, type }) => {
     if (word.includes('%0A') && type === 'suffix') {
       breakReduce = true;
       let previous = accumulator;
+      /* istanbul ignore next */
       if (accumulator) {
         previous = `${accumulator}%20`;
       }
