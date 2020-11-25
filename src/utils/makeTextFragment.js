@@ -22,7 +22,11 @@ const truncateOnWords = ({ string, totalWords, type }) => {
     }
     if (word.includes('%0A') && type === 'suffix') {
       breakReduce = true;
-      return `${accumulator}%20${
+      let previous = accumulator;
+      if (accumulator) {
+        previous = `${accumulator}%20`;
+      }
+      return `${previous}${
         word
           .split('%0A')
           .join('%20')
