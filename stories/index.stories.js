@@ -6,7 +6,13 @@ import { withKnobs, select, number, text } from '@storybook/addon-knobs';
 
 import { ThemeProvider } from 'styled-components';
 import './consoleOverrides';
-import { Button, ButtonToggle, Fab, ButtonSelect } from '../src/Buttons';
+import {
+  Button,
+  ButtonToggle,
+  Fab,
+  ButtonSelect,
+  ButtonCount,
+} from '../src/Buttons';
 import Icon from '../src/Icon';
 import TypeIcon from '../src/Icon/TypeIcon';
 import Logo from '../src/Logo';
@@ -91,9 +97,9 @@ storiesOf('Button', module)
   })
   .add('With count', () => {
     return (
-      <Button countTotal={149} countVariant="light">
+      <ButtonCount countTotal={149} countVariant="light">
         Follow
-      </Button>
+      </ButtonCount>
     );
   })
   .add('Select', () => {
