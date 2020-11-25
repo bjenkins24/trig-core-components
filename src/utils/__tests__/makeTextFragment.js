@@ -8,24 +8,44 @@ describe('makeTextFragment()', () => {
       url: 'https://google.com/',
     });
     expect(newUrl).toEqual(
-      'https://google.com/#:~:text=Hello%2C%20%26%20there%20my%20name,-cool%20things%20happen%20for&text=cool%20things%20happen%20for-,real%20%2D,-my%20name%20is%20john.&text=my%20name%20is%20john.-,Please%20stop%20me'
+      'https://google.com/#:~:text=Hello%2C,name,-cool%20things%20happen%20for&text=cool%20things%20happen%20for-,real,%2D,-my%20name%20is%20john.&text=my%20name%20is%20john.-,Please,me'
     );
   });
 
-  it('truncates urls correctly', () => {
-    // This string is too long and should get truncated like below
-    const string =
-      '<mark>I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so longI am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long I am testing a url with 2049 characters it shouldnt be so long </mark>';
+  it('keeps fragments short', () => {
+    const string = `
+_This <mark>Roast</mark> Turkey recipe is a holiday staple! Made with a fresh or frozen and thawed turkey, lots of rich butter, fresh herbs, a hint of bright lemon, and flavorful onion and garlic. It’s easy to prepare and it’s sure to impress family and friends!_
+
+I don’t know what it is about roasting a turkey but it can seem like one of the most intimidating things to prepare and cook for the first time.
+   `;
 
     const newUrl = makeTextFragment({
       string,
-      url: 'https://google.com/',
+      url: 'https://www.cookingclassy.com/roast-turkey-recipe/',
     });
 
-    const expectedTruncatedUrl =
-      'https://google.com/#:~:text=I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20longI%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing%20a%20url%20with%202049%20characters%20it%20shouldnt%20be%20so%20long%20I%20am%20testing';
+    expect(newUrl).toEqual(
+      'https://www.cookingclassy.com/roast-turkey-recipe/#:~:text=This-,Roast,-Turkey%20recipe%20is%20a%20holiday'
+    );
+  });
 
-    expect(newUrl).toEqual(expectedTruncatedUrl);
+  it('replace line breaks with commas', () => {
+    const string = `
+_This <mark>Roast Turkey 
+
+recipe is a holiday 
+
+staple!</mark> Made with a fresh or frozen and thawed turkey, lots of rich butter, fresh herbs, a hint of bright lemon, and flavorful onion and garlic. It’s easy to prepare and it’s sure to impress family and friends!_
+   `;
+
+    const newUrl = makeTextFragment({
+      string,
+      url: 'https://www.cookingclassy.com/roast-turkey-recipe/',
+    });
+
+    expect(newUrl).toEqual(
+      'https://www.cookingclassy.com/roast-turkey-recipe/#:~:text=This-,Roast,staple!,-Made%20with%20a%20fresh%20or'
+    );
   });
 
   it('returns the url if empty string', () => {

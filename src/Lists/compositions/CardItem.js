@@ -21,7 +21,6 @@ const CardItemProps = {
   moreProps: PropTypes.object.isRequired,
   favoriteProps: PropTypes.object.isRequired,
   openInNewTab: PropTypes.bool,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 /* istanbul ignore next */
@@ -33,7 +32,6 @@ const defaultProps = {
 };
 
 const CardItem = ({
-  id,
   href,
   openInNewTab,
   onClick,
@@ -49,7 +47,7 @@ const CardItem = ({
   /* istanbul ignore next */
   if (openInNewTab) {
     clickableProps.target = '_blank';
-    clickableProps.onClick = () => onClick(id);
+    clickableProps.onClick = (event) => onClick(event);
   }
   const mungedContent = useMemo(() => {
     return mungeHighlight({ string: content, tag: 'mark' });
@@ -70,9 +68,9 @@ const CardItem = ({
       variant={content ? 'withContent' : 'default'}
       onClick={
         /* istanbul ignore next */
-        (e) => {
-          e.preventDefault();
-          onClick(id);
+        (event) => {
+          event.preventDefault();
+          onClick(event);
         }
       }
       description={

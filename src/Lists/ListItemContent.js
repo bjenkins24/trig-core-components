@@ -33,7 +33,7 @@ const defaultProps = {
 
 const listItemContentTypes = {
   renderItem: PropTypes.func,
-  primary: PropTypes.string.isRequired,
+  primary: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   secondary: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['sm', 'md']),
   variant: PropTypes.oneOf(['light', 'dark']),

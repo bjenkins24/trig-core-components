@@ -1,5 +1,35 @@
 import removeMarkdown from 'remove-markdown';
 
+const truncateOnWords = ({ string, totalWords }) => {
+  return string.split('%20').reduce((accumulator, word, index) => {
+    if (index > totalWords - 1) {
+      return accumulator;
+    }
+    if (accumulator) {
+      return `${accumulator}%20${word}`;
+    }
+    return word;
+  }, '');
+};
+
+const trimSpaces = (string) => {
+  let newString = string;
+  if (newString.substring(0, 3) === '%20') {
+    newString = newString.substring(3);
+  }
+  if (newString.substring(newString.length - 3) === '%20') {
+    newString = newString.slice(0, -3);
+  }
+  return newString;
+};
+
+const mungeString = (string) => {
+  let newString = string;
+  newString = trimSpaces(newString);
+  newString = truncateOnWords({ string: newString, totalWords: 5 });
+  return newString;
+};
+
 export const makeTextFragment = ({ url, string, tag = 'mark' }) => {
   if (!string) return url;
 
@@ -8,7 +38,7 @@ export const makeTextFragment = ({ url, string, tag = 'mark' }) => {
     .join('%2D');
 
   const splitOpenMark = removeMarkdown(
-    // Remove any dashes that are followed by a space - that's markdown for a list that won't be remove
+    // Remove any dashes that are followed by a space - that's markdown for a list that won't be removed
     // because we just encoded it above
     encodedString
       .split('%2D%20')
@@ -28,26 +58,23 @@ export const makeTextFragment = ({ url, string, tag = 'mark' }) => {
     let prefix =
       splitCloseMark[itemKey - 1][splitCloseMark[itemKey - 1].length - 1];
     let [marked, suffix] = item;
-    // Trim first space if it exists
-    if (prefix.substring(0, 3) === '%20') {
-      prefix = prefix.substring(3);
+    prefix = mungeString(prefix)
+      .split('%0A')
+      .join('');
+    // If there's a line break "%0A" then we should make it the textEnd
+    const markedArray = trimSpaces(marked)
+      .split('%0A')
+      .join('%20')
+      .split('%20');
+    if (markedArray.length === 1) {
+      [marked] = markedArray;
+    } else {
+      marked = `${markedArray[0]},${markedArray[markedArray.length - 1]}`;
     }
-    if (marked.substring(0, 3) === '%20') {
-      marked = marked.substring(3);
-    }
-    if (suffix.substring(0, 3) === '%20') {
-      suffix = suffix.substring(3);
-    }
-    // Trim last space if it exists
-    if (prefix.substring(prefix.length - 3) === '%20') {
-      prefix = prefix.slice(0, -3);
-    }
-    if (marked.substring(marked.length - 3) === '%20') {
-      marked = marked.slice(0, -3);
-    }
-    if (suffix.substring(suffix.length - 3) === '%20') {
-      suffix = suffix.slice(0, -3);
-    }
+
+    suffix = mungeString(suffix)
+      .split('%0A')
+      .join('');
 
     if (!finalString) {
       finalString = '#:~:text=';
