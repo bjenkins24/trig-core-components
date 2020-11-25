@@ -136,12 +136,21 @@ const urlEncode = (string) => {
 };
 
 const getFirstWords = ({ stringSplit, totalWords }) => {
+  let breakLineBreak = false;
   const firstWords = stringSplit.reduce((accumulator, word, index) => {
+    if (breakLineBreak) return accumulator;
+    let newWord = word;
     if (index < totalWords) {
-      return `${accumulator}${word} `;
+      if (word.includes('%0A')) {
+        const splitWord = word.split('%0A');
+        breakLineBreak = true;
+        return `${accumulator}${splitWord[0]} `;
+      }
+      return `${accumulator}${newWord} `;
     }
     if (index === totalWords) {
-      return `${accumulator}${word}`;
+      newWord = newWord.split('%0A').join('');
+      return `${accumulator}${newWord}`;
     }
     return accumulator;
   }, '');
@@ -151,6 +160,10 @@ const getFirstWords = ({ stringSplit, totalWords }) => {
 const getLastWords = ({ stringSplit, totalWords }) => {
   const lastWords = stringSplit.reduce((accumulator, word, index) => {
     if (index > stringSplit.length - totalWords - 1) {
+      if (word.includes('%0A')) {
+        const splitLastWord = word.split('%0A');
+        return `${splitLastWord[splitLastWord.length - 1]} `;
+      }
       return `${accumulator}${word} `;
     }
     return accumulator;
@@ -160,7 +173,7 @@ const getLastWords = ({ stringSplit, totalWords }) => {
 
 const makeTextFragmentFromExcerpt = ({ url, string }) => {
   const stringSplit = removeMarkdown(string)
-    .replace(/\s+/g, ' ')
+    .replace(/(?:\r\n|\r|\n)/g, '%0A')
     .split(' ');
 
   return `${url}#:~:text=${getFirstWords({

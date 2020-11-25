@@ -63,8 +63,21 @@ staple!</mark> Made with a fresh or frozen and thawed turkey, lots of rich butte
 });
 
 describe('makeTextFragmentFromExcerpt', () => {
-  it('returns the correct excerpt', () => {
+  it('returns the correct excerpt with no line breaks for five words', () => {
     const string = `- <mark> Hello, & there my name</mark> this is my long suffix and prefix it's more than a bunch of words <mark>real -</mark> Suffix to real.
+
+I am <mark>on a different</mark> line and should not be matched for a suffix to the last mark <mark>Please stop me</mark>`;
+    const url = 'https://google.com';
+    const newUrl = makeTextFragmentFromExcerpt({ url, string });
+
+    expect(newUrl).toEqual(
+      `${url}#:~:text=Hello%2C%20%26%20there%20my%20name,last%20mark%20Please%20stop%20me`
+    );
+  });
+  it('returns the correct excerpt line breaks in the middle of five words', () => {
+    const string = `- <mark> Hello, & there 
+
+my name</mark> this is my long suffix and prefix it's more than a bunch of words <mark>real -</mark> Suffix to real.
 
 I am <mark>on a different</mark> line and should not be matched for a suffix to the last mark <mark>Please 
 
@@ -72,8 +85,6 @@ stop me</mark>`;
     const url = 'https://google.com';
     const newUrl = makeTextFragmentFromExcerpt({ url, string });
 
-    expect(newUrl).toEqual(
-      `${url}#:~:text=Hello%2C%20%26%20there%20my%20name,last%20mark%20Please%20stop%20me`
-    );
+    expect(newUrl).toEqual(`${url}#:~:text=Hello%2C%20%26%20there,stop%20me`);
   });
 });
