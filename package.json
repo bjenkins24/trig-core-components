@@ -1,6 +1,6 @@
 {
   "name": "@trig-app/core-components",
-  "version": "0.1.115",
+  "version": "0.1.116",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
