@@ -8,7 +8,7 @@ import Avatar from 'Avatar';
 import { format } from 'utils/dateFns';
 import { mungeHighlight } from 'utils/mungeHighlight';
 import Highlight from 'Highlight';
-import { makeTextFragment } from 'utils/makeTextFragment';
+import { makeTextFragmentFromExcerpt } from 'utils/makeTextFragment';
 
 const CardItemProps = {
   href: PropTypes.string,
@@ -58,7 +58,7 @@ const CardItem = ({
   }, [title]);
 
   const mungedUrl = useMemo(() => {
-    return makeTextFragment({ url: href, string: mungedContent });
+    return makeTextFragmentFromExcerpt({ url: href, string: mungedContent });
   }, [href, content]);
 
   return (

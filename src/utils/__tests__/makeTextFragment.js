@@ -1,8 +1,11 @@
-import { makeTextFragment } from '../makeTextFragment';
+import {
+  makeTextFragmentFromMarks,
+  makeTextFragmentFromExcerpt,
+} from '../makeTextFragment';
 
-describe('makeTextFragment()', () => {
+describe('makeTextFragmentFromMarks()', () => {
   it('makes a text fragment in the url', () => {
-    const newUrl = makeTextFragment({
+    const newUrl = makeTextFragmentFromMarks({
       string: `- <mark> Hello, & there my name</mark> this is my long suffix and prefix it's more than a bunch of words <mark>real -</mark> Suffix to real.
 
 I am <mark>on a different</mark> line and should not be matched for a suffix to the last mark <mark>Please stop me</mark>`,
@@ -20,7 +23,7 @@ _This <mark>Roast</mark> Turkey recipe is a holiday staple! Made with a fresh or
 I don’t know what it is about roasting a turkey but it can seem like one of the most intimidating things to prepare and cook for the first time.
    `;
 
-    const newUrl = makeTextFragment({
+    const newUrl = makeTextFragmentFromMarks({
       string,
       url: 'https://www.cookingclassy.com/roast-turkey-recipe/',
     });
@@ -39,7 +42,7 @@ recipe is a holiday
 staple!</mark> Made with a fresh or frozen and thawed turkey, lots of rich butter, fresh herbs, a hint of bright lemon, and flavorful onion and garlic. It’s easy to prepare and it’s sure to impress family and friends!_
    `;
 
-    const newUrl = makeTextFragment({
+    const newUrl = makeTextFragmentFromMarks({
       string,
       url: 'https://www.cookingclassy.com/roast-turkey-recipe/',
     });
@@ -51,10 +54,26 @@ staple!</mark> Made with a fresh or frozen and thawed turkey, lots of rich butte
 
   it('returns the url if empty string', () => {
     const url = 'https://google.com';
-    const newUrl = makeTextFragment({
+    const newUrl = makeTextFragmentFromMarks({
       string: '',
       url,
     });
     expect(newUrl).toEqual(url);
+  });
+});
+
+describe('makeTextFragmentFromExcerpt', () => {
+  it('returns the correct excerpt', () => {
+    const string = `- <mark> Hello, & there my name</mark> this is my long suffix and prefix it's more than a bunch of words <mark>real -</mark> Suffix to real.
+
+I am <mark>on a different</mark> line and should not be matched for a suffix to the last mark <mark>Please 
+
+stop me</mark>`;
+    const url = 'https://google.com';
+    const newUrl = makeTextFragmentFromExcerpt({ url, string });
+
+    expect(newUrl).toEqual(
+      `${url}#:~:text=Hello%2C%20%26%20there%20my%20name,last%20mark%20Please%20stop%20me`
+    );
   });
 });

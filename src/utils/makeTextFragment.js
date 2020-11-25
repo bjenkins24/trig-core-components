@@ -62,7 +62,9 @@ const mungeString = ({ string, type }) => {
   return newString;
 };
 
-export const makeTextFragment = ({ url, string, tag = 'mark' }) => {
+// I'm keeping this because I spent hours working on it. But I don't think we'll ever use it
+// Highlighting the excerpt is better
+const makeTextFragmentFromMarks = ({ url, string, tag = 'mark' }) => {
   if (!string) return url;
 
   const encodedString = encodeURIComponent(string)
@@ -120,3 +122,54 @@ export const makeTextFragment = ({ url, string, tag = 'mark' }) => {
 
   return `${url}${finalString}`.substr(0, 1999);
 };
+
+const urlEncode = (string) => {
+  return encodeURIComponent(string)
+    .split('%0A')
+    .join('%20')
+    .split(',')
+    .join('%2C')
+    .split('-')
+    .join('%2D')
+    .split('&')
+    .join('%26');
+};
+
+const getFirstWords = ({ stringSplit, totalWords }) => {
+  const firstWords = stringSplit.reduce((accumulator, word, index) => {
+    if (index < totalWords) {
+      return `${accumulator}${word} `;
+    }
+    if (index === totalWords) {
+      return `${accumulator}${word}`;
+    }
+    return accumulator;
+  }, '');
+  return trimSpaces(urlEncode(firstWords));
+};
+
+const getLastWords = ({ stringSplit, totalWords }) => {
+  const lastWords = stringSplit.reduce((accumulator, word, index) => {
+    if (index > stringSplit.length - totalWords - 1) {
+      return `${accumulator}${word} `;
+    }
+    if (index === stringSplit.length - totalWords + 1) {
+      return `${accumulator}${word}`;
+    }
+    return accumulator;
+  }, '');
+  return trimSpaces(urlEncode(lastWords));
+};
+
+const makeTextFragmentFromExcerpt = ({ url, string }) => {
+  const stringSplit = removeMarkdown(string)
+    .replace(/\s+/g, ' ')
+    .split(' ');
+
+  return `${url}#:~:text=${getFirstWords({
+    stringSplit,
+    totalWords: 5,
+  })},${getLastWords({ stringSplit, totalWords: 5 })}`;
+};
+
+export { makeTextFragmentFromExcerpt, makeTextFragmentFromMarks };
