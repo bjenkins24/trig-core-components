@@ -1,9 +1,33 @@
 import removeMarkdown from 'remove-markdown';
 
-const truncateOnWords = ({ string, totalWords }) => {
-  return string.split('%20').reduce((accumulator, word, index) => {
-    if (index > totalWords - 1) {
+const truncateOnWords = ({ string, totalWords, type }) => {
+  const stringSplit = string.split('%20');
+  let breakReduce = false;
+  return stringSplit.reduce((accumulator, word, index) => {
+    if (breakReduce) {
       return accumulator;
+    }
+    if (
+      (type === 'suffix' && index > totalWords - 1) ||
+      (type === 'prefix' && index < stringSplit.length - totalWords)
+    ) {
+      return accumulator;
+    }
+    if (word.includes('%0A') && type === 'prefix') {
+      const prefixSplit = word
+        .split('%0A')
+        .join('%20')
+        .split('%20');
+      return prefixSplit[prefixSplit.length - 1];
+    }
+    if (word.includes('%0A') && type === 'suffix') {
+      breakReduce = true;
+      return `${accumulator}%20${
+        word
+          .split('%0A')
+          .join('%20')
+          .split('%20')[0]
+      }`;
     }
     if (accumulator) {
       return `${accumulator}%20${word}`;
@@ -14,7 +38,10 @@ const truncateOnWords = ({ string, totalWords }) => {
 
 const trimSpaces = (string) => {
   let newString = string;
-  if (newString.substring(0, 3) === '%20') {
+  if (
+    newString.substring(0, 3) === '%20' ||
+    newString.substring(0, 3) === '%0A'
+  ) {
     newString = newString.substring(3);
   }
   if (newString.substring(newString.length - 3) === '%20') {
@@ -23,10 +50,10 @@ const trimSpaces = (string) => {
   return newString;
 };
 
-const mungeString = (string) => {
+const mungeString = ({ string, type }) => {
   let newString = string;
   newString = trimSpaces(newString);
-  newString = truncateOnWords({ string: newString, totalWords: 5 });
+  newString = truncateOnWords({ string: newString, totalWords: 5, type });
   return newString;
 };
 
@@ -58,9 +85,7 @@ export const makeTextFragment = ({ url, string, tag = 'mark' }) => {
     let prefix =
       splitCloseMark[itemKey - 1][splitCloseMark[itemKey - 1].length - 1];
     let [marked, suffix] = item;
-    prefix = mungeString(prefix)
-      .split('%0A')
-      .join('');
+    prefix = mungeString({ string: prefix, type: 'prefix' });
     // If there's a line break "%0A" then we should make it the textEnd
     const markedArray = trimSpaces(marked)
       .split('%0A')
@@ -72,9 +97,7 @@ export const makeTextFragment = ({ url, string, tag = 'mark' }) => {
       marked = `${markedArray[0]},${markedArray[markedArray.length - 1]}`;
     }
 
-    suffix = mungeString(suffix)
-      .split('%0A')
-      .join('');
+    suffix = mungeString({ string: suffix, type: 'suffix' });
 
     if (!finalString) {
       finalString = '#:~:text=';
