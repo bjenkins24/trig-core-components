@@ -175,6 +175,7 @@ const Card = ({
           onClick(id);
         }}
         href={href}
+        rel="noopener"
         {...clickableProps}
       >
         <Title>

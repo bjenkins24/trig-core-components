@@ -170,6 +170,7 @@ const ListItem = ({
           isClickable
           data-testid="list-item__container"
           target={target}
+          rel="noopener"
         >
           <div
             css={`
