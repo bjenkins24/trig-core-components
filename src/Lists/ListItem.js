@@ -150,6 +150,7 @@ const ListItem = ({
     for (let i = 0; i < 5; i += 1) {
       if (node.classList && node.classList.contains(actionClass)) {
         e.preventDefault();
+        return;
       }
       node = node.parentNode;
     }

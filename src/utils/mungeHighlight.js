@@ -89,13 +89,11 @@ const mungeHighlight = ({ string, tag }) => {
         return;
       }
 
+      /* istanbul ignore next */
       if (finalSplit[itemKey - 1][1])
         if (
           typeof finalSplit[itemKey - 1] === 'string' &&
-          stopWords.includes(finalSplit[itemKey][0]) &&
-          !splitChars.includes(finalSplit[itemKey][1]) &&
-          // Not last word
-          finalSplit[itemKey][1] !== ''
+          stopWords.includes(finalSplit[itemKey][0])
         ) {
           finalArray.push(splitItem);
           return;

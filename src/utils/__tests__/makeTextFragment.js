@@ -4,7 +4,7 @@ describe('makeTextFragment()', () => {
   it('makes a text fragment in the url', () => {
     const newUrl = makeTextFragment({
       string:
-        '- <mark>Hello, & there my name</mark> cool things happen for <mark>real -</mark> my name _is_ **john**. <mark>Please stop me</mark>',
+        '- <mark> Hello, & there my name</mark> cool things happen for <mark>real -</mark> my name _is_ **john**. <mark>Please stop me</mark>',
       url: 'https://google.com/',
     });
     expect(newUrl).toEqual(
