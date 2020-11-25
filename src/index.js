@@ -7,7 +7,7 @@ import * as FormComponents from './Form';
 import * as Toast from './Toast';
 import * as Popovers from './Popovers';
 
-export const { Button, ButtonSelect, ButtonToggle, Fab } = Buttons;
+export const { Button, ButtonSelect, ButtonToggle, Fab, ButtonCount } = Buttons;
 export const { Notification, toast, ToastContainer } = Toast;
 export const { HorizontalGroup, VerticalGroup } = Groups;
 export const { Tabs, TabList, Tab, TabPanel } = AllTabs;
