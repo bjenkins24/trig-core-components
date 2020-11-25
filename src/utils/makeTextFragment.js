@@ -153,9 +153,6 @@ const getLastWords = ({ stringSplit, totalWords }) => {
     if (index > stringSplit.length - totalWords - 1) {
       return `${accumulator}${word} `;
     }
-    if (index === stringSplit.length - totalWords + 1) {
-      return `${accumulator}${word}`;
-    }
     return accumulator;
   }, '');
   return trimSpaces(urlEncode(lastWords));
