@@ -111,7 +111,7 @@ const Popover = ({
     <>
       {trigger}
       <Popper
-        style={{ zIndex: 1100 }}
+        style={{ zIndex: 2200 }}
         id={id}
         open={open}
         anchorEl={anchorEl}
