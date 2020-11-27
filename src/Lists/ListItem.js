@@ -17,7 +17,7 @@ const Container = styled.li`
   min-height: 7.2rem;
   border: 0.1rem solid ${({ theme }) => theme.ps[100]};
   display: ${({ href }) => (href ? 'block' : 'flex')};
-  padding-right: 1.6rem;
+  padding: 0 ${({ theme }) => theme.space[3]}px;
   cursor: ${({ isClickable }) => (isClickable ? 'pointer' : 'default')};
   text-decoration: none;
   background: ${({ theme }) => theme.bs[200]};
@@ -80,26 +80,6 @@ const ListItemContent = ({
         ))}
       </Actions>
     </>
-  );
-};
-
-const DescriptionComponent = ({ description }) => {
-  if (!description) return null;
-  return (
-    <div
-      css={`
-        display: flex;
-        margin-bottom: ${({ theme }) => theme.space[3]}px;
-      `}
-    >
-      <div
-        css={`
-          width: 9rem;
-        `}
-      />
-      <Body2>{description}</Body2>
-      <div />
-    </div>
   );
 };
 /* eslint-enable react/prop-types */
@@ -175,6 +155,7 @@ const ListItem = ({
           <div
             css={`
               display: flex;
+              margin-left: -${({ theme }) => theme.space[3]}px;
             `}
           >
             <ListItemContent
@@ -184,7 +165,7 @@ const ListItem = ({
               actionClass={actionClass}
             />
           </div>
-          <DescriptionComponent description={description} />
+          {description ? <Body2>{description}</Body2> : null}
         </Container>
       </li>
     );
@@ -197,13 +178,19 @@ const ListItem = ({
       data-testid="list-item__container"
       {...restProps}
     >
-      <ListItemContent
-        actions={actions}
-        renderItem={renderItem}
-        renderContent={renderContent}
-        actionClass={actionClass}
-      />
-      <DescriptionComponent description={description} />
+      <div
+        css={`
+          margin-left: -${({ theme }) => theme.space[3]}px;
+        `}
+      >
+        <ListItemContent
+          actions={actions}
+          renderItem={renderItem}
+          renderContent={renderContent}
+          actionClass={actionClass}
+        />
+      </div>
+      {description ? <Body2>{description}</Body2> : null}
     </Container>
   );
 };
