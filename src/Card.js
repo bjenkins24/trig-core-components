@@ -129,7 +129,6 @@ const cardTypes = {
   isLoading: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
   onClickFavorite: PropTypes.func.isRequired,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   navigationList: PropTypes.array.isRequired,
   href: PropTypes.string.isRequired,
   openInNewTab: PropTypes.bool,
@@ -145,7 +144,6 @@ const defaultProps = {
 const Card = ({
   title,
   dateTime,
-  id,
   renderAvatar,
   image,
   type,
@@ -163,16 +161,16 @@ const Card = ({
   /* istanbul ignore next */
   if (openInNewTab) {
     clickableProps.target = '_blank';
-    clickableProps.onClick = () => onClick(id);
+    clickableProps.onClick = (event) => onClick(event);
   }
 
   return (
     <Container {...restProps}>
       <ClickableArea
         data-testid="card__clickable-area"
-        onClick={(e) => {
-          e.preventDefault();
-          onClick(id);
+        onClick={(event) => {
+          event.preventDefault();
+          onClick(event);
         }}
         href={href}
         rel="noopener"
@@ -227,7 +225,7 @@ const Card = ({
           <HorizontalGroup margin={1.6}>
             <IconGroup
               data-testid="card__favorite"
-              onClick={() => onClickFavorite(id)}
+              onClick={(event) => onClickFavorite(event)}
             >
               {!isFavorited ? (
                 <StyledIcon type="heart" title="Favorite" />
