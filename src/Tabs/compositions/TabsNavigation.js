@@ -63,6 +63,7 @@ export const TabsNavigation = ({
         })}
       </TabList>
       <SelectedBar
+        tabs={tabs}
         variant={variant}
         data-testid="select-bar"
         sizeType={size}

@@ -39,7 +39,7 @@ export const TabsDefault = ({ variant, defaultTab, tabs, tabPanels }) => {
           margin-bottom: ${({ theme }) => `${theme.space[4]}px`};
         `}
       >
-        <SelectedBar variant={variant} />
+        <SelectedBar variant={variant} tabs={tabs} />
       </Separator>
       {tabPanels.map((content, key) => {
         return (

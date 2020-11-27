@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
@@ -7,6 +7,33 @@ import { Tabs, TabList, Tab, TabPanel } from '../src/Tabs';
 import theme from './theme';
 import { TabsDefault } from '../src/Tabs/compositions/TabsDefault';
 import { TabsNavigation } from '../src/Tabs/compositions/TabsNavigation';
+
+const NavigationWithChange = () => {
+  const [tab, setTab] = useState('All Cards');
+  return (
+    <>
+      <TabsNavigation
+        tabs={[
+          { text: tab },
+          { text: 'Recently Viewed' },
+          { text: 'Recently Edited' },
+        ]}
+        tabPanels={['EVERYTHING', 'just viewed', 'just edited']}
+        variant="light"
+      />
+      <button
+        type="button"
+        onClick={() =>
+          tab === 'All Cards'
+            ? setTab('A long title just for separator')
+            : setTab('All Cards')
+        }
+      >
+        Change tab
+      </button>
+    </>
+  );
+};
 
 storiesOf('Tabs', module)
   .addDecorator((story) => (
@@ -38,15 +65,5 @@ storiesOf('Tabs', module)
     />
   ))
   .add('Composition - Navigation', () => {
-    return (
-      <TabsNavigation
-        tabs={[
-          { text: 'All Cards' },
-          { text: 'Recently Viewed' },
-          { text: 'Recently Edited' },
-        ]}
-        tabPanels={['EVERYTHING', 'just viewed', 'just edited']}
-        variant="light"
-      />
-    );
+    return <NavigationWithChange />;
   });

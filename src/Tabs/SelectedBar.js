@@ -38,13 +38,16 @@ const reducer = (state, action) => {
 
 const selectedBarTypes = {
   variant: PropTypes.oneOf(['dark', 'light']),
+  tabs: PropTypes.arrayOf(
+    PropTypes.shape({ text: PropTypes.string, onClick: PropTypes.func })
+  ).isRequired,
 };
 
 const defaultProps = {
   variant: 'dark',
 };
 
-export const SelectedBar = ({ variant, ...restProps }) => {
+export const SelectedBar = ({ variant, tabs, ...restProps }) => {
   const { selectedTab, tabRefs } = useContext(TabContext);
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -69,7 +72,7 @@ export const SelectedBar = ({ variant, ...restProps }) => {
       }, 0);
       dispatch({ type: 'setSelectedPosition', payload: position });
     }
-  }, [selectedTab, tabRefs]);
+  }, [selectedTab, tabRefs, tabs]);
 
   return (
     <SelectedBarContainer
