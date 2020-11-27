@@ -12,6 +12,7 @@ describe('<ListItem />', () => {
     const exampleClass = 'example-class';
     const firstAction = 'first-action';
     const secondAction = 'second-action';
+    const description = 'My description';
     const item = 'item';
     const content = 'content';
     const { getByText, getByTestId } = render(
@@ -21,6 +22,7 @@ describe('<ListItem />', () => {
         className={exampleClass}
         renderContent={() => <div>{content}</div>}
         renderItem={() => <div>{item}</div>}
+        description={description}
         actions={[
           <div key={1}>{firstAction}</div>,
           <div key={2}>{secondAction}</div>,
@@ -32,10 +34,11 @@ describe('<ListItem />', () => {
     expect(mockCallback.mock.calls.length).toEqual(1);
 
     expect(listItem).toHaveClass(exampleClass);
-    expect(getByText(content)).toBeTruthy();
-    expect(getByText(item)).toBeTruthy();
-    expect(getByText(firstAction)).toBeTruthy();
-    expect(getByText(secondAction)).toBeTruthy();
+    expect(getByText(description)).toBeInTheDocument();
+    expect(getByText(content)).toBeInTheDocument();
+    expect(getByText(item)).toBeInTheDocument();
+    expect(getByText(firstAction)).toBeInTheDocument();
+    expect(getByText(secondAction)).toBeInTheDocument();
   });
 
   it('renderItem defaults to null', () => {
