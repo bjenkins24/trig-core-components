@@ -82,6 +82,23 @@ const ListItemContent = ({
     </>
   );
 };
+
+const Description = ({ description }) => {
+  if (!description) return null;
+
+  return (
+    <div
+      css={`
+        padding-bottom: ${({ theme }) => theme.space[3]}px;
+        & div div > *:last-child {
+          margin-bottom: 0;
+        }
+      `}
+    >
+      <Body2 as="div">{description}</Body2>
+    </div>
+  );
+};
 /* eslint-enable react/prop-types */
 
 const listItemTypes = {
@@ -165,7 +182,7 @@ const ListItem = ({
               actionClass={actionClass}
             />
           </div>
-          {description ? <Body2>{description}</Body2> : null}
+          <Description description={description} />
         </Container>
       </li>
     );
@@ -190,7 +207,7 @@ const ListItem = ({
           actionClass={actionClass}
         />
       </div>
-      {description ? <Body2>{description}</Body2> : null}
+      <Description description={description} />
     </Container>
   );
 };

@@ -78,8 +78,8 @@ const CardItem = ({
           <Highlight
             string={mungedContent}
             styles={`
-            background: rgba(252, 219, 59, 0.32)
-          `}
+              background: rgba(252, 219, 59, 0.32)
+            `}
           />
         ) : (
           ''
