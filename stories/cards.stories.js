@@ -20,6 +20,7 @@ const CreateCard = () => {
       onClickFavorite={() => setIsFavorited(!isFavorited)}
       title={text('title', 'Why AI is Going to Take Your Job')}
       dateTime={new Date()}
+      description="We’ll take care of customer support for you — faster responses, smaller backlogs, and happier customers. We help growing companies provide great customer support. Support for all all the time"
       renderAvatar={() => (
         <Avatar
           size={1.6}
@@ -27,7 +28,9 @@ const CreateCard = () => {
           lastName={text('lastName', 'Jenkins')}
         />
       )}
-      image={text('image', 'https://picsum.photos/300/300')}
+      imageWidth={251}
+      imageHeight={240}
+      image={text('image', 'https://picsum.photos/251/240')}
       type={select(
         'type',
         {

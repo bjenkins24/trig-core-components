@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { rgba } from 'polished';
 import styled from 'styled-components';
 import Truncate from 'react-truncate';
-import { Heading1, Heading3, Heading4, TinyText } from 'Typography';
+import OnImagesLoaded from 'react-on-images-loaded';
+import { Body1, Heading1, Heading3, Heading4, TinyText } from 'Typography';
 import { HorizontalGroup } from 'Groups';
 import Image from 'Image';
 import Icon from 'Icon';
@@ -12,9 +13,12 @@ import { format } from 'utils/dateFns';
 import Loading from './Loading';
 import PopoverNavigation from './Popovers/PopoverNavigation';
 
+const cardWidth = 251;
+const maxImageHeight = 240;
+
 const Container = styled.div`
   background: ${({ theme }) => theme.bs[200]};
-  width: 25.1rem;
+  width: ${cardWidth}px;
   border-radius: ${({ theme }) => theme.br};
   box-shadow: ${({ theme }) => theme.sh};
 `;
@@ -22,7 +26,8 @@ const Container = styled.div`
 const Hover = styled.div`
   height: 100%;
   width: 100%;
-  background: ${({ theme }) => rgba(theme.s, 0.85)};
+  background: ${({ theme, hasDescription }) =>
+    hasDescription ? rgba(theme.s, 0.95) : rgba(theme.s, 0.85)};
   opacity: 0;
   transition: opacity 0.15s;
   position: absolute;
@@ -123,6 +128,8 @@ const cardTypes = {
   dateTime: PropTypes.instanceOf(Date).isRequired,
   renderAvatar: PropTypes.func,
   image: PropTypes.string,
+  imageWidth: PropTypes.number,
+  imageHeight: PropTypes.number,
   type: PropTypes.string.isRequired,
   totalFavorites: PropTypes.number.isRequired,
   isFavorited: PropTypes.bool.isRequired,
@@ -132,13 +139,17 @@ const cardTypes = {
   navigationList: PropTypes.array.isRequired,
   href: PropTypes.string.isRequired,
   openInNewTab: PropTypes.bool,
+  description: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
 };
 
 const defaultProps = {
   renderAvatar: () => <span data-testid="card__avatar-null" />,
   image: null,
+  imageWidth: 0,
+  imageHeight: 0,
   openInNewTab: false,
   isLoading: false,
+  description: '',
 };
 
 const Card = ({
@@ -146,6 +157,8 @@ const Card = ({
   dateTime,
   renderAvatar,
   image,
+  imageWidth,
+  imageHeight,
   type,
   totalFavorites,
   isFavorited,
@@ -155,14 +168,68 @@ const Card = ({
   onClick,
   onClickFavorite,
   openInNewTab,
+  description,
   ...restProps
 }) => {
+  const [areImagesloaded, setAreImagesLoaded] = useState(false);
+  const [placeholderHeight, setPlaceholderHeight] = useState(0);
+  const placeholderRef = useRef(null);
+  const truncateRef = useRef(null);
   const clickableProps = {};
   /* istanbul ignore next */
   if (openInNewTab) {
     clickableProps.target = '_blank';
     clickableProps.onClick = (event) => onClick(event);
   }
+
+  useEffect(() => {
+    let timer = 0;
+    if (placeholderRef.current) {
+      timer = setTimeout(() => {
+        setPlaceholderHeight(placeholderRef.current.offsetHeight);
+      });
+      return () => clearTimeout(timer);
+    }
+    return () => null;
+  }, [placeholderRef.current, image, title]);
+
+  useEffect(() => {
+    if ((areImagesloaded || placeholderHeight) && truncateRef.current) {
+      truncateRef.current.onResize();
+    }
+  }, [areImagesloaded, placeholderHeight]);
+
+  let actualImageHeight = image
+    ? Math.max(imageHeight, maxImageHeight)
+    : placeholderHeight;
+  const truncateLines = useMemo(() => {
+    const defaultLines = 7;
+    if (!description) return defaultLines;
+
+    if (image) {
+      const ratio = cardWidth / imageWidth;
+      actualImageHeight = Math.floor(imageHeight * ratio);
+    }
+
+    const truncateBreakpoints = [
+      { start: 222, end: 100000, totalLines: defaultLines },
+      { start: 198, end: 221, totalLines: 6 },
+      { start: 167, end: 197, totalLines: 5 },
+      { start: 136, end: 166, totalLines: 4 },
+      { start: 115, end: 135, totalLines: 3 },
+      { start: 0, end: 114, totalLines: 0 },
+    ];
+
+    return truncateBreakpoints.reduce((accumulator, breakpoint) => {
+      if (
+        actualImageHeight >= breakpoint.start &&
+        actualImageHeight <= breakpoint.end
+      ) {
+        return breakpoint.totalLines;
+      }
+      return accumulator;
+    }, JSON.parse(JSON.stringify(defaultLines)));
+  }, [title, placeholderHeight, imageWidth, imageHeight, image]);
 
   return (
     <Container {...restProps}>
@@ -192,23 +259,39 @@ const Card = ({
           <CardType url={href} type={type} size={1.6} />
         </Type>
         <ThumbnailContainer>
-          <Hover>
-            <Open margin={0.8}>
-              <Heading1
-                color="sc"
+          <Hover hasDescription={!!description}>
+            {!description || truncateLines === 0 ? (
+              <Open margin={0.8}>
+                <Heading1
+                  color="sc"
+                  css={`
+                    margin: 0;
+                  `}
+                >
+                  Open
+                </Heading1>
+                <Icon type="open" color="sc" />
+              </Open>
+            ) : (
+              <div
                 css={`
-                  margin: 0;
+                  padding: ${({ theme }) => theme.space[3]}px;
                 `}
               >
-                Open
-              </Heading1>
-              <Icon type="open" color="sc" />
-            </Open>
+                <Body1 color="sc" fontWeight="bold">
+                  <Truncate lines={truncateLines} ref={truncateRef}>
+                    {description}
+                  </Truncate>
+                </Body1>
+              </div>
+            )}
           </Hover>
           {image ? (
-            <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
+            <OnImagesLoaded onLoaded={() => setAreImagesLoaded(true)}>
+              <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
+            </OnImagesLoaded>
           ) : (
-            <PlaceholderThumbnail>
+            <PlaceholderThumbnail ref={placeholderRef}>
               <Heading1
                 css={`
                   color: ${({ theme }) => theme.sc};
