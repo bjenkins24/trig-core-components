@@ -9,6 +9,7 @@ import { format } from 'utils/dateFns';
 import { mungeHighlight } from 'utils/mungeHighlight';
 import Highlight from 'Highlight';
 import { makeTextFragmentFromExcerpt } from 'utils/makeTextFragment';
+import PopoverNavigation from 'Popovers/PopoverNavigation';
 
 const CardItemProps = {
   href: PropTypes.string,
@@ -18,9 +19,9 @@ const CardItemProps = {
   avatarProps: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
   dateTime: PropTypes.instanceOf(Date).isRequired,
-  moreProps: PropTypes.object.isRequired,
   favoriteProps: PropTypes.object.isRequired,
   openInNewTab: PropTypes.bool,
+  navigationList: PropTypes.array.isRequired,
 };
 
 /* istanbul ignore next */
@@ -40,7 +41,7 @@ const CardItem = ({
   title,
   dateTime,
   content,
-  moreProps,
+  navigationList,
   favoriteProps,
 }) => {
   const clickableProps = {};
@@ -113,7 +114,14 @@ const CardItem = ({
       )}
       actions={[
         <Icon type="heart" color="s" size={1.6} {...favoriteProps} />,
-        <Icon type="horizontal-dots" color="s" size={1.6} {...moreProps} />,
+        <PopoverNavigation placement="top" navigationList={navigationList}>
+          <Icon
+            title="More Options"
+            type="horizontal-dots"
+            color="s"
+            size={1.6}
+          />
+        </PopoverNavigation>,
       ]}
       {...clickableProps}
     />

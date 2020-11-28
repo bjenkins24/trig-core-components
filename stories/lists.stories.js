@@ -9,6 +9,8 @@ import Avatar from '../src/Avatar';
 import './consoleOverrides';
 import themeForProvider from './theme';
 import CardItem from '../src/Lists/compositions/CardItem';
+import { HorizontalGroup } from '../src/Groups';
+import Icon from '../src/Icon';
 
 // eslint-disable-next-line react/prop-types
 const StoryListItem = ({ onClick }) => {
@@ -140,9 +142,17 @@ storiesOf('Lists', module)
         favoriteProps={{
           onClick: () => console.log('clicked favorite'),
         }}
-        moreProps={{
-          onClick: () => console.log('clicked more'),
-        }}
+        navigationList={[
+          {
+            onClick: () => null,
+            item: (
+              <HorizontalGroup margin={1.6}>
+                <Icon type="trash" size={1.6} />
+                <span>Remove From Trig</span>
+              </HorizontalGroup>
+            ),
+          },
+        ]}
         avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
         cardType="link"
         title="How To Memorize Music 5 <mark>Times</mark> Faster"
