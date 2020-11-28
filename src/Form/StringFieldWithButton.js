@@ -114,6 +114,7 @@ const StringFieldWithButton = ({
               onChange={(event) => setValue(event.target.value)}
               onBlur={(event) => {
                 onBlur(event);
+                /* istanbul ignore next */
                 setTimeout(() => setIsFocused(false), 10);
               }}
               width="100%"

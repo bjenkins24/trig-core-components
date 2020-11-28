@@ -18,6 +18,7 @@ const ModalCompositionProps = {
   onSubmit: PropTypes.func,
   onRequestClose: PropTypes.func.isRequired,
   children: PropTypes.node,
+  isOpen: PropTypes.bool.isRequired,
   height: widthType,
 };
 
@@ -42,6 +43,7 @@ const ModalComposition = ({
   onRequestClose,
   children,
   height,
+  isOpen,
   ...restProps
 }) => {
   let defaultTab = 0;
@@ -84,6 +86,7 @@ const ModalComposition = ({
   return (
     <Modal
       onRequestClose={onClose}
+      isOpen={isOpen}
       height={height}
       renderHeader={() => {
         if (tabNavigationProps) {

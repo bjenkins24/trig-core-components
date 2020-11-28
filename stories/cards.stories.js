@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, select, number, text } from '@storybook/addon-knobs';
-import Card from '../src/Card';
+import Card from '../src/Card/index';
 import Avatar from '../src/Avatar';
 import Icon from '../src/Icon';
 import { HorizontalGroup } from '../src/Groups';

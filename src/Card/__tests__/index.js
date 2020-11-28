@@ -1,15 +1,23 @@
 import React from 'react';
-import { render } from 'test/utils';
+import { render, screen } from 'test/utils';
 import user from '@testing-library/user-event';
-import Card from 'Card';
+import Card from '../index';
+
+jest.spyOn(console, 'error').mockImplementation(() => {});
 
 jest.mock('react-truncate', () => {
   return (props) => <div {...props} />;
 });
 
+// Make truncate lines return 7 all the time
+jest.mock('Card/truncateLines', () => {
+  return { truncateLines: () => 7 };
+});
+
 const totalFavorites = 12;
 const title = 'My cool card';
 const alt = `Thumbnail for the card: ${title}`;
+const description = `My cool description`;
 
 const onClickMock = jest.fn();
 const onClickFavoriteMock = jest.fn();
@@ -22,6 +30,7 @@ const buildCard = (props) => {
       onClick={onClickMock}
       onClickFavorite={onClickFavoriteMock}
       totalFavorites={totalFavorites}
+      description={description}
       type="link"
       isFavorited
       dateTime={new Date()}
@@ -42,7 +51,7 @@ describe('<Card />', () => {
       queryByAltText,
       rerender,
       queryByTitle,
-    } = render(buildCard());
+    } = render(buildCard({ description: '' }));
 
     expect(getByText(totalFavorites.toString())).toBeInTheDocument();
     expect(getAllByText(title)).toBeTruthy();
@@ -76,5 +85,23 @@ describe('<Card />', () => {
       buildCard({ renderAvatar: () => <div>{avatarText}</div> })
     );
     expect(getByText(avatarText)).toBeInTheDocument();
+  });
+
+  it('renders description correctly', () => {
+    const { rerender } = render(
+      buildCard({
+        imageWidth: 300,
+        imageHeight: 300,
+        image: 'https://image.com',
+      })
+    );
+    user.hover(screen.getByTestId('card__clickable-area'));
+    expect(screen.getByText(description)).toBeInTheDocument();
+    // This is a ref error that doesn't appear when actually rendering? I'm not sure
+    // what to do with it
+    expect(console.error).toHaveBeenCalledTimes(1);
+
+    rerender(buildCard());
+    expect(screen.getByText(description)).toBeInTheDocument();
   });
 });

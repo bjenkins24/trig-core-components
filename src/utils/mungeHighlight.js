@@ -34,7 +34,7 @@ export const stopWords = [
   'with',
 ];
 
-const splitChars = [' ', '-', '_'];
+const splitChars = [' ', '-', '_', '/'];
 
 const mungeHighlight = ({ string, tag }) => {
   if (!string) return string;

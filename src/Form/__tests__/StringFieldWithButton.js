@@ -1,6 +1,6 @@
 import React from 'react';
 // eslint-disable-next-line
-import { render, fireEvent, wait } from 'test/utils';
+import { render, fireEvent, waitFor } from 'test/utils';
 import user from '@testing-library/user-event';
 import StringFieldWithButton from 'Form/StringFieldWithButton';
 import theme from '../../../stories/theme';
@@ -35,13 +35,12 @@ describe('<StringFieldWithButton />', () => {
     );
 
     fireEvent.change(getByRole('textbox'), { target: { value: 'a' } });
-    await wait(() => fireEvent.blur(getByRole('textbox')), { timeout: 20 });
+    await waitFor(() => fireEvent.blur(getByRole('textbox')), { timeout: 20 });
     expect(getByRole('button')).not.toHaveStyleRule(
       `border: 0.1rem solid ${theme.ps[200]}`
     );
     expect(getByText(label)).toBeInTheDocument();
     getByRole('button').focus();
     expect(mockFocusCallBack.mock.calls.length).toEqual(1);
-    wait();
   });
 });

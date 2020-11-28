@@ -25,6 +25,7 @@ const StoryListItem = ({ onClick }) => {
       title="How To Memorize Music 5 Times Faster"
       dateTime={new Date('2020-11-18T04:06:43+0000')}
       href="https://google.com"
+      navigationList={[{ onClick: () => null, text: 'Cool beans' }]}
     />
   );
 };

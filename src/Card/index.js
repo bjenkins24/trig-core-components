@@ -10,8 +10,9 @@ import Image from 'Image';
 import Icon from 'Icon';
 import TypeIcon from 'Icon/TypeIcon';
 import { format } from 'utils/dateFns';
-import Loading from './Loading';
-import PopoverNavigation from './Popovers/PopoverNavigation';
+import { truncateLines } from 'Card/truncateLines';
+import Loading from '../Loading';
+import PopoverNavigation from '../Popovers/PopoverNavigation';
 
 const cardWidth = 251;
 const maxImageHeight = 240;
@@ -185,6 +186,7 @@ const Card = ({
   useEffect(() => {
     let timer = 0;
     if (placeholderRef.current) {
+      /* istanbul ignore next */
       timer = setTimeout(() => {
         setPlaceholderHeight(placeholderRef.current.offsetHeight);
       });
@@ -194,6 +196,7 @@ const Card = ({
   }, [placeholderRef.current, image, title]);
 
   useEffect(() => {
+    /* istanbul ignore next */
     if ((areImagesloaded || placeholderHeight) && truncateRef.current) {
       truncateRef.current.onResize();
     }
@@ -202,34 +205,25 @@ const Card = ({
   let actualImageHeight = image
     ? Math.max(imageHeight, maxImageHeight)
     : placeholderHeight;
-  const truncateLines = useMemo(() => {
-    const defaultLines = 7;
-    if (!description) return defaultLines;
 
-    if (image) {
-      const ratio = cardWidth / imageWidth;
-      actualImageHeight = Math.floor(imageHeight * ratio);
-    }
+  if (image) {
+    const ratio = cardWidth / imageWidth;
+    actualImageHeight = Math.floor(imageHeight * ratio);
+  }
 
-    const truncateBreakpoints = [
-      { start: 222, end: 100000, totalLines: defaultLines },
-      { start: 198, end: 221, totalLines: 6 },
-      { start: 167, end: 197, totalLines: 5 },
-      { start: 136, end: 166, totalLines: 4 },
-      { start: 115, end: 135, totalLines: 3 },
-      { start: 0, end: 114, totalLines: 0 },
-    ];
-
-    return truncateBreakpoints.reduce((accumulator, breakpoint) => {
-      if (
-        actualImageHeight >= breakpoint.start &&
-        actualImageHeight <= breakpoint.end
-      ) {
-        return breakpoint.totalLines;
-      }
-      return accumulator;
-    }, JSON.parse(JSON.stringify(defaultLines)));
-  }, [title, placeholderHeight, imageWidth, imageHeight, image]);
+  const truncatedLines = useMemo(() => {
+    return truncateLines({
+      actualImageHeight,
+      description,
+    });
+  }, [
+    title,
+    placeholderHeight,
+    image,
+    cardWidth,
+    actualImageHeight,
+    description,
+  ]);
 
   return (
     <Container {...restProps}>
@@ -259,8 +253,8 @@ const Card = ({
           <CardType url={href} type={type} size={1.6} />
         </Type>
         <ThumbnailContainer>
-          <Hover hasDescription={!!description}>
-            {!description || truncateLines === 0 ? (
+          <Hover hasDescription={!!description} data-testid="card__hover">
+            {!description || truncatedLines === 0 ? (
               <Open margin={0.8}>
                 <Heading1
                   color="sc"
@@ -279,7 +273,7 @@ const Card = ({
                 `}
               >
                 <Body1 color="sc" fontWeight="bold">
-                  <Truncate lines={truncateLines} ref={truncateRef}>
+                  <Truncate lines={truncatedLines} ref={truncateRef}>
                     {description}
                   </Truncate>
                 </Body1>
@@ -287,7 +281,12 @@ const Card = ({
             )}
           </Hover>
           {image ? (
-            <OnImagesLoaded onLoaded={() => setAreImagesLoaded(true)}>
+            <OnImagesLoaded
+              onLoaded={
+                /* istanbul ignore next */
+                () => setAreImagesLoaded(true)
+              }
+            >
               <Thumbnail src={image} alt={`Thumbnail for the card: ${title}`} />
             </OnImagesLoaded>
           ) : (

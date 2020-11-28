@@ -1,6 +1,6 @@
 import React from 'react';
 // eslint-disable-next-line
-import { render, wait } from 'test/utils';
+import { render, waitFor } from 'test/utils';
 import user from '@testing-library/user-event';
 import { string } from 'yup';
 import StringFieldWithButtonForm from 'Form/StringFieldWithButtonForm';
@@ -27,12 +27,11 @@ describe('<StringFieldWithButtonForm />', () => {
 
     expect(getByText(buttonContent)).toBeInTheDocument();
 
-    await wait(() => user.click(submitButton));
+    await waitFor(() => user.click(submitButton));
     expect(getByText(error)).toBeInTheDocument();
-    await wait(() => user.type(getByRole('textbox'), 'hello'));
-    await wait(() => user.click(submitButton));
+    await waitFor(() => user.type(getByRole('textbox'), 'hello'));
+    await waitFor(() => user.click(submitButton));
     expect(mockCallBack.mock.calls.length).toEqual(1);
-    await wait();
     expect(getByRole('textbox').value).toEqual('');
   });
 });

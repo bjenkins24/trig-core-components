@@ -1,6 +1,6 @@
 import React from 'react';
 // eslint-disable-next-line import/named
-import { render, wait } from 'test/utils';
+import { render, waitFor } from 'test/utils';
 import user from '@testing-library/user-event';
 import { Form, StringFieldForm, Fieldset, Legend } from '../../index';
 
@@ -65,14 +65,14 @@ describe('<Form />, <Fieldset />, <Legend />', () => {
     const submitButton = getByText('Submit');
     user.type(getByTestId(inputId2), 'Change the value');
     user.click(submitButton);
-    await wait(() => {
+    await waitFor(() => {
       expect(getByText(errorMessage2)).toBeInTheDocument();
     });
     expect(queryByText(errorMessage)).toBeNull();
     user.type(getByTestId(inputId), 'Change the value');
 
     user.click(submitButton);
-    await wait(() => {
+    await waitFor(() => {
       expect(getByText(errorMessage)).toBeInTheDocument();
     });
 

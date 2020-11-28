@@ -39,6 +39,7 @@ describe('<ModalComposition />', () => {
 
     rerender(
       <ModalComposition
+        isOpen
         onRequestClose={() => null}
         tabNavigationProps={{
           tabs,
