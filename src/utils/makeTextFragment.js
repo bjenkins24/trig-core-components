@@ -172,6 +172,7 @@ const getLastWords = ({ stringSplit, totalWords }) => {
 };
 
 const makeTextFragmentFromExcerpt = ({ url, string }) => {
+  if (!string) return url;
   const stringSplit = removeMarkdown(string)
     .replace(/(?:\r\n|\r|\n)/g, '%0A')
     .split(' ');

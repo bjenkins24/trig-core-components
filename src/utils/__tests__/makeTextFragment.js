@@ -87,4 +87,9 @@ stop me</mark>`;
 
     expect(newUrl).toEqual(`${url}#:~:text=Hello%2C%20%26%20there,stop%20me`);
   });
+  it('returns the url if the string is empty', () => {
+    const url = 'https://google.com';
+    const newUrl = makeTextFragmentFromExcerpt({ url, string: '' });
+    expect(url).toEqual(newUrl);
+  });
 });
