@@ -148,6 +148,7 @@ const defaultProps = {
   image: null,
   imageWidth: 0,
   imageHeight: 0,
+  /* istanbul ignore next */
   onClick: () => null,
   openInNewTab: false,
   isLoading: false,
