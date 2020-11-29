@@ -143,12 +143,12 @@ const cardTypes = {
   description: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
 };
 
+/* istanbul ignore next */
 const defaultProps = {
   renderAvatar: () => <span data-testid="card__avatar-null" />,
   image: null,
   imageWidth: 0,
   imageHeight: 0,
-  /* istanbul ignore next */
   onClick: () => null,
   openInNewTab: false,
   isLoading: false,
