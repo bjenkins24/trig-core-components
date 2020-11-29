@@ -95,6 +95,7 @@ const CardItem = ({
           primary={
             <div
               css={`
+                word-break: break-word;
                 p {
                   margin: 0;
                 }
@@ -103,8 +104,8 @@ const CardItem = ({
               <Highlight
                 string={mungedTitle}
                 styles={`
-                background: rgba(252, 219, 59, 0.32)
-              `}
+                  background: rgba(252, 219, 59, 0.32)
+                `}
               />
             </div>
           }
