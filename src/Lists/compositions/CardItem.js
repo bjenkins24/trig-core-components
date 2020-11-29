@@ -70,7 +70,9 @@ const CardItem = ({
       onClick={
         /* istanbul ignore next */
         (event) => {
-          event.preventDefault();
+          if (!openInNewTab) {
+            event.preventDefault();
+          }
           onClick(event);
         }
       }
