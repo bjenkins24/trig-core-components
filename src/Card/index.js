@@ -135,7 +135,7 @@ const cardTypes = {
   totalFavorites: PropTypes.number.isRequired,
   isFavorited: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   onClickFavorite: PropTypes.func.isRequired,
   navigationList: PropTypes.array.isRequired,
   href: PropTypes.string.isRequired,
@@ -148,6 +148,7 @@ const defaultProps = {
   image: null,
   imageWidth: 0,
   imageHeight: 0,
+  onClick: () => null,
   openInNewTab: false,
   isLoading: false,
   description: '',
@@ -206,8 +207,9 @@ const Card = ({
     ? Math.max(imageHeight, maxImageHeight)
     : placeholderHeight;
 
+  let ratio = 0;
   if (image) {
-    const ratio = cardWidth / imageWidth;
+    ratio = cardWidth / imageWidth;
     actualImageHeight = Math.floor(imageHeight * ratio);
   }
 

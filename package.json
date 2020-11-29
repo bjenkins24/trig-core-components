@@ -42,6 +42,7 @@
     "disable-scroll": "^0.5.1",
     "final-form": "^4.18.7",
     "final-form-focus": "^1.1.2",
+    "masonic": "^3.3.10",
     "polished": "^3.4.1",
     "react-calendar": "^2.19.2",
     "react-dropzone-uploader": "^2.10.2",

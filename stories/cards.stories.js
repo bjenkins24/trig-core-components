@@ -1,16 +1,93 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
+import get from 'lodash/get';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, select, number, text } from '@storybook/addon-knobs';
+import { MasonryScroller, usePositioner, useResizeObserver } from 'masonic';
 import Card from '../src/Card/index';
 import Avatar from '../src/Avatar';
 import Icon from '../src/Icon';
 import { HorizontalGroup } from '../src/Groups';
 import './consoleOverrides';
 import themeForProvider from './theme';
+import { mockCards } from './mockCards';
+
+/* eslint-disable */
+const CardBase = ({ data }) => {
+  return (
+    <Card
+      isLoading={!get(data, 'id', false) || !data.lastAttemptedSync}
+      key={data.id}
+      dateTime={new Date(data.createdAt)}
+      isFavorited={data.isFavorited}
+      totalFavorites={data.totalFavorites}
+      onClickFavorite={() => null}
+      description={data.description}
+      openInNewTab
+      title={data.title}
+      href={data.url}
+      type={data.cardType}
+      image={data.image}
+      imageWidth={data.imageWidth}
+      imageHeight={data.imageHeight}
+      renderAvatar={() => {
+        return (
+          <Avatar
+            size={1.6}
+            firstName={data.user.firstName}
+            lastName={data.user.lastName}
+            email={data.user.email}
+          />
+        );
+      }}
+      navigationList={[
+        {
+          onClick: () => null,
+          text: 'hello',
+        },
+      ]}
+    />
+  );
+};
+
+// this has to be defined outside of the component or the UI flashes
+const CardRenderer = ({ data }) => {
+  return <CardBase data={data} />;
+};
+
+const items = get(mockCards, 'data', []);
+
+const Mason = () => {
+  const positioner = usePositioner(
+    { width: 780, columnWidth: 251, columnGutter: 6 },
+    // This is our dependencies array. When these dependencies
+    // change, the positioner cache will be cleared and the
+    // masonry component will reset as a result.
+    [items.length]
+  );
+
+  const resizeObserver = useResizeObserver(positioner);
+
+  return (
+    <MasonryScroller
+      // Provides the data for our grid items
+      items={items}
+      itemHeightEstimate={400}
+      itemkey={(data) => data.id}
+      positioner={positioner}
+      height={900}
+      resizeObserver={resizeObserver}
+      // Pre-renders 5 windows worth of content
+      overscanBy={5}
+      // This is the grid item component
+      render={CardRenderer}
+    />
+  );
+};
 
 const CreateCard = () => {
+  const imageHeight = 150;
   const [isFavorited, setIsFavorited] = useState(false);
   return (
     <Card
@@ -29,8 +106,8 @@ const CreateCard = () => {
         />
       )}
       imageWidth={251}
-      imageHeight={240}
-      image={text('image', 'https://picsum.photos/251/240')}
+      imageHeight={imageHeight}
+      image={text('image', `https://picsum.photos/251/${imageHeight}`)}
       type={select(
         'type',
         {
@@ -90,4 +167,7 @@ storiesOf('Cards', module)
     <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
   ))
   .addDecorator(withKnobs)
-  .add('Thumbnail', () => <CreateCard />);
+  .add('Thumbnail', () => <CreateCard />)
+  .add('Masonry Example', () => {
+    return <Mason />;
+  });
