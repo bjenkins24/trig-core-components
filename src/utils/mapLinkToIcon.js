@@ -47,6 +47,15 @@ const mapLinkToIcon = (url) => {
   if (host.includes('notion')) {
     return 'type-notion';
   }
+  if (host.includes('quora.com')) {
+    return 'type-quora';
+  }
+  if (host.includes('stackoverflow.com')) {
+    return 'type-stack-overflow';
+  }
+  if (host.includes('reddit.com')) {
+    return 'type-reddit';
+  }
   if (host.includes('trello')) {
     return 'type-trello';
   }

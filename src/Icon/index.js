@@ -64,6 +64,9 @@ import TypeGoogleSlide from './icons/TypeGoogleSlide';
 import TypeJira from './icons/TypeJira';
 import TypeNotion from './icons/TypeNotion';
 import TypePowerpoint from './icons/TypePowerpoint';
+import TypeQuora from './icons/TypeQuora';
+import TypeReddit from './icons/TypeReddit';
+import TypeStackOverflow from './icons/TypeStackOverflow';
 import TypeTrello from './icons/TypeTrello';
 import TypeTypeform from './icons/TypeTypeform';
 import TypeWord from './icons/TypeWord';
@@ -132,6 +135,9 @@ export const iconComponents = {
   'type-jira': TypeJira,
   'type-notion': TypeNotion,
   'type-powerpoint': TypePowerpoint,
+  'type-quora': TypeQuora,
+  'type-reddit': TypeReddit,
+  'type-stack-overflow': TypeStackOverflow,
   'type-trello': TypeTrello,
   'type-typeform': TypeTypeform,
   'type-word': TypeWord,
