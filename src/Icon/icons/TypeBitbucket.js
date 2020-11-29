@@ -11,7 +11,7 @@ const TypeBitbucket = ({ title, ...restProps }) => {
           y1="31.413%"
           x2="48.477%"
           y2="66.198%"
-          id="a"
+          id="tqvcnyrnnf"
         >
           <stop stopColor="#0052CC" offset="17.6%" />
           <stop stopColor="#2684FF" offset="100%" />
@@ -24,7 +24,7 @@ const TypeBitbucket = ({ title, ...restProps }) => {
         />
         <path
           d="M32.186 9.637h-9.684l-1.597 9.166h-6.697L6.275 27.87s.36.348.927.348h20.966c.515 0 .927-.348 1.03-.847l2.988-17.734z"
-          fill="url(#a)"
+          fill="url(#tqvcnyrnnf)"
           transform="translate(-1.5 2)"
         />
       </g>

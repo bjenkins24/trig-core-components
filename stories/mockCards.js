@@ -4,6 +4,31 @@ export const mockCards = {
       id: 37,
       token: '52c26ef1996edae58640b956b5974124e00cd245f77637a8',
       userId: 7,
+      title:
+        'https://docs.google.com/document/d/1Fuo8bFnEjdbhkgYLEwiApscA5aFKemNRBfHYhuZwzFk/edit',
+      cardType: 'link',
+      cardTypeId: 1,
+      imageWidth: null,
+      imageHeight: null,
+      createdAt: '2020-11-28T07:15:46+00:00',
+      url:
+        'https://docs.google.com/document/d/1Fuo8bFnEjdbhkgYLEwiApscA5aFKemNRBfHYhuZwzFk/edit',
+      totalFavorites: 0,
+      description: '',
+      user: {
+        id: 7,
+        firstName: null,
+        lastName: null,
+        email: 'brian@trytrig.com',
+      },
+      cardFavorite: null,
+      isFavorited: false,
+      lastAttemptedSync: '2020-11-28T07:15:53+00:00',
+    },
+    {
+      id: 37,
+      token: '52c26ef1996edae58640b956b5974124e00cd245f77637a8',
+      userId: 7,
       title: 'Navigating the Product Maze',
       cardType: 'link',
       cardTypeId: 1,
@@ -11,8 +36,7 @@ export const mockCards = {
       imageWidth: 1200,
       imageHeight: 674,
       createdAt: '2020-11-28T07:15:46+00:00',
-      url:
-        'https://medium.com/lets-make-things/navigating-the-product-maze-f7dce97eeb34',
+      url: 'https://trello.com',
       totalFavorites: 0,
       description: 'Or, The Elementary Forces of Product Design.',
       user: {

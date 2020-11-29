@@ -22,7 +22,7 @@ const StoryListItem = ({ onClick }) => {
       cardType="link"
       favoriteProps={{}}
       moreProps={{}}
-      title="How To Memorize Music 5 Times Faster"
+      title="https://docs.google.com/document/d/1Fuo8bFnEjdbhkgYLEwiApscA5aFKemNRBfHYhuZwzFk/edit"
       dateTime={new Date('2020-11-18T04:06:43+0000')}
       href="https://google.com"
       navigationList={[{ onClick: () => null, text: 'Cool beans' }]}
