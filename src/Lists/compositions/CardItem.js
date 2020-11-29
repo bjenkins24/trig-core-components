@@ -88,7 +88,7 @@ const CardItem = ({
           ''
         )
       }
-      renderItem={() => <TypeIcon type={cardType} size={3.2} />}
+      renderItem={() => <TypeIcon url={href} type={cardType} size={3.2} />}
       renderContent={() => (
         <ListItemContent
           renderItem={() => <Avatar size={4} {...avatarProps} />}
