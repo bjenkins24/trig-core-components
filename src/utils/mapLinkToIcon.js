@@ -42,7 +42,7 @@ const mapLinkToIcon = (url) => {
     return 'type-jira';
   }
   if (host.includes('linkedin')) {
-    return 'linkedin';
+    return 'linked-in';
   }
   if (host.includes('notion')) {
     return 'type-notion';

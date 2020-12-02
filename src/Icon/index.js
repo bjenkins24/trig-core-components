@@ -104,7 +104,7 @@ export const iconComponents = {
   'horizontal-dots': HorizontalDots,
   italic: Italic,
   link: Link,
-  linkedIn: LinkedIn,
+  'linked-in': LinkedIn,
   'list-ordered': ListOrdered,
   'list-unordered': ListUnordered,
   loading: Loading,
