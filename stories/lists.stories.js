@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
@@ -14,13 +14,19 @@ import Icon from '../src/Icon';
 
 // eslint-disable-next-line react/prop-types
 const StoryListItem = ({ onClick }) => {
+  const [isFavorited, setIsFavorited] = useState(false);
   return (
     <CardItem
       openInNewTab
       onClick={onClick}
       avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
       cardType="link"
-      favoriteProps={{}}
+      favoriteProps={{
+        onClick: () => {
+          setIsFavorited(!isFavorited);
+        },
+        type: !isFavorited ? 'heart' : 'heart-filled',
+      }}
       moreProps={{}}
       title="https://docs.google.com/document/d/1Fuo8bFnEjdbhkgYLEwiApscA5aFKemNRBfHYhuZwzFk/edit"
       dateTime={new Date('2020-11-18T04:06:43+0000')}
