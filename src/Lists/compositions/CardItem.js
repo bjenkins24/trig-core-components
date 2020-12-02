@@ -10,6 +10,7 @@ import { mungeHighlight } from 'utils/mungeHighlight';
 import Highlight from 'Highlight';
 import { makeTextFragmentFromExcerpt } from 'utils/makeTextFragment';
 import PopoverNavigation from 'Popovers/PopoverNavigation';
+import Loading from 'Loading';
 
 const CardItemProps = {
   href: PropTypes.string,
@@ -22,6 +23,7 @@ const CardItemProps = {
   favoriteProps: PropTypes.object.isRequired,
   openInNewTab: PropTypes.bool,
   navigationList: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool,
 };
 
 /* istanbul ignore next */
@@ -30,10 +32,12 @@ const defaultProps = {
   onClick: () => null,
   content: '',
   openInNewTab: false,
+  isLoading: false,
 };
 
 const CardItem = ({
   href,
+  isLoading,
   openInNewTab,
   onClick,
   cardType,
@@ -117,14 +121,18 @@ const CardItem = ({
       )}
       actions={[
         <Icon type="heart" color="s" size={1.6} {...favoriteProps} />,
-        <PopoverNavigation placement="top" navigationList={navigationList}>
-          <Icon
-            title="More Options"
-            type="horizontal-dots"
-            color="s"
-            size={1.6}
-          />
-        </PopoverNavigation>,
+        !isLoading ? (
+          <PopoverNavigation placement="top" navigationList={navigationList}>
+            <Icon
+              title="More Options"
+              type="horizontal-dots"
+              color="s"
+              size={1.6}
+            />
+          </PopoverNavigation>
+        ) : (
+          <Loading size={1.6} title="Syncing Card..." color="ps.200" />
+        ),
       ]}
       {...clickableProps}
     />
