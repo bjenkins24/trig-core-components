@@ -37,6 +37,7 @@ describe('<CardItem />', () => {
 
     rerender(
       <CardItem
+        isLoading
         cardType="doc"
         avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
         title={title}
@@ -49,6 +50,7 @@ describe('<CardItem />', () => {
 
     user.click(container);
     expect(queryByText(content)).not.toBeInTheDocument();
+    expect(getByTitle('Syncing Card...'));
 
     rerender(
       <CardItem
