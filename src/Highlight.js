@@ -16,6 +16,14 @@ const Highlight = ({ string, styles, tag }) => {
   return (
     <div
       css={`
+        ul li {
+          list-style-type: disc;
+        }
+        blockquote {
+          border-left: 2px solid ${({ theme }) => theme.p};
+          padding-left: ${({ theme }) => theme.space[3]}px;
+          margin-left: 0;
+        }
         ${tag} {
           ${styles}
         }
