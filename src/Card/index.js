@@ -133,6 +133,7 @@ const cardTypes = {
   imageHeight: PropTypes.number,
   type: PropTypes.string.isRequired,
   totalFavorites: PropTypes.number.isRequired,
+  showTotalFavorites: PropTypes.bool,
   isFavorited: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool,
   onClick: PropTypes.func,
@@ -149,6 +150,7 @@ const defaultProps = {
   image: null,
   imageWidth: 0,
   imageHeight: 0,
+  showTotalFavorites: true,
   onClick: () => null,
   openInNewTab: false,
   isLoading: false,
@@ -164,6 +166,7 @@ const Card = ({
   imageHeight,
   type,
   totalFavorites,
+  showTotalFavorites,
   isFavorited,
   isLoading,
   navigationList,
@@ -317,9 +320,11 @@ const Card = ({
               ) : (
                 <StyledIcon type="heart-filled" title="Favorited" />
               )}
-              <TinyText color="s" className="card__meta-text">
-                {totalFavorites}
-              </TinyText>
+              {showTotalFavorites && (
+                <TinyText color="s" className="card__meta-text">
+                  {totalFavorites}
+                </TinyText>
+              )}
             </IconGroup>
           </HorizontalGroup>
         </div>

@@ -105,6 +105,7 @@ const CreateCard = () => {
           lastName={text('lastName', 'Jenkins')}
         />
       )}
+      showTotalFavorites={false}
       imageWidth={251}
       imageHeight={imageHeight}
       image={text('image', `https://picsum.photos/251/${imageHeight}`)}
