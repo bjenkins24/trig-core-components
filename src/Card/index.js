@@ -321,7 +321,11 @@ const Card = ({
                 <StyledIcon type="heart-filled" title="Favorited" />
               )}
               {showTotalFavorites && (
-                <TinyText color="s" className="card__meta-text">
+                <TinyText
+                  color="s"
+                  className="card__meta-text"
+                  data-testid="total_favorites"
+                >
                   {totalFavorites}
                 </TinyText>
               )}

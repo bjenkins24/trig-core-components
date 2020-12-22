@@ -81,10 +81,16 @@ describe('<Card />', () => {
 
   it('renders avatar', () => {
     const avatarText = 'avatar-text';
-    const { getByText } = render(
+    const { getByText, getByTestId } = render(
       buildCard({ renderAvatar: () => <div>{avatarText}</div> })
     );
     expect(getByText(avatarText)).toBeInTheDocument();
+    expect(getByTestId('total_favorites')).toBeInTheDocument();
+  });
+
+  it('hides favorite count', () => {
+    const { queryByTestId } = render(buildCard({ showTotalFavorites: false }));
+    expect(queryByTestId('total_favorites')).toBeNull();
   });
 
   it('renders description correctly', () => {
