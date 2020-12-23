@@ -10,6 +10,7 @@ import { widthType } from '../utils/propTypes';
 
 const Container = styled(VerticalGroup)`
   ${getWidth}
+  margin-bottom: auto;
 `;
 
 const StyledLabel = styled(Label)`
