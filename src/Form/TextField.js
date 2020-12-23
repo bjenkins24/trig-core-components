@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import FieldContainer from './FieldContainer';
@@ -35,29 +35,32 @@ export const defaultProps = {
   error: '',
 };
 
-const TextField = ({ label, className, width, error, ...restProps }) => {
-  return (
-    <FieldContainer
-      label={label}
-      className={className}
-      width={width}
-      error={error}
-      id="text-field"
-    >
-      {({ id }) => {
-        return (
-          <TextArea
-            id={id}
-            data-testid="textfield__textarea"
-            type="text"
-            error={error}
-            {...restProps}
-          />
-        );
-      }}
-    </FieldContainer>
-  );
-};
+const TextField = forwardRef(
+  ({ label, className, width, error, ...restProps }, ref) => {
+    return (
+      <FieldContainer
+        label={label}
+        className={className}
+        width={width}
+        error={error}
+        id="text-field"
+      >
+        {({ id }) => {
+          return (
+            <TextArea
+              ref={ref}
+              id={id}
+              data-testid="textfield__textarea"
+              type="text"
+              error={error}
+              {...restProps}
+            />
+          );
+        }}
+      </FieldContainer>
+    );
+  }
+);
 
 TextField.propTypes = textFieldTypes;
 TextField.defaultProps = defaultProps;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Select from 'react-select';
@@ -89,50 +89,46 @@ const defaultProps = {
   className: '',
 };
 
-const SelectField = ({
-  options,
-  label,
-  size,
-  width,
-  className,
-  ...restProps
-}) => {
-  const scTheme = useTheme();
+const SelectField = forwardRef(
+  ({ options, label, size, width, className, ...restProps }, ref) => {
+    const scTheme = useTheme();
 
-  return (
-    <FieldContainer
-      width={width}
-      className={className}
-      label={label}
-      id="select"
-    >
-      {({ id }) => {
-        return (
-          <StyledSelect
-            size={size}
-            className="react-select-container"
-            classNamePrefix="react-select"
-            scTheme={scTheme}
-            theme={
-              /* istanbul ignore next */
-              (theme) => ({
-                ...theme,
-                colors: {
-                  ...theme.colors,
-                  primary25: scTheme.ss[200],
-                  primary: scTheme.s,
-                },
-              })
-            }
-            options={options}
-            {...restProps}
-            id={id}
-          />
-        );
-      }}
-    </FieldContainer>
-  );
-};
+    return (
+      <FieldContainer
+        width={width}
+        className={className}
+        label={label}
+        id="select"
+      >
+        {({ id }) => {
+          return (
+            <StyledSelect
+              ref={ref}
+              size={size}
+              className="react-select-container"
+              classNamePrefix="react-select"
+              scTheme={scTheme}
+              theme={
+                /* istanbul ignore next */
+                (theme) => ({
+                  ...theme,
+                  colors: {
+                    ...theme.colors,
+                    primary25: scTheme.ss[200],
+                    primary: scTheme.s,
+                  },
+                })
+              }
+              options={options}
+              {...restProps}
+              id={id}
+            />
+          );
+        }}
+      </FieldContainer>
+    );
+  }
+);
 
 SelectField.propTypes = selectFieldTypes;
 SelectField.defaultProps = defaultProps;

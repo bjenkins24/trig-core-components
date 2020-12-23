@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Field } from 'react-final-form';
 import StringField, { stringFieldTypes } from './StringField';
 
-const StringFieldForm = ({ label, name, ...restProps }) => {
+const StringFieldForm = forwardRef(({ label, name, ...restProps }, ref) => {
   return (
     <Field name={name}>
       {({ input, meta }) => {
         return (
           <StringField
+            ref={ref}
             label={label}
             width="100%"
             {...input}
@@ -18,7 +19,7 @@ const StringFieldForm = ({ label, name, ...restProps }) => {
       }}
     </Field>
   );
-};
+});
 
 StringFieldForm.propTypes = stringFieldTypes;
 

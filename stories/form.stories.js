@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
@@ -25,6 +25,40 @@ import './consoleOverrides';
 import themeForProvider from './theme';
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const FormComponent = () => {
+  const supRef = useRef(null);
+  return (
+    <Form
+      initialValues={{ sup: '', joe: '' }}
+      onSubmit={action('submitted')}
+      validationSchema={object().shape({
+        sup: string().required('Add one please'),
+        joe: string().required('add another one!'),
+      })}
+    >
+      {({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <Fieldset>
+            <Legend>Stuff</Legend>
+            <StringFieldForm
+              ref={supRef}
+              name="sup"
+              label={text('label', 'My Cool Label')}
+              placeholder={text('placeholder', 'Placeholder')}
+            />
+            <TextFieldForm
+              name="joe"
+              label={text('label', 'My Cool Label')}
+              placeholder={text('placeholder', 'Placeholder')}
+            />
+          </Fieldset>
+          <button type="submit">Submit</button>
+        </form>
+      )}
+    </Form>
+  );
+};
 
 const DateRangeFieldWrapper = () => {
   const [startDate, setStartDate] = useState(null);
@@ -77,35 +111,7 @@ storiesOf('Form', module)
     <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
   ))
   .addDecorator(withKnobs)
-  .add('Form', () => (
-    <Form
-      initialValues={{ sup: '', joe: '' }}
-      onSubmit={action('submitted')}
-      validationSchema={object().shape({
-        sup: string().required('Add one please'),
-        joe: string().required('add another one!'),
-      })}
-    >
-      {({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Fieldset>
-            <Legend>Stuff</Legend>
-            <StringFieldForm
-              name="sup"
-              label={text('label', 'My Cool Label')}
-              placeholder={text('placeholder', 'Placeholder')}
-            />
-            <TextFieldForm
-              name="joe"
-              label={text('label', 'My Cool Label')}
-              placeholder={text('placeholder', 'Placeholder')}
-            />
-          </Fieldset>
-          <button type="submit">Submit</button>
-        </form>
-      )}
-    </Form>
-  ))
+  .add('Form', () => <FormComponent />)
   .add('StringField', () => (
     <StringField
       label={text('label', 'My Cool Label')}

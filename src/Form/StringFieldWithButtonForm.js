@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
 import { object } from 'yup';
@@ -21,71 +21,77 @@ const defaultProps = {
   disabled: false,
 };
 
-const StringFieldWithButtonForm = ({
-  onSubmit,
-  validate,
-  initialValue,
-  buttonProps,
-  loading,
-  disabled,
-  ...restProps
-}) => {
-  let handleResetForm = null;
+const StringFieldWithButtonForm = forwardRef(
+  (
+    {
+      onSubmit,
+      validate,
+      initialValue,
+      buttonProps,
+      loading,
+      disabled,
+      ...restProps
+    },
+    ref
+  ) => {
+    let handleResetForm = null;
 
-  const handleSubmitForm = ({ input }) => {
-    onSubmit({
-      value: input,
-      resetForm: handleResetForm,
-    });
-  };
+    const handleSubmitForm = ({ input }) => {
+      onSubmit({
+        value: input,
+        resetForm: handleResetForm,
+      });
+    };
 
-  const buttonPropsMerged = {
-    type: 'submit',
-    loading,
-    disabled,
-    ...buttonProps,
-  };
+    const buttonPropsMerged = {
+      type: 'submit',
+      loading,
+      disabled,
+      ...buttonProps,
+    };
 
-  return (
-    <Form
-      initialValues={{ input: initialValue }}
-      onSubmit={handleSubmitForm}
-      validationSchema={object().shape({
-        input: validate,
-      })}
-    >
-      {({ handleSubmit, form }) => {
-        if (!handleResetForm && form && form.reset) {
-          handleResetForm = () => {
-            setTimeout(() => {
-              form.reset();
-              form.resetFieldState('input');
-            });
-          };
-        }
-        return (
-          <form onSubmit={handleSubmit}>
-            <Field name="input">
-              {({ input, meta }) => {
-                return (
-                  <StringFieldWithButton
-                    {...restProps}
-                    disabled={disabled || loading}
-                    buttonProps={buttonPropsMerged}
-                    name={input.name}
-                    value={input.value}
-                    onChange={input.onChange}
-                    error={meta.touched && meta.error}
-                  />
-                );
-              }}
-            </Field>
-          </form>
-        );
-      }}
-    </Form>
-  );
-};
+    return (
+      <Form
+        initialValues={{ input: initialValue }}
+        onSubmit={handleSubmitForm}
+        validationSchema={object().shape({
+          input: validate,
+        })}
+      >
+        {({ handleSubmit, form }) => {
+          if (!handleResetForm && form && form.reset) {
+            handleResetForm = () => {
+              setTimeout(() => {
+                form.reset();
+                form.resetFieldState('input');
+              });
+            };
+          }
+          return (
+            <form onSubmit={handleSubmit}>
+              <Field name="input">
+                {({ input, meta }) => {
+                  return (
+                    <StringFieldWithButton
+                      {...restProps}
+                      ref={ref}
+                      disabled={disabled || loading}
+                      buttonProps={buttonPropsMerged}
+                      name={input.name}
+                      value={input.value}
+                      onChange={input.onChange}
+                      error={meta.touched && meta.error}
+                    />
+                  );
+                }}
+              </Field>
+            </form>
+          );
+        }}
+      </Form>
+    );
+  }
+);
 
 StringFieldWithButtonForm.propTypes = stringFieldWithButtonTypes;
 StringFieldWithButtonForm.defaultProps = defaultProps;

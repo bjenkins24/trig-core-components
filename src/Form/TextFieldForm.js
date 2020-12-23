@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Field } from 'react-final-form';
 import TextField, { textFieldTypes } from './TextField';
 
-const TextFieldForm = ({ label, name, ...restProps }) => {
+const TextFieldForm = forwardRef(({ label, name, ...restProps }, ref) => {
   return (
     <Field name={name}>
       {({ input, meta }) => {
         return (
           <TextField
+            ref={ref}
             label={label}
             width="100%"
             {...input}
@@ -18,7 +19,7 @@ const TextFieldForm = ({ label, name, ...restProps }) => {
       }}
     </Field>
   );
-};
+});
 
 TextFieldForm.propTypes = textFieldTypes;
 
