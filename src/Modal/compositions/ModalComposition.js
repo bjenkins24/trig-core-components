@@ -12,10 +12,10 @@ import { widthType } from 'utils/propTypes';
 const ModalCompositionProps = {
   tabNavigationProps: PropTypes.shape(tabsNavigationTypes),
   header: PropTypes.string,
+  cancelProps: PropTypes.object,
   cancelContent: PropTypes.string,
-  onCancel: PropTypes.func,
+  submitProps: PropTypes.object,
   submitContent: PropTypes.string,
-  onSubmit: PropTypes.func,
   onRequestClose: PropTypes.func.isRequired,
   children: PropTypes.node,
   isOpen: PropTypes.bool.isRequired,
@@ -27,8 +27,8 @@ const defaultProps = {
   header: null,
   cancelContent: 'Cancel',
   submitContent: 'Submit',
-  onCancel: null,
-  onSubmit: null,
+  submitProps: {},
+  cancelProps: {},
   children: null,
   height: null,
 };
@@ -36,9 +36,9 @@ const defaultProps = {
 const ModalComposition = ({
   header,
   cancelContent,
-  onCancel,
+  cancelProps,
   submitContent,
-  onSubmit,
+  submitProps,
   tabNavigationProps,
   onRequestClose,
   children,
@@ -124,7 +124,7 @@ const ModalComposition = ({
         return null;
       }}
       renderFooter={() => {
-        if (!onSubmit) return null;
+        if (!submitProps.onClick) return null;
         return (
           <>
             <div
@@ -149,10 +149,11 @@ const ModalComposition = ({
                 css={`
                   padding-left: 0;
                 `}
+                {...cancelProps}
                 onClick={(event) => {
                   /* istanbul ignore next */
-                  if (onCancel) {
-                    onCancel(event);
+                  if (cancelProps.onClick) {
+                    cancelProps.onClick(event);
                   }
                   return onClose();
                 }}
@@ -164,7 +165,7 @@ const ModalComposition = ({
                 css={`
                   margin-left: auto;
                 `}
-                onClick={onSubmit}
+                {...submitProps}
               >
                 {submitContent}
               </Button>

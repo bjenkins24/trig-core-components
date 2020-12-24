@@ -80,7 +80,9 @@ storiesOf('Modals', module)
   .add('default', () => <ModalStory />)
   .add('With Action Buttons', () => (
     <ModalStoryComposition
-      onSubmit={() => null}
+      submitProps={{
+        onClick: () => null,
+      }}
       submitContent="Create Card"
       height={60}
       tabNavigationProps={{
