@@ -60,9 +60,13 @@ describe('<ModalComposition />', () => {
         onRequestClose={mockClose}
         header={headerText}
         submitContent={submitButtonText}
-        onSubmit={mockCallback}
+        submitProps={{
+          onClick: mockCallback,
+        }}
         cancelContent={cancelButtonText}
-        onCancel={mockCancel}
+        cancelProps={{
+          onClick: mockCancel,
+        }}
       >
         {content}
       </ModalComposition>
