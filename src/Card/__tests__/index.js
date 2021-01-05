@@ -72,6 +72,11 @@ describe('<Card />', () => {
     rerender(buildCard({ isLoading: true }));
     expect(getByTitle(/syncing card.../i)).toBeInTheDocument();
     expect(queryByTitle(/more options/i)).toBeNull();
+
+    rerender(buildCard({ hideType: true, isLoading: true }));
+    expect(queryByTitle('link')).not.toBeInTheDocument();
+    expect(getByTitle(/syncing card.../i)).toBeInTheDocument();
+    expect(queryByTitle(/more options/i)).toBeNull();
   });
 
   it('renders thumbnail', () => {

@@ -142,6 +142,7 @@ const cardTypes = {
   href: PropTypes.string.isRequired,
   openInNewTab: PropTypes.bool,
   description: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  hideType: PropTypes.bool,
 };
 
 /* istanbul ignore next */
@@ -155,6 +156,7 @@ const defaultProps = {
   openInNewTab: false,
   isLoading: false,
   description: '',
+  hideType: false,
 };
 
 const Card = ({
@@ -175,6 +177,7 @@ const Card = ({
   onClickFavorite,
   openInNewTab,
   description,
+  hideType,
   ...restProps
 }) => {
   const [areImagesloaded, setAreImagesLoaded] = useState(false);
@@ -255,9 +258,11 @@ const Card = ({
             )}`}
           </DateCreated>
         </Meta>
-        <Type>
-          <CardType url={href} type={type} size={1.6} />
-        </Type>
+        {!hideType && (
+          <Type>
+            <CardType url={href} type={type} size={1.6} />
+          </Type>
+        )}
         <ThumbnailContainer>
           <Hover hasDescription={!!description} data-testid="card__hover">
             {!description || truncatedLines === 0 ? (
