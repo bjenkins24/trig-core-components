@@ -106,7 +106,9 @@ const Modal = ({
 
   useEffect(() => {
     if (isOpen) {
-      disableScroll.on(document.getElementsByTagName('body')[0]);
+      disableScroll.on(document.getElementsByTagName('body')[0], {
+        disableKeys: false,
+      });
     } else {
       disableScroll.off(document.getElementsByTagName('body')[0]);
     }
