@@ -38,7 +38,7 @@ describe('<CardItem />', () => {
     rerender(
       <CardItem
         isLoading
-        cardType="doc"
+        type="doc"
         avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
         title={title}
         dateTime={date}
@@ -55,7 +55,6 @@ describe('<CardItem />', () => {
     rerender(
       <CardItem
         content="hello"
-        cardType="doc"
         avatarProps={{ firstName: 'Brian', lastName: 'Jenkins' }}
         title={title}
         dateTime={date}

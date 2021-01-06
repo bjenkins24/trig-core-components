@@ -66,11 +66,13 @@ const ListItemContent = ({
 }) => {
   return (
     <>
-      <Item>
-        <ItemContent data-testid="listItem__itemContent">
-          {renderItem()}
-        </ItemContent>
-      </Item>
+      {!renderItem ? null : (
+        <Item>
+          <ItemContent data-testid="listItem__itemContent">
+            {renderItem()}
+          </ItemContent>
+        </Item>
+      )}
       <Content>{renderContent()}</Content>
       <Actions margin={1.6}>
         {actions.map((action) => (
@@ -102,7 +104,7 @@ const Description = ({ description }) => {
 /* eslint-enable react/prop-types */
 
 const listItemTypes = {
-  renderItem: PropTypes.func,
+  renderItem: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   renderContent: PropTypes.func.isRequired,
   actions: PropTypes.arrayOf(PropTypes.node),
   onClick: PropTypes.func,
@@ -172,8 +174,9 @@ const ListItem = ({
           <div
             css={`
               display: flex;
-              margin-left: -${({ theme }) => theme.space[3]}px;
+              margin-left: -${({ theme, hasItem }) => (hasItem ? `${theme.space[3]}px` : 0)};
             `}
+            hasItem={renderItem}
           >
             <ListItemContent
               actions={actions}

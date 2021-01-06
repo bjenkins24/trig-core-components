@@ -131,7 +131,7 @@ const cardTypes = {
   image: PropTypes.string,
   imageWidth: PropTypes.number,
   imageHeight: PropTypes.number,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   totalFavorites: PropTypes.number.isRequired,
   showTotalFavorites: PropTypes.bool,
   isFavorited: PropTypes.bool.isRequired,
@@ -142,7 +142,6 @@ const cardTypes = {
   href: PropTypes.string.isRequired,
   openInNewTab: PropTypes.bool,
   description: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-  hideType: PropTypes.bool,
 };
 
 /* istanbul ignore next */
@@ -156,7 +155,7 @@ const defaultProps = {
   openInNewTab: false,
   isLoading: false,
   description: '',
-  hideType: false,
+  type: '',
 };
 
 const Card = ({
@@ -177,7 +176,6 @@ const Card = ({
   onClickFavorite,
   openInNewTab,
   description,
-  hideType,
   ...restProps
 }) => {
   const [areImagesloaded, setAreImagesLoaded] = useState(false);
@@ -258,7 +256,7 @@ const Card = ({
             )}`}
           </DateCreated>
         </Meta>
-        {!hideType && (
+        {type && (
           <Type>
             <CardType url={href} type={type} size={1.6} />
           </Type>

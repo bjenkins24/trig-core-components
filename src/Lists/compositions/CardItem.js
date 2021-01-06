@@ -15,7 +15,7 @@ import Loading from 'Loading';
 const CardItemProps = {
   href: PropTypes.string,
   onClick: PropTypes.func,
-  cardType: PropTypes.string.isRequired,
+  type: PropTypes.string,
   content: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   avatarProps: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
@@ -30,6 +30,7 @@ const CardItemProps = {
 const defaultProps = {
   href: '',
   onClick: () => null,
+  type: '',
   content: '',
   openInNewTab: false,
   isLoading: false,
@@ -40,7 +41,7 @@ const CardItem = ({
   isLoading,
   openInNewTab,
   onClick,
-  cardType,
+  type,
   avatarProps,
   title,
   dateTime,
@@ -92,7 +93,9 @@ const CardItem = ({
           ''
         )
       }
-      renderItem={() => <TypeIcon url={href} type={cardType} size={3.2} />}
+      renderItem={
+        type ? () => <TypeIcon url={href} type={type} size={3.2} /> : false
+      }
       renderContent={() => (
         <ListItemContent
           renderItem={() => <Avatar size={4} {...avatarProps} />}
