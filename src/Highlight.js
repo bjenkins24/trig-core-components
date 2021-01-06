@@ -24,6 +24,9 @@ const Highlight = ({ string, styles, tag }) => {
           padding-left: ${({ theme }) => theme.space[3]}px;
           margin-left: 0;
         }
+        code {
+          white-space: pre-wrap;
+        }
         ${tag} {
           ${styles}
         }
