@@ -45,6 +45,7 @@ import Plus from './icons/Plus';
 import Quote from './icons/Quote';
 import RowView from './icons/RowView';
 import Search from './icons/Search';
+import Tags from './icons/Tags';
 import ThumbnailView from './icons/ThumbnailView';
 import Trash from './icons/Trash';
 import Twitter from './icons/Twitter';
@@ -118,6 +119,7 @@ export const iconComponents = {
   quote: Quote,
   'row-view': RowView,
   search: Search,
+  tags: Tags,
   twitter: Twitter,
   'type-airtable': TypeAirtable,
   'type-amplitude': TypeAmplitude,
