@@ -166,7 +166,9 @@ storiesOf('Icons', module)
     <ThemeProvider theme={theme}>{story()}</ThemeProvider>
   ))
   .addDecorator(withKnobs)
-  .add('default', () => <Icon type="collection" size={number('size', 3.2)} />)
+  .add('default', () => (
+    <Icon type="animated-check" size={number('size', 3.2)} />
+  ))
   .add('type icon', () => (
     <TypeIcon
       type={select('Icon', icons, 'application/vnd.google-apps.document')}

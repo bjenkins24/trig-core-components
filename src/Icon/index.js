@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import Aggregate from './icons/Aggregate';
 import Alert from './icons/Alert';
+import AnimatedCheck from './icons/AnimatedCheck';
 import ArrowDown from './icons/ArrowDown';
 import ArrowLeft from './icons/ArrowLeft';
 import ArrowRight from './icons/ArrowRight';
@@ -78,6 +79,7 @@ import Underline from './icons/Underline';
 export const iconComponents = {
   aggregate: Aggregate,
   alert: Alert,
+  'animated-check': AnimatedCheck,
   'arrow-down': ArrowDown,
   'arrow-left': ArrowLeft,
   'arrow-right': ArrowRight,
