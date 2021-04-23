@@ -55,11 +55,13 @@ import TypeAirtable from './icons/TypeAirtable';
 import TypeAmplitude from './icons/TypeAmplitude';
 import TypeAsana from './icons/TypeAsana';
 import TypeBitbucket from './icons/TypeBitbucket';
+import TypeClubhouse from './icons/TypeClubhouse';
 import TypeCode from './icons/TypeCode';
 import TypeConfluence from './icons/TypeConfluence';
 import TypeExcel from './icons/TypeExcel';
 import TypeFigma from './icons/TypeFigma';
 import TypeGithub from './icons/TypeGithub';
+import TypeGmail from './icons/TypeGmail';
 import TypeGoogleDoc from './icons/TypeGoogleDoc';
 import TypeGoogleForm from './icons/TypeGoogleForm';
 import TypeGoogleSheet from './icons/TypeGoogleSheet';
@@ -129,11 +131,13 @@ export const iconComponents = {
   'type-amplitude': TypeAmplitude,
   'type-asana': TypeAsana,
   'type-bitbucket': TypeBitbucket,
+  'type-clubhouse': TypeClubhouse,
   'type-code': TypeCode,
   'type-confluence': TypeConfluence,
   'type-excel': TypeExcel,
   'type-figma': TypeFigma,
   'type-github': TypeGithub,
+  'type-gmail': TypeGmail,
   'type-google-doc': TypeGoogleDoc,
   'type-google-form': TypeGoogleForm,
   'type-google-sheet': TypeGoogleSheet,
