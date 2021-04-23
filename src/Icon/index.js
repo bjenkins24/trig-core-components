@@ -52,8 +52,10 @@ import ThumbnailView from './icons/ThumbnailView';
 import Trash from './icons/Trash';
 import Twitter from './icons/Twitter';
 import TypeAirtable from './icons/TypeAirtable';
+import TypeAmazon from './icons/TypeAmazon';
 import TypeAmplitude from './icons/TypeAmplitude';
 import TypeAsana from './icons/TypeAsana';
+import TypeBasecamp from './icons/TypeBasecamp';
 import TypeBitbucket from './icons/TypeBitbucket';
 import TypeClubhouse from './icons/TypeClubhouse';
 import TypeCode from './icons/TypeCode';
@@ -128,8 +130,10 @@ export const iconComponents = {
   tags: Tags,
   twitter: Twitter,
   'type-airtable': TypeAirtable,
+  'type-amazon': TypeAmazon,
   'type-amplitude': TypeAmplitude,
   'type-asana': TypeAsana,
+  'type-basecamp': TypeBasecamp,
   'type-bitbucket': TypeBitbucket,
   'type-clubhouse': TypeClubhouse,
   'type-code': TypeCode,

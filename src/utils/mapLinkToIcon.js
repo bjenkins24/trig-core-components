@@ -17,6 +17,12 @@ const mapLinkToIcon = (url) => {
   if (url.includes('docs.google') && url.includes('forms')) {
     return 'type-google-form';
   }
+  if (url.includes('mail.google')) {
+    return 'type-gmail';
+  }
+  if (host.includes('amazon')) {
+    return 'type-amazon';
+  }
   if (host.includes('amplitude')) {
     return 'type-amplitude';
   }
@@ -26,8 +32,14 @@ const mapLinkToIcon = (url) => {
   if (host.includes('asana')) {
     return 'type-asana';
   }
+  if (url.includes('basecamp')) {
+    return 'type-basecamp';
+  }
   if (host.includes('bitbucket')) {
     return 'type-bitbucket';
+  }
+  if (url.includes('clubhouse.io')) {
+    return 'type-clubhouse';
   }
   if (host.includes('confluence')) {
     return 'type-confluence';
