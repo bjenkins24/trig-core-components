@@ -61,6 +61,7 @@ import TypeClubhouse from './icons/TypeClubhouse';
 import TypeCode from './icons/TypeCode';
 import TypeConfluence from './icons/TypeConfluence';
 import TypeExcel from './icons/TypeExcel';
+import TypeFacebook from './icons/TypeFacebook';
 import TypeFigma from './icons/TypeFigma';
 import TypeGithub from './icons/TypeGithub';
 import TypeGmail from './icons/TypeGmail';
@@ -68,6 +69,7 @@ import TypeGoogleDoc from './icons/TypeGoogleDoc';
 import TypeGoogleForm from './icons/TypeGoogleForm';
 import TypeGoogleSheet from './icons/TypeGoogleSheet';
 import TypeGoogleSlide from './icons/TypeGoogleSlide';
+import TypeInstagram from './icons/TypeInstagram';
 import TypeJira from './icons/TypeJira';
 import TypeNotion from './icons/TypeNotion';
 import TypePowerpoint from './icons/TypePowerpoint';
@@ -75,6 +77,7 @@ import TypeQuora from './icons/TypeQuora';
 import TypeReddit from './icons/TypeReddit';
 import TypeStackOverflow from './icons/TypeStackOverflow';
 import TypeTrello from './icons/TypeTrello';
+import TypeTwitter from './icons/TypeTwitter';
 import TypeTypeform from './icons/TypeTypeform';
 import TypeWord from './icons/TypeWord';
 import TypeYoutube from './icons/TypeYoutube';
@@ -139,6 +142,7 @@ export const iconComponents = {
   'type-code': TypeCode,
   'type-confluence': TypeConfluence,
   'type-excel': TypeExcel,
+  'type-facebook': TypeFacebook,
   'type-figma': TypeFigma,
   'type-github': TypeGithub,
   'type-gmail': TypeGmail,
@@ -146,6 +150,7 @@ export const iconComponents = {
   'type-google-form': TypeGoogleForm,
   'type-google-sheet': TypeGoogleSheet,
   'type-google-slide': TypeGoogleSlide,
+  'type-instagram': TypeInstagram,
   'type-jira': TypeJira,
   'type-notion': TypeNotion,
   'type-powerpoint': TypePowerpoint,
@@ -153,6 +158,7 @@ export const iconComponents = {
   'type-reddit': TypeReddit,
   'type-stack-overflow': TypeStackOverflow,
   'type-trello': TypeTrello,
+  'type-twitter': TypeTwitter,
   'type-typeform': TypeTypeform,
   'type-word': TypeWord,
   'type-youtube': TypeYoutube,

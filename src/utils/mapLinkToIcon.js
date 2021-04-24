@@ -44,11 +44,17 @@ const mapLinkToIcon = (url) => {
   if (host.includes('confluence')) {
     return 'type-confluence';
   }
+  if (host.includes('facebook')) {
+    return 'type-facebook';
+  }
   if (host.includes('figma')) {
     return 'type-figma';
   }
   if (host.includes('github')) {
     return 'type-github';
+  }
+  if (host.includes('instagram')) {
+    return 'type-instagram';
   }
   if (host.includes('jira')) {
     return 'type-jira';
@@ -70,6 +76,9 @@ const mapLinkToIcon = (url) => {
   }
   if (host.includes('trello')) {
     return 'type-trello';
+  }
+  if (host.includes('twitter')) {
+    return 'type-twitter';
   }
   if (host.includes('typeform')) {
     return 'type-typeform';
