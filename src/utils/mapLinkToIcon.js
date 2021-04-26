@@ -50,7 +50,7 @@ const mapLinkToIcon = (url) => {
   if (host.includes('figma')) {
     return 'type-figma';
   }
-  if (host.includes('github')) {
+  if (url.includes('github.com')) {
     return 'type-github';
   }
   if (host.includes('instagram')) {
