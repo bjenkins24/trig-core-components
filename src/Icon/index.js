@@ -42,6 +42,7 @@ import NumberOne from './icons/NumberOne';
 import NumberTwo from './icons/NumberTwo';
 import Open from './icons/Open';
 import Organize from './icons/Organize';
+import Play from './icons/Play';
 import Plus from './icons/Plus';
 import Quote from './icons/Quote';
 import RowView from './icons/RowView';
@@ -125,6 +126,7 @@ export const iconComponents = {
   'number-two': NumberTwo,
   open: Open,
   organize: Organize,
+  play: Play,
   plus: Plus,
   quote: Quote,
   'row-view': RowView,
