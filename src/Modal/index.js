@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { createGlobalStyle } from 'styled-components';
 import { device } from '@trig-app/constants';
@@ -103,6 +103,13 @@ const Modal = ({
   ...restProps
 }) => {
   const contentClassName = useRef(makeRandomClass());
+  const [isClientSide, setIsClientSide] = useState(false);
+
+  // Perfect scrollbar is not set up for server side rendering. So we're only going to render it
+  // on the client which useEffect should take care of
+  useEffect(() => {
+    setIsClientSide(true);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -161,11 +168,21 @@ const Modal = ({
               width: calc(100% + 15px);
             `}
           >
-            <PerfectScrollbar
-              css={`
-                width: 100%;
-              `}
-            >
+            {isClientSide ? (
+              <PerfectScrollbar
+                css={`
+                  width: 100%;
+                `}
+              >
+                <div
+                  css={`
+                    margin-right: 15px;
+                  `}
+                >
+                  {children}
+                </div>
+              </PerfectScrollbar>
+            ) : (
               <div
                 css={`
                   margin-right: 15px;
@@ -173,7 +190,7 @@ const Modal = ({
               >
                 {children}
               </div>
-            </PerfectScrollbar>
+            )}
           </div>
           <footer
             css={`
