@@ -24,7 +24,6 @@ export const {
   Label,
   Legend,
   SelectField,
-  SelectTagField,
   StringField,
   StringFieldForm,
   StringFieldWithButton,
