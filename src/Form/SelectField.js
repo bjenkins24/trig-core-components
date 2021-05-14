@@ -123,7 +123,9 @@ const SelectField = forwardRef(
                 classNamePrefix={randomClass}
                 menuPortalTarget={document.body}
                 styles={{
-                  menuPortal: (provided) => ({ ...provided, zIndex: 9999 }),
+                  menuPortal:
+                    /* istanbul ignore next */
+                    (provided) => ({ ...provided, zIndex: 9999 }),
                 }}
                 theme={
                   /* istanbul ignore next */
