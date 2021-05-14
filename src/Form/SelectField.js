@@ -1,6 +1,6 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import Select from 'react-select';
 import FieldContainer from './FieldContainer';
 import useTheme from '../utils/useTheme';
@@ -14,16 +14,16 @@ const getSize = (type) => ({ size }) => {
       md: Body1Styles,
     },
     padding: {
-      sm: 'padding: 0.5rem 1.2rem',
-      md: 'padding: 0.5rem 1.6rem',
+      sm: 'padding: 0.5rem 1.2rem !important',
+      md: 'padding: 0.5rem 1.6rem !important',
     },
   };
   return sizeMap[type][size];
 };
 
-const StyledSelect = styled(Select)`
-  ${getSize('font')}
-  .react-select {
+const GlobalStyles = createGlobalStyle`
+${({ theme, randomClass, size }) => {
+  return `.${randomClass} {
     &__clear-indicator {
       display: none;
     }
@@ -31,29 +31,31 @@ const StyledSelect = styled(Select)`
       display: none;
     }
     &__placeholder {
-      color: ${({ scTheme }) => scTheme.ps[100]};
+      color: ${theme.ps[100]};
     }
     &__control {
-      background: ${({ scTheme }) => scTheme.colors.b};
+      background: ${theme.colors.b} !important;
       cursor: pointer;
-      border: solid 0.1rem ${({ scTheme }) => scTheme.ps[100]};
+      border: solid 0.1rem ${theme.ps[100]};
       &--is-focused {
-        box-shadow: none;
-        border: solid 0.1rem ${({ scTheme }) => scTheme.ps[200]};
+        box-shadow: none !important;
+        border: solid 0.1rem ${theme.ps[200]};
       }
     }
     &__value-container {
       margin-top: 1px;
-      ${getSize('padding')}
+      cursor: pointer;
+      ${getSize('font')({ size })}
+      ${getSize('padding')({ size })}
     }
     &__option {
-      background: ${({ scTheme }) => scTheme.colors.b};
-      cursor: pointer;
-      color: ${({ scTheme }) => scTheme.p};
+      background: ${theme.colors.b} !important;
+      cursor: pointer !important;
+      color: ${theme.p} !important;
       &--is-focused,
       &--is-selected {
-        background: ${({ scTheme }) => scTheme.colors.s};
-        color: ${({ scTheme }) => scTheme.bs[200]};
+        background: ${theme.colors.s} !important;
+        color: ${theme.bs[200]} !important;
       }
     }
     &__indicator {
@@ -63,10 +65,12 @@ const StyledSelect = styled(Select)`
       display: none;
     }
     &__menu {
-      background: ${({ scTheme }) => scTheme.colors.b};
+      ${getSize('font')({ size })}
+      background: ${theme.colors.b} !important;
       z-index: 3;
     }
-  }
+  }`;
+}}
 `;
 
 const selectFieldTypes = {
@@ -92,40 +96,54 @@ const defaultProps = {
 const SelectField = forwardRef(
   ({ options, label, size, width, className, ...restProps }, ref) => {
     const scTheme = useTheme();
+    const randomClass = useMemo(
+      () =>
+        (Math.random() + 1)
+          .toString(36)
+          .substr(2, 12)
+          .replace(/[0-9]/g, 'a'),
+      []
+    );
 
     return (
-      <FieldContainer
-        width={width}
-        className={className}
-        label={label}
-        id="select"
-      >
-        {({ id }) => {
-          return (
-            <StyledSelect
-              ref={ref}
-              size={size}
-              className="react-select-container"
-              classNamePrefix="react-select"
-              scTheme={scTheme}
-              theme={
-                /* istanbul ignore next */
-                (theme) => ({
-                  ...theme,
-                  colors: {
-                    ...theme.colors,
-                    primary25: scTheme.ss[200],
-                    primary: scTheme.s,
-                  },
-                })
-              }
-              options={options}
-              {...restProps}
-              id={id}
-            />
-          );
-        }}
-      </FieldContainer>
+      <>
+        <GlobalStyles size={size} randomClass={randomClass} />
+        <FieldContainer
+          width={width}
+          className={className}
+          label={label}
+          id="select"
+        >
+          {({ id }) => {
+            return (
+              <Select
+                ref={ref}
+                size={size}
+                className="react-select-container"
+                classNamePrefix={randomClass}
+                menuPortalTarget={document.body}
+                styles={{
+                  menuPortal: (provided) => ({ ...provided, zIndex: 9999 }),
+                }}
+                theme={
+                  /* istanbul ignore next */
+                  (theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      primary25: scTheme.ss[200],
+                      primary: scTheme.s,
+                    },
+                  })
+                }
+                options={options}
+                {...restProps}
+                id={id}
+              />
+            );
+          }}
+        </FieldContainer>
+      </>
     );
   }
 );
