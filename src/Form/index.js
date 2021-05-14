@@ -8,7 +8,6 @@ import Form from './Form';
 import Label from './Label';
 import Legend from './Legend';
 import SelectField from './SelectField';
-import SelectTagField from './SelectTagField';
 import StringField from './StringField';
 import StringFieldForm from './StringFieldForm';
 import StringFieldWithButton from './StringFieldWithButton';
@@ -28,7 +27,6 @@ export {
   Fieldset,
   Form,
   SelectField,
-  SelectTagField,
   StringField,
   StringFieldForm,
   StringFieldWithButton,
