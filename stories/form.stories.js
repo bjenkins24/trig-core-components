@@ -14,7 +14,6 @@ import {
   Legend,
   StringFieldWithButtonForm,
   SelectField,
-  SelectTagField,
   CheckboxForm,
   Tag,
   Label,
@@ -128,14 +127,6 @@ storiesOf('Form', module)
     return (
       <SelectFieldWrapper
         Component={SelectField}
-        size={select('Size', { sm: 'sm', md: 'md', lg: 'lg' }, 'md')}
-      />
-    );
-  })
-  .add('SelectTagField', () => {
-    return (
-      <SelectFieldWrapper
-        Component={SelectTagField}
         size={select('Size', { sm: 'sm', md: 'md', lg: 'lg' }, 'md')}
       />
     );
