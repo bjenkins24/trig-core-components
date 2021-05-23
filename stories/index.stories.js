@@ -198,7 +198,7 @@ storiesOf('Logo', module)
   ))
   .addDecorator(withKnobs)
   .add('default', () => (
-    <Logo type={select('type', ['dark', 'light'], 'dark')} />
+    <Logo type={select('type', ['dark', 'light'], 'light')} />
   ));
 
 storiesOf('Collection', module)
@@ -229,6 +229,7 @@ storiesOf('Collection', module)
           'https://code.org/images/fill-480x360/tutorials/hoc2018/danceparty-characters.jpg'
         )}
         totalFollowers={number('followers', 9)}
+        permission="public"
         totalCards={number('cards', 22)}
         title={text('title', 'Onboarding Support')}
         description={text(

@@ -56,7 +56,7 @@ const Wrapper = styled.a`
   text-decoration: none;
   border-radius: ${({ theme }) => theme.br};
   ${getBackground(false)}
-  transition: opacity 200ms;
+  transition: all 200ms;
   width: 100%;
   height: 100%;
   color: ${({ theme }) => theme.sc};
@@ -67,12 +67,14 @@ const Wrapper = styled.a`
   }
   &:hover {
     ${getBackground(true)}
-    .collection__thumbnail {
+    ${({ description }) =>
+      description !== '' &&
+      `.collection__thumbnail {
       opacity: 0;
     }
     .collection__hover {
       opacity: 1;
-    }
+    }`}
   }
 `;
 
@@ -105,25 +107,42 @@ const AvatarWrapper = ({ user, ...restProps }) => {
 
 AvatarWrapper.propTypes = AvatarWrapperProps;
 
+const getPermission = (permission) => {
+  const permissionMap = {
+    private: {
+      icon: 'lock',
+      title: 'Private',
+    },
+    public: {
+      icon: 'world',
+      title: 'Public',
+    },
+  };
+  return permissionMap[permission];
+};
+
 const defaultProps = {
   image: '',
+  user: null,
+  totalFollowers: null,
 };
 
 const collectionTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   totalCards: PropTypes.number.isRequired,
-  totalFollowers: PropTypes.number.isRequired,
+  totalFollowers: PropTypes.number,
   image: PropTypes.string,
   href: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  permission: PropTypes.oneOf(['private', 'public']).isRequired,
   user: PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     position: PropTypes.string,
     email: PropTypes.string,
     image: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 const Collection = ({
@@ -135,6 +154,7 @@ const Collection = ({
   description,
   href,
   onClick,
+  permission,
   ...restProps
 }) => {
   return (
@@ -145,6 +165,7 @@ const Collection = ({
         e.preventDefault();
         onClick(e);
       }}
+      description={description}
       {...restProps}
     >
       <CollectionThumbnail className="collection__thumbnail">
@@ -167,7 +188,7 @@ const Collection = ({
             width: calc(100% - ${({ theme }) => theme.space[4]}px);
           `}
         >
-          <AvatarWrapper user={user} />
+          {user && <AvatarWrapper user={user} />}
           <HorizontalGroup
             margin={1.6}
             css={`
@@ -180,47 +201,59 @@ const Collection = ({
                 {totalCards}
               </Body3Component>
             </HorizontalGroup>
-            <HorizontalGroup margin={0.8}>
-              <Icon type="followers" size={1.6} color="sc" />
-              <Body3Component weight="bold" color="sc">
-                {totalFollowers}
-              </Body3Component>
-            </HorizontalGroup>
+            {totalFollowers !== null && (
+              <HorizontalGroup margin={0.8}>
+                <Icon type="followers" size={1.6} color="sc" />
+                <Body3Component weight="bold" color="sc">
+                  {totalFollowers}
+                </Body3Component>
+              </HorizontalGroup>
+            )}
+            <Icon
+              type={getPermission(permission).icon}
+              title={getPermission(permission).title}
+              size={1.6}
+              color="sc"
+            />
           </HorizontalGroup>
         </div>
       </CollectionThumbnail>
-      <CollectionHover className="collection__hover">
-        <Body2Component
-          color="sc"
-          css={`
-            margin: 0 0 ${({ theme }) => theme.space[3]}px 0;
-            text-decoration: none;
-          `}
-        >
-          <Truncate trimWhitespace lines={6}>
-            {description}
-          </Truncate>
-        </Body2Component>
-        <HorizontalGroup
-          margin={0.8}
-          css={`
-            position: absolute;
-            bottom: 16px;
-          `}
-        >
-          <AvatarWrapper user={user} />
-          <VerticalGroup
+      {description && (
+        <CollectionHover className="collection__hover">
+          <Body2Component
+            color="sc"
             css={`
-              margin-top: 0.1rem;
+              margin: 0 0 ${({ theme }) => theme.space[3]}px 0;
+              text-decoration: none;
             `}
           >
-            <TinyText color="sc">
-              {user.firstName} {user.lastName}
-            </TinyText>
-            <TinyText color="sc">{user.position}</TinyText>
-          </VerticalGroup>
-        </HorizontalGroup>
-      </CollectionHover>
+            <Truncate trimWhitespace lines={6}>
+              {description}
+            </Truncate>
+          </Body2Component>
+          {user && (
+            <HorizontalGroup
+              margin={0.8}
+              css={`
+                position: absolute;
+                bottom: 16px;
+              `}
+            >
+              <AvatarWrapper user={user} />
+              <VerticalGroup
+                css={`
+                  margin-top: 0.1rem;
+                `}
+              >
+                <TinyText color="sc">
+                  {user.firstName} {user.lastName}
+                </TinyText>
+                <TinyText color="sc">{user.position}</TinyText>
+              </VerticalGroup>
+            </HorizontalGroup>
+          )}
+        </CollectionHover>
+      )}
     </Wrapper>
   );
 };

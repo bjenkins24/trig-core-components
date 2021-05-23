@@ -83,6 +83,7 @@ import TypeTypeform from './icons/TypeTypeform';
 import TypeWord from './icons/TypeWord';
 import TypeYoutube from './icons/TypeYoutube';
 import Underline from './icons/Underline';
+import World from './icons/World';
 
 export const iconComponents = {
   aggregate: Aggregate,
@@ -167,6 +168,7 @@ export const iconComponents = {
   'thumbnail-view': ThumbnailView,
   trash: Trash,
   underline: Underline,
+  world: World,
 };
 
 const iconTypes = {

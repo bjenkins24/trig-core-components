@@ -6,7 +6,7 @@ import theme from '../../stories/theme';
 describe('<Logo />', () => {
   it('renders and takes basic props', () => {
     const { getByTitle, rerender, getByTestId } = render(<Logo />);
-    expect(getByTitle('Logo')).toBeInTheDocument();
+    expect(getByTitle('Trig Logo')).toBeInTheDocument();
     expect(getByTestId('logo__path').getAttribute('fill')).toEqual(theme.pc);
 
     const title = 'Cool Logo';

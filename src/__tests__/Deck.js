@@ -29,6 +29,7 @@ const buildCollection = ({ onClick, ...restProps }) => {
       href="https://google.com"
       onClick={onClick}
       image="http://exampleimage.png"
+      permission="public"
       {...restProps}
     />
   );
@@ -37,7 +38,7 @@ const buildCollection = ({ onClick, ...restProps }) => {
 describe('<Collection />', () => {
   it('renders and takes basic props', () => {
     const mockCallback = jest.fn();
-    const { getByText, getAllByText, container, rerender } = render(
+    const { getByText, getAllByText, container, rerender, getByTitle } = render(
       buildCollection({ onClick: mockCallback })
     );
 
@@ -48,12 +49,20 @@ describe('<Collection />', () => {
     expect(getByText(`${user.firstName} ${user.lastName}`)).toBeInTheDocument();
     expect(getAllByText(`${title}`)).toBeTruthy();
     expect(getAllByText(`${title}`)).toBeTruthy();
+    expect(getByTitle('Public')).toBeInTheDocument();
 
     expect(container.firstChild).toHaveStyleRule(
       'background',
       expect.stringContaining('url')
     );
-    rerender(buildCollection({ image: '', onClick: mockCallback }));
+    rerender(
+      buildCollection({
+        image: '',
+        onClick: mockCallback,
+        permission: 'private',
+      })
+    );
+    expect(getByTitle('Private')).toBeInTheDocument();
 
     expect(container.firstChild).not.toHaveStyleRule(
       'background',
