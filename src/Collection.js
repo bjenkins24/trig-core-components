@@ -125,11 +125,12 @@ const defaultProps = {
   image: '',
   user: null,
   totalFollowers: null,
+  description: '',
 };
 
 const collectionTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
   totalCards: PropTypes.number.isRequired,
   totalFollowers: PropTypes.number,
   image: PropTypes.string,
