@@ -11,7 +11,7 @@ const logoTypes = {
 const defaultProps = {
   type: 'dark',
   title: 'Trig Logo',
-  width: 126,
+  width: 100,
 };
 
 const Logo = ({ type, title, width, ...restProps }) => {
