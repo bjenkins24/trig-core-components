@@ -142,6 +142,7 @@ const cardTypes = {
   href: PropTypes.string.isRequired,
   openInNewTab: PropTypes.bool,
   description: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  showActions: PropTypes.bool,
 };
 
 /* istanbul ignore next */
@@ -156,6 +157,7 @@ const defaultProps = {
   isLoading: false,
   description: '',
   type: '',
+  showActions: true,
 };
 
 const Card = ({
@@ -168,6 +170,7 @@ const Card = ({
   type,
   totalFavorites,
   showTotalFavorites,
+  showActions,
   isFavorited,
   isLoading,
   navigationList,
@@ -312,48 +315,55 @@ const Card = ({
         </ThumbnailContainer>
       </ClickableArea>
       <Footer>
-        <div>
-          <HorizontalGroup margin={1.6}>
-            <IconGroup
-              data-testid="card__favorite"
-              onClick={(event) => onClickFavorite(event)}
-            >
-              {!isFavorited ? (
-                <StyledIcon type="heart" title="Favorite" />
-              ) : (
-                <StyledIcon type="heart-filled" title="Favorited" />
-              )}
-              {showTotalFavorites && (
-                <TinyText
-                  color="s"
-                  className="card__meta-text"
-                  data-testid="total_favorites"
+        {showActions && (
+          <>
+            <div>
+              <HorizontalGroup margin={1.6}>
+                <IconGroup
+                  data-testid="card__favorite"
+                  onClick={(event) => onClickFavorite(event)}
                 >
-                  {totalFavorites}
-                </TinyText>
-              )}
-            </IconGroup>
-          </HorizontalGroup>
-        </div>
-        {isLoading && (
-          <Loading
-            size={1.6}
-            title="Syncing Card..."
-            color="ps.200"
-            css={`
-              margin-left: auto;
-              margin-right: ${({ theme }) => theme.space[2]}px;
-            `}
-          />
-        )}
-        {!isLoading && (
-          <PopoverNavigation placement="top" navigationList={navigationList}>
-            <HorizontalDots
-              title="More Options"
-              data-testid="card__more"
-              type="horizontal-dots"
-            />
-          </PopoverNavigation>
+                  {!isFavorited ? (
+                    <StyledIcon type="heart" title="Favorite" />
+                  ) : (
+                    <StyledIcon type="heart-filled" title="Favorited" />
+                  )}
+                  {showTotalFavorites && (
+                    <TinyText
+                      color="s"
+                      className="card__meta-text"
+                      data-testid="total_favorites"
+                    >
+                      {totalFavorites}
+                    </TinyText>
+                  )}
+                </IconGroup>
+              </HorizontalGroup>
+            </div>
+            {isLoading && (
+              <Loading
+                size={1.6}
+                title="Syncing Card..."
+                color="ps.200"
+                css={`
+                  margin-left: auto;
+                  margin-right: ${({ theme }) => theme.space[2]}px;
+                `}
+              />
+            )}
+            {!isLoading && (
+              <PopoverNavigation
+                placement="top"
+                navigationList={navigationList}
+              >
+                <HorizontalDots
+                  title="More Options"
+                  data-testid="card__more"
+                  type="horizontal-dots"
+                />
+              </PopoverNavigation>
+            )}
+          </>
         )}
       </Footer>
     </Container>
