@@ -111,7 +111,11 @@ describe('<Button />', () => {
     expect(getByText('0')).toBeInTheDocument();
 
     rerender(
-      <ButtonCount countTotal={2} countVariant="dark">
+      <ButtonCount
+        countTotal={2}
+        countVariant="dark"
+        buttonProps={{ size: 'lg' }}
+      >
         Button
       </ButtonCount>
     );
