@@ -72,7 +72,11 @@ const StyledIcon = styled(Icon)`
 `;
 
 export const checkboxTypes = {
-  label: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  label: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.string,
+    PropTypes.node,
+  ]),
   children: PropTypes.func,
   className: PropTypes.string,
   checked: PropTypes.bool,

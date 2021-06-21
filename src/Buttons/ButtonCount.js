@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Body2 } from 'Typography';
-import Button, { buttonTypes } from './Button';
+import Button, { buttonTypes, heightMap } from './Button';
 
 const buttonCountTypes = {
   countTotal: PropTypes.number,
@@ -61,6 +61,9 @@ const ButtonCount = forwardRef(
                   color === 'light' ? theme.colors.p : theme.colors.pc};
                 padding: 0 ${({ theme }) => theme.space[3]}px;
                 border-radius: ${({ theme }) => theme.br};
+                height: ${typeof buttonProps.size !== 'undefined'
+                  ? heightMap[buttonProps.size]
+                  : heightMap.md};
               `}
             >
               <div
