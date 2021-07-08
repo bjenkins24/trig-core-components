@@ -27,7 +27,7 @@ const MetaHoverContainer = styled.div`
   position: absolute;
   width: calc(100% - 32px);
   bottom: 0;
-  padding: 32px 16px 14px;
+  padding: 32px 16px 16px;
   display: flex;
 `;
 
@@ -166,6 +166,7 @@ const CardLargeTypes = {
   showTotalFavorites: PropTypes.bool,
   showTotalViews: PropTypes.bool,
   showUrl: PropTypes.bool,
+  children: PropTypes.node,
 };
 
 const defaultProps = {
@@ -174,6 +175,7 @@ const defaultProps = {
   showUrl: true,
   showTotalViews: true,
   image: null,
+  children: null,
 };
 
 const CardLarge = ({
@@ -188,6 +190,7 @@ const CardLarge = ({
   showTotalFavorites,
   totalFavorites,
   showUrl,
+  children,
 }) => {
   return (
     <Container
@@ -253,6 +256,7 @@ const CardLarge = ({
             />
           </MetaHoverContainer>
         </Hover>
+        {children && children}
         {image && (
           <img
             css={`

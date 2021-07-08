@@ -13,6 +13,7 @@ import './consoleOverrides';
 import themeForProvider from './theme';
 import { mockCards } from './mockCards';
 import CardLarge from '../src/CardLarge';
+import { CardTwitter } from '../src/CardLarge/compositions';
 
 /* eslint-disable */
 const CardBase = ({ data }) => {
@@ -189,17 +190,6 @@ storiesOf('Cards', module)
           onClickFavorite={() => alert('clicked favorite')}
           onClickTrash={() => alert('clicked trash')}
           totalViews={23}
-          navigationList={[
-            {
-              onClick: () => null,
-              item: (
-                <HorizontalGroup margin={1.6}>
-                  <Icon type="new-window" size={1.6} />
-                  <span>Open in New Window</span>
-                </HorizontalGroup>
-              ),
-            },
-          ]}
         />
       </>
     );
@@ -208,7 +198,21 @@ storiesOf('Cards', module)
     return (
       <>
         <Global />
-        <CardLarge image="https://picsum.photos/800/800" />
+        <CardTwitter
+          href="https://trytrig.com"
+          totalFavorites={0}
+          isFavorited={true}
+          onClickFavorite={() => alert('clicked favorite')}
+          onClickTrash={() => alert('clicked trash')}
+          totalViews={23}
+          profileImage="https://pbs.twimg.com/profile_images/1318383841581686784/-e5Lwjgc_normal.jpg"
+          name="Simon Barker"
+          handle="@allthecode_"
+          date="June 30"
+          content="When did Google Analytics become impossible to understand? A decade ago I could intuitively navigate and find data without having to read 5 help articles. There must be something better than this available?"
+        >
+          cool twitter stuff here
+        </CardTwitter>
       </>
     );
   })
