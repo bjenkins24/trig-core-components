@@ -21,6 +21,7 @@ import Comment from './icons/Comment';
 import Collection from './icons/Collection';
 import Document from './icons/Document';
 import Edit from './icons/Edit';
+import Eye from './icons/Eye';
 import Facebook from './icons/Facebook';
 import File from './icons/File';
 import Followers from './icons/Followers';
@@ -106,6 +107,7 @@ export const iconComponents = {
   collection: Collection,
   document: Document,
   edit: Edit,
+  eye: Eye,
   facebook: Facebook,
   file: File,
   followers: Followers,

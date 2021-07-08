@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ThemeProvider } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import get from 'lodash/get';
 import { storiesOf } from '@storybook/react';
@@ -12,6 +12,7 @@ import { HorizontalGroup } from '../src/Groups';
 import './consoleOverrides';
 import themeForProvider from './theme';
 import { mockCards } from './mockCards';
+import CardLarge from '../src/CardLarge';
 
 /* eslint-disable */
 const CardBase = ({ data }) => {
@@ -163,12 +164,54 @@ const CreateCard = () => {
   );
 };
 
+const Global = createGlobalStyle`
+  body {
+    background: #F5F5F5;
+  }
+`;
+
 storiesOf('Cards', module)
   .addDecorator((story) => (
     <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
   ))
   .addDecorator(withKnobs)
+
   .add('Thumbnail', () => <CreateCard />)
+  .add('Large', () => {
+    return (
+      <>
+        <Global />
+        <CardLarge
+          image="https://picsum.photos/800/800"
+          href="https://trytrig.com"
+          totalFavorites={0}
+          isFavorited={true}
+          onClickFavorite={() => alert('clicked favorite')}
+          onClickTrash={() => alert('clicked trash')}
+          totalViews={23}
+          navigationList={[
+            {
+              onClick: () => null,
+              item: (
+                <HorizontalGroup margin={1.6}>
+                  <Icon type="new-window" size={1.6} />
+                  <span>Open in New Window</span>
+                </HorizontalGroup>
+              ),
+            },
+          ]}
+        />
+      </>
+    );
+  })
+  .add('Large Twitter', () => {
+    return (
+      <>
+        <Global />
+        <CardLarge image="https://picsum.photos/800/800" />
+      </>
+    );
+  })
   .add('Masonry Example', () => {
     return <Mason />;
   });
