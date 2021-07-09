@@ -11,7 +11,7 @@ import Icon from '../src/Icon';
 import { HorizontalGroup } from '../src/Groups';
 import './consoleOverrides';
 import themeForProvider from './theme';
-import { mockCards } from './mockCards';
+import { mockCards, mockCardsLarge } from './mockCards';
 import CardLarge from '../src/CardLarge';
 import { CardTwitter } from '../src/CardLarge/compositions';
 
@@ -53,16 +53,48 @@ const CardBase = ({ data }) => {
   );
 };
 
+const CardRendererLarge = ({ data }) => {
+  if (data.isTwitter) {
+    return (
+      <CardTwitter
+        href={data.url}
+        onClickTrash={() => console.log('trash')}
+        onClickFavorite={() => console.log('favorite')}
+        totalViews={20}
+        totalFavorites={data.totalFavorites}
+        isFavorited={data.isFavorited}
+        date={data.date}
+        profileImage={data.profileImage}
+        tweet={data.content}
+        name={data.name}
+        handle={data.handle}
+      />
+    );
+  } else {
+    return (
+      <CardLarge
+        href={data.url}
+        title={data.title}
+        onClickTrash={() => console.log('trash')}
+        onClickFavorite={() => console.log('favorite')}
+        totalViews={20}
+        totalFavorites={data.totalFavorites}
+        isFavorited={data.isFavorited}
+        image={data.image}
+        content={data.content}
+      />
+    );
+  }
+};
+
 // this has to be defined outside of the component or the UI flashes
 const CardRenderer = ({ data }) => {
   return <CardBase data={data} />;
 };
 
-const items = get(mockCards, 'data', []);
-
-const Mason = () => {
+const Mason = ({ renderer, items, totalWidth, columnWidth, columnGutter }) => {
   const positioner = usePositioner(
-    { width: 780, columnWidth: 251, columnGutter: 6 },
+    { width: totalWidth, columnWidth, columnGutter },
     // This is our dependencies array. When these dependencies
     // change, the positioner cache will be cleared and the
     // masonry component will reset as a result.
@@ -83,7 +115,7 @@ const Mason = () => {
       // Pre-renders 5 windows worth of content
       overscanBy={5}
       // This is the grid item component
-      render={CardRenderer}
+      render={renderer}
     />
   );
 };
@@ -209,13 +241,40 @@ storiesOf('Cards', module)
           name="Simon Barker"
           handle="@allthecode_"
           date="June 30"
-          content="When did Google Analytics become impossible to understand? A decade ago I could intuitively navigate and find data without having to read 5 help articles. There must be something better than this available?"
+          tweet="When did Google Analytics become impossible to understand? A decade ago I could intuitively navigate and find data without having to read 5 help articles. There must be something better than this available?"
         >
           cool twitter stuff here
         </CardTwitter>
       </>
     );
   })
-  .add('Masonry Example', () => {
-    return <Mason />;
+  .add('Masonry Example Thumbnails', () => {
+    return (
+      <Mason
+        renderer={CardRenderer}
+        items={get(mockCards, 'data', [])}
+        totalWidth={780}
+        width={251}
+        columnGutter={6}
+      />
+    );
+  })
+  .add('Masonry Example Large', () => {
+    return (
+      <div
+        css={`
+          width: 100%;
+          height: 100%;
+          background: #f5f5f5;
+        `}
+      >
+        <Mason
+          renderer={CardRendererLarge}
+          items={get(mockCardsLarge, 'data', [])}
+          totalWidth={1280}
+          columnWidth={628}
+          columnGutter={12}
+        />
+      </div>
+    );
   });

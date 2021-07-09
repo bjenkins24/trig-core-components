@@ -8,7 +8,7 @@ const CardTwitterTypes = {
   name: PropTypes.string.isRequired,
   handle: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  tweet: PropTypes.string.isRequired,
 };
 
 const CardTwitter = ({
@@ -16,7 +16,7 @@ const CardTwitter = ({
   name,
   handle,
   date,
-  content,
+  tweet,
   ...restProps
 }) => {
   return (
@@ -26,6 +26,7 @@ const CardTwitter = ({
           text-align: center;
           background: #fff;
           padding: 0 ${({ theme }) => theme.space[4]}px;
+          border-radius: 0.4rem;
         `}
       >
         <div
@@ -75,7 +76,7 @@ const CardTwitter = ({
                   display: block;
                 `}
               >
-                {content}
+                {tweet}
               </Body1>
             </div>
           </div>

@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Icon from 'Icon';
-import { Body3, Body2 } from 'Typography';
+import { Body3, Body2, Body1, Heading2 } from 'Typography';
 import { rgba } from 'polished';
+import Truncate from 'react-truncate';
 
 const MetaContainer = styled.div`
   position: absolute;
@@ -157,6 +158,7 @@ const MetaContent = ({
 const CardLargeTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
+  content: PropTypes.string,
   href: PropTypes.string.isRequired,
   onClickTrash: PropTypes.func.isRequired,
   totalViews: PropTypes.number.isRequired,
@@ -171,6 +173,7 @@ const CardLargeTypes = {
 
 const defaultProps = {
   title: null,
+  content: null,
   showTotalFavorites: true,
   showUrl: true,
   showTotalViews: true,
@@ -181,6 +184,7 @@ const defaultProps = {
 const CardLarge = ({
   image,
   title,
+  content,
   href,
   onClickTrash,
   showTotalViews,
@@ -192,8 +196,13 @@ const CardLarge = ({
   showUrl,
   children,
 }) => {
+  const displayUrl = href.replace(/(^\w+:|^)\/\//, '');
   return (
     <Container
+      css={`
+        text-decoration: none;
+      `}
+      data-testid="card__container"
       onClick={(event) => {
         if (
           event.target.classList.contains('trash-icon') ||
@@ -226,7 +235,11 @@ const CardLarge = ({
         `}
       >
         <Hover>
-          <TrashButton onClick={onClickTrash} className="trash-icon">
+          <TrashButton
+            onClick={onClickTrash}
+            className="trash-icon"
+            data-testid="card__trash"
+          >
             <Trash size={1.6} type="trash" color="s" />
           </TrashButton>
           {showUrl && (
@@ -241,7 +254,9 @@ const CardLarge = ({
                 bottom: 56px;
               `}
             >
-              <Body2 color="s">{href}</Body2>
+              <Body2 color="s">
+                <Truncate lines={1}>{displayUrl}</Truncate>
+              </Body2>
             </div>
           )}
           <MetaHoverContainer>
@@ -268,6 +283,32 @@ const CardLarge = ({
             src={image}
             alt={`Screenshot for the card: ${title}`}
           />
+        )}
+        {!image && !children && (
+          <div
+            css={`
+              padding: ${({ theme }) =>
+                `${theme.space[5]}px ${theme.space[5]}px ${theme.space[5]}px`};
+              background: #fff;
+              border-radius: ${({ theme }) => theme.br};
+            `}
+          >
+            {title && (
+              <Heading2 color="p">
+                <Truncate lines={3}>{title}</Truncate>
+              </Heading2>
+            )}
+            {content && (
+              <Body1>
+                <Truncate lines={15}>{content}</Truncate>
+              </Body1>
+            )}
+            {!title && !content && (
+              <Heading2 color="p">
+                <Truncate lines={2}>{displayUrl}</Truncate>
+              </Heading2>
+            )}
+          </div>
         )}
         <MetaContainer>
           <MetaContent

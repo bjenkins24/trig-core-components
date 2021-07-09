@@ -10,6 +10,7 @@ const alt = `Screenshot for the card: ${title}`;
 
 const onClickMock = jest.fn();
 const onClickFavoriteMock = jest.fn();
+const onClickTrash = jest.fn();
 
 const buildCard = (props) => {
   return (
@@ -18,12 +19,12 @@ const buildCard = (props) => {
       href="https://example.com"
       onClick={onClickMock}
       onClickFavorite={onClickFavoriteMock}
+      onClickTrash={onClickTrash}
       totalFavorites={totalFavorites}
       totalViews={totalViews}
       isFavorited
       image="http://fakeimage.com"
       title={title}
-      navigationList={[{ onClick: () => null, item: 'first item' }]}
       {...props}
     />
   );
