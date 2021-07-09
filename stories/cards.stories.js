@@ -14,6 +14,7 @@ import themeForProvider from './theme';
 import { mockCards, mockCardsLarge } from './mockCards';
 import CardLarge from '../src/CardLarge';
 import { CardTwitter } from '../src/CardLarge/compositions';
+import Tag from '../src/Form/Tag';
 
 /* eslint-disable */
 const CardBase = ({ data }) => {
@@ -56,33 +57,63 @@ const CardBase = ({ data }) => {
 const CardRendererLarge = ({ data }) => {
   if (data.isTwitter) {
     return (
-      <CardTwitter
-        href={data.url}
-        onClickTrash={() => console.log('trash')}
-        onClickFavorite={() => console.log('favorite')}
-        totalViews={20}
-        totalFavorites={data.totalFavorites}
-        isFavorited={data.isFavorited}
-        date={data.date}
-        profileImage={data.profileImage}
-        tweet={data.content}
-        name={data.name}
-        handle={data.handle}
-      />
+      <div>
+        <CardTwitter
+          href={data.url}
+          onClickTrash={() => console.log('trash')}
+          onClickFavorite={() => console.log('favorite')}
+          totalViews={20}
+          totalFavorites={data.totalFavorites}
+          isFavorited={data.isFavorited}
+          date={data.date}
+          profileImage={data.profileImage}
+          tweet={data.content}
+          name={data.name}
+          handle={data.handle}
+        />
+        <HorizontalGroup
+          margin={0.4}
+          css={`
+            flex-wrap: wrap;
+            & > * {
+              margin-top: ${({ theme }) => theme.space[1]}px;
+            }
+          `}
+        >
+          <Tag>Product</Tag>
+          <Tag isSelected>Product/Market Fit Examples</Tag>
+          <Tag>Product</Tag>
+          <Tag>Product/Market Fit Examples</Tag>
+          <Tag>Product</Tag>
+          <Tag>Product/Market Fit Examples</Tag>
+          <Tag>Product</Tag>
+          <Tag>Product/Market Fit Examples</Tag>
+        </HorizontalGroup>
+      </div>
     );
   } else {
     return (
-      <CardLarge
-        href={data.url}
-        title={data.title}
-        onClickTrash={() => console.log('trash')}
-        onClickFavorite={() => console.log('favorite')}
-        totalViews={20}
-        totalFavorites={data.totalFavorites}
-        isFavorited={data.isFavorited}
-        image={data.image}
-        content={data.content}
-      />
+      <div>
+        <CardLarge
+          href={data.url}
+          title={data.title}
+          onClickTrash={() => console.log('trash')}
+          onClickFavorite={() => console.log('favorite')}
+          totalViews={20}
+          totalFavorites={data.totalFavorites}
+          isFavorited={data.isFavorited}
+          image={data.image}
+          content={data.content}
+        />
+        <HorizontalGroup
+          margin={0.4}
+          css={`
+            margin-top: ${({ theme }) => theme.space[1]}px;
+          `}
+        >
+          <Tag onRequestRemove={() => console.log('removed')}>Product</Tag>
+        </HorizontalGroup>
+      </div>
     );
   }
 };
@@ -272,8 +303,8 @@ storiesOf('Cards', module)
           renderer={CardRendererLarge}
           items={get(mockCardsLarge, 'data', [])}
           totalWidth={1280}
-          columnWidth={628}
-          columnGutter={12}
+          columnWidth={615}
+          columnGutter={16}
         />
       </div>
     );
