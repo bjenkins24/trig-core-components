@@ -169,6 +169,7 @@ const CardLargeTypes = {
   showTotalViews: PropTypes.bool,
   showUrl: PropTypes.bool,
   children: PropTypes.node,
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {
@@ -179,6 +180,7 @@ const defaultProps = {
   showTotalViews: true,
   image: null,
   children: null,
+  onClick: null,
 };
 
 const CardLarge = ({
@@ -195,6 +197,8 @@ const CardLarge = ({
   totalFavorites,
   showUrl,
   children,
+  onClick,
+  ...restProps
 }) => {
   const displayUrl = href.replace(/(^\w+:|^)\/\//, '');
   return (
@@ -224,10 +228,14 @@ const CardLarge = ({
         ) {
           event.preventDefault();
         }
+        if (onClick) {
+          onClick(event);
+        }
       }}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      {...restProps}
     >
       <div
         css={`
