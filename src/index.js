@@ -72,6 +72,8 @@ export { default as Logo } from './Logo';
 export { default as Avatar } from './Avatar';
 export { default as Carousel } from './Carousel';
 export { default as Card } from './Card/index';
+export { default as CardLarge } from './CardLarge/index';
+export { default as CardTwitter } from './CardLarge/compositions/CardTwitter';
 export { default as Collection } from 'Collection';
 export { default as Icon } from './Icon';
 export { default as Highlight } from './Highlight';

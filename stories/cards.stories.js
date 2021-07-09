@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ThemeProvider } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import get from 'lodash/get';
 import { storiesOf } from '@storybook/react';
@@ -11,7 +11,10 @@ import Icon from '../src/Icon';
 import { HorizontalGroup } from '../src/Groups';
 import './consoleOverrides';
 import themeForProvider from './theme';
-import { mockCards } from './mockCards';
+import { mockCards, mockCardsLarge } from './mockCards';
+import CardLarge from '../src/CardLarge';
+import { CardTwitter } from '../src/CardLarge/compositions';
+import Tag from '../src/Form/Tag';
 
 /* eslint-disable */
 const CardBase = ({ data }) => {
@@ -51,16 +54,78 @@ const CardBase = ({ data }) => {
   );
 };
 
+const CardRendererLarge = ({ data }) => {
+  if (data.isTwitter) {
+    return (
+      <div>
+        <CardTwitter
+          href={data.url}
+          onClickTrash={() => console.log('trash')}
+          onClickFavorite={() => console.log('favorite')}
+          totalViews={20}
+          totalFavorites={data.totalFavorites}
+          isFavorited={data.isFavorited}
+          date={data.date}
+          profileImage={data.profileImage}
+          tweet={data.content}
+          name={data.name}
+          handle={data.handle}
+        />
+        <HorizontalGroup
+          margin={0.4}
+          css={`
+            flex-wrap: wrap;
+            & > * {
+              margin-top: ${({ theme }) => theme.space[1]}px;
+            }
+          `}
+        >
+          <Tag>Product</Tag>
+          <Tag isSelected>Product/Market Fit Examples</Tag>
+          <Tag>Product</Tag>
+          <Tag>Product/Market Fit Examples</Tag>
+          <Tag>Product</Tag>
+          <Tag>Product/Market Fit Examples</Tag>
+          <Tag>Product</Tag>
+          <Tag>Product/Market Fit Examples</Tag>
+        </HorizontalGroup>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <CardLarge
+          href={data.url}
+          title={data.title}
+          onClickTrash={() => console.log('trash')}
+          onClickFavorite={() => console.log('favorite')}
+          totalViews={20}
+          totalFavorites={data.totalFavorites}
+          isFavorited={data.isFavorited}
+          image={data.image}
+          content={data.content}
+        />
+        <HorizontalGroup
+          margin={0.4}
+          css={`
+            margin-top: ${({ theme }) => theme.space[1]}px;
+          `}
+        >
+          <Tag onRequestRemove={() => console.log('removed')}>Product</Tag>
+        </HorizontalGroup>
+      </div>
+    );
+  }
+};
+
 // this has to be defined outside of the component or the UI flashes
 const CardRenderer = ({ data }) => {
   return <CardBase data={data} />;
 };
 
-const items = get(mockCards, 'data', []);
-
-const Mason = () => {
+const Mason = ({ renderer, items, totalWidth, columnWidth, columnGutter }) => {
   const positioner = usePositioner(
-    { width: 780, columnWidth: 251, columnGutter: 6 },
+    { width: totalWidth, columnWidth, columnGutter },
     // This is our dependencies array. When these dependencies
     // change, the positioner cache will be cleared and the
     // masonry component will reset as a result.
@@ -81,7 +146,7 @@ const Mason = () => {
       // Pre-renders 5 windows worth of content
       overscanBy={5}
       // This is the grid item component
-      render={CardRenderer}
+      render={renderer}
     />
   );
 };
@@ -163,12 +228,84 @@ const CreateCard = () => {
   );
 };
 
+const Global = createGlobalStyle`
+  body {
+    background: #F5F5F5;
+  }
+`;
+
 storiesOf('Cards', module)
   .addDecorator((story) => (
     <ThemeProvider theme={themeForProvider}>{story()}</ThemeProvider>
   ))
   .addDecorator(withKnobs)
+
   .add('Thumbnail', () => <CreateCard />)
-  .add('Masonry Example', () => {
-    return <Mason />;
+  .add('Large', () => {
+    return (
+      <>
+        <Global />
+        <CardLarge
+          image="https://picsum.photos/800/800"
+          href="https://trytrig.com"
+          totalFavorites={0}
+          isFavorited={true}
+          onClickFavorite={() => alert('clicked favorite')}
+          onClickTrash={() => alert('clicked trash')}
+          totalViews={23}
+        />
+      </>
+    );
+  })
+  .add('Large Twitter', () => {
+    return (
+      <>
+        <Global />
+        <CardTwitter
+          href="https://trytrig.com"
+          totalFavorites={0}
+          isFavorited={true}
+          onClickFavorite={() => alert('clicked favorite')}
+          onClickTrash={() => alert('clicked trash')}
+          totalViews={23}
+          profileImage="https://pbs.twimg.com/profile_images/1318383841581686784/-e5Lwjgc_normal.jpg"
+          name="Simon Barker"
+          handle="@allthecode_"
+          date="June 30"
+          tweet="When did Google Analytics become impossible to understand? A decade ago I could intuitively navigate and find data without having to read 5 help articles. There must be something better than this available?"
+        >
+          cool twitter stuff here
+        </CardTwitter>
+      </>
+    );
+  })
+  .add('Masonry Example Thumbnails', () => {
+    return (
+      <Mason
+        renderer={CardRenderer}
+        items={get(mockCards, 'data', [])}
+        totalWidth={780}
+        width={251}
+        columnGutter={6}
+      />
+    );
+  })
+  .add('Masonry Example Large', () => {
+    return (
+      <div
+        css={`
+          width: 100%;
+          height: 100%;
+          background: #f5f5f5;
+        `}
+      >
+        <Mason
+          renderer={CardRendererLarge}
+          items={get(mockCardsLarge, 'data', [])}
+          totalWidth={1280}
+          columnWidth={615}
+          columnGutter={16}
+        />
+      </div>
+    );
   });

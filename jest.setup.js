@@ -21,3 +21,7 @@ jest.mock('@material-ui/core/ClickAwayListener', () => {
 jest.mock('@material-ui/core/Grow', () => {
   return ({ children }) => <div>{children}</div>;
 });
+
+HTMLCanvasElement.prototype.getContext = () => {
+  // return whatever getContext has to return
+};
