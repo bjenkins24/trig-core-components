@@ -22,12 +22,18 @@ const Content = styled(Body3)`
   text-align: center;
   padding: 0 0.8rem;
   line-height: 2.4rem;
-  cursor: pointer;
   color: ${({ theme, isSelected }) => (isSelected ? theme.bs[200] : theme.p)};
-  &:hover {
-    background: ${({ theme }) => theme.ss[300]};
-    color: ${({ theme }) => theme.sc};
-  }
+  ${({ onClick, theme }) => {
+    if (onClick) {
+      return `
+      cursor: pointer;
+      &:hover {
+        background: ${theme.ss[300]};
+        color: ${theme.sc};
+      }`;
+    }
+    return ``;
+  }}
 `;
 
 const Remove = styled.div`
@@ -61,12 +67,14 @@ const tagTypes = {
   onRequestRemove: PropTypes.func,
   iconProps: PropTypes.object,
   isSelected: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {
   iconProps: {},
   onRequestRemove: null,
   isSelected: false,
+  onClick: null,
 };
 
 const Tag = ({
@@ -74,6 +82,7 @@ const Tag = ({
   onRequestRemove,
   iconProps,
   isSelected,
+  onClick,
   ...restProps
 }) => {
   return (
@@ -83,6 +92,7 @@ const Tag = ({
         onRequestRemove={onRequestRemove}
         weight="bold"
         color="sc"
+        onClick={onClick}
       >
         {children}
       </Content>

@@ -15,6 +15,7 @@ describe('<Tag />', () => {
       getByTitle,
       getByTestId,
       getByRole,
+      rerender,
     } = render(
       <Tag
         data-testid={testId}
@@ -33,5 +34,15 @@ describe('<Tag />', () => {
     expect(mockCallback.mock.calls.length).toEqual(1);
     expect(getByTitle(/remove button/i)).toBeInTheDocument();
     expect(getByTestId(testId)).toHaveClass(exampleClass);
+    rerender(
+      <Tag
+        data-testid={testId}
+        onRequestRemove={mockCallback}
+        className={exampleClass}
+        onClick={() => null}
+      >
+        {tagText}
+      </Tag>
+    );
   });
 });
