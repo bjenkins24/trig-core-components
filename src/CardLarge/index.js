@@ -170,6 +170,7 @@ const CardLargeTypes = {
   showUrl: PropTypes.bool,
   children: PropTypes.node,
   onClick: PropTypes.func,
+  maxHeight: PropTypes.number,
 };
 
 const defaultProps = {
@@ -181,6 +182,7 @@ const defaultProps = {
   image: null,
   children: null,
   onClick: null,
+  maxHeight: null,
 };
 
 const CardLarge = ({
@@ -198,6 +200,7 @@ const CardLarge = ({
   showUrl,
   children,
   onClick,
+  maxHeight,
   ...restProps
 }) => {
   const displayUrl = href.replace(/(^\w+:|^)\/\//, '');
@@ -240,6 +243,8 @@ const CardLarge = ({
       <div
         css={`
           position: relative;
+          ${maxHeight && `max-height: ${maxHeight}px; overflow: hidden;`}
+          border-radius: ${({ theme }) => theme.br};
         `}
       >
         <Hover>
