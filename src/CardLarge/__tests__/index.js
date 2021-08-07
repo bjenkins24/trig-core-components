@@ -54,5 +54,7 @@ describe('<CardLarge />', () => {
 
     rerender(buildCard({ isFavorited: false }));
     expect(getAllByTitle(/Favorite/i)[0]).toBeInTheDocument();
+
+    rerender(buildCard({ isFavorited: false, maxHeight: 200 }));
   });
 });
