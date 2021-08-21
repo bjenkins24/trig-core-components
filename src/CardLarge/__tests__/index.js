@@ -37,6 +37,7 @@ describe('<CardLarge />', () => {
       getAllByTitle,
       getAllByTestId,
       queryByAltText,
+      queryByTitle,
       rerender,
     } = render(buildCard());
 
@@ -56,5 +57,7 @@ describe('<CardLarge />', () => {
     expect(getAllByTitle(/Favorite/i)[0]).toBeInTheDocument();
 
     rerender(buildCard({ isFavorited: false, maxHeight: 200 }));
+    rerender(buildCard({ canFavorite: false }));
+    expect(queryByTitle(/Favorite/i)).toBeNull();
   });
 });

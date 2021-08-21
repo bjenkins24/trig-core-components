@@ -252,6 +252,7 @@ storiesOf('Cards', module)
           href="https://trytrig.com"
           totalFavorites={0}
           isFavorited={true}
+          canFavorite={false}
           onClickFavorite={() => alert('clicked favorite')}
           onClickTrash={() => alert('clicked trash')}
           totalViews={23}

@@ -103,35 +103,38 @@ const MetaContent = ({
   showTotalFavorites,
   totalFavorites,
   showTotalViews,
+  canFavorite = true,
   totalViews,
 }) => {
   return (
     <>
-      <IconGroup
-        data-testid="card__favorite"
-        onClick={(event) => onClickFavorite(event)}
-        isHover={isHover}
-        className="card-favorite"
-      >
-        {!isFavorited ? (
-          <StyledIcon
-            type="heart"
-            color={isHover ? 'pc' : 's'}
-            title="Favorite"
-          />
-        ) : (
-          <StyledIcon
-            color={isHover ? 'pc' : 's'}
-            type="heart-filled"
-            title="Favorited"
-          />
-        )}
-        {showTotalFavorites && (
-          <Body3 className="card__meta-text" color={isHover ? 'pc' : 's'}>
-            {totalFavorites}
-          </Body3>
-        )}
-      </IconGroup>
+      {canFavorite && (
+        <IconGroup
+          data-testid="card__favorite"
+          onClick={(event) => onClickFavorite(event)}
+          isHover={isHover}
+          className="card-favorite"
+        >
+          {!isFavorited ? (
+            <StyledIcon
+              type="heart"
+              color={isHover ? 'pc' : 's'}
+              title="Favorite"
+            />
+          ) : (
+            <StyledIcon
+              color={isHover ? 'pc' : 's'}
+              type="heart-filled"
+              title="Favorited"
+            />
+          )}
+          {showTotalFavorites && (
+            <Body3 className="card__meta-text" color={isHover ? 'pc' : 's'}>
+              {totalFavorites}
+            </Body3>
+          )}
+        </IconGroup>
+      )}
       {showTotalViews && (
         <div
           css={`
@@ -171,6 +174,7 @@ const CardLargeTypes = {
   children: PropTypes.node,
   onClick: PropTypes.func,
   maxHeight: PropTypes.number,
+  canFavorite: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -183,6 +187,7 @@ const defaultProps = {
   children: null,
   onClick: null,
   maxHeight: null,
+  canFavorite: true,
 };
 
 const CardLarge = ({
@@ -196,6 +201,7 @@ const CardLarge = ({
   isFavorited,
   onClickFavorite,
   showTotalFavorites,
+  canFavorite,
   totalFavorites,
   showUrl,
   children,
@@ -281,6 +287,7 @@ const CardLarge = ({
               totalFavorites={totalFavorites}
               showTotalFavorites={showTotalFavorites}
               showTotalViews={showTotalViews}
+              canFavorite={canFavorite}
             />
           </MetaHoverContainer>
         </Hover>
@@ -332,6 +339,7 @@ const CardLarge = ({
             onClickFavorite={onClickFavorite}
             showTotalFavorites={showTotalFavorites}
             showTotalViews={showTotalViews}
+            canFavorite={canFavorite}
           />
         </MetaContainer>
       </div>
