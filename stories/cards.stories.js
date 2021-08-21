@@ -21,6 +21,7 @@ const CardBase = ({ data }) => {
   return (
     <Card
       isLoading={!get(data, 'id', false) || !data.lastAttemptedSync}
+      width={251}
       key={data.id}
       dateTime={new Date(data.createdAt)}
       isFavorited={data.isFavorited}
@@ -157,6 +158,7 @@ const CreateCard = () => {
   return (
     <Card
       id={1}
+      width={251}
       href={text('href', 'https://trello.com')}
       onClick={action('clicked')}
       onClickFavorite={() => setIsFavorited(!isFavorited)}

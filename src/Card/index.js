@@ -14,12 +14,9 @@ import { truncateLines } from 'Card/truncateLines';
 import Loading from '../Loading';
 import PopoverNavigation from '../Popovers/PopoverNavigation';
 
-const cardWidth = 251;
-const maxImageHeight = 240;
-
 const Container = styled.div`
   background: ${({ theme }) => theme.bs[200]};
-  width: ${cardWidth}px;
+  width: ${({ width }) => (width === 'auto' ? width : `${width}px`)};
   border-radius: ${({ theme }) => theme.br};
   box-shadow: ${({ theme }) => theme.sh};
 `;
@@ -143,6 +140,8 @@ const cardTypes = {
   openInNewTab: PropTypes.bool,
   description: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   showActions: PropTypes.bool,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  maxImageHeight: PropTypes.number,
 };
 
 /* istanbul ignore next */
@@ -158,6 +157,8 @@ const defaultProps = {
   description: '',
   type: '',
   showActions: true,
+  width: 'auto',
+  maxImageHeight: 240,
 };
 
 const Card = ({
@@ -179,6 +180,8 @@ const Card = ({
   onClickFavorite,
   openInNewTab,
   description,
+  width,
+  maxImageHeight,
   ...restProps
 }) => {
   const [areImagesloaded, setAreImagesLoaded] = useState(false);
@@ -217,7 +220,7 @@ const Card = ({
 
   let ratio = 0;
   if (image) {
-    ratio = cardWidth / imageWidth;
+    ratio = width / imageWidth;
     actualImageHeight = Math.floor(imageHeight * ratio);
   }
 
@@ -226,17 +229,10 @@ const Card = ({
       actualImageHeight,
       description,
     });
-  }, [
-    title,
-    placeholderHeight,
-    image,
-    cardWidth,
-    actualImageHeight,
-    description,
-  ]);
+  }, [title, placeholderHeight, image, width, actualImageHeight, description]);
 
   return (
-    <Container {...restProps}>
+    <Container width={width} {...restProps}>
       <ClickableArea
         data-testid="card__clickable-area"
         onClick={(event) => {

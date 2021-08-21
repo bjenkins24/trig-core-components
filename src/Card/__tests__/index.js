@@ -112,7 +112,7 @@ describe('<Card />', () => {
     // what to do with it
     expect(console.error).toHaveBeenCalledTimes(1);
 
-    rerender(buildCard());
+    rerender(buildCard({ width: 150, maxImageHeight: 120 }));
     expect(screen.getByText(description)).toBeInTheDocument();
   });
 });
