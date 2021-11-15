@@ -27,6 +27,7 @@ const buildCard = (props) => {
       totalViews={totalViews}
       isFavorited
       title={title}
+      content={tweet}
       {...props}
     />
   );
