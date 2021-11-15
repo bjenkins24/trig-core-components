@@ -67,7 +67,7 @@ const CardRendererLarge = ({ data }) => {
           totalFavorites={data.totalFavorites}
           isFavorited={data.isFavorited}
           date={data.date}
-          profileImage={data.profileImage}
+          avatar={data.avatar}
           tweet={data.content}
           name={data.name}
           handle={data.handle}
@@ -271,11 +271,33 @@ storiesOf('Cards', module)
           onClickFavorite={() => alert('clicked favorite')}
           onClickTrash={() => alert('clicked trash')}
           totalViews={23}
-          profileImage="https://pbs.twimg.com/profile_images/1318383841581686784/-e5Lwjgc_normal.jpg"
+          avatar="https://pbs.twimg.com/profile_images/1318383841581686784/-e5Lwjgc_normal.jpg"
           name="Simon Barker"
           handle="@allthecode_"
           date="June 30"
-          tweet="When did Google Analytics become impossible to understand? A decade ago I could intuitively navigate and find data without having to read 5 help articles. There must be something better than this available?"
+          content="When did Google Analytics become impossible to understand? A decade ago I could intuitively navigate and find data without having to read 5 help articles. There must be something better than this available?"
+          // reply={{
+          //   name: 'Brian Jenkins',
+          //   handle: '@brian',
+          //   avatar:
+          //     'https://pbs.twimg.com/profile_images/1318383841581686784/-e5Lwjgc_normal.jpg',
+          //   replyingTo: 'Replying to @pbteja1998 and @MDX_one',
+          //   content:
+          //     'i never thought of it as a blogging engine Exploding head will start recommending it as well now FireFire',
+          //   date: 'Oct 30',
+          // }}
+          // link={{
+          //   href: 'producthunt.com',
+          //   imageSrc:
+          //     'https://pbs.twimg.com/card_img/1458691292058484742/Wqckzdxa?format=jpg&name=medium',
+          //   title:
+          //     'Personal.ai - Remember everything with your own personal AI | Product Hunt',
+          //   description:
+          //     'We forget 80% of the information we experience every day. Speak, write or upload insights, information and experiences into your personal AI so you can recall your memories exactly when you need them.',
+          // }}
+          images={[
+            'https://pbs.twimg.com/media/FBl9MEyUcAIx5Ep?format=jpg&name=medium',
+          ]}
         >
           cool twitter stuff here
         </CardTwitter>

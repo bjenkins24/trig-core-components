@@ -2,21 +2,47 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CardLarge from 'CardLarge';
 import { Body1 } from 'Typography';
+import Truncate from 'react-truncate';
 
 const CardTwitterTypes = {
-  profileImage: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   handle: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  tweet: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  reply: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    handle: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    replyingTo: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  }),
+  link: PropTypes.shape({
+    href: PropTypes.string.isRequired,
+    imageSrc: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }),
+  images: PropTypes.arrayOf(PropTypes.string),
+};
+
+const defaultProps = {
+  reply: null,
+  link: null,
+  images: null,
 };
 
 const CardTwitter = ({
-  profileImage,
+  avatar,
   name,
   handle,
   date,
-  tweet,
+  content,
+  reply,
+  link,
+  images,
   ...restProps
 }) => {
   return (
@@ -44,7 +70,7 @@ const CardTwitter = ({
           >
             <img
               alt={name}
-              src={profileImage}
+              src={avatar}
               css={`
                 border-radius: 50%;
                 margin-right: 12px;
@@ -76,8 +102,160 @@ const CardTwitter = ({
                   display: block;
                 `}
               >
-                {tweet}
+                {content}
               </Body1>
+              {link && (
+                <div
+                  css={`
+                    border: 1px solid ${({ theme }) => theme.ps[200]};
+                    border-radius: ${({ theme }) => theme.br};
+                    padding: ${({ theme }) =>
+                      theme.space[2] + theme.space[1]}px;
+                    color: ${({ theme }) => theme.bc};
+                    margin-top: ${({ theme }) => theme.space[2]}px;
+                    font-size: ${({ theme }) => theme.fontSizes[3]}px;
+                  `}
+                >
+                  <div>
+                    <img
+                      src={link.imageSrc}
+                      alt={link.title}
+                      css={`
+                        position: relative;
+                        left: -${({ theme }) => theme.space[2] + theme.space[1]}px;
+                        top: -${({ theme }) => theme.space[2] + theme.space[1]}px;
+                        width: calc(
+                          100% +
+                            ${({ theme }) =>
+                              theme.space[2] * 2 + theme.space[1] * 2}px
+                        );
+                        border-bottom: 1px solid ${({ theme }) => theme.ps[200]};
+                      `}
+                    />
+                    <div
+                      css={`
+                        margin-right: ${({ theme }) => theme.space[1]}px;
+                        margin-top: -${({ theme }) => theme.space[1]}px;
+                      `}
+                    >
+                      <Truncate
+                        lines={1}
+                        css={`
+                          color: ${({ theme }) => theme.ps[200]};
+                        `}
+                      >
+                        {link.href}
+                      </Truncate>
+                    </div>
+                    <Truncate lines={1}>{link.title}</Truncate>
+                  </div>
+                  <div
+                    css={`
+                      color: ${({ theme }) => theme.ps[200]};
+                    `}
+                  >
+                    {link.description}
+                  </div>
+                </div>
+              )}
+              {reply && (
+                <div
+                  css={`
+                    border: 1px solid ${({ theme }) => theme.ps[200]};
+                    border-radius: ${({ theme }) => theme.br};
+                    padding: ${({ theme }) =>
+                      theme.space[2] + theme.space[1]}px;
+                    color: ${({ theme }) => theme.bc};
+                    margin-top: ${({ theme }) => theme.space[2]}px;
+                    font-size: ${({ theme }) => theme.fontSizes[3]}px;
+                  `}
+                >
+                  <div
+                    css={`
+                      display: flex;
+                      align-items: center;
+                    `}
+                  >
+                    <img
+                      src={reply.avatar}
+                      alt={reply.name}
+                      css={`
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        margin-right: ${({ theme }) => theme.space[1]}px;
+                      `}
+                    />
+                    <span
+                      css={`
+                        font-size: ${({ theme }) => theme.fontSizes[2]}px;
+                        font-weight: ${({ theme }) => theme.fontWeights.bold};
+                        margin-right: ${({ theme }) => theme.space[1]}px;
+                      `}
+                    >
+                      {reply.name}
+                    </span>
+                    <span
+                      css={`
+                        color: ${({ theme }) => theme.ps[200]};
+                      `}
+                    >
+                      {reply.handle} - {reply.date}
+                    </span>
+                  </div>
+                  <div
+                    css={`
+                      color: ${({ theme }) => theme.ps[200]};
+                    `}
+                  >
+                    {reply.replyingTo}
+                  </div>
+                  <div>{reply.content}</div>
+                </div>
+              )}
+              {images && images.length === 1 && (
+                <img
+                  src={images[0]}
+                  alt="Tweet"
+                  css={`
+                    width: 100%;
+                    border-radius: ${({ theme }) => theme.br};
+                    margin-top: ${({ theme }) => theme.space[2]}px;
+                  `}
+                />
+              )}
+              {images && images.length > 1 && (
+                <div
+                  css={`
+                    display: flex;
+                    width: 100%;
+                    flex-wrap: wrap;
+                    margin-top: ${({ theme }) => theme.space[2]}px;
+                    border-radius: ${({ theme }) => theme.br};
+                    overflow: hidden;
+                    border: 1px solid ${({ theme }) => theme.ps[200]};
+                  `}
+                >
+                  {images.map((image) => (
+                    <div
+                      css={`
+                        height: 160px;
+                        overflow: hidden;
+                        width: 50%;
+                      `}
+                    >
+                      <img
+                        alt="Tweet"
+                        src={image}
+                        css={`
+                          width: 100%;
+                          min-height: 160px;
+                        `}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -87,5 +265,6 @@ const CardTwitter = ({
 };
 
 CardTwitter.propTypes = CardTwitterTypes;
+CardTwitter.defaultProps = defaultProps;
 
 export default CardTwitter;

@@ -6,7 +6,7 @@ const totalFavorites = 12;
 const totalViews = 11;
 const title = 'My cool card';
 const tweet = 'My cool tweet';
-const profileImage = 'https://image.jpg';
+const avatar = 'https://image.jpg';
 const name = 'Brian';
 const handle = '@brian';
 const date = 'July 3';
@@ -35,7 +35,7 @@ const buildCard = (props) => {
 describe('<CardTwitter />', () => {
   it('renders and takes basic props', () => {
     const { getAllByTitle, getByText } = render(
-      buildCard({ date, handle, tweet, name, profileImage })
+      buildCard({ date, handle, tweet, name, avatar })
     );
 
     expect(getAllByTitle(/Favorite/i)[0]).toBeInTheDocument();
