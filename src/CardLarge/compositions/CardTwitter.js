@@ -238,6 +238,7 @@ const CardTwitter = ({
                 >
                   {images.map((image) => (
                     <div
+                      key={image}
                       css={`
                         height: 160px;
                         overflow: hidden;

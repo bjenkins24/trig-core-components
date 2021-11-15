@@ -297,6 +297,8 @@ storiesOf('Cards', module)
           // }}
           images={[
             'https://pbs.twimg.com/media/FBl9MEyUcAIx5Ep?format=jpg&name=medium',
+            'https://pbs.twimg.com/media/FCXiUUjXMAMq2WH?format=jpg&name=900x900',
+            'https://pbs.twimg.com/media/FCXiVEjXoAERStM?format=jpg&name=small',
           ]}
         >
           cool twitter stuff here
