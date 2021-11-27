@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import CardLarge from 'CardLarge';
 import { Body1 } from 'Typography';
 import Truncate from 'react-truncate';
+import { readableDate } from 'utils/dateFns';
 
 const CardTwitterTypes = {
   avatar: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   handle: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
+    .isRequired,
   content: PropTypes.string.isRequired,
   reply: PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -60,6 +62,7 @@ const CardTwitter = ({
             display: inline-block;
             margin: ${({ theme }) => theme.space[4] + theme.space[2]}px auto
               ${({ theme }) => theme.space[5]}px;
+            width: 100%;
           `}
         >
           <div
@@ -74,12 +77,12 @@ const CardTwitter = ({
               css={`
                 border-radius: 50%;
                 margin-right: 12px;
+                max-width: 48px;
               `}
             />
             <div
               css={`
                 text-align: left;
-                max-width: 600px;
               `}
             >
               <Body1
@@ -93,7 +96,7 @@ const CardTwitter = ({
                     color: ${({ theme }) => theme.ps[200]};
                   `}
                 >
-                  {handle} - {date}
+                  {handle} - {readableDate(date)}
                 </span>
               </Body1>
               <Body1
@@ -228,7 +231,7 @@ const CardTwitter = ({
                 <div
                   css={`
                     display: flex;
-                    width: 100%;
+                    width: calc(100% - 2px);
                     flex-wrap: wrap;
                     margin-top: ${({ theme }) => theme.space[2]}px;
                     border-radius: ${({ theme }) => theme.br};

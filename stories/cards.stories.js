@@ -271,10 +271,10 @@ storiesOf('Cards', module)
           onClickFavorite={() => alert('clicked favorite')}
           onClickTrash={() => alert('clicked trash')}
           totalViews={23}
-          avatar="https://pbs.twimg.com/profile_images/1318383841581686784/-e5Lwjgc_normal.jpg"
+          avatar="https://pbs.twimg.com/profile_images/1435987121559330816/Nk1N53gB_x96.jpg"
           name="Simon Barker"
           handle="@allthecode_"
-          date="June 30"
+          date="2021-10-13T16:34:58.000000Z"
           content="When did Google Analytics become impossible to understand? A decade ago I could intuitively navigate and find data without having to read 5 help articles. There must be something better than this available?"
           // reply={{
           //   name: 'Brian Jenkins',
