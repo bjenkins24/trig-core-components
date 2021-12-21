@@ -104,9 +104,8 @@ const CardTwitter = ({
                   font-size: 15px;
                   display: block;
                 `}
-              >
-                {content}
-              </Body1>
+                dangerouslySetInnerHTML={{ __html: content }}
+              />
               {link && (
                 <div
                   css={`
@@ -156,9 +155,8 @@ const CardTwitter = ({
                     css={`
                       color: ${({ theme }) => theme.ps[200]};
                     `}
-                  >
-                    {link.description}
-                  </div>
+                    dangerouslySetInnerHTML={{ __html: link.description }}
+                  />
                 </div>
               )}
               {reply && (
@@ -210,10 +208,9 @@ const CardTwitter = ({
                     css={`
                       color: ${({ theme }) => theme.ps[200]};
                     `}
-                  >
-                    {reply.replyingTo}
-                  </div>
-                  <div>{reply.content}</div>
+                    dangerouslySetInnerHTML={{ __html: reply.replyingTo }}
+                  />
+                  <div dangerouslySetInnerHTML={{ __html: reply.content }} />
                 </div>
               )}
               {images && images.length === 1 && (
