@@ -103,6 +103,17 @@ const CardTwitter = ({
                 css={`
                   font-size: 15px;
                   display: block;
+                  img {
+                    width: 18px;
+                    height: 18px;
+                    vertical-align: -10%;
+                  }
+                  div {
+                    display: inline;
+                  }
+                  span.card__link {
+                    color: ${({ theme }) => theme.s};
+                  }
                 `}
                 dangerouslySetInnerHTML={{ __html: content }}
               />

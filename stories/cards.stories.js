@@ -261,6 +261,11 @@ storiesOf('Cards', module)
     );
   })
   .add('Large Twitter', () => {
+    const content =
+      '<span>Social login on </span><div><span><span class="card__link">@treendly</span></span></div><span> was a win. Now experimenting with selling right in the onboarding process. At this price point, a Treendly sub is just an impulse buy so it makes sense </span><img alt="Raising hands" src="https://abs-0.twimg.com/emoji/v2/svg/1f64c.svg" title="Raising hands"><span> </span><span><span class="card__link">#buildinpublic</span></span>';
+    // const content2 =
+    //   '<span>I need to improve the positioning of </span><div><span><span class="card__link">@MDX_one</span><span class="card__link">@MDX_one</span></span></div><span> better.<br /><br />How does "A notion-based alternative to Ghost" sound?<br /><br />It\'s not just another Notion website builder. <br/> <br/> </span> <div><span class="card__link">@MDX_one</span></div> <span> is a blogging platform where creators can truly own their content and publish content effortlessly.</span>';
+
     return (
       <>
         <Global />
@@ -275,7 +280,7 @@ storiesOf('Cards', module)
           name="Simon Barker"
           handle="@allthecode_"
           date="2021-10-13T16:34:58.000000Z"
-          content="When did Google Analytics become impossible to understand? A decade ago I could intuitively navigate and find data without having to read 5 help articles. There must be something better than this available?"
+          content={content}
           // reply={{
           //   name: 'Brian Jenkins',
           //   handle: '@brian',
