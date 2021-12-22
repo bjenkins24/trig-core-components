@@ -106,7 +106,8 @@ const CardTwitter = ({
                   img {
                     width: 18px;
                     height: 18px;
-                    vertical-align: -10%;
+                    vertical-align: -15%;
+                    margin: 0 1px;
                   }
                   div {
                     display: inline;
