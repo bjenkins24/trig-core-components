@@ -149,7 +149,7 @@ const CardTwitter = ({
                     <div
                       css={`
                         margin-right: ${({ theme }) => theme.space[1]}px;
-                        margin-top: -${({ theme }) => theme.space[1]}px;
+                        margin-bottom: ${({ theme }) => theme.space[1]}px;
                       `}
                     >
                       <Truncate
@@ -161,7 +161,14 @@ const CardTwitter = ({
                         {link.href}
                       </Truncate>
                     </div>
-                    <Truncate lines={1}>{link.title}</Truncate>
+                    <Truncate
+                      lines={1}
+                      css={`
+                        margin-bottom: ${({ theme }) => theme.space[1]}px;
+                      `}
+                    >
+                      {link.title}
+                    </Truncate>
                   </div>
                   <div
                     css={`
