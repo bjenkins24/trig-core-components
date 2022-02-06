@@ -58,7 +58,11 @@ const CardBase = ({ data }) => {
 const CardRendererLarge = ({ data }) => {
   if (data.isTwitter) {
     return (
-      <div>
+      <div
+        css={`
+          margin-bottom: ${({ theme }) => theme.space[2]}px;
+        `}
+      >
         <CardTwitter
           href={data.url}
           onClickTrash={() => console.log('trash')}
@@ -94,7 +98,11 @@ const CardRendererLarge = ({ data }) => {
     );
   } else {
     return (
-      <div>
+      <div
+        css={`
+          margin-bottom: ${({ theme }) => theme.space[2]}px;
+        `}
+      >
         <CardLarge
           href={data.url}
           title={data.title}
@@ -247,16 +255,23 @@ storiesOf('Cards', module)
     return (
       <>
         <Global />
-        <CardLarge
-          image="https://picsum.photos/800/800"
-          href="https://trytrig.com"
-          totalFavorites={0}
-          isFavorited={true}
-          canFavorite={false}
-          onClickFavorite={() => alert('clicked favorite')}
-          onClickTrash={() => alert('clicked trash')}
-          totalViews={23}
-        />
+        <div
+          css={`
+            width: 592px;
+          `}
+        >
+          <CardLarge
+            image="https://picsum.photos/800/800"
+            href="https://trytrig.com"
+            totalFavorites={0}
+            isFavorited={true}
+            canFavorite={false}
+            onClickFavorite={() => alert('clicked favorite')}
+            onClickTrash={() => alert('clicked trash')}
+            totalViews={23}
+            title="Hello Friend"
+          />
+        </div>
       </>
     );
   })

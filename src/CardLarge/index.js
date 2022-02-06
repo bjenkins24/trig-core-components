@@ -246,6 +246,17 @@ const CardLarge = ({
       rel="noopener noreferrer"
       {...restProps}
     >
+      {(image || children) && (
+        <Heading2
+          color="p"
+          css={`
+            margin-bottom: ${({ theme }) => `${theme.space[1]}px`};
+            font-size: 18px;
+          `}
+        >
+          <Truncate lines={2}>{title}</Truncate>
+        </Heading2>
+      )}
       <div
         css={`
           position: relative;
